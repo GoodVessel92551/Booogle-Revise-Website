@@ -2,9 +2,7 @@ from flask import Flask, render_template,redirect,request,current_app,session
 from fun import get_folders,get_settings,get_streak,get_sets,hash_value,gen_user_token,add_streak,streak,login,check_image,gen_id,make_dict_group,user_data_group,username,recommend,rule_id,gen_code,leaderboard_dict,similarity,userinfo,make_dict,mod,play_dict,smart,last_7,week_add,stats_dict,update,make_dict_folder,subject,make_dict_rules
 from better_profanity import profanity
 import emoji
-import requests
-import os,random,json,re
-from urllib.parse import urlparse
+import os,random,re
 from datetime import timedelta
 from datetime import datetime
 from flask_compress import Compress

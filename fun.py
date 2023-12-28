@@ -1,4 +1,4 @@
-import requests,os,json,random,re
+import requests,os,random
 from better_profanity import profanity
 import datetime,time
 from datetime import datetime
