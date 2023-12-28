@@ -12,7 +12,7 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 
 load_dotenv()
-client = MongoClient("mongodb+srv://GoodVessel92551:Gzw9KNoZEwhgIkpq@booogle.j0arbkm.mongodb.net/?retryWrites=true&w=majority")
+client = MongoClient(os.getenv('mongo_url'))
 db = client["Booogle_Revise"]
 global_data_db = db["Global_Data"]
 user_data_db = db["User_Data"]

@@ -7,10 +7,13 @@ from collections import Counter
 from flask import session
 from pymongo import MongoClient
 from dotenv import load_dotenv
+from booogle_ai_tools.moderation import moderation
+from booogle_ai_tools.smartmatch import smartmatch
+from booogle_ai_tools.smartsubject import smartsubject
 import hashlib
 
 load_dotenv()
-client = MongoClient("mongodb+srv://GoodVessel92551:Gzw9KNoZEwhgIkpq@booogle.j0arbkm.mongodb.net/?retryWrites=true&w=majority")
+client = MongoClient(os.getenv('mongo_url'))
 db = client["Booogle_Revise"]
 global_data_db = db["Global_Data"]
 user_data_db = db["User_Data"]

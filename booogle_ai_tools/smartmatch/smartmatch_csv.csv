@@ -1,0 +1,1453 @@
+Name,Type
+John,Name
+Emily,Name
+Michael,Name
+Sarah,Name
+Google,Company
+Microsoft,Company
+Amazon,Company
+Tesla,Company
+London,City
+Paris,City
+New York City,City
+Tokyo,City
+iPhone,Product
+Samsung TV,Product
+PlayStation,Product
+Nike,Brand
+Adidas,Brand
+Coca-Cola,Brand
+Pizza,Food
+Sushi,Food
+Burger,Food
+Car,Vehicle
+Bicycle,Vehicle
+Plane,Vehicle
+Laptop,Device
+Smartphone,Device
+Smartwatch,Device
+Adam,Name
+Hannah,Name
+George,Name
+Olivia,Name
+IBM,Company
+Apple,Company
+Facebook,Company
+Uber,Company
+Sydney,City
+Shanghai,City
+Moscow,City
+Berlin,City
+AirPods,Product
+Xbox,Product
+Nintendo Switch,Product
+Puma,Brand
+Under Armour,Brand
+McDonald's,Brand
+Ice Cream,Food
+Tacos,Food
+Hot Dog,Food
+Train,Vehicle
+Motorcycle,Vehicle
+Boat,Vehicle
+Tablet,Device
+Smart Speaker,Device
+VR Headset,Device
+Elephant,Animal
+Dog,Animal
+Lion,Animal
+Rose,Plant
+Sunflower,Plant
+Pineapple,Fruit
+Italian,Language
+Mandarin,Language
+Spanish,Language
+Soccer,Sport
+Tennis,Sport
+Basketball,Sport
+Rock,Music Genre
+Pop,Music Genre
+Jazz,Music Genre
+USA,Country
+Brazil,Country
+Algeria,Country
+Japan,Country
+China,Country
+Matthew,Name
+Isabella,Name
+Benjamin,Name
+Mia,Name
+Intel,Company
+Netflix,Company
+Airbnb,Company
+Dubai,City
+Los Angeles,City
+Toronto,City
+Kindle,Product
+Fitbit,Product
+Gucci,Brand
+Louis Vuitton,Brand
+Rolex,Brand
+Pasta,Food
+Steak,Food
+Boeing,Vehicle
+Helicopter,Vehicle
+RV,Vehicle
+Headphones,Device
+Smart Thermostat,Device
+Drone,Device
+Giraffe,Animal
+Sailfish,Animal
+Kangaroo,Animal
+Cactus,Plant
+Palm Tree,Plant
+Tulip,Plant
+Banana,Fruit
+French,Language
+Arabic,Language
+Baseball,Sport
+Golf,Sport
+Swimming,Sport
+Hip Hop,Music Genre
+Country,Music Genre
+Electronic,Music Genre
+France,Country
+India,Country
+Guitar,Musical Instrument
+Piano,Musical Instrument
+Drums,Musical Instrument
+Cricket,Sport
+Rugby,Sport
+Ice Hockey,Sport
+Mango,Fruit
+Pine Tree,Plant
+Pepper,Food
+Gorilla,Animal
+Whale,Animal
+Aiden,Name
+Ava,Name
+William,Name
+Sophia,Name
+Toyota,Company
+Samsung,Company
+Hong Kong,City
+Seoul,City
+Mexico City,City
+Vancouver,City
+Macbook,Product
+Hermes,Brand
+Chanel,Brand
+Burberry,Brand
+Curry,Food
+Pho,Food
+Bike,Vehicle
+Wireless Earbuds,Device
+Penguin,Animal
+Koala,Animal
+Panda,Animal
+Orchid,Plant
+Lily,Plant
+Watermelon,Fruit
+German,Language
+Russian,Language
+Football,Sport
+Classical,Music Genre
+R&B,Music Genre
+Canada,Country
+Russia,Country
+Spain,Country
+Flute,Musical Instrument
+Violin,Musical Instrument
+Trumpet,Musical Instrument
+Hiking,Sport
+Fishing,Sport
+Grape,Fruit
+Birch,Plant
+Pig,Animal
+Turtle,Animal
+Octopus,Animal
+Emma,Name
+Elon Musk,Name
+Greta Thunberg,Name
+McKinsey,Consulting Firm
+Harvard University,University
+New York,City
+Mount Everest,Mountain
+Grand Canyon,National Park
+Hamburger,Food
+Honda,Car Manufacturer
+Rolls-Royce,Luxury Brand
+MacBook,Laptop
+Tomato,Vegetable
+Swahili,Language
+Surfing,Sport
+South Africa,Country
+Name,Type
+Red,Color
+Blue,Color
+Green,Color
+Yellow,Color
+Purple,Color
+Orange,Color
+Pink,Color
+Brown,Color
+Black,Color
+White,Color
+Gray,Color
+Silver,Color
+Gold,Color
+Beige,Color
+Maroon,Color
+Navy,Color
+Turquoise,Color
+Teal,Color
+Magenta,Color
+Lavender,Color
+Olive,Color
+Violet,Color
+Crimson,Color
+Fuchsia,Color
+Indigo,Color
+Sky Blue,Color
+Periwinkle,Color
+Saffron,Color
+Chartreuse,Color
+Lime Green,Color
+Cylinder,Shape
+Sphere,Shape
+Cone,Shape
+Cube,Shape
+Cuboid,Shape
+Torus,Shape
+Prism,Shape
+Pyramid,Shape
+Rectangular Pyramid,Shape
+Triangular Pyramid,Shape
+Octahedron,Shape
+Dodecahedron,Shape
+Icosahedron,Shape
+Trapezoid,Shape
+Parallelogram,Shape
+Pentagon,Shape
+Hexagon,Shape
+Heptagon,Shape
+Octagon,Shape
+Nonagon,Shape
+Decagon,Shape
+Trapezium,Shape
+Rectangle,Shape
+Square,Shape
+Diamond,Shape
+Triangle,Shape
+Ellipse,Shape
+Airplane,Vehicle
+Truck,Vehicle
+Bus,Vehicle
+Submarine,Vehicle
+Jet Ski,Vehicle
+Scooter,Vehicle
+Sedan,Vehicle
+SUV,Vehicle
+Pickup Truck,Vehicle
+Dump Truck,Vehicle
+Tanker Truck,Vehicle
+Blimp,Vehicle
+Dirigible,Vehicle
+Van,Vehicle
+Oxygen,Chemical Element
+Carbon,Chemical Element
+Platinum,Chemical Element
+Uranium,Chemical Element
+Iron,Chemical Element
+Silicon,Chemical Element
+Helium,Chemical Element
+Hydrogen,Chemical Element
+Sulfur,Chemical Element
+Microscope,Scientific Instrument
+Telescope,Scientific Instrument
+Beaker,Scientific Instrument
+Bunsen Burner,Scientific Instrument
+Flask,Scientific Instrument
+Fume Hood,Scientific Instrument
+Graduated Cylinder,Scientific Instrument
+Pipette,Scientific Instrument
+Thermometer,Scientific Instrument
+Balance,Scientific Instrument
+General Relativity,Scientific Theory
+Quantum Mechanics,Scientific Theory
+Big Bang Theory,Scientific Theory
+Evolutionary Theory,Scientific Theory
+Special Relativity,Scientific Theory
+Plate Tectonics,Scientific Theory
+String Theory,Scientific Theory
+Theory of Gravity,Scientific Theory
+Atomic Theory,Scientific Theory
+Cell Theory,Scientific Theory
+Sun,Planet
+Moon,Planet
+Mars,Planet
+Jupiter,Planet
+Saturn,Planet
+Neptune,Planet
+Uranus,Planet
+Pluto,Planet
+Black Hole,Planet
+Nebula,Planet
+Electron,Subatomic Particle
+Proton,Subatomic Particle
+Neutron,Subatomic Particle
+Quark,Subatomic Particle
+Lepton,Subatomic Particle
+Boson,Subatomic Particle
+Muon,Subatomic Particle
+Tauon,Subatomic Particle
+Higgs Boson,Subatomic Particle
+W and Z Bosons,Subatomic Particle
+Biology,Branch of Science
+Chemistry,Branch of Science
+Physics,Branch of Science
+Astronomy,Branch of Science
+Geology,Branch of Science
+Ecology,Branch of Science
+Botany,Branch of Science
+Zoology,Branch of Science
+Anthropology,Branch of Science
+Psychology,Branch of Science
+Leonardo da Vinci,Name
+Barack Obama,Name
+Harry Potter,Book
+Albert Einstein,Name
+The Great Wall of China,Structure
+Venus,Planet
+Sistine Chapel,Artwork
+Australia,Country
+Mona Lisa,Artwork
+The Beatles,Band
+The Nile River,River
+Thomas Edison,Name
+Gravity,Scientific Concept
+Newton,Name
+The Bible,Religious Text
+Eiffel Tower,Structure
+The Great Barrier Reef,Natural Wonder
+Vincent van Gogh,Name
+United States of America,Country
+William Shakespeare,Name
+Pacific Ocean,Ocean
+Declaration of Independence,Document
+Neil Armstrong,Name
+Pablo Picasso,Name
+Antarctica,Continent
+The Simpsons,TV Show
+The Pyramids of Giza,Structure
+Stephen Hawking,Name
+The Odyssey,Book
+The Mona Lisa,Artwork
+Johann Sebastian Bach,Name
+The Louvre,Museum
+The Starry Night,Artwork
+Napoleon Bonaparte,Name
+The Amazon River,River
+Charles Darwin,Name
+The Venus de Milo,Sculpture
+The Roman Empire,Civilization
+George Orwell,Name
+The Moon,Satellite
+The Taj Mahal,Mausoleum
+The Scream,Artwork
+Winston Churchill,Name
+The Panama Canal,Waterway
+The Atlantic Ocean,Ocean
+The Statue of Liberty,Structure
+Genghis Khan,Name
+The Book of Genesis,Religious Text
+The Leaning Tower of Pisa,Structure
+Neil deGrasse Tyson,Name
+Madame Curie,Name
+The Tower of London,Structure
+The Indian Ocean,Ocean
+The Canterbury Tales,Book
+The Berlin Wall,Structure
+The Great Sphinx of Giza,Sculpture
+The Colosseum,Structure
+Nelson Mandela,Name
+The Indian subcontinent,Region
+The Last Supper,Artwork
+The Bill of Rights,Document
+The Harry Potter series,Book
+The Panama Papers,Document
+Queen Elizabeth II,Name
+The Hoover Dam,Structure
+Mount Rushmore,National Monument
+The Red Sea,Sea
+The Crucible,Play
+The Panama hat,Article of Clothing
+The Wright brothers,Name
+The Great Salt Lake,Lake
+The Battle of Waterloo,Historical Event
+The Nile crocodile,Animal
+The World Health Organization,Organization
+The 2016 Olympics,Event
+The First Amendment to the U.S. Constitution,Document
+The Forbidden City,Palace
+The Rocky Mountains,Mountain Range
+The Panama Canal Treaty,Treaty
+The Black Death,Pandemic
+Ludwig van Beethoven,Name
+Mount Kilimanjaro,Mountain
+The Lord of the Rings trilogy,Book
+Marie Curie,Name
+The Catcher in the Rye,Book
+Marsupials,Animal
+Guernica,Artwork
+Leonard Bernstein,Name
+The Smithsonian Institution,Museum
+Abraham Lincoln,Name
+The Mississippi River,River
+Issac Newton,Name
+Michelangelo's David,Sculpture
+The Aztecs,Civilization
+J.K. Rowling,Name
+The International Space Station,Structure
+The Parthenon,Structure
+Whistler's Mother,Artwork
+Martin Luther King Jr.,Name
+The Sydney Opera House,Structure
+The Pacific Ring of Fire,Region
+The Colossus of Rhodes,Statue
+The New Testament,Religious Text
+The Tower Bridge,Structure
+Bill Nye,Name
+Rachel Carson,Name
+The Chunnel,Structure
+Thomas Jefferson,Name
+The Arabian Peninsula,Region
+The Last Judgment,Artwork
+The Universal Declaration of Human Rights,Document
+The Hunger Games trilogy,Book
+The Magna Carta,Document
+Queen Victoria,Name
+The Aswan High Dam,Structure
+The Grand Canyon,National Park
+The Caribbean Sea,Sea
+The Importance of Being Earnest,Play
+The fedora,Article of Clothing
+The Lumière brothers,Name
+The Great Lakes,Lake
+The Battle of Stalingrad,Historical Event
+The African savanna,Biome
+The International Criminal Court,Organization
+The 2018 FIFA World Cup,Event
+The Second Amendment to the U.S. Constitution,Document
+The Louvre Abu Dhabi,Museum
+The Alps,Mountain Range
+The Treaty of Versailles,Treaty
+The Spanish Flu,Pandemic
+Claude Monet,Name
+Breaking Bad,TV Show
+The Eiffel Tower,Structure
+Marie Antoinette,Name
+War and Peace,Book
+The Sistine Chapel,Structure
+Johannes Brahms,Name
+Italy,Country
+The Metropolitan Museum of Art,Museum
+The Persistence of Memory,Artwork
+Alexander Graham Bell,Name
+The Statue of Zeus at Olympia,Sculpture
+Mark Twain,Name
+The Alhambra,Palace
+The Birth of Venus,Artwork
+Benjamin Franklin,Name
+The Colorado River,River
+The Sydney Harbour Bridge,Structure
+The Arctic Ocean,Ocean
+The Terracotta Army,Artwork
+The Quran,Religious Text
+The Tower of Hercules,Lighthouse
+Ada Lovelace,Name
+Galileo Galilei,Name
+The Bay of Bengal,Bay
+The Machu Picchu,Structure
+Harriet Tubman,Name
+The Constitution of the United States,Document
+To Kill a Mockingbird,Book
+The Emancipation Proclamation,Document
+Queen Elizabeth I,Name
+The Aswan Dam,Structure
+The Yellowstone National Park,National Park
+The Baltic Sea,Sea
+The Erie Canal,Waterway
+The top hat,Article of Clothing
+The Battle of Hastings,Historical Event
+The Sahara,Desert
+The United Nations,Organization
+The 2022 Winter Olympics,Event
+The Third Amendment to the U.S. Constitution,Document
+The Van Gogh Museum,Museum
+The Himalayas,Mountain Range
+The Treaty of Tordesillas,Treaty
+The Spanish Inquisition,Event
+The Gobi,Desert
+The Book of Exodus,Religious Text
+The Inca Empire,Civilization
+Wolfgang Amadeus Mozart,Name
+The Appalachian Mountains,Mountain Range
+The Hundred Years' War,Event
+The Arctic fox,Animal
+The European Union,Organization
+The 2024 Summer Olympics,Event
+The Fourth Amendment to the U.S. Constitution,Document
+The Vatican City,Country
+The First Transcontinental Railroad,Transportation
+The Dead Sea,Sea
+The Taming of the Shrew,Play
+The beret,Article of Clothing
+The Montgolfier brothers,Name
+The Grand Tetons,National Park
+The Battle of Agincourt,Historical Event
+The Silk Road,Trade Route
+The French Revolution,Event
+The Himalayan Mountains,Mountain Range
+The Panama Canal Zone,Zone
+The Black Sea,Sea
+The Merchant of Venice,Play
+The bowler hat,Article of Clothing
+The Boston Tea Party,Event
+The Kalahari,Desert
+The Nile,River
+Helsinki,City
+Argentina,Country
+Istanbul,Country
+Bolivia,Country
+The Philippines,Country
+Creece,Country
+Beijing,City
+Norway,Country
+Montgolfier brothers,Name
+The Philadelphia Convention,Event
+The Acropolis of Athens,Ancient Site
+The Palace of Versailles,Palace
+The Brooklyn Bridge,Bridge
+The Golden Gate Bridge,Bridge
+The Arc de Triomphe,Monument
+The Blue Nile,River
+The Stonehenge,Ancient Site
+The Hagia Sophia,Church
+The Mount Everest,Mountain
+The Mount Rushmore,Monument
+The Yosemite National Park,National Park
+The Serengeti National Park,National Park
+The Kruger National Park,National Park
+The Okavango Delta,Delta
+The Lake District,National Park
+The Yosemite Valley,Valley
+The Andes,Mountain Range
+The Mediterranean Sea,Sea
+The Pacific Ocean,Ocean
+The Rio de Janeiro,City
+The London,City
+The New York City,City
+The Tokyo,City
+The Beijing,City
+The Sydney,City
+The Los Angeles,City
+The Rio Grande,River
+The Danube River,River
+The Thames River,River
+The Seine River,River
+The Ganges River,River
+The Mekong River,River
+The Yangtze River,River
+The Yellow River,River
+The Volga River,River
+The Saint Lawrence River,River
+The Mount Kilimanjaro,Mountain
+The Mount Fuji,Mountain
+The Mount McKinley,Mountain
+The Mount Olympus,Mountain
+The Mount Vesuvius,Volcano
+The Mount St. Helens,Volcano
+The Krakatoa,Volcano
+The Stromboli,Volcano
+Mahatma Gandhi,Name
+The Dead Sea Scrolls,Historical Document
+The Iliad,Book
+Sir Isaac Newton,Name
+The Great Pyramid of Cholula,Structure
+Cleopatra,Name
+The Gutenberg Bible,Religious Text
+The Epic of Gilgamesh,Book
+Florence Nightingale,Name
+The Hanging Gardens of Babylon,Structure
+Alexander the Great,Name
+The Divine Comedy,Book
+Galen,Name
+The Arctic Circle,Geographic Location
+The Book of Kells,Religious Text
+The Acropolis,Structure
+Anne Frank,Name
+The Angkor Wat,Structure
+The Mekong Delta,Geographic Location
+The Tower of Babel,Structure
+Christopher Columbus,Name
+The Arctic Tundra,Geographic Location
+The Book of Mormon,Religious Text
+The Temple of Artemis,Structure
+Sir Francis Drake,Name
+Isaac Newton,Name
+The Tower of Pisa,Structure
+Pablo Neruda,Name
+The Congo River,River
+The Great Library of Alexandria,Structure
+Mao Zedong,Name
+The Indian Subcontinent,Geographic Location
+The Book of Revelations,Religious Text
+US Dollar,Currency
+Euro,Currency
+British Pound,Currency
+Japanese Yen,Currency
+Canadian Dollar,Currency
+Australian Dollar,Currency
+Swiss Franc,Currency
+Chinese Yuan,Currency
+Hong Kong Dollar,Currency
+Indian Rupee,Currency
+Camel,Animal
+Mariana Trench,Location
+Canberra,City
+Mercury,Planet
+Rome,City
+Au,Chemical Symbol
+Fe,Chemical Symbol
+O,Chemical Symbol
+Br,Chemical Symbol
+C,Chemical Symbol
+He,Chemical Symbol
+Ag,Chemical Symbol
+Madrid,City
+Ottawa,City
+London,City
+Peso,Currency
+Brasília,City
+11111,Number
+3324534,Number
+888888,Number
+456789,Number
+987654321,Number
+555555,Number
+246810,Number
+777777,Number
+123456789,Number
+999999,Number
+11111111,Number
+314159265,Number
+Emma,Name
+Noah,Name
+Olivia,Name
+Liam,Name
+Ava,Name
+William,Name
+Sophia,Name
+Mason,Name
+Isabella,Name
+James,Name
+Mia,Name
+Benjamin,Name
+Charlotte,Name
+Jacob,Name
+Amelia,Name
+Michael,Name
+Harper,Name
+Elijah,Name
+Abigail,Name
+Ethan,Name
+Emily,Name
+Daniel,Name
+Madison,Name
+Aiden,Name
+Elizabeth,Name
+Jackson,Name
+Sofia,Name
+Matthew,Name
+Scarlett,Name
+Lucas,Name
+Victoria,Name
+Logan,Name
+Grace,Name
+Samuel,Name
+Lily,Name
+Christopher,Name
+Ellie,Name
+Andrew,Name
+Avery,Name
+Joshua,Name
+Harper,Name
+David,Name
+Penelope,Name
+Jonathan,Name
+Chloe,Name
+Ryan,Name
+Aria,Name
+John,Name
+Leah,Name
+Oliver,Name
+Tokyo, City
+New York, City
+Shanghai, City
+Mumbai, City
+Beijing, City
+Sao Paulo, City
+Mexico City, City
+Cairo, City
+Dhaka, City
+Osaka, City
+Karachi, City
+Buenos Aires, City
+Istanbul, City
+Chongqing, City
+Kolkata, City
+Manila, City
+Moscow, City
+Lahore, City
+Rio de Janeiro, City
+Shenzhen, City
+Bangalore, City
+Paris, City
+London, City
+Chennai, City
+Bogota, City
+Bangkok, City
+Hyderabad, City
+Essen, City
+Tehran, City
+Baghdad, City
+Hong Kong, City
+Santiago, City
+Surat, City
+Madrid, City
+Guangzhou, City
+Toronto, City
+Wuhan, City
+Singapore, City
+Pune, City
+Kinshasa, City
+Miami, City
+Belo Horizonte, City
+Philadelphia, City
+Khartoum, City
+Barcelona, City
+Atlanta, City
+Houston, City
+Washington DC, City
+Boston, City
+San Francisco, City
+Black hole, Space
+Solar system, Space
+Nebula, Space
+Planet, Space
+Star, Space
+Galaxy, Space
+Asteroid, Space
+Meteor, Space
+Comet, Space
+Orbit, Space
+Telescope, Space
+Spacecraft, Space
+Gravity, Space
+Lunar, Space
+Satellite, Space
+Supernova, Space
+Cosmic rays, Space
+Extraterrestrial, Space
+Astronaut, Space
+Lunar module, Space
+Space station, Space
+Interstellar, Space
+Space probe, Space
+Dark matter, Space
+Cosmic microwave background, Space
+Event horizon, Space
+Red giant, Space
+White dwarf, Space
+Kuiper belt, Space
+Oort cloud, Space
+Rocket, Space
+International Space Station, Space
+Constellation, Space
+Space shuttle, Space
+Lunar eclipse, Space
+Solar eclipse, Space
+Hubble Space Telescope, Space
+Voyager, Space
+Mars rover, Space
+Space tourism, Space
+Space debris, Space
+Exoplanet, Space
+Galactic center, Space
+Gravitational waves, Space
+Magnetosphere, Space
+Parallax, Space
+Celestial equator, Space
+Asteroid belt, Space
+Space weather, Space
+Van Allen radiation belt, Space
+Amazon River, River
+Nile River, River
+Yangtze River, River
+Mississippi River, River
+Yenisei River, River
+Yellow River, River
+Ob River, River
+Parana River, River
+Congo River, River
+Amur River, River
+Mekong River, River
+Lena River, River
+Mackenzie River, River
+Niger River, River
+Murray River, River
+Indus River, River
+Ganges River, River
+Danube River, River
+Volga River, River
+Tigris River, River
+Euphrates River, River
+Colorado River, River
+Rhine River, River
+Zambezi River, River
+Orinoco River, River
+Don River, River
+Colorado River, River
+Columbia River, River
+Brahmaputra River, River
+Godavari River, River
+Murray-Darling River, River
+Rio Grande River, River
+Niger River, River
+Loire River, River
+Gambia River, River
+Tocantins River, River
+Dnieper River, River
+Vistula River, River
+Paranapanema River, River
+Fraser River, River
+Churchill River, River
+Churchill River, River
+Senegal River, River
+Darling River, River
+Tocantins River, River
+Colorado River, River
+Kaveri River, River
+Desaguadero River, River
+Saskatchewan River, River
+Maranon River, River
+Football, Sport
+Basketball, Sport
+Tennis, Sport
+Baseball, Sport
+Golf, Sport
+Swimming, Sport
+Boxing, Sport
+Rugby, Sport
+Athletics, Sport
+Ice hockey, Sport
+Volleyball, Sport
+Gymnastics, Sport
+Cricket, Sport
+Wrestling, Sport
+Table tennis, Sport
+Skiing, Sport
+Snowboarding, Sport
+Skateboarding, Sport
+Surfing, Sport
+Cycling, Sport
+Sailing, Sport
+Horse racing, Sport
+Badminton, Sport
+Weightlifting, Sport
+Fencing, Sport
+Archery, Sport
+Canoeing, Sport
+Kayaking, Sport
+Taekwondo, Sport
+Judo, Sport
+Eiffel Tower, Location
+Great Wall of China, Location
+Statue of Liberty, Location
+Grand Canyon, Location
+Niagara Falls, Location
+Machu Picchu, Location
+Stonehenge, Location
+Mount Everest, Location
+The Pyramids, Location
+The Colosseum, Location
+Mount Rushmore, Location
+The Great Barrier Reef, Location
+The Taj Mahal, Location
+The Acropolis, Location
+The Louvre, Location
+The Golden Gate Bridge, Location
+The Alhambra, Location
+The Palace of Versailles, Location
+The Sagrada Familia, Location
+The Tower of London, Location
+The Sydney Opera House, Location
+The Panama Canal, Location
+The Vatican City, Location
+The Hiroshima Peace Memorial, Location
+The Neuschwanstein Castle, Location
+The Petra, Location
+The Angel Falls, Location
+The Uluru (Ayers Rock), Location
+The Sistine Chapel, Location
+The Edinburgh Castle, Location
+iPhone, Device
+MacBook, Device
+PlayStation, Device
+Xbox, Device
+Google Home, Device
+Samsung Galaxy, Device
+GoPro, Device
+Fitbit, Device
+Kindle, Device
+Smartwatch, Device
+Drone, Device
+Virtual Reality Headset, Device
+iPad, Device
+DSLR Camera, Device
+AirPods, Device
+Bluetooth Speaker, Device
+Wireless Charger, Device
+External Hard Drive, Device
+Robot Vacuum, Device
+Electric Toothbrush, Device
+Thermal Imaging Camera, Device
+3D Printer, Device
+Blood Pressure Monitor, Device
+Portable Power Bank, Device
+Wireless Earbuds, Device
+Smart Lock, Device
+Air Purifier, Device
+Gaming Mouse, Device
+Instant Camera, Device
+Hurricane, Weather
+Tornado, Weather
+Blizzard, Weather
+Tsunami, Weather
+Lightning, Weather
+Thunderstorm, Weather
+Hailstorm, Weather
+Heatwave, Weather
+Drought, Weather
+Flood, Weather
+Apple, Company
+Microsoft, Company
+Facebook, Company
+Google, Company
+Tesla, Company
+Coca-Cola, Company
+Nike, Company
+Adidas, Company
+PepsiCo, Company
+Procter & Gamble, Company
+Johnson & Johnson, Company
+IBM, Company
+Samsung, Company
+General Electric, Company
+Toyota, Company
+Ford, Company
+Honda, Company
+Intel, Company
+ExxonMobil, Company
+BP, Company
+Royal Dutch Shell, Company
+Goldman Sachs, Company
+JPMorgan Chase, Company
+Berkshire Hathaway, Company
+Walt Disney, Company
+Uber, Company
+Airbnb, Company
+Netflix, Company
+Spotify, Company
+45654,Number
+43,Number
+96,Number
+2,Number
+1,Number
+A,Letter
+ER,Letter
+T,Letter
+y,Letter
+e,Letter
+170,Number
+1100,Number
+96,Number
+FF,Letter
+John Smith,Name
+Emily Johnson,Name
+Michael Davis,Name
+Jennifer Brown,Name
+Christopher Lee,Name
+Sarah Wilson,Name
+David Taylor,Name
+Jessica Martinez,Name
+Kevin Garcia,Name
+Ashley Anderson,Name
+Brian Miller,Name
+Stephanie Rodriguez,Name
+Matthew Hernandez,Name
+Amanda Perez,Name
+Daniel Jackson,Name
+Megan Martin,Name
+Robert Taylor,Name
+Laura Gonzalez,Name
+William Thomas,Name
+Rachel Moore,Name
+Jonathan Davis,Name
+Lauren Perez,Name
+Brandon Garcia,Name
+Brittany Jackson,Name
+Joshua Hernandez,Name
+Olivia Anderson,Name
+Christopher Wilson,Name
+Kayla Brown,Name
+Andrew Lee,Name
+Natalie Johnson,Name
+Anthony Smith,Name
+Katherine Martin,Name
+David Rodriguez,Name
+Elizabeth Taylor,Name
+Nicholas Gonzalez,Name
+Christina Anderson,Name
+Thomas Perez,Name
+Victoria Davis,Name
+Erica Hernandez,Name
+Timothy Jackson,Name
+Rebecca Wilson,Name
+Steven Brown,Name
+Marissa Lee,Name
+Benjamin Johnson,Name
+Vanessa Smith,Name
+James Martin,Name
+Caroline Rodriguez,Name
+Jacob Taylor,Name
+Alexis Anderson,Name
+Ryan Perez,Name
+Samantha Davis,Name
+Patrick Hernandez,Name
+Nicole Jackson,Name
+Matthew Wilson,Name
+Danielle Brown,Name
+Ethan Lee,Name
+Hannah Johnson,Name
+William Smith,Name
+Grace Martin,Name
+Lucas Rodriguez,Name
+Gabriella Taylor,Name
+Joseph Gonzalez,Name
+Isabella Anderson,Name
+Christopher Perez,Name
+Alyssa Davis,Name
+Jacob Hernandez,Name
+Madison Jackson,Name
+Tyler Wilson,Name
+Hailey Brown,Name
+Jonathan Lee,Name
+Chloe Johnson,Name
+Brandon Smith,Name
+Jasmine Martin,Name
+Juan Rodriguez,Name
+Savannah Taylor,Name
+Kevin Gonzalez,Name
+Makayla Anderson,Name
+Justin Perez,Name
+Avery Davis,Name
+Julia Hernandez,Name
+Alexander Jackson,Name
+Emma Wilson,Name
+Daniel Brown,Name
+Sydney Lee,Name
+William Johnson,Name
+Oliver Smith,Name
+Abigail Martin,Name
+Nicholas Rodriguez,Name
+Madeline Taylor,Name
+Joshua Gonzalez,Name
+Elizabeth Anderson,Name
+Caleb Perez,Name
+Brianna Davis,Name
+Evelyn Hernandez,Name
+Logan Jackson,Name
+Emily Wilson,Name
+Christian Brown,Name
+Ariana Lee,Name
+Adam Johnson,Name
+Sophia Smith,Name
+Leah Martin,Name
+Angel Rodriguez,Name
+Nathan Taylor,Name
+Juliana Gonzalez,Name
+Victoria Anderson,Name
+Jaden Perez,Name
+Audrey Davis,Name
+Landon Hernandez,Name
+Emma Jackson,Name
+Isaac Wilson,Name
+Grace Brown,Name
+Connor Lee,Name
+Avery Johnson,Name
+Ella Smith,Name
+Liam Martin,Name
+Gabriel Rodriguez,Name
+Ava Taylor,Name
+Brandon Gonzalez,Name
+Maya Anderson,Name
+Isabelle Perez,Name
+Cole Davis,Name
+Lila Hernandez,Name
+Ethan Jackson,Name
+Lily Wilson,Name
+Adam Brown,Name
+Allison Lee,Name
+Sophie Johnson,Name
+Luke Smith,Name
+Mia Martin,Name
+Dylan Rodriguez,Name
+Claire Taylor,Name
+Elijah Gonzalez,Name
+Big Ben,Location
+Eiffel Tower,Location
+Statue of Liberty,Location
+Golden Gate Bridge,Location
+Great Wall of China,Location
+Niagara Falls,Location
+Machu Picchu,Location
+Taj Mahal,Location
+Burj Khalifa,Location
+Grand Canyon,Location
+Mount Everest,Location
+Sagrada Familia,Location
+Acropolis of Athens,Location
+Chichen Itza,Location
+Stonehenge,Location
+Uluru (Ayers Rock),Location
+Petra,Location
+Mount Rushmore,Location
+Hollywood Sign,Location
+Leaning Tower of Pisa,Location
+Buckingham Palace,Location
+Disney World,Location
+The Louvre,Location
+Christ the Redeemer,Location
+Neuschwanstein Castle,Location
+Angkor Wat,Location
+Sydney Opera House,Location
+Yellowstone National Park,Location
+Giza Pyramids,Location
+Empire State Building,Location
+Victoria Falls,Location
+Mount Kilimanjaro,Location
+The Colosseum,Location
+Parthenon,Location
+The Great Sphinx,Location
+Zion National Park,Location
+The Grand Palace,Location
+Big Sur,Location
+The Alhambra,Location
+The Vatican,Location
+Sistine Chapel,Location
+Hagia Sophia,Location
+Bryce Canyon National Park,Location
+The Parthenon,Location
+Matterhorn,Location
+Mont Saint-Michel,Location
+Santorini,Location
+The Treasury at Petra,Location
+The Dome of the Rock,Location
+The Blue Lagoon,Location
+The Tower of London,Location
+The Tower Bridge,Location
+St. Basil's Cathedral,Location
+The Red Square,Location
+Pompeii,Location
+Haleakala National Park,Location
+Mount Fuji,Location
+Lake Louise,Location
+Meteora,Location
+The Acropolis of Lindos,Location
+The Hagia Sophia,Location
+Saint Peter's Basilica,Location
+The Neolithic Temples of Malta,Location
+The Great Barrier Reef,Location
+Ulun Danu Temple,Location
+The Sistine Chapel,Location
+The Brandenburg Gate,Location
+The Palace of Versailles,Location
+The Charles Bridge,Location
+The Prague Castle,Location
+The Sydney Harbour Bridge,Location
+The CN Tower,Location
+The Château Frontenac,Location
+The Parliament Hill,Location
+The CN Tower,Location
+The Berlin Wall,Location
+The Blue Mosque,Location
+The Rila Monastery,Location
+The Alcazar of Seville,Location
+The Rock of Gibraltar,Location
+The Alamo,Location
+The Stone Forest,Location
+The Mont Saint-Michel Abbey,Location
+The Reichstag Building,Location
+The Mount Etna,Location
+The Mycenae,Location
+The Pompey's Pillar,Location
+The Masada,Location
+The Wailing Wall,Location
+The Dead Sea,Location
+The Tower of David,Location
+The Machu Picchu,Location
+The Teotihuacan,Location
+The Palenque,Location
+The Xochimilco,Location
+The Angel Falls,Location
+The Milford Sound,Location
+The Aoraki Mount Cook National Park,Location
+The Milford Track,Location
+The Franz Josef Glacier,Location
+The Waitomo Caves,Location
+The Coromandel Peninsula,Location
+The Tongariro National Park,Location
+The Bay of Islands,Location
+The Rotorua,Location
+Bubble sort,Algorithm
+Binary search,Algorithm
+Merge sort,Algorithm
+Quick sort,Algorithm
+Selection sort,Algorithm
+Python,programming language
+Java,programming language
+C++,programming language
+JavaScript,programming language
+Ruby,programming language
+Go,programming language
+Swift,programming language
+Rust,programming language
+PHP,programming language
+C#,programming language
+Assembly language,programming language
+A fluffy white cloud floating in the sky,Description
+The aroma of freshly brewed coffee in the morning,Description
+A majestic waterfall cascading down a rocky cliff,Description
+The sound of waves crashing on a sandy beach,Description
+The vibrant colors of a beautiful sunset,Description
+The gentle rustling of leaves in a forest breeze,Description
+The exhilaration of riding a roller coaster,Description
+The taste of a delicious, homemade chocolate chip cookie,Description
+The feeling of soft grass beneath your bare feet,Description
+The joy of a child's laughter echoing through the room,Description
+The scent of blooming flowers in a spring garden,Description
+The warmth of a cozy fireplace on a winter's night,Description
+The excitement of opening a gift on your birthday,Description
+The serenity of meditating in a peaceful garden,Description
+The awe-inspiring sight of a starry night sky,Description
+The adrenaline rush of skydiving from a plane,Description
+The satisfaction of completing a challenging puzzle,Description
+The tranquility of reading a captivating book,Description
+The energy of a lively music concert,Description
+The taste of a refreshing slice of watermelon on a hot day,Description
+The anticipation of a thrilling movie's climax,Description
+The cool breeze on a summer evening,Description
+The scent of freshly cut grass,Description
+The feeling of sand between your toes at the beach,Description
+The sound of raindrops falling on a tin roof,Description
+The taste of a perfectly ripe mango,Description
+The peacefulness of a quiet library,Description
+The excitement of a live sports game,Description
+The beauty of a blooming cherry blossom tree,Description
+The cozy embrace of a warm blanket on a chilly day,Description
+The aroma of a sizzling barbecue,Description
+The sensation of jumping into a cool swimming pool on a hot day,Description
+The sound of birds chirping in the morning,Description
+The wonder of exploring a new city,Description
+The feeling of accomplishment after completing a difficult task,Description
+The taste of a juicy, ripe strawberry,Description
+The tranquility of watching a gentle waterfall,Description
+The thrill of riding a bicycle downhill,Description
+The comfort of a long hug from a loved one,Description
+The laughter shared with friends around a campfire,Description
+The smell of freshly baked bread from the oven,Description
+The exhilaration of solving a challenging riddle,Description
+The beauty of a full moon illuminating the night sky,Description
+The refreshing feeling of a cold shower on a hot day,Description
+The taste of a mouthwatering slice of pizza,Description
+The feeling of grass tickling your feet as you walk barefoot,Description
+The excitement of attending a live concert of your favorite band,Description
+The scent of a fragrant bouquet of flowers,Description
+The serenity of watching a sunrise by the ocean,Description
+The joy of dancing like no one is watching,Description
+The satisfaction of finishing a jigsaw puzzle,Description
+A program that translates high-level code into low-level code before execution.,Description
+They are specific to a particular machine architecture.,Description
+It executes the code line by line translating and executing each line at runtime.,Description
+To connect multiple networks together,Description
+To translate domain names into IP addresses,Description
+To filter incoming and outgoing network traffic,Description
+To transmit data within a single network,Description
+To convert digital signals to analog signals and vice versa,Description
+HTTP,Protocol
+TCP,Protocol
+UDP,Protocol
+SMTP,Protocol
+FTP,Protocol
+SSH,Protocol
+DNS,Protocol
+ICMP,Protocol
+SNMP,Protocol
+TLS,Protocol
+POP3,Protocol
+IMAP,Protocol
+HTTPS,Protocol
+Telnet,Protocol
+ARP,Protocol
+True,Boolean
+False,Boolean
+AND,Logical Operator
+OR,Logical Operator
+NOT,Logical Operator
+XOR,Logical Operator
+NOR,Logical Operator
+Capillaries,Blood Vessels
+Arteries,Blood Vessels
+Photosynthesis,Processes
+Brain,Organ
+Heart,Organ
+Lungs,Organ
+Liver,Organ
+Kidneys,Organ
+Stomach,Organ
+Intestines,Organ
+Pancreas,Organ
+Spleen,Organ
+Gallbladder,Organ
+Bladder,Organ
+Skin,Organ
+Muscles,Organ
+Bones,Organ
+Eyes,Organ
+Ears,Organ
+Nose,Organ
+Tongue,Organ
+Thyroid gland,Organ
+Adrenal glands,Organ
+Root,Part Of Plant
+Stem,Part Of Plant
+Leaf,Part Of Plant
+Flower,Part Of Plant
+Fruit,Part Of Plant
+Seed,Part Of Plant
+Petal,Part Of Plant
+Stamen,Part Of Plant
+Pistil,Part Of Plant
+Sepal,Part Of Plant
+Peduncle,Part Of Plant
+Ovule,Part Of Plant
+Filament,Part Of Plant
+Style,Part Of Plant
+Anther,Part Of Plant
+Receptacle,Part Of Plant
+Stigma,Part Of Plant
+Bract,Part Of Plant
+Tendril,Part Of Plant
+Rhizome,Part Of Plant
+Insulin,Hormone
+Glucagon,Hormone
+Growth hormone (GH),Hormone
+Thyroid-stimulating hormone (TSH),Hormone
+Adrenocorticotropic hormone (ACTH),Hormone
+Prolactin,Hormone
+Follicle-stimulating hormone (FSH),Hormone
+Luteinizing hormone (LH),Hormone
+Estrogen,Hormone
+Progesterone,Hormone
+Testosterone,Hormone
+Cortisol,Hormone
+Epinephrine (adrenaline),Hormone
+Norepinephrine,Hormone
+Melatonin,Hormone
+Oxytocin,Hormone
+Vasopressin (antidiuretic hormone),Hormone
+Parathyroid hormone (PTH),Hormone
+Calcitonin,Hormone
+Leptin,Hormone
+Nucleus,Organelle
+Mitochondria,Organelle
+Endoplasmic reticulum,Organelle
+Golgi apparatus,Organelle
+Lysosomes,Organelle
+Peroxisomes,Organelle
+Vacuoles,Organelle
+Chloroplasts,Organelle
+Ribosomes,Organelle
+Cytoskeleton,Organelle
+Centrioles,Organelle
+Cell membrane,Organelle
+Cell wall,Organelle
+Nucleolus,Organelle
+Nuclear envelope,Organelle
+Endosomes,Organelle
+Flagella,Organelle
+Cilia,Organelle
+Microvilli,Organelle
+Peroxisomes,Organelle
+Providing light,Function
+Generating heat,Function
+Storing data,Function
+Enhancing communication,Function
+Promoting relaxation,Function
+Supporting weight,Function
+Filtering air or water,Function
+Controlling temperature,Function
+Amplifying sound,Function
+Generating electricity,Function
+Displaying information,Function
+Transporting fluids or gases,Function
+Organizing objects,Function
+Filtering or purifying substances,Function
+Aiding digestion,Function
+Providing protection,Function
+Facilitating movement,Function
+Securing objects or structures,Function
+Generating motion,Function
+Indicating time,Function
+Increasing visibility,Function
+Generating music or sound effects,Function
+Tracking or monitoring activities,Function
+Enhancing aesthetics,Function
+Encouraging creativity,Function
+Promoting cleanliness or hygiene,Function
+Offering storage space,Function
+Assisting in navigation,Function
+Facilitating learning or education,Function
+Supporting body posture,Function
+Stimulating senses,Function
+Dispensing or distributing substances,Function
+Promoting exercise or physical activity,Function
+Providing comfort or relaxation,Function
+Creating visual effects,Function
+Protecting against environmental hazards,Function
+Enhancing productivity,Function
+Enabling cooking or food preparation,Function
+Facilitating research or experimentation,Function
+Promoting social interaction,Function
+Organizing information or data,Function
+Promoting safety or security,Function
+Facilitating transportation,Function
+Promoting organization or efficiency,Function
+Enhancing entertainment experiences,Function
+Supporting medical treatments or procedures,Function
+Promoting sustainability or eco-friendliness,Function
+Enhancing sports performance,Function
+Assisting in decision-making,Function
+Promoting emotional well-being,Function
