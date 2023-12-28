@@ -264,33 +264,12 @@ def questions(username,name):
     notifications = []
     settings = {"interface":{"theme":"green","cards":"straight"},"accessibility":{"fontSize":"normal","font":"roboto"}}
     set = make_dict(db[username]["sets"])[name]
-    if request.method == "POST":
-        current = session.get("current")
-        if session.get("current")["current"] == len(session.get("current")["order"]):
-            return render_template("finish.html",name="Guest",boosting=False,profile_pic="https://booogle-revise-2.goodvessel92551.repl.co/static/logo.png",notifications=notifications)
-        if session.get("next") == "False":
-            answer = request.form["button"]
-            answers = []
-            for i in set[current["order"][current["current"]]]["answers"]:
-                answers.append(set[current["order"][current["current"]]]["answers"][i])
-            answer1 = answers[0]
-            for i in range(1,len(answers)):
-                answer1 += ", "+i
-            session["next"] = "True"
-            session["current"] = {"current":current["current"]+1,"order":current["order"]}
-            if answer in answers:
-                return render_template("correct.html",settings=settings,name="Guest",boosting=False,profile_pic="https://booogle-revise-2.goodvessel92551.repl.co/static/logo.png",answer=answer1,notifications=notifications)
-            else:
-                return render_template("wrong.html",settings=settings,name="Guest",boosting=False,profile_pic="https://booogle-revise-2.goodvessel92551.repl.co/static/logo.png",answer=answer1,notifications=notifications)
-        else:
-            session["next"] = "False"
-    else:
-        order = []
-        for i in range(1,len(set)):
-            order.append("Q"+str(i))
-        random.shuffle(order)
-        session["next"] = "False"
-        session["current"] = {"current":0,"order":order}
+    order = []
+    for i in range(1,len(set)):
+        order.append("Q"+str(i))
+    random.shuffle(order)
+    session["next"] = "False"
+    session["current"] = {"current":0,"order":order}
     ans = []
     if session.get("current")["current"] == len(session.get("current")["order"]):
         return render_template("finish.html",settings=settings,name="Guest",boosting=False,profile_pic="https://booogle-revise-2.goodvessel92551.repl.co/static/logo.png",notifications=notifications)
@@ -623,42 +602,18 @@ def question(name):
         return render_template("login.html")
     notifications = []
     set = get_sets()[name]
-    if request.method == "POST":
-        current = session.get("current")
-        if session.get("current")["current"] == len(session.get("current")["order"]):
-            return render_template("finish.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,stats=session["stats"])
-        if session.get("next") == "False":
-            answer = request.form["button"]
-            answers = []
-            for i in set[current["order"][current["current"]]]["answers"]:
-                answers.append(set[current["order"][current["current"]]]["answers"][i])
-            answer1 = answers[0]
-            for i in range(1,len(answers)):
-                answer1 += ", "+i
-            session["next"] = "True"
-            session["current"] = {"current":current["current"]+1,"order":current["order"]}
-            quest = set[current["order"][current["current"]]]["question"]
-            if answer in answers:
-                session["stats"][str(current["current"]+1)] = {"quest":quest,"correct":True}
-                return render_template("correct.html",title=name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),answer=answer1,notifications=notifications)
-            else:
-                session["stats"][str(current["current"]+1)] = {"quest":quest,"correct":False}
-                return render_template("wrong.html",title=name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),answer=answer1,notifications=notifications)
-        else:
-            session["next"] = "False"
-    else:
-        if len(set) < 4:
-            session["notifications"] = ["You Need More Questions"]
-            return redirect("/")
-        if session.get("stats"):
-            session.pop("stats")
-        session["stats"] = {}
-        order = []
-        for i in range(1,len(set)):
-            order.append("Q"+str(i))
-        random.shuffle(order)
-        session["next"] = "False"
-        session["current"] = {"current":0,"order":order}
+    if len(set) < 4:
+        session["notifications"] = ["You Need More Questions"]
+        return redirect("/")
+    if session.get("stats"):
+        session.pop("stats")
+    session["stats"] = {}
+    order = []
+    for i in range(1,len(set)):
+        order.append("Q"+str(i))
+    random.shuffle(order)
+    session["next"] = "False"
+    session["current"] = {"current":0,"order":order}
     ans = []
     if session.get("current")["current"] == len(session.get("current")["order"]):
         return render_template("finish.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,stats=session["stats"])
@@ -695,67 +650,6 @@ def question(name):
         random.shuffle(ans)
     return render_template("question.html",title=name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets()[name],ans=ans,question=question,notifications=notifications,quest_num = current["order"][current["current"]],set=name,total_quests=len(current["order"]),owner=username())
 
-@app.route("/api/questions",methods=["POST","GET"])
-def api_quest_ans():
-    correct = False
-    data = request.get_json()
-    print(data)
-    owner = data["user"]
-    current = session.get("current")
-    set = user_data_db.find_one({"username":owner,"type":"user_data"})["data"]["sets"][data["set"]]
-    current_ans = set[data["question"]]["answers"]["ans1"]
-    current["current"] += 1
-    session["current"] = current
-    if data["answer"] == current_ans:
-        session["stats"][str(current["current"])] = {"quest":set[data["question"]]["question"],"correct":True}
-        correct = True
-    else:
-        session["stats"][str(current["current"])] = {"quest":set[data["question"]]["question"],"correct":False}
-    if session.get("current")["current"] == len(session.get("current")["order"]):
-        add_streak()
-        return {"done":True,"answer":current_ans,"correct":correct}
-    quest_num = current["order"][current["current"]]
-    next_quest = set[quest_num]
-
-    ans = []
-    temp = list(current["order"])
-    temp.remove(current["order"][current["current"]])
-    ans.append(set[current["order"][session["current"]["current"]]]["answers"]["ans1"])
-    try:
-        type = set[current["order"][current["current"]]]["type"]
-    except:
-        pass
-    else:
-        ans = []
-        for i in temp:
-            if set[i]["type"] == type:
-                temp.remove(i)
-                ans.append(set[i]["answers"]["ans1"])
-        if len(ans) >= 3:
-            random.shuffle(ans)
-            ans = ans[:2]
-            ans.append(set[current["order"][session["current"]["current"]]]["answers"]["ans1"])
-        else:
-            ans.append(set[current["order"][session["current"]["current"]]]["answers"]["ans1"])
-    while len(ans) < 3:
-        quest = random.choice(temp)
-        temp.remove(quest)
-        ans.append([set[quest]["answers"]["ans1"]])
-    random.shuffle(ans)
-    
-    send_data = {
-        "done":False,
-        "correct":correct,
-        "answer":current_ans,
-        "question":next_quest["question"],
-        "answers":{
-            "ans1":ans[0],
-            "ans2":ans[1],
-            "ans3":ans[2]
-        },
-        "quest_num":quest_num
-    }
-    return send_data
 
 @app.route("/finish/questions")
 def finish_questions():
@@ -772,81 +666,6 @@ def delete(name):
     session["notifications"] = [f"Success! ✅ You Have Deleted: {name}"]
     return redirect("/")
 
-@app.route("/api/account/<api_key>/<id>/<name>",methods=["GET"])
-def add_account(api_key,id,name):
-    r = requests.get(f"https://Booogle-API.goodvessel92551.repl.co/api/{os.getenv('key')}/{id}/{name}")
-    if name in db["users"]:
-        return "User Exsits"
-    if api_key == r.json()["token"]:
-        db["users"].append(name)
-        db[name] = {}
-        db[name]["sets"] = {}
-        db[name]["level"] = ""
-        db[name]["folders"] = {}
-        last_7_days = last_7()
-        db[name]["stats"] = {"last_7":{}}
-        for i in last_7_days:
-            db[name]["stats"]["last_7"][i] = {"sets":0}
-        db[name]["stats"]["total"] = {"sets":0,"published":0,"made":0}
-        return "Success"
-    else:
-        return "Invalid API Key"
-
-@app.route("/api/<api_key>/<id>/<name>",methods=["GET"])
-def api(api_key,id,name):
-    if name not in db["users"]:
-        return "No User"
-    else:
-        r = requests.get(f"https://Booogle-API.goodvessel92551.repl.co/api/{os.getenv('key')}/{id}/{name}")
-        if api_key == r.json()["token"]:
-            sets = db[name]["sets"]
-            return make_dict(sets)
-        else:
-            return "Invalid API Key"
-
-@app.route("/api/delete/<api_key>/<id>/<name>/<set_name>",methods=["GET"])
-def api_del(api_key,id,name,set_name):
-    r = requests.get(f"https://Booogle-API.goodvessel92551.repl.co/api/{os.getenv('key')}/{id}/{name}")
-    if api_key == r.json()["token"]:
-        del db[name]["sets"][set_name]
-        return "Done"
-    else:
-        return "Invalid API Key"
-
-@app.route("/api/new/<api_key>/<id>/<name>/<set_name>/<set_desc>/<cover_img>",methods=["GET"])
-def api_new(api_key,id,name,set_name,set_desc,cover_img):
-    r = requests.get(f"https://Booogle-API.goodvessel92551.repl.co/api/{os.getenv('key')}/{id}/{name}")
-    if api_key == r.json()["token"]:
-        level = db[name]["level"]
-        if set_name in list(db[name]["sets"]):
-            return "Do not repeat set names"
-        elif (len(db[name]["sets"]) >= 10 and (level != "premium" and level != "pro" and level != "elite")) or (len(db[name]["sets"]) >= 20 and level == "premium") or (len(db[name]["sets"]) >= 20 and level == "pro") or (len(db[name]["sets"]) >= 20 and level == "elite"):
-            return "You Have Reached The Max Amount Of Sets."
-        elif len(set_name) > 80 or len(set_name) == 0 or len(set_desc) > 150 or len(set_desc) == 0:
-            return "Error"
-        db[name]["sets"][emoji.demojize(set_name)] = {
-            "settings":{
-                "name":set_name,
-                "desc":set_desc,
-                "public":False,
-                "background":cover_img,
-                "user":name,
-                "level":"booogle"
-            }
-        }
-        return "Done"
-    else:
-        return "Invalid API Key"
-
-@app.route("/api/new_quest/<api_key>/<id>/<name>/<set_name>/<quest>/<ans>",methods=["GET"])
-def api_quest(api_key,id,name,set_name,quest,ans):
-    r = requests.get(f"https://Booogle-API.goodvessel92551.repl.co/api/{os.getenv('key')}/{id}/{name}")
-    if api_key == r.json()["token"]:
-        type = smart(ans)
-        db[name]["sets"][emoji.demojize(set_name)]["Q"+str(len(db[name]["sets"][emoji.demojize(set_name)]))] = {"status":mod(quest),"question":quest,"answers":{"ans1":ans},"type":type}
-        return "Done"
-    else:
-        return "Invalid API Key"
 
 
 @app.route("/upgrade")
