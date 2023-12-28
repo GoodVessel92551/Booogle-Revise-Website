@@ -4,7 +4,6 @@ from better_profanity import profanity
 import emoji
 import requests
 import os,random,json,re
-import cohere
 from urllib.parse import urlparse
 from datetime import timedelta
 from datetime import datetime
@@ -525,41 +524,6 @@ def new_question():
         session.pop("quest_len")
     return render_template("new_question.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),quest=quest,ans=ans,rude=rude,len=length,notifications=notifications)
 
-@app.route("/new/question/generate",methods=["POST","GET"])
-def generate():
-    if login() == False:
-        return render_template("login.html")
-    if request.method == "POST":
-        level = userinfo(username())[0]
-        quest = request.form["quest"]
-        
-        if level == "pro" or level == "elite":
-            if len(quest.split()) < 3:
-                session["quest_len"] = quest
-            elif mod(quest) != "1" and profanity.contains_profanity(quest) == False:
-                co = cohere.Client(os.getenv('AI_key'))
-                try:
-                    response = co.generate(
-                        model='command-xlarge-beta',
-                        prompt='You are Booogle Revise AI and you are a AI assistant, Answer this: \"'+quest+'\" as concise as possible',
-                        max_tokens=100,
-                        temperature=0.5,
-                        k=0,
-                        p=0.75,
-                        stop_sequences=[],
-                        return_likelihoods='NONE'
-                    )
-                except:
-                    ans = "There Was An Error"
-                else:
-                    ans = response.generations[0].text.lstrip()
-                session["quest"] = {"quest":quest,"ans":ans}
-            else:
-                session["quest_rude"] = quest
-        else:
-            session["quest"] = {"quest":quest,"ans":""}
-    return redirect("/new/question")
-
 @app.route("/edit/<name>",methods=["POST","GET"])
 def edit(name):
     if login() == False:
@@ -931,40 +895,6 @@ def server_error(e):
 def page_not_found(e):
     session["notifications"] = ["The Page That You Were Looking For Does Not Exist Here 😭"]
     return redirect("/")
-
-@app.route("/ai/revise/generate",methods=["POST","GET"])
-def ai_revise_generate():
-    data = request.get_json()
-    url = request.referrer
-    parsed_url = urlparse(url)
-    subdomain_list = parsed_url.hostname.split('.')
-    subdomain = subdomain_list[-3] + "." + subdomain_list[-2] + "." + subdomain_list[-1]
-    if subdomain != "goodvessel92551.repl.co":
-        {"error": "You cannot come from that domain."}
-    prompt = data['prompt']
-    messages = data["messages"]
-    topic = messages[0]
-    messages.remove(topic)
-    ans = True
-    if len(messages)%2 == 0:
-        ans = False
-    if ans == True:
-        prompt = f"You are Booogle Revise AI and you are a AI assistant, Is this question right? {messages[-1]}. Also give me another revision question on the topic: {topic}. Make sure to do this."
-    else:
-        prompt = f"You are Booogle Revise AI and you are a AI assistant, Give me a {topic}'s revision question."
-    co = cohere.Client(os.getenv('AI_key'))
-    response = co.generate(
-        model='command-xlarge-beta',
-        prompt=prompt,
-        max_tokens=100,
-        temperature=0.8,
-        k=0,
-        p=0.75,
-        stop_sequences=[],
-        return_likelihoods='NONE'
-    )
-    ans = ans = response.generations[0].text.lstrip()
-    return {"ans":ans}
 
 @app.route("/test/<set>",methods=["POST","GET"])
 def test_mode(set):
