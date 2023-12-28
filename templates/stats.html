@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="{{url_for('static',filename='logo.png')}}"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='main.css')}}"
+      type="text/css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <title>Booogle Revise 2</title>
+    <meta name="theme-color" id="theme" content="#2A2F2D" />
+    <link rel="manifest" href="/static/manifest.json" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div id="top_text" class="top_menu">
+      <span>Booogle Revise - {{name}}</span>
+    </div>
+    <nav class="stats-nav nav">
+      <a href="/" class="nav_img"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1000 1000"
+          shape-rendering="geometricPrecision"
+          text-rendering="geometricPrecision"
+        >
+          <defs>
+            <linearGradient
+              id="b"
+              x1=".687"
+              y1=".036"
+              x2=".313"
+              y2=".964"
+              spreadMethod="pad"
+              gradientUnits="objectBoundingBox"
+            >
+              <stop offset="0%" stop-color="#0b0" />
+              <stop offset="100%" stop-color="#009600" />
+            </linearGradient>
+            <filter id="a" x="-150%" width="400%" y="-150%" height="400%">
+              <feGaussianBlur in="SourceAlpha" stdDeviation="100,100" />
+              <feOffset result="tmp" />
+              <feFlood flood-color="#0b0" />
+              <feComposite operator="in" in2="tmp" />
+              <feMerge>
+                <feMergeNode />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+          <path
+            d="M4775 9504c-230-55-437-199-575-399-48-70-108-202-131-290-26-100-36-291-20-395 17-108 71-257 127-352 96-162 292-328 463-392 124-47 182-57 428-71 134-8 291-22 350-31 320-47 680-184 972-369 810-513 1269-1412 1211-2373-22-362-109-681-275-1012-200-396-537-768-920-1015-414-267-895-406-1405-407-374 0-678 60-1007 198-528 221-971 614-1261 1121-203 356-310 736-332 1183-12 238-16 273-46 378-47 160-130 297-255 418-90 86-146 125-252 174-144 68-228 84-417 84-138 0-178-4-245-22-89-25-222-85-291-133-200-137-346-349-398-576-22-97-22-495-1-699 76-717 338-1449 730-2037 171-258 335-457 570-692 513-515 1121-886 1829-1115 262-84 585-151 906-187 216-24 724-24 938 0 705 79 1406 322 1967 680 986 631 1687 1609 1965 2741 91 372 124 659 124 1086 0 338-12 486-59 768-96 567-337 1196-638 1667-748 1169-1974 1926-3349 2070-194 20-618 19-703-1Z"
+            filter="url(#a)"
+            fill="url(#b)"
+            transform="matrix(.1 0 0 -.1 0 1000)"
+          /></svg
+      ></a>
+      <a class="nav_title" href="/" style="text-decoration: none">Stats</a>
+    </nav>
+    <div class="stats-top-back"></div>
+    <div class="stats">
+      <h1>GoodVessel92551’s Stats</h1>
+      <div class="stats-box">
+        <a
+          ><h3>
+            Total Sets Revised<span class="total"
+              ><ion-icon name="help-circle-outline"></ion-icon
+            ></span>
+          </h3>
+          <h2>{{stats["total"]["sets"]}}</h2></a
+        >
+        <a
+          ><h3>Last 7 Days</h3>
+          <h2 id="this_week"></h2
+        ></a>
+        <a
+          ><h3>Sets Made<span class="made"></span></h3>
+          <h2>{{stats["total"]["made"]}}</h2></a
+        >
+        <a
+          ><h3>Sets Published<span class="published"></span></h3>
+          <h2>{{stats["total"]["published"]}}</h2></a
+        >
+      </div>
+      <h2 class="stats-week">Last 7 Days</h2>
+      <div class="chart"><canvas id="myChart"></canvas></div>
+    </div>
+    <script src="/static/app.js"></script>
+    <script>
+        var stats = {{stats|tojson}}
+        console.log(stats)
+        keys = Object.keys(stats["last_7"])
+        values = []
+        var total_week = 0
+        for (var i = 0;i < keys.length;i++){
+            total_week += stats["last_7"][keys[i]]["sets"]
+            values.push(stats["last_7"][keys[i]]["sets"])
+        }
+        document.getElementById("this_week").innerText = total_week
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, '#00bb00');
+        gradient.addColorStop(1, '#007d00');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: keys,
+                datasets: [{
+                    label: 'Sets',
+                    data: values,
+                    fill: false,
+                    borderColor: gradient,
+                    tension: 0.3,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+      });
+    </script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>

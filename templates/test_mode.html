@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block page_title %} {{title}} {% endblock %}{% block title %}Test Mode{% endblock %} {% block main %}
+<main class="main">
+    <h1>{{set["settings"]["name"]}}</h1>
+    <form method="post" class="test" id="test">
+        <button href="/new" class="main_button home_button1" style="position: absolute; top: 34.5px; right: 20px" ><span>Submit</span><ion-icon name="checkmark-done-outline"></ion-icon></button>
+    </form>
+</main>
+<script>
+    var set = {{quest_set|tojson}};
+    var keys = Object.keys(set);
+    console.log(keys)
+    var test_element = document.getElementById("test");
+    for (var i = 0; i < keys.length; i++){
+        var a = document.createElement("a");
+        var h2 = document.createElement("h2");
+        var p = document.createElement("p");
+        var span = document.createElement("span");
+        h2.innerText = `Question ${i+1}`;
+        p.innerText = set[`Q${i+1}`]["question"];
+        if (set[`Q${i+1}`]["type"] == "text"){
+            ans = document.createElement("ans");
+            input = document.createElement("input");
+            input.type = "text";
+            input.classList.add("text","ans_text")
+            input.name = `Q${i+1}`;
+            input.autocomplete = "off";
+            input.required = true;
+            input.placeholder = "Answer";
+            ans.appendChild(input);
+            span.appendChild(ans);
+        }else{
+            ans1 = document.createElement("ans");
+            ans2 = document.createElement("ans");
+            ans3 = document.createElement("ans");
+            input1 = document.createElement("input");
+            input2 = document.createElement("input");
+            input3 = document.createElement("input");
+            input1.type = "radio";
+            input2.type = "radio";
+            input3.type = "radio";
+            input1.value = set[`Q${i+1}`]["answer"][0];
+            input2.value = set[`Q${i+1}`]["answer"][1];
+            input3.value = set[`Q${i+1}`]["answer"][2];
+            input1.required = true;
+            input2.required = true;
+            input3.required = true;
+            input1.name = `Q${i+1}`;
+            input2.name = `Q${i+1}`;
+            input3.name = `Q${i+1}`;
+            label1 = document.createElement("label");
+            label2 = document.createElement("label");
+            label3 = document.createElement("label");
+            label1.innerText = set[`Q${i+1}`]["answer"][0];
+            label2.innerText = set[`Q${i+1}`]["answer"][1];
+            label3.innerText = set[`Q${i+1}`]["answer"][2];
+            ans1.appendChild(input1);
+            ans2.appendChild(input2);
+            ans3.appendChild(input3);
+            ans1.appendChild(label1);
+            ans2.appendChild(label2);
+            ans3.appendChild(label3);
+            span.appendChild(ans1);
+            span.appendChild(ans2);
+            span.appendChild(ans3);
+        }
+        a.appendChild(h2);
+        a.appendChild(p);
+        a.appendChild(span);
+        test_element.appendChild(a);
+    }
+    console.log(set)
+</script>
+{% endblock %}

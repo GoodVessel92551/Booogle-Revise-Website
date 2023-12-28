@@ -1,0 +1,190 @@
+{% extends "base.html" %}{% block page_title %} Recommended {% endblock %} {% block title %}Recommended{% endblock %} {% block main %}
+<main class="main">
+    <div class="your_sets_button"><a class="your_sets_button_hover" href="/community">Community</a><a>Recommended</a>
+    </div>
+    <div class="home_sets" id="home_sets"></div>
+    <dialog class="start_set" id="start_set">
+        <div class="all_contain_start">
+            <img class="set_image" id="set_image">
+            <div class="text_contain_start">
+                <h1 id="set_title" class="set_title_dialog">Set Name</h1>
+                <p id="set_desc"></p>
+            </div>
+        </div>
+        <button id="close_mobile" class="close_moblie no_pull"><div></div></button>
+        <button class="close_start_set">
+            <ion-icon onclick="document.getElementById('start_set').close()" class="close_start"
+                name="close-outline"></ion-icon>
+        </button>
+        <h2>Revise</h2>
+        <div class="start_options">
+            <a href="/flashcards" id="flashcards">
+                <span id="flash_rec"><ion-icon name="sparkles-outline"></ion-icon></span>
+                <ion-icon name="albums-outline"></ion-icon>
+                <strong>Flashcards</strong>
+            </a>
+            <a href="/questions" id="questions">
+                <span id="quest_rec"><ion-icon name="sparkles-outline"></ion-icon></span>
+                <ion-icon name="help-outline"></ion-icon>
+                <strong>Questions</strong>
+            </a>
+            <a href="/fill" id="fill">
+                <ion-icon name="create-outline"></ion-icon>
+                <strong>Fill The Gaps</strong>
+            </a>
+            <a href="/test" id="test">
+                <ion-icon id="test_lock" class="start_lock" name="lock-closed-outline"></ion-icon>
+                <ion-icon name="list-outline"></ion-icon>
+                <strong>Test</strong>
+            </a>
+        </div>
+        <div class="start_buttons">
+            <a href="/delete" id="del_button" class="main_button del_button">
+                <span>Delete</span><ion-icon name="trash-outline"></ion-icon>
+            </a>
+            <a href="/share" id="upload" class="thrid_button main_button">
+                <span>Share</span><ion-icon name="share-social-outline"></ion-icon>
+            </a>
+            <a href="/download" id="upload" class="second_button main_button">
+                <span>Download</span><ion-icon name="download-outline"></ion-icon>
+            </a>
+        </div>
+    </dialog>
+</main>
+    <nav class="bottom_nav">
+        <a href="/new/folder"><ion-icon name="folder-open-outline"></ion-icon></a>
+        <a href="/community"><ion-icon name="earth-outline"></ion-icon></a>
+        <a href="/play"><ion-icon name="play-outline"></ion-icon></a>
+        <a href="/new" class="add_button_nav"><ion-icon name="add-outline"></ion-icon></a>
+    </nav>
+<script>
+    level = {{boosting | tojson}}
+    function show(name) {
+        var set = sets[name];
+        var sets_keys = Object.keys(set);
+        sets_keys.pop();
+        var mean = 0;
+        var total_ans_len = 0;
+        for (var i = 0; i < sets_keys.length; i++) {
+            var ans = set[sets_keys[i]]["answers"]["ans1"];
+            total_ans_len += ans.split(" ").length;
+        }
+        mean = total_ans_len / sets_keys.length;
+        if (mean <= 2 && sets_keys.length > 3) {
+            document.getElementById("quest_rec").style.display = "block";
+            document.getElementById("flash_rec").style.display = "none";
+        } else {
+            document.getElementById("flash_rec").style.display = "block";
+            document.getElementById("quest_rec").style.display = "none";
+        }
+        document.getElementById("start_set").showModal();
+        var title = sets[name]["settings"]["name"];
+        var user = sets[name]["settings"]["user"];
+        document.getElementById("set_title").innerText = title;
+        document.getElementById("set_desc").innerText = sets[name]["settings"]["desc"];
+        document.getElementById("flashcards").href = `/flashcards/@${user}/${title}`;
+        document.getElementById("questions").href = `/questions/@${user}/${title}`;
+        document.getElementById("fill").href = `/fill/@${user}/${title}`;
+        if (username == "GoodVessel92551" || user == username) {
+            document.getElementById("del_button").style.display = "inline-block";
+        } else {
+            document.getElementById("del_button").style.display = "none";
+        }
+        document.getElementById("del_button").href = `/delete/@${user}/${title}`;
+        document.getElementById("download_button").href = `/download/@${user}/${title}`;
+    }
+
+    var sets = {{recommended_sets| tojson}};
+    var sets_keys = Object.keys(sets)
+    const droppableElement = document.querySelector('.droppable');
+    for (var i = 0; i < sets_keys.length; i++) {
+        var level = sets[sets_keys[i]]["settings"]["level"];
+        var home = document.getElementById("home_sets");
+        var a = document.createElement("a");
+        a.classList.add("set_home")
+        var img = document.createElement("img");
+        var strong = document.createElement("strong");
+        var p = document.createElement("p");
+        var user = document.createElement("a");
+        var subject = document.createElement("span");
+        img.draggable = false;
+        a.addEventListener("click", (e) => {
+            show(e.target.id);
+        });
+        img.alt = sets[sets_keys[i]]["settings"]["name"];
+        img.src = `/static/set_icons/${sets[sets_keys[i]]["settings"]["background"]}.webp`;
+        user.innerText = sets[sets_keys[i]]["settings"]["user"];
+        user.classList.add("user_name");
+        user.href = "/stats/@" + sets[sets_keys[i]]["settings"]["user"];
+        strong.innerText = sets[sets_keys[i]]["settings"]["name"];
+        subject.innerText = sets[sets_keys[i]]["settings"]["subject"];
+        subject.classList.add("subject");
+        p.innerText = sets[sets_keys[i]]["settings"]["desc"];
+        a.id = sets_keys[i];
+        strong.id = sets_keys[i];
+        strong.classList.add("set_title");
+        img.id = sets_keys[i];
+        p.id = sets_keys[i];
+        if (level != false) {
+            var badge = document.createElement("ion-icon");
+            badge.classList.add("badge");
+            if (level == "boost") {
+                badge.name = "rocket-outline";
+                badge.style.background = "linear-gradient(72deg, var(--boost1), var(--boost2))";
+                badge.style.color = "var(--black)";
+            } else if (level == "premium") {
+                badge.name = "sparkles-outline";
+                badge.style.background = "linear-gradient(72deg, var(--premium1), var(--premium2))";
+                badge.style.color = "var(--text)";
+            } else if (level == "pro") {
+                badge.name = "medal-outline";
+                badge.style.background = "linear-gradient(72deg, var(--pro1), var(--pro2))";
+                badge.style.color = "var(--black)";
+            } else if (level == "elite") {
+                badge.name = "diamond-outline";
+                badge.style.background = "linear-gradient(72deg, var(--elite1), var(--elite2), var(--elite3))";
+                badge.style.color = "var(--text)";
+            } else if (level == "booogle") {
+                badge.name = "repeat-outline";
+                badge.style.background = "linear-gradient(72deg, #79e46c, #45f4c6)";
+                badge.style.color = "var(--black)";
+            }
+            badge.id = sets[sets_keys[i]]["settings"]["name"];
+            user.appendChild(badge);
+            document.querySelector("svg").addEventListener("load", () => {
+                document.querySelectorAll(".badge").forEach((badge_item) => {
+                    badge_item.style.display = "inline-block";
+                });
+            });
+        }
+        a.appendChild(img);
+        a.appendChild(strong);
+        a.appendChild(p);
+        a.appendChild(user);
+        a.appendChild(subject);
+        home.appendChild(a);
+        
+        const dialog = document.getElementById('start_set');
+        const closeButton = document.getElementById('close_mobile');
+        var isDragging = false;
+        closeButton.addEventListener('touchstart', (e) => {
+            isDragging = true;
+        });
+        
+        closeButton.addEventListener('touchmove', (e) => {
+          if (isDragging) {
+                dialog.classList.add("slide_out_animation");
+                setTimeout(() => {
+                    dialog.classList.remove("slide_out_animation");
+                    dialog.close()
+                }, 500);
+            }
+        });
+        document.addEventListener('touchstart', function(e) {
+            if (e.target.classList.contains('no_pull')) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+        }
+</script>
+{% endblock %}

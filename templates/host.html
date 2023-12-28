@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block page_title %} Play {% endblock %}
+{% block title %}Play{% endblock %}
+{% block main %}
+<main class="main">
+    <h1>Pick Set To Host</h1>
+    <div class="home_sets" id="home_sets"></div>
+</main>
+<script>
+    var sets = {{sets| tojson}};
+    var sets_keys = Object.keys(sets);
+    for (var i = 0; i < sets_keys.length; i++) {
+        var level = sets[sets_keys[i]]["settings"]["level"];
+        var home = document.getElementById("home_sets");
+        var a = document.createElement("a");
+        a.classList.add("set_home")
+        var img = document.createElement("img");
+        img.draggable = "false";
+        var strong = document.createElement("strong");
+        var p = document.createElement("p");
+        var user = document.createElement("p");
+        a.href = `/play/host/{{code}}/${sets[sets_keys[i]]["settings"]["name"]}`;
+        img.alt = sets[sets_keys[i]]["settings"]["name"];
+        img.src = `/static/set_icons/${sets[sets_keys[i]]["settings"]["background"]}.webp`;
+        user.innerText = sets[sets_keys[i]]["settings"]["user"];
+        img.draggable = "false";
+        user.classList.add("user_name");
+        strong.innerText = sets[sets_keys[i]]["settings"]["name"];
+        p.innerText = sets[sets_keys[i]]["settings"]["desc"];
+        if (level != false) {
+            var badge = document.createElement("ion-icon");
+            badge.classList.add("badge");
+                if (level == "boost") {
+                    badge.name = "rocket-outline";
+                    badge.style.background = "var(--boost1)";
+                    badge.style.color = "var(--on_boost)";
+                } else if (level == "premium") {
+                    badge.name = "sparkles-outline";
+                    badge.style.background = "var(--premium1)";
+                    badge.style.color = "var(--on_premium)";
+                } else if (level == "pro") {
+                    badge.name = "medal-outline";
+                    badge.style.background = "var(--pro1)";
+                    badge.style.color = "var(--on_pro)";
+                } else if (level == "elite") {
+                    badge.name = "diamond-outline";
+                    badge.style.background = "var(--elite1)";
+                    badge.style.color = "var(--on_elite)";
+                } else if (level == "booogle") {
+                    badge.name = "repeat-outline";
+                    badge.style.background = "#A3D89D";
+                    badge.style.color = "#243822)";
+                }
+            badge.id = sets[sets_keys[i]]["settings"]["name"];
+            user.appendChild(badge);
+            document.querySelector('svg').addEventListener('load', () => {
+                document.querySelectorAll(".badge").forEach((badge_item) => {
+                    badge_item.style.display = "inline-block";
+                });
+            });
+        }
+        a.appendChild(img);
+        a.appendChild(strong);
+        a.appendChild(p);
+        a.appendChild(user);
+        home.appendChild(a);
+    }
+</script>
+{% endblock %}

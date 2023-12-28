@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Introducing Booogle Revise 2, the ultimate revision app that revolutionizes the way you study. With Booogle Revise 2, you can enhance your learning experience by collaborating with friends and accessing an extensive collection of study sets from the vibrant community.">
+    <meta property="og:image" content="/static/embed.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="675">
+    <meta property="og:image:alt" content="Booogle Revise">
+    <link rel="icon" href="{{url_for('static',filename='favicon.ico')}}" type="image/x-icon" />
+    <link rel="stylesheet" href="{{url_for('static',filename='main.css')}}" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+    <title>Booogle Revise - {% block page_title %} {% endblock %}</title>
+    <meta property="og:title" content="Booogle Revise - The Ultimate Revision App" />
+    <meta property="og:description" content="Booogle Revise is a simple to use revision app that allows you to revise in the way that you want from flashcards to fill the gap." />
+    <meta property="og:image" content="/static/embed.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="675">
+    <meta property="og:image:alt" content="Booogle Revise">
+    <meta property="og:url" content="https://revise.booogle.app/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_GB" />
+    <meta name="theme-color" id="theme" content="#2A2F2D" />
+    <link rel="manifest" href="/static/manifest.json" />
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <style id="customStyles">
+        :root {
+            --back: #1b1e1a;
+            --top_back: #2a2f2d;
+            --on_top_back:#37423e;
+            --border: 1px solid #3f4b3d;
+            --border_hover: #6f896a;
+            --text5: #a4bcb0;
+            --back2: #323232;
+            --border2: 2px solid #3d3c3c;
+            --top_green: #2a2f2d;
+            --hover_top_green: #303634;
+            --hover_top_green-2: #343c3a;
+            --top_green_opactiy: #2a2f2dbb;
+            --top_green_2: #303634;
+            --on_top_green: #badbca;
+            --on_top_green_2: #A5C1B2;
+            --main_button: #bfffc2;
+            --on_main_button: #0F5B11;
+            --second_button: #a3d9a5;
+            --on_second_button: #0D400E;
+            --third_button: #86b388;
+            --on_third_button: #072007;
+            --error_button: #F2B6B6;
+            --on_error_button: #611010;
+            --focus:#2e80a3;
+            --text_border: #323c32;
+            --autocomplete: #435643;
+            --text_border_hover: #4e5f4e;
+            --text_border_focus: #627f62;
+            --select:#496949;
+            --speaker:#51654e;
+            --on_speaker:#ebffd6;
+            --leaderboard:#333D39;
+            --close_moblie:#5a655f;
+            --add_user_back:#404443;
+            --add_user_back_focus:#404543;
+            --view_user_group:#404443;
+            --settings_back_focus:#3f4b46;
+            --settings_cards:#475A53;
+            --flash_indicator:#333b38;
+        }
+    </style>
+</head>
+
+<body id="body">
+    <div id="top_text" class="top_menu">
+        <span>Booogle Revise - {{name}}</span>
+    </div>
+
+    <nav class="nav">
+        <a href="/" title="Home" class="nav_img">
+            <svg width="119" height="119" viewBox="0 0 119 119" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M56.88 0.44938C53.8834 1.16596 51.1865 3.04211 49.3885 5.64785C48.7632 6.55986 47.9814 8.27966 47.6818 9.42619C47.343 10.7291 47.2128 13.2175 47.4212 14.5726C47.6427 15.9797 48.3462 17.9209 49.0758 19.1587C50.3266 21.2693 52.8802 23.4321 55.1081 24.2659C56.7236 24.8783 57.4793 25.0086 60.6843 25.191C62.4301 25.2952 64.4756 25.4776 65.2443 25.5949C69.4134 26.2072 74.1037 27.9921 77.9081 30.4025C88.4612 37.0862 94.4413 48.799 93.6857 61.3197C93.399 66.0361 92.2655 70.1922 90.1028 74.5047C87.4971 79.6641 83.1065 84.5108 78.1165 87.7289C72.7227 91.2076 66.4559 93.0186 59.8114 93.0316C54.9387 93.0316 50.978 92.2499 46.6916 90.4519C39.8125 87.5726 34.0409 82.4523 30.2626 75.8467C27.6178 71.2085 26.2237 66.2575 25.9371 60.4337C25.7808 57.3329 25.7287 56.8769 25.3378 55.5088C24.7255 53.4242 23.6441 51.6393 22.0155 50.0628C20.8429 48.9424 20.1133 48.4342 18.7323 47.7958C16.8562 46.9099 15.7618 46.7014 13.2994 46.7014C11.5014 46.7014 10.9803 46.7535 10.1074 46.988C8.94783 47.3138 7.21503 48.0955 6.31606 48.7209C3.71034 50.5058 1.80818 53.2679 1.13069 56.2254C0.844062 57.4892 0.844062 62.6746 1.11766 65.3325C2.10783 74.6741 5.52131 84.2111 10.6285 91.872C12.8564 95.2335 14.9931 97.8262 18.0548 100.888C24.7385 107.598 32.6599 112.431 41.8841 115.415C45.2976 116.509 49.5058 117.382 53.688 117.851C56.5021 118.164 63.1206 118.164 65.9088 117.851C75.0939 116.822 84.2269 113.656 91.5359 108.992C104.382 100.771 113.515 88.0286 117.137 73.28C118.323 68.4333 118.753 64.6941 118.753 59.1308C118.753 54.7271 118.596 52.7989 117.984 49.1248C116.733 41.7375 113.593 33.5424 109.672 27.4059C99.9263 12.1753 83.9533 2.3125 66.039 0.436355C63.5115 0.17578 57.9874 0.188806 56.88 0.44938Z" fill="#ADF0CE"/>
+            </svg>
+        </a>
+        <a class="nav_title" id="nav_title" href="/" style="text-decoration: none">{% block title %}{% endblock %}</a>
+        <a class="nav_streak">
+            <ion-icon id="nav_streak_fire"></ion-icon><span>{{streak|tojson}}</span>
+        </a>
+        <a class="boost" href="/upgrade" id="level_button"><span id="level">Upgrade</span>
+            <ion-icon id="level_icon"></ion-icon>
+        </a>
+        <a class="nav_pro" target="_blank" href="https://replit.com/@{{name}}"><img alt="profile_pic" id="nav_pro"
+                src="{{boosting[1]}}" onerror="this.src = '{{url_for('static',filename='logo.png')}}'" /></a>
+    </nav>
+    <div id="notifications" class="notifications"></div>
+    {% block main %} {% endblock %}
+    <script src="/static/notification.js"></script>
+    <script>
+        var streak = {{streak|tojson}}
+        console.log(streak)
+        var settings = {{settings|tojson}}
+        console.log(settings)
+        var theme = settings["interface"]["theme"]
+        const styleElement = document.getElementById('customStyles');
+        var nav_streak_fire = document.getElementById("nav_streak_fire");
+        if (streak > 0){
+            nav_streak_fire.name = "flame"
+            nav_streak_fire.style.color = "#F2D6B6"
+        }else{
+            nav_streak_fire.name = "flame-outline"
+        }
+        if(theme == "blue"){
+            var newStyles = `
+            :root{
+                --back: #1a1b1e;
+                --top_back: #292a2e;
+                --on_top_back:#383b43;
+                --border: 1px solid #3e434c;
+                --border_hover: #6a758a;
+                --text5: #a4acbc;
+                --back2: #323232;
+                --border2: 2px solid #3d3d3e;
+                --top_green: #292a2e;
+                --hover_top_green: #303236;
+                --hover_top_green-2: #34373c;
+                --top_green_opactiy: #292a2ebb;
+                --top_green_2: #33363d;
+                --on_top_green: #b9c4da;
+                --on_top_green_2: #a5aec0;
+                --main_button: #bdd3ff;
+                --on_main_button: #0f295c;
+                --second_button: #a4b6da;
+                --on_second_button: #0d1e3f;
+                --third_button: #8594b2;
+                --on_third_button: #071021;
+                --error_button: #F2B6B6;
+                --on_error_button: #611010;
+                --text_border: #33363d;
+                --autocomplete: #434956;
+                --text_border_hover: #4e545f;
+                --text_border_focus: #626b7f;
+                --select:#495469;
+                --speaker:#4e5565;
+                --on_speaker:#d6e4ff;
+                --leaderboard:#33363d;
+                --close_moblie:#595c64;
+                --add_user_back:#404244;
+                --add_user_back_focus:#404145;
+                --view_user_group:#404244;
+                --settings_back_focus:#3f434b;
+                --settings_cards:#484e5b;
+                --flash_indicator:#34373c;
+            }`;
+            styleElement.innerHTML = newStyles;
+        }else if(theme == "yellow"){
+            var newStyles = `
+            :root{
+                --back: #1e1d1a;
+                --top_back: #2e2d29;
+                --on_top_back:#434038;
+                --border: 1px solid #4c483e;
+                --border_hover: #8a826a;
+                --text5: #bcb6a4;
+                --back2: #323232;
+                --border2: 2px solid #3b3b3b;
+                --top_green: #2e2d29;
+                --hover_top_green: #363530;
+                --hover_top_green-2: #3c3a34;
+                --top_green_opactiy: #2e2d29bb;
+                --top_green_2: #3d3b33;
+                --on_top_green: #dad2b9;
+                --on_top_green_2: #c0b9a5;
+                --main_button: #ffedbd;
+                --on_main_button: #5c480f;
+                --second_button: #dacca4;
+                --on_second_button: #3f320d;
+                --third_button: #b2a685;
+                --on_third_button: #211a07;
+                --error_button: #F2B6B6;
+                --on_error_button: #611010;
+                --text_border: #3d3b33;
+                --autocomplete: #565143;
+                --text_border_hover: #5f5b4e;
+                --text_border_focus: #7f7762;
+                --select:#696049;
+                --speaker:#655e4e;
+                --on_speaker:#fff2d6;
+                --leaderboard:#3d3a33;
+                --close_moblie:#646059;
+                --add_user_back:#444340;
+                --add_user_back_focus:#454340;
+                --view_user_group:#444340;
+                --settings_back_focus:#4b473f;
+                --settings_cards:#5b5548;
+                --flash_indicator:#3c3a34;
+            }`;
+            styleElement.innerHTML = newStyles;
+        }else if(theme == "red"){
+            var newStyles = `
+            :root{
+                --back: #1e1a1a;
+                --top_back: #2e2d29;
+                --on_top_back:#433838;
+                --border: 1px solid #4c483e;
+                --border_hover: #8a6a6a;
+                --text5: #bca4a4;
+                --back2: #323232;
+                --border2: 2px solid #3b3b3b;
+                --top_green: #2e2929;
+                --hover_top_green: #363030;
+                --hover_top_green-2: #3c3434;
+                --top_green_opactiy: #2e2929bb;
+                --top_green_2: #3d3333;
+                --on_top_green: #dcbcbc;
+                --on_top_green_2: #c0b9a5;
+                --main_button: #ffbdbd;
+                --on_main_button: #5c0f0f;
+                --second_button: #daa4a4;
+                --on_second_button: #3f0d0d;
+                --third_button: #b28585;
+                --on_third_button: #072007;
+                --error_button: #F2B6B6;
+                --on_error_button: #611010;
+                --text_border: #3d3333;
+                --autocomplete: #564343;
+                --text_border_hover: #5f4e4e;
+                --text_border_focus: #7f6262;
+                --select:#694949;
+                --speaker:#654e4e;
+                --on_speaker:#ffd6d6;
+                --leaderboard:#3d3333;
+                --close_moblie:#645959;
+                --add_user_back:#444040;
+                --add_user_back_focus:#454040;
+                --view_user_group:#444040;
+                --settings_back_focus:#4b3f3f;
+                --settings_cards:#5b4848;
+                --flash_indicator:#3c3434;
+            }`;
+            styleElement.innerHTML = newStyles;
+        }
+        var body = document.getElementById("body")
+        console.log(body)
+        body.setAttribute("data-value",`theme_${theme}`)
+        var level = {{boosting| tojson}}[0];
+        console.log(level)
+        var notifications = {{notifications| tojson}}
+        for (var i = 0; i < notifications.length; i++) {
+            var a = document.createElement("a");
+            a.id = `notification_${i}_notification`
+            var p = document.createElement("p");
+            var button = document.createElement("button");
+            button.id = `notification_${i}`;
+            button.addEventListener("click", (e) => {
+                document.getElementById(`${e.target.id}_notification`).remove();
+            })
+            button.innerHTML = `<ion-icon id="notification_${i}" name="close-outline"></ion-icon>`;
+            p.innerText = notifications[i];
+            a.appendChild(p);
+            a.appendChild(button);
+            document.getElementById("notifications").appendChild(a);
+        }
+        var level_icon = document.getElementById("level_icon")
+        var level_text = document.getElementById("level")
+        var level_button = document.getElementById("level_button")
+        if (level == "boost") {
+            level_button.classList.add("boost_boot")
+            level_text.innerText = "Boosting"
+            level_button.style.borderColor = "var(--boost1)";
+            level_button.style.color = "var(--boost1)";
+            level_icon.style.color = "var(--boost1)";
+            level_icon.name = "rocket-outline";
+        }
+        else if (level == "premium") {
+            level_button.classList.add("boost_premium")
+            level_text.innerText = "Premium"
+            level_button.style.borderColor = "var(--premium1)";
+            level_button.style.color = "var(--premium1)";
+            level_icon.style.color = "var(--premium1)";
+            level_icon.name = "sparkles-outline";
+        }
+        else if (level == "pro") {
+            level_button.classList.add("boost_pro")
+            level_text.innerText = "Pro"
+            level_button.style.borderColor = "var(--pro1)";
+            level_button.style.color = "var(--pro1)";
+            level_icon.style.color = "var(--pro1)";
+            level_icon.name = "ribbon-outline";
+        }
+        else if (level == "elite") {
+            level_button.classList.add("boost_elite")
+            level_text.innerText = "Elite"
+            level_icon.name = "diamond-outline";
+        }
+        else {
+            level_icon.name = "arrow-up-outline"
+        }
+        function color(color) {
+            document.getElementById("nav_title").innerText = "Test"
+            document.body.style.backgroundColor = color
+        }
+        const send_notification = () => {
+            if ("Notification" in window) {
+              Notification.requestPermission().then(function (permission) {
+                if (permission === "granted") {
+                  var notification = new Notification("Save Your Steak!", {
+                     body: "Your steak is about to end.",
+                     icon: "static/save_steak.png"
+                   });
+                  notification.onclick = function () {
+                    console.log("Notification clicked!");
+                  };
+                }
+              });
+            }
+        }
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3B95SWPDXZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-3B95SWPDXZ');
+    </script>
+    <script src="/static/app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Classroom{% endblock %}
+{% block main %}
+<main class="main">
+    <div class="classroom" id="assignment_classroom">
+        <div class="classroom_banner">
+            <div class="classroom_banner_buttons">
+                <a class="current_classroom_button">Assignments</a>
+                <a>Work</a>
+                <a>People</a>
+            </div>
+            <img src="/static/classroom_icons/maths.webp">
+            <h1>Maths Classroom</h1>
+            <p>Maths Teacher</p>
+        </div>
+        <div class="message_classroom">
+            <ion-icon name="chatbubbles-outline"></ion-icon>
+            <input id="type_message" type="text" placeholder="Send A Message" class="message_classroom_input">
+        </div>
+        <div class="assignment_classroom">
+            <span>
+                <ion-icon name="clipboard-outline"></ion-icon>
+            </span>
+            <strong>Title</strong>
+            <p>Teacher</p>
+            <img src="/static/waterfall.webp">
+        </div>
+        <div class="assignment_classroom">
+            <span>
+                <ion-icon name="chatbubble-outline"></ion-icon>
+            </span>
+            <strong>Chat Message</strong>
+            <p>Sender Name</p>
+            <img src="/static/waterfall.webp">
+        </div>
+    </div>
+</main>
+<script>
+    var work = document.getElementById("assignment_classroom")
+    const assignment = (title,teacher,image) => {
+        var div = document.createElement("div")
+        div.classList.add("assignment_classroom")
+        var span = document.createElement("span")
+        span.innerHTML = '<ion-icon name="clipboard-outline"></ion-icon>'
+        var strong = document.createElement("strong")
+        var p = document.createElement("p")
+        strong.innerText = title
+        p.innerText = teacher
+        var img = document.createElement("img")
+        img.src = image
+        div.appendElement("span")
+        div.appendElement("strong")
+        div.appendElement("p")
+        div.appendElement("img")
+    }
+
+    const message = (chat_message,sender,image) => {
+        var div = document.createElement("div")
+        div.classList.add("assignment_classroom")
+        var span = document.createElement("span")
+        span.innerHTML = '<ion-icon name="chatbubble-outline"></ion-icon>'
+        var strong = document.createElement("strong")
+        var p = document.createElement("p")
+        strong.innerText = chat_message
+        p.innerText = sender
+        var img = document.createElement("img")
+        img.src = image
+        div.appendChild(span)
+        div.appendChild(strong)
+        div.appendChild(p)
+        div.appendChild(img)
+        work.appendChild(div)
+    }
+
+    var type_message = document.getElementById("type_message");
+    type_message.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        message(type_message.value,{{name|tojson}},"/static/waterfall.webp")
+      }
+    });
+   
+</script>
+{% endblock %}

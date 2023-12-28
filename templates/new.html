@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block page_title %} New Question {% endblock %}
+{% block title %}New{% endblock %}
+{% block main %}
+    <main class="main">
+        <h1>New Set</h1>
+        <span id="len_warn" style="display:none;" class="error_message"><ion-icon name="warning-outline"></ion-icon>Unable To Create Set, Due To The Set Title/Description Being To Long/Short.</a></span>
+        <form method="post">
+            <button class="main_button next top_title_button" type="submit" style="position:absolute;top:34.5px;right:0px;"><span>Next</span><ion-icon name="arrow-forward-outline"></ion-icon></button>
+            <input required oninvalid="this.setCustomValidity('Please enter only letters and numbers.')" oninput="this.setCustomValidity('')" pattern="^[A-Za-z0-9\s]+$" value="{{title}}" id="quest"  maxlength="80" placeholder="Title" name="title" class="new_title text" autofocus>
+            <div style="margin-top:-52px;" class="autocomplete"><span class="autocomplete_current" id="quest_autocomplete_current"></span><span class="autocomplete_next" id="quest_autocomplete_next"></span><button class="autocomplete_button" id="quest_autocomplete_button" type="button">Tab</button><button id="voice_title" class="mic" type="button" onclick="record('quest',this.id)"><ion-icon name="mic-outline"></ion-icon></button></div>
+            <textarea required id="ans1" maxlength="150"  placeholder="Description" name="desc" class="new_desc text">{{desc}}</textarea>
+            <div style="height:200px;margin-top:-212px;" class="autocomplete"><span class="autocomplete_current" id="ans_autocomplete_current"></span><span class="autocomplete_next" id="ans_autocomplete_next"></span><button class="autocomplete_button" id="ans_autocomplete_button" type="button">Tab</button><button id="voice_desc" class="mic" type="button" onclick="record('ans1',this.id)"><ion-icon name="mic-outline"></ion-icon></button></div>
+            <div class="new_images">
+                <h3 style="color:var(--text)">Cover Image</h3>
+                <div class="new_images_here">
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/maths.webp" onclick="document.getElementById('maths').checked = true"><input id="maths" type="radio" name="cover" value="maths" checked></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/book.webp" onclick="document.getElementById('book').checked = true"><input id="book" type="radio" name="cover" value="book"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/bridge.webp" onclick="document.getElementById('bridge').checked = true"><input id="bridge" type="radio" name="cover" value="bridge"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/bush.webp" onclick="document.getElementById('bush').checked = true"><input id="bush" type="radio" name="cover" value="bush"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/comp.webp" onclick="document.getElementById('comp').checked = true"><input id="comp" type="radio" name="cover" value="comp"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/flag.webp" onclick="document.getElementById('flag').checked = true"><input id="flag" type="radio" name="cover" value="flag"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/animals.webp" onclick="document.getElementById('animals').checked = true"><input id="animals" type="radio" name="cover" value="animals"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/gear.webp" onclick="document.getElementById('gear').checked = true"><input id="gear" type="radio" name="cover" value="gear"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/science.webp" onclick="document.getElementById('science').checked = true"><input id="science" type="radio" name="cover" value="science"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/sport.webp" onclick="document.getElementById('sport').checked = true"><input id="sport" type="radio" name="cover" value="sport"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/world.webp" onclick="document.getElementById('world').checked = true"><input id="world" type="radio" name="cover" value="world"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/cpu.webp" onclick="document.getElementById('cpu').checked = true"><input id="cpu" type="radio" name="cover" value="cpu"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/lang.webp" onclick="document.getElementById('lang').checked = true"><input id="lang" type="radio" name="cover" value="lang"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/brain.webp" onclick="document.getElementById('brain').checked = true"><input id="brain" type="radio" name="cover" value="brain"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/music.webp" onclick="document.getElementById('music').checked = true"><input id="music" type="radio" name="cover" value="music"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/rocket.webp" onclick="document.getElementById('rocket').checked = true"><input id="rocket" type="radio" name="cover" value="rocket"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/light.webp" onclick="document.getElementById('light').checked = true"><input id="light" type="radio" name="cover" value="light"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/gradhat.webp" onclick="document.getElementById('gradhat').checked = true"><input id="gradhat" type="radio" name="cover" value="gradhat"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/puzzle.webp" onclick="document.getElementById('puzzle').checked = true"><input id="puzzle" type="radio" name="cover" value="puzzle"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/code_lang.webp" onclick="document.getElementById('code_lang').checked = true"><input id="code_lang" type="radio" name="cover" value="code_lang"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/physics.webp" onclick="document.getElementById('physics').checked = true"><input id="physics" type="radio" name="cover" value="physics"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/biology.webp" onclick="document.getElementById('biology').checked = true"><input id="biology" type="radio" name="cover" value="biology"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/chemistry.webp" onclick="document.getElementById('chemistry').checked = true"><input id="chemistry" type="radio" name="cover" value="chemistry"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/networks.webp" onclick="document.getElementById('networks').checked = true"><input id="networks" type="radio" name="cover" value="networks"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/phone.webp" onclick="document.getElementById('phone').checked = true"><input id="phone" type="radio" name="cover" value="phone"></a>
+                    <a><img class="cover_img" draggable="false" src="static/set_icons/image.webp" onclick="document.getElementById('image').checked = true"><input id="image" type="radio" name="cover" value="image"></a>
+                    <a style="display:none;" class="premium"><img class="cover_img" draggable="false" src="static/set_icons/boost.webp" onclick="document.getElementById('boost').checked = true"><input id="boost" type="radio" name="cover" value="boost"></a>
+                    <a style="display:none;" class="premium"><img class="cover_img" draggable="false" src="static/set_icons/premium.webp" onclick="document.getElementById('premium').checked = true"><input id="premium" type="radio" name="cover" value="premium"></a>
+                    <a style="display:none;" class="pro"><img class="cover_img" draggable="false" src="static/set_icons/pro.webp" onclick="document.getElementById('pro').checked = true"><input id="pro" type="radio" name="cover" value="pro"></a>
+                    <a style="display:none;" class="elite"><img class="cover_img" draggable="false" src="static/set_icons/elite.webp" onclick="document.getElementById('elite').checked = true"><input id="elite" type="radio" name="cover" value="elite"></a>
+                    <a style="display:none;" class="pro"><img class="cover_img" draggable="false" src="static/set_icons/art.webp" onclick="document.getElementById('art').checked = true"><input id="art" type="radio" name="cover" value="art"></a>
+                    <a style="display:none;" class="elite"><img class="cover_img" draggable="false" src="static/set_icons/bike.webp" onclick="document.getElementById('bike').checked = true"><input id="bike" type="radio" name="cover" value="bike"></a>
+                    <a style="display:none;" class="elite"><img class="cover_img" draggable="false" src="static/set_icons/car.webp" onclick="document.getElementById('car').checked = true"><input id="car" type="radio" name="cover" value="car"></a>
+                    <a style="display:none;" class="elite"><img class="cover_img" draggable="false" src="static/set_icons/castle.webp" onclick="document.getElementById('castle').checked = true"><input id="castle" type="radio" name="cover" value="castle"></a>
+                    <a style="display:none;" class="elite"><img class="cover_img" draggable="false" src="static/set_icons/code.webp" onclick="document.getElementById('code').checked = true"><input id="code" type="radio" name="cover" value="code"></a>
+                    <a style="display:none;" class="elite"><img class="cover_img" draggable="false" src="static/set_icons/hill.webp" onclick="document.getElementById('hill').checked = true"><input id="hill" type="radio" name="cover" value="hill"></a>
+                    <a style="display:none;" class="elite"><img class="cover_img" draggable="false" src="static/set_icons/map.webp" onclick="document.getElementById('map').checked = true"><input id="map" type="radio" name="cover" value="map"></a>
+                    <a style="display:none;" class="elite"><img class="cover_img" draggable="false" src="static/set_icons/flask.webp" onclick="document.getElementById('flask').checked = true"><input id="flask" type="radio" name="cover" value="flask"></a>
+                </div>
+            </div>
+        </form>
+    </main>
+<script>
+    var background = {{background|tojson}};
+    var title = {{title|tojson}};
+    var desc = {{desc|tojson}};
+    var level = {{boosting|tojson}}[0];
+    if(title != "" || desc != ""){
+        document.getElementById("len_warn").style.display = "block";
+        document.getElementById(background).checked = true;
+    }
+    if(level == "premium" || level == "pro" || level == "elite"){
+        document.querySelectorAll(".premium").forEach((p) => {
+            p.style.display = "block";
+        })
+    }
+    if(level == "pro" || level == "elite"){
+        document.querySelectorAll(".pro").forEach((p) => {
+            p.style.display = "block";
+        })
+    }
+    if(level == "elite"){
+        document.querySelectorAll(".elite").forEach((p) => {
+            p.style.display = "block";
+        })
+    }
+</script>
+<script src="/static/auto_complete.js"></script>
+<script src="/static/voice-recorder.js"></script>
+{% endblock %}

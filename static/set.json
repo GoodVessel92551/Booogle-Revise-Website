@@ -1,0 +1,23 @@
+{
+  "set_name": {
+    "settings": {
+      "name": "name",
+      "desc": "desc",
+      "public": "true",
+      "background": "maths",
+      "user": "username"
+    },
+    "Q1": {
+      "question": "question",
+      "answers": {
+        "ans1": "ans1"
+      }
+    },
+    "Q2": {
+      "question": "question",
+      "answers": {
+        "ans1": "ans1"
+      }
+    }
+  }
+}

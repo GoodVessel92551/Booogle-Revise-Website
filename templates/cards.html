@@ -1,0 +1,195 @@
+{% extends "base.html" %} 
+{% block page_title %} {{title}} {% endblock %}
+{% block title %}Flashcards{% endblock %} {% block
+main %}
+<main style="
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: calc(min(90%, 900px) + 2px);
+  " class="main">
+    <button class="speaker" id="speaker">
+        <ion-icon name="volume-high-outline"></ion-icon>
+    </button>
+    <div class="flashcard_container">
+        <div id="card" class="flashcard">
+            <h1 id="card_text" class="card_quest">Questions</h1>
+            <h2 class="card_title" id="card_title">Answer</h2>
+            <img class="card_img" id="card_img">
+            <p class="card_ans" id="card_ans"></p>
+        </div>
+        <div class="flash_indicator">
+            <span><span id="flash_indicator"></span></span>
+        </div>
+        <div class="flash_buttons">
+            <a class="main_button second_button" href="/" style="margin-right: 13px"><span>Exit</span><ion-icon name="exit-outline"></ion-icon></a>
+            <button onclick="next()" class="main_button next">
+                <span>Next</span><ion-icon name="arrow-forward-outline"></ion-icon>
+            </button>
+        </div>
+    </div>
+</main>
+<script>
+    var card = document.getElementById("card");
+    var spin = false;
+    var set = {{sets|tojson}}
+    console.log(set)
+    var keys = Object.keys(set)
+    var current = 1
+    var ans, quest
+    var card_text = document.getElementById("card_text")
+    var speaker = document.getElementById("speaker")
+    var flash_indicator = document.getElementById("flash_indicator")
+    var title = document.getElementById("card_title")
+    var ans_p = document.getElementById("card_ans")
+    var img = document.getElementById("card_img")
+    var img_visible = false
+    var starttime, endtime
+    const startTime = () => {
+        starttime = new Date();
+    }
+    const endTime = () => {
+        if(starttime){
+            endtime = new Date();
+            var timeDiff = endtime - starttime;
+            if (timeDiff < 5000){
+                console.log("Very Strong")
+            }else if(timeDiff < 10000){
+                console.log("Strong")
+            }else if(timeDiff < 15000){
+                console.log("Weak")
+            }else{
+                console.log("Very Weak")
+            }
+            starttime = null
+        }else{
+            console.log("Weak")
+        }
+    }
+    speaker.addEventListener("click", () => {
+        console.log(card_text.innerText)
+        voice(card_text.innerText)
+    })
+    const next = (() => {
+        startTime()
+        flash_indicator.style.width = (current-1)/(keys.length-1)*100+"%"
+        if (!spin) {
+            if (card.style.transform == 'rotateX(180deg)') {
+                card.style.transition = "0s";
+                card.style.transform = 'rotateX(0deg)';
+                card_text.style.transform = "scale(1)"
+                card_text.style.display = "block";
+                title.style.display = "none"
+                ans_p.style.display = "none"
+                img.style.display = "none"
+                title.style.transform = "scale(1)"
+                ans_p.style.transform = "scale(1)"
+                img.style.transform = "scale(1)"
+                ans_p.classList.remove("big_answer")
+                ans_p.style.left = ""
+                setTimeout(() => {
+                    card.style.transition = ".2s border-color,.2s filter,.2s box-shadow,1s transform"
+                }, 10)
+            }
+            if (current < 1) {
+                current = 1
+            }
+            else if (current > keys.length - 1) {
+                location.href = "/finish"
+            }else{
+                quest = set[`Q${current}`]["question"]
+                card_text.innerText = set[`Q${current}`]["question"]
+                var answers = Object.keys(set[`Q${current}`]["answers"])
+                if (set[`Q${current}`]["image"]){
+                    console.log(set[`Q${current}`]["image"])
+                    img.src = set[`Q${current}`]["image"]["url"]
+                    img_visible = true
+                }else{
+                    img_visible = false
+                }
+                if (answers.length == 1) {
+                    ans = set[`Q${current}`]["answers"]["ans1"]
+                } else {
+                    ans = []
+                    for (var i = 1; i <= answers.length; i++) {
+                        ans.push(set[`Q${current}`]["answers"][`ans${i}`])
+                    }
+                }
+                current++
+            }
+        }
+    })
+    const flash = (() => {
+        endTime()
+        if (!spin) {
+            spin = true;
+            if (card.style.transform != 'rotateX(180deg)') {
+                card.style.transform = 'rotateX(180deg)';
+                setTimeout(() => {
+                    card_text.style.transform = "scale(1,-1)";
+                    card_text.style.display = "none";
+                    title.style.transform = "scale(1,-1)"
+                    ans_p.style.transform = "scale(1,-1)"
+                    img.style.transform = "scale(1,-1)"
+                    title.style.display = "block"
+                    ans_p.style.display = "block"
+                    if (img_visible){
+                        img.style.display = "block"
+                    }
+                    ans_p.innerText = ans
+                    if(ans.length < 15){
+                        ans_p.classList.add("big_answer")
+                        ans_p.style.transform = "scale(1,-1) translate(-50%,-50%)"
+                        if(!img_visible){
+                            ans_p.style.left = "50%"
+                        }else{
+                            ans_p.style.left = "25%"
+                        }
+                    }
+                }, 300)
+                setTimeout(() => {
+                    spin = false;
+                }, 720)
+            } else {
+                card.style.transform = 'rotateX(0deg)';
+                setTimeout(() => {
+                    card_text.innerText = quest;
+                    card_text.style.transform = "scale(1)"
+                    title.style.transform = "scale(1)"
+                    ans_p.style.transform = "scale(1)"
+                    card_text.style.display = "block";
+                    title.style.display = "none"
+                    ans_p.style.display = "none"
+                    img.style.display = "none"
+                    img.style.transform = "scale(1)"
+                    ans_p.classList.remove("big_answer")
+                    ans_p.style.left = ""
+                }, 300)
+                setTimeout(() => {
+                    spin = false;
+                }, 720)
+            }
+        }
+    })
+    card.addEventListener("click", () => {
+        flash()
+    })
+
+    document.addEventListener("keyup", (e) => {
+        if (!spin) {
+            if (e.key == " " || e.key == "ArrowUp") {
+                flash()
+            }
+            else if (e.key == "ArrowRight") {
+                next()
+            }
+            else if (e.key == "ArrowLeft") {
+                current = current - 2
+                next()
+            }
+        }
+    })
+    next()
+</script>
+<script src="/static/text-to-voice.js"></script>
+{% endblock %}

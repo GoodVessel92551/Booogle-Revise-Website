@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% block page_title %} Play {% endblock %} {% block title %}Plap{% endblock %} 
+{% block main %}
+<main class="main">
+    <h1>Play Stats</h1>
+    <div class="play_stats">
+        <div class="average">
+            <div class="average_slider">
+                <span class="average_slider_correct" style="width:50%;"></span>
+                <span class="average_slider_number" style="left:50%;">50%</span>
+                <span class="average_slider_wrong" style="width:50%;"></span>
+            </div>
+            <div class="average_buttons">
+                <button class="main_button"><ion-icon name="repeat-outline"></ion-icon><span>Replay</span></button>
+                <button class="second_button main_button"><ion-icon name="school-outline"></ion-icon><span>Give Practice</span></button>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

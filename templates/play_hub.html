@@ -1,0 +1,24 @@
+{% extends "base.html" %}{% block page_title %} Play {% endblock %} {% block title %}Play{% endblock %} {% block main %}
+<main class="main">
+    <h1>Play</h1>
+        <a href="/play/leave/{{code}}" class="main_button home_button1" style="position: absolute; top: 34.5px; right: 20px" ><span>Leave</span><ion-icon name="exit-outline"></ion-icon></a>
+</main>
+<h2 class="your_in">🎉 You Are In!</h2>
+<p class="waiting_for">Waiting For Host To Start...</p>
+<script>
+    var code = {{code|tojson}};
+    setInterval(() => {
+        fetch(`/api/play/started/${code}`)
+        .then(response => response.json())
+        .then(data => {
+            if(data.started){
+                window.location.href = "/play/started/{{code}}";
+            }
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}, 5000);
+</script>
+{% endblock %}

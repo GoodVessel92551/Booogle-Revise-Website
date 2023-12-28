@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% block page_title %} Upgrade {% endblock %}
+{% block title %}Upgrade{% endblock %}
+{% block main %}
+    <main class="main">
+        <h1>Upgrade</h1>
+        <div class="up_container">
+            <!-- <a class="up_upgrade">
+                <strong class="up_title">Boost</strong>
+                <strong class="up_price">Follow Me</strong>
+                <div class="up_items">
+                    <span>
+                        <ion-icon name="push-outline"></ion-icon>3 Publishable Sets
+                    </span>
+                    <span>
+                        <ion-icon name="rocket-outline"></ion-icon>Boost Badge Next To Your Name
+                    </span>
+                </div>
+                <button id="boost" onclick="window.open('https://replit.com/@GoodVessel92551')"
+                    style="--up_text: var(--on_boost); --up_color: #ffce0055; --border_color: #ffce00; background: var(--boost1);"
+                    class="up_button">
+                    Follow Me
+                </button>
+            </a> -->
+            <a class="up_upgrade">
+                <strong class="up_title">Basic</strong>
+                <strong class="up_price">Free</strong>
+                <div class="up_items">
+                    <span>
+                        <ion-icon name="file-tray-stacked-outline"></ion-icon>10 Sets
+                    </span>
+                    <span>
+                        <ion-icon name="push-outline"></ion-icon>2 Publishable Sets
+                    </span>
+                    <span>
+                        <ion-icon name="help-outline"></ion-icon>15 Max Questions
+                    </span>
+                    <span>
+                        <ion-icon name="play-outline"></ion-icon>Play Mode With 3 Users
+                    </span>
+                </div>
+            </a>
+            <a class="up_upgrade">
+                <strong class="up_title">Premium</strong>
+                <strong class="up_price">100 Cycles</strong>
+                <div class="up_items">
+                    <span>
+                        <ion-icon name="file-tray-stacked-outline"></ion-icon>20 Sets
+                    </span>
+                    <span>
+                        <ion-icon name="push-outline"></ion-icon>5 Publishable Sets
+                    </span>
+                    <span>
+                        <ion-icon name="sparkles-outline"></ion-icon>Premium Badge Next To Your Name
+                    </span>
+                    <span>
+                        <ion-icon name="image-outline"></ion-icon>2 New Cover Images
+                    </span>
+                    <span>
+                        <ion-icon name="help-outline"></ion-icon> 20 Max Questions
+                    </span>
+                    <span>
+                        <ion-icon name="play-outline"></ion-icon>Play Mode With 5 Users
+                    </span>
+                </div>
+                <button id="premium" onclick="window.open('/__repl')"
+                    style="--up_text: var(--on_premium); --up_color: #00a7ff55; --border_color: #00a7ff; background: var(--premium1);"
+                    class="up_button">
+                    Tip 100 Cycles
+                </button>
+            </a>
+            <a class="up_upgrade">
+                <strong class="up_title">Pro</strong>
+                <strong class="up_price">500 Cycles</strong>
+                <div class="up_items">
+                    <span>
+                        <ion-icon name="file-tray-stacked-outline"></ion-icon>35 Sets
+                    </span>
+                    <span>
+                        <ion-icon name="push-outline"></ion-icon>10 Publishable Sets
+                    </span>
+                    <span>
+                        <ion-icon name="medal-outline"></ion-icon>Pro Badge Next To Your Name
+                    </span>
+                    <span>
+                        <ion-icon name="image-outline"></ion-icon>5 New Cover Images
+                    </span>
+                    <span>
+                        <ion-icon name="help-outline"></ion-icon> 25 Max Questions
+                    </span>
+                    <span>
+                        <ion-icon name="play-outline"></ion-icon>Play Mode With 10 Users
+                    </span>
+                </div>
+                <button id="pro" onclick="window.open('/__repl')"
+                    style="--up_text: var(--on_pro); --up_color: #00f8ff55; --border_color: #00f8ff; background: var(--pro1);"
+                    class="up_button">
+                    Tip 500 Cycles
+                </button>
+            </a>
+            <a class="up_upgrade" style="
+                border-color: #692a7d;
+            ">
+                <strong class="up_title">Elite</strong>
+                <strong class="up_price">1000 Cycles</strong>
+                <div class="up_items">
+                    <span>
+                        <ion-icon name="file-tray-stacked-outline"></ion-icon>50 Sets
+                    </span>
+                    <span>
+                        <ion-icon name="push-outline"></ion-icon>20 Publishable Sets
+                    </span>
+                    <span>
+                        <ion-icon name="diamond-outline"></ion-icon>Elite Badge Next To Your Name
+                    </span>
+                    <span>
+                        <ion-icon name="images-outline"></ion-icon>12 New Cover Images
+                    </span>
+                    <span>
+                        <ion-icon name="help-outline"></ion-icon> 35 Max Questions
+                    </span>
+                    <span>
+                        <ion-icon name="list-outline"></ion-icon>Test Mode
+                    </span>
+                    <span>
+                        <ion-icon name="play-outline"></ion-icon>Play Mode With 15 Users
+                    </span>
+                    <span>
+                        <ion-icon name="flask-outline"></ion-icon>Beta Features
+                    </span>
+                </div>
+                <button id="elite" onclick="window.open('/__repl')"
+                    style="--up_text: var(--on_elite); --up_color: #ff00ff55; --border_color: #ff00ff; background: var(--elite1);"
+                    class="up_button">
+                    Tip 1000 Cycles
+                </button>
+            </a>
+        </div>
+    </main>
+    <script>
+        var level = {{boosting| tojson}};
+        if (level != false) {
+            document.getElementById(level).style.background = "none";
+            document.getElementById(level).style.outline = "1px solid var(--" + level + "1)";
+            document.getElementById(level).innerText = "Current Level"
+            document.getElementById(level).style.color = "var(--text)";
+            document.getElementById(level).style.boxShadow = "none"
+        }
+    </script>
+{% endblock %}

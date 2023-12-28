@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block page_title %} Well Done {% endblock %}{% block title %}Finish{% endblock %} {% block main %}
+<h1 class="you_did_it">You Did It!</h1>
+<p class="you_did_well">Well Done You Have Completed This Set.</p>
+<a class="next_set main_button next keep_text" href="/">Start Your Next Set<ion-icon name="arrow-forward-outline"></ion-icon></a>
+<div class="score">
+    <a class="percentage">
+        <strong id="percentage"></strong>
+        <p id="score"></p>
+    </a>
+    <span class="questions_score" id="questions">
+    </span>
+</div>
+<script>
+    stats = {{stats|tojson}}
+    keys = Object.keys(stats)
+    var questions = document.getElementById("questions")
+    var correct_num = 0
+    var wrong_num = 0
+    for (var i = 0; i< keys.length;i++){
+        var correct = stats[keys[i]]["correct"]
+        var a = document.createElement("a")
+        var p = document.createElement("p")
+        var icon = document.createElement("ion-icon")
+        p.innerText = stats[keys[i]]["quest"]
+        if (correct){
+            correct_num++
+            a.classList.add("quest_score")
+            icon.name = "checkmark-outline"
+        }else{
+            wrong_num++
+            a.classList.add("quest_score_wrong")
+            icon.name = "close-outline"
+        }
+        questions.appendChild(a)
+        a.appendChild(p)
+        a.appendChild(icon)
+    }
+    console.log(correct_num)
+    console.log(wrong_num)
+    document.getElementById("percentage").innerText = Math.round(correct_num/keys.length*100)+"%"
+    document.getElementById("score").innerText = `${correct_num}/${keys.length}`
+    console.log(stats)
+  function gen(num1, num2) {
+    min = Math.ceil(num1);
+    max = Math.floor(num2);
+    number = Math.floor(Math.random() * (max - min + 1) + min);
+    return number;
+  }
+  for (var i = 0; i < 100; i++) {
+    var a = document.createElement("span");
+    a.id = "star";
+    a.style.top = gen(5, 95) + "%";
+    a.style.left = gen(5, 95) + "%";
+    a.style.filter = "saturate(" + gen(0, 100) + "%)";
+    a.style.animationDelay = gen(0, 5) + "s";
+    document.body.appendChild(a);
+  }
+</script>
+{% endblock %}

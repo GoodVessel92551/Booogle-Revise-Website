@@ -1,0 +1,91 @@
+{% extends "base.html" %}{% block page_title %} Play {% endblock %} {% block title %}Play{% endblock %} {% block main %}
+<main class="main">
+    <h1>Leaderboard</h1>
+    <div class="home_buttons host_buttons">
+        <a href="/play/end/{{code}}" class="main_button">
+            <span>End</span><ion-icon name="stop-outline"></ion-icon>
+        </a>
+    </div>
+    <div class="leaderboard_play" id="leaderboard_play">
+    </div>
+</main>
+<script>
+    var quest_num = {{quests|tojson}}
+    const leaderboard_element = document.getElementById("leaderboard_play");
+    const make_leaderboard = (users) => {
+        const childNodes = leaderboard_element.childNodes;
+
+        for (let i = childNodes.length - 1; i >= 0; i--) {
+          const childNode = childNodes[i];
+          leaderboard_element.removeChild(childNode);
+        }
+        var keys = Object.keys(users)
+        var leaderboard = {}
+        var num_quests = 0
+        for(var i = 0;keys.length>i;i++){
+            var score = 0
+            var quests = Object.keys(users[keys[i]]["score"])
+            console.log(quests)
+            for(var j = 0;quests.length>j;j++){
+                if(users[keys[i]]["score"][quests[j]]["correct"]){
+                    score++
+                }
+            }
+            leaderboard[keys[i]] = score
+        }
+        var leaderboard_array = Object.entries(leaderboard);
+    
+        leaderboard_array.sort((a, b) => b[1] - a[1]);
+    
+        var leaderboard = Object.fromEntries(leaderboard_array);
+        var leaderboard_keys = Object.keys(leaderboard)
+        for(var i = 0;leaderboard_keys.length>i;i++){
+            var a = document.createElement("a")
+            var img = document.createElement("img")
+            var p = document.createElement("p")
+            var user_info = document.createElement("span")
+            var user_score = document.createElement("span")
+            var user_scale = document.createElement("span")
+            var wrong = document.createElement("span")
+            var right = document.createElement("span")
+            wrong.classList.add("wrong_play")
+            right.classList.add("right_play")
+            user_info.classList.add("user_leadrborad")
+            user_score.classList.add("user_score")
+            user_scale.classList.add("user_scale")
+            img.src = users[leaderboard_keys[i]]["user_image"]
+            p.innerText = leaderboard_keys[i]
+            var total_num = quest_num-1
+            var total_compleat = Object.keys(users[leaderboard_keys[i]]["score"]).length
+            var corrent_num = leaderboard[leaderboard_keys[i]]
+            var wrong_num = Object.keys(users[leaderboard_keys[i]]["score"]).length - (leaderboard[leaderboard_keys[i]] - 1)
+            var wrong_per = (total_compleat / total_num) * 100
+            var corrent_per =  (corrent_num / total_num) * 100
+            wrong.style.width = wrong_per+"%"
+            right.style.width = corrent_per+"%"
+            //span.innerText = `${leaderboard[leaderboard_keys[i]]}/${quest_num}`
+            user_info.appendChild(img)
+            user_info.appendChild(p)
+            a.appendChild(user_info)
+            a.appendChild(user_score)
+            user_score.appendChild(user_scale)
+            user_scale.appendChild(wrong)
+            user_scale.appendChild(right)
+            leaderboard_element.appendChild(a)
+        }
+    }
+    make_leaderboard({{users|tojson}})
+    var code = {{code|tojson}}
+    setInterval(() => {
+        fetch('/api/play/leaderboard/'+code)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                make_leaderboard(data)
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }, 5000)
+</script>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}New Groupp{% endblock %}
+{% block main %}
+    <main class="main">
+        <h1>New Group</h1>
+        <form method="post">
+            <button class="main_button top_title_button" type="submit" style="position:absolute;top:34.5px;right:0px;"><span>Done</span><ion-icon name="checkmark-done-outline"></ion-icon></button>
+            <input required oninvalid="this.setCustomValidity('Please enter only letters and numbers.')" oninput="this.setCustomValidity('')" pattern="^[A-Za-z0-9\s]+$" value="" id="quest"  maxlength="80" placeholder="Title" name="title" class="new_title text" autofocus>
+            <div style="margin-top:-52px;" class="autocomplete"><span class="autocomplete_current" id="quest_autocomplete_current"></span><span class="autocomplete_next" id="quest_autocomplete_next"></span><button class="autocomplete_button" id="quest_autocomplete_button" type="button">Tab</button><button id="voice_title" class="mic" type="button" onclick="record('quest',this.id)"><ion-icon name="mic-outline"></ion-icon></button></div>
+            <textarea required id="ans1" maxlength="150"  placeholder="Description" name="desc" class="new_desc text"></textarea>
+            <div style="height:200px;margin-top:-212px;" class="autocomplete"><span class="autocomplete_current" id="ans_autocomplete_current"></span><span class="autocomplete_next" id="ans_autocomplete_next"></span><button class="autocomplete_button" id="ans_autocomplete_button" type="button">Tab</button><button id="voice_desc" class="mic" type="button" onclick="record('ans1',this.id)"><ion-icon name="mic-outline"></ion-icon></button></div>
+            <div class="user_settings_group">
+                <h3>User Settings</h3>
+                <a><input type="checkbox"><p>Allow Users To Add/Remove Sets</p></a>
+            </div>
+            <div class="new_images">
+                <h3 style="color:var(--text)">Cover Image</h3>
+                <div class="new_images_here">
+                    <a><img class="cover_img" draggable="false" src="/static/groups/Group.webp" onclick="document.getElementById('Group').checked = true"><input id="Group" type="radio" name="cover" value="Group" checked></a>
+                    <a><img class="cover_img" draggable="false" src="/static/groups/Group-1.webp" onclick="document.getElementById('Group-1').checked = true"><input id="Group-1" type="radio" name="cover" value="Group-1"></a> 
+                    <a><img class="cover_img" draggable="false" src="/static/groups/Group-2.webp" onclick="document.getElementById('Group-2').checked = true"><input id="Group-2" type="radio" name="cover" value="Group-2"></a>
+                    <a><img class="cover_img" draggable="false" src="/static/groups/Group-3.webp" onclick="document.getElementById('Group-3').checked = true"><input id="Group-3" type="radio" name="cover" value="Group-3"></a>  
+                    <a><img class="cover_img" draggable="false" src="/static/groups/Group-4.webp" onclick="document.getElementById('Group-4').checked = true"><input id="Group-4" type="radio" name="cover" value="Group-4"></a>  
+                    <a><img class="cover_img" draggable="false" src="/static/groups/Group-5.webp" onclick="document.getElementById('Group-5').checked = true"><input id="Group-5" type="radio" name="cover" value="Group-5"></a>  
+                    <a><img class="cover_img" draggable="false" src="/static/groups/Group-6.webp" onclick="document.getElementById('Group-6').checked = true"><input id="Group-6" type="radio" name="cover" value="Group-6"></a>  
+                </div>
+
+            </div>
+        </form>
+    </main>
+<script>
+    var group_info = {{group_info|tojson}}
+</script>
+<script src="/static/auto_complete.js"></script>
+<script src="/static/voice-recorder.js"></script>
+{% endblock %}

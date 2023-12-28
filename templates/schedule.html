@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Schedules{% endblock %}
+{% block main %}
+<form method="post" class="main">
+    <h1>Your Schedule</h1>
+    <div class="home_buttons">
+        <button onclick="save=false;document.getElementById('save_text').innerText = 'Saving...';" type="submit" class="main_button">
+            <span id="save_text">Save</span><ion-icon name="save-outline"></ion-icon>
+        </button>
+    </div>
+    <p>Set Times When Booogle Will Send You A Notification To Remind You To Revise</p>
+    <div id="rules" class="rules">
+
+    </div>
+    <button style="margin-top:8px;" type="button" onclick="new_rule()" class="main_button new_rule"><span>New Time</span><ion-icon name="add-outline"></ion-icon></button>
+</form>
+<script>
+    var subjects = ["Computer Science", "Chemistry", "Biology", "Physics", "Maths", "Sport", "English", "History", "Geography", "Other"];
+    const new_rule = () => {
+        id = rules.childElementCount
+        var a = document.createElement("a")
+        a.id = `rule${id}`
+        var input = document.createElement("input")
+        input.name = `time${id}`
+        input.type = "time"
+        var date = document.createElement("input")
+        date.name = `date${id}`
+        date.type = "date"
+        var repeat = document.createElement("select")
+        repeat.name = `repeat${id}`
+        var none = document.createElement("option");
+        none.value = "None"
+        none.innerText = "None"
+        repeat.appendChild(none)
+        var day = document.createElement("option");
+        day.value = "Every Day"
+        day.innerText = "Every Day"
+        repeat.appendChild(day)
+        var week = document.createElement("option");
+        week.value = "Every Week"
+        week.innerText = "Every Week"
+        repeat.appendChild(week)
+        var move = document.createElement("span")
+        var to = document.createElement("span")
+        var del = document.createElement("button")
+        del.classList.add("del_button","del_rule","main_button")
+        del.innerText = "Delete"
+        del.id = id
+        del.addEventListener("click", (e) => {
+            a.remove()
+            var kids = Array.from(rules.children)
+            for (var i = 0; i < kids.length; i++){
+                kids[i].id = `rule${i}`
+            }
+        })
+        input.id = "move"
+        rules.appendChild(a)
+        a.appendChild(date)
+        a.appendChild(input)
+        a.appendChild(repeat)
+        a.appendChild(del)
+    }
+</script>
+{% endblock %}

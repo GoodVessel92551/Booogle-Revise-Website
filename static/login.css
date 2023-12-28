@@ -1,0 +1,380 @@
+:root {
+    --back: #1b1e1a;
+    --top_back: #2a2f2d;
+    --text: #f2f2f2;
+    --text3: #B5B5B5;
+    --main_button: #B6F2BC;
+    --on_main_button: #0F5B11;
+    --text4: #ccc;
+    --border_hover:#6f896a;
+    --hover_top_green: #3e4744;
+}
+
+::selection {
+    background: #496949;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--top_back);
+    transition: 0.2s;
+    border-radius: 10px;
+    z-index: 5;
+}
+
+* {
+    font-family: "Roboto", sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+}
+
+body,
+html {
+    width: 100vw;
+    height: 100vh;
+    margin: 0px;
+    background: var(--back);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.nav{
+    width:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    display:flex;
+    align-items:center;
+    flex-direction:row;
+    padding:32px;
+    gap:16px;
+    box-sizing:border-box;
+    background:var(--back);
+    z-index:2;
+}
+
+.nav > p{
+    font-size:16px;
+    font-weight:bold;
+    color:var(--text)
+}
+
+.title{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50% ,-50%);
+    font-size: 40px;
+    color:var(--text);
+    font-weight:bold;
+    white-space:nowrap;
+    display:flex;
+    gap:10px;
+}
+
+.title > span{
+    position:relative;
+    display:block;
+}
+
+@keyframes draw{
+    from{width:0%}
+    to{width:100%}
+}
+
+
+
+.login{
+    position:absolute;
+    bottom:100px;
+    left:50%;
+    transform:translateX(-50%);
+    color:var(--text);
+    font-weight:bold;
+    background:none;
+    border:none;
+    padding-bottom:8px;
+    font-size:16px;
+    cursor:pointer;
+    transition:.4s;
+}
+
+.login::before{
+    content:"";
+    width:100%;
+    height:8px;
+    background: #647d6d;
+    position:absolute;
+    bottom:4px;
+    left:0;
+    border-radius:4px;
+    z-index:-1;
+    transform:rotate(-2deg) translateY(4px);
+    transition:.4s background;
+}
+
+.login:hover::before{
+    background:#7da68c;
+}
+
+.down{
+    position:absolute;
+    bottom:32px;
+    left:50%;
+    transform:translateX(-50%);
+    color:var(--text);
+    background:none;
+    border:none;
+}
+
+
+
+@keyframes down{
+    from{transform:translateY(0)}
+    50%{transform:translateY(5px)}
+    to{transform:translateY(0)}
+}
+
+.down > ion-icon{
+    font-size:32px;
+    --ionicon-stroke-width: 48px;
+    animation:infinite 1s down;
+    
+}
+
+.main{
+    height:100vh;
+    width:100vw;
+    top:100%;
+    left:0;
+    position:absolute;
+}
+
+.main > div{
+    width:40%;
+    max-width:500px;
+    min-width:300px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    position:absolute;
+    text-align:center;
+}
+
+.main > div > h2{
+    color:var(--text3);
+    font-size:16px;
+    font-weight:normal;
+    margin-bottom:64px;
+}
+
+.main > div > p{
+    color:var(--text);
+    font-size:16px;
+    font-weight:normal;
+    line-height: 32px
+}
+
+.links{
+    margin-left:auto;
+}
+
+@media(max-width: 600px){
+    .links{
+        display:none;
+    }
+}
+
+.links > a {
+    color:var(--text);
+    font-size:15px;
+    text-decoration:none;
+    margin-left:16px;
+}
+
+.links > a:hover{
+    border-bottom:2px solid var(--text);
+}
+
+.bold_link{
+    font-weight:bold;
+}
+
+.features_main{
+    width:100%;
+    margin:auto;
+    margin-top:115px;
+    padding:64px;
+    box-sizing:border-box;
+    max-width:840px;
+}
+
+.features_main h1{
+    color: var(--text);
+    font-size: 32px;
+}
+
+.features_main h2{
+    color: var(--text);
+    font-size: 24px;
+}
+
+
+.features_main p{
+    color:var(--text4);
+    font-size:16px;
+    font-weight:normal;
+    margin-top:32px;
+    margin-bottom:64px;
+}
+
+.feature{
+    width:100%;
+    display:flex;
+    margin-bottom:64px;
+    gap:16px;
+}
+
+.scroll_container{
+    animation: fade_in ease-in both;
+    animation-timeline: view();
+    animation-range: entry 10% contain 0%;
+}
+
+.feature > p > a{
+    color:#c3dac4;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.feature > p > a:hover{
+    color:#98a999;
+}
+
+
+.feature > img{
+    width:calc(50% - 16px);
+    border-radius:8px;
+    object-fit:cover;
+}
+
+@media (max-width:800px){
+    .feature{
+        flex-direction: column;
+    }
+    .feature > img{
+        width:100%;
+    }
+}
+
+@keyframes fade_in{
+    from{opacity:0;transform:translateY(100%) scale(0.9);}
+}
+
+.features_main h3{
+    color:var(--text);
+}
+
+
+.offer_list{
+    color:var(--text4);
+    list-style-type: '-    ';
+}
+
+.sign_up_input{
+    width:300px;
+    height:32px;
+    border-radius:16px;
+    box-sizing:border-box;
+    border:1px solid var(--top_back);
+    background:none;
+    padding:10px 16px;
+    color:var(--text);
+    transition:.2s border;
+    display:block;
+    margin-bottom:8px;
+}
+
+.sign_up_input:focus{
+    border-color:var(--border_hover);
+    outline:none;
+}
+
+.sign_up_option_button{
+    padding:10px 16px;
+    background:var(--top_back);
+    color:var(--text);
+    border-radius:16px;
+    height:32px;
+    box-sizing:border-box;
+    border:none;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    transition:.2s background-color;
+}
+
+.sign_up_option_button:focus-visible{
+    outline:1px solid var(--border_hover);
+}
+
+.sign_up_option_button > input{
+    display:none;
+}
+
+.sign_up_option_button:has(input:checked){
+    background-color:var(--hover_top_green);
+}
+
+.main_button {
+    padding: 8px 24px 8px 24px;
+    color: var(--on_main_button);
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s transform, 0.3s box-shadow, 0.3s filter;
+    text-decoration: none;
+    background: var(--main_button);
+    box-shadow: none;
+    display: inline-block;
+    font-weight:500;
+    border:1px solid var(--main_button);
+    margin-top:32px;
+}
+
+.main_button:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset:-1px;
+}
+
+.main_button:not(:disabled):hover {
+    filter: brightness(90%);
+}
+
+.main_button:disabled {
+    cursor: not-allowed;
+    filter: saturate(0.5) brightness(90%);
+}
+
+.main_button ion-icon {
+    --ionicon-stroke-width: 45px;
+    color: inherit;
+    position: relative;
+    font-size: 18px;
+    top: 0.5px;
+    font-size: 18px;
+    margin-right: 15px;
+    float: left;
+}

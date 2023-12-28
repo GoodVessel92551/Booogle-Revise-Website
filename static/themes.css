@@ -1,0 +1,189 @@
+#green{
+    :root{
+        --back: #1b1e1a;
+        --top_back: #2a2f2d;
+        --on_top_back:#37423e;
+        --border: 1px solid #3f4b3d;
+        --border_hover: #6f896a;
+        --text5: #a4bcb0;
+        --back2: #323232;
+        --border2: 2px solid #3d3c3c;
+        --top_green: #2a2f2d;
+        --hover_top_green: #303634;
+        --hover_top_green-2: #343c3a;
+        --top_green_opactiy: #2a2f2dbb;
+        --top_green_2: #323c32;
+        --on_top_green: #badbca;
+        --on_top_green_2: #A5C1B2;
+        --main_button: #bfffc2;
+        --on_main_button: #0F5B11;
+        --second_button: #a3d9a5;
+        --on_second_button: #0D400E;
+        --third_button: #86b388;
+        --on_third_button: #072007;
+        --error_button: #F2B6B6;
+        --on_error_button: #611010;
+        --focus:#2e80a3;
+        --text_border: #323c32;
+        --autocomplete: #435643;
+        --text_border_hover: #4e5f4e;
+        --text_border_focus: #627f62;
+        --select:#496949;
+        --speaker:#51654e;
+        --on_speaker:#ebffd6;
+        --leaderboard:#333D39;
+        --close_moblie:#5a655f;
+        --add_user_back:#404443;
+        --add_user_back_focus:#404543;
+        --view_user_group:#404443;
+        --settings_back_focus:#3f4b46;
+        --settings_cards:#475A53;
+        --flash_indicator:#333b38;
+    }
+}
+
+#blue{
+    :root{
+        --back: #1a1b1e;
+        --top_back: #292a2e;
+        --on_top_back:#383b43;
+        --border: 1px solid #3e434c;
+        --border_hover: #6a758a;
+        --text: #f2f2f2;
+        --text2: #141414;
+        --text3: #848484;
+        --text4: #ccc;
+        --text5: #a4acbc;
+        --back2: #323232;
+        --border2: 2px solid #3d3d3e;
+        --error: #8c1d18;
+        --on_error: #f9dedc;
+        --error_hover: #483235;
+        --top_green: #292a2e;
+        --hover_top_green: #303236;
+        --hover_top_green-2: #34373c;
+        --top_green_opactiy: #292a2ebb;
+        --top_green_2: #33363d;
+        --on_top_green: #b9c4da;
+        --on_top_green_2: #a5aec0;
+        --main_button: #bdd3ff;
+        --on_main_button: #0f295c;
+        --second_button: #a4b6da;
+        --on_second_button: #0d1e3f;
+        --third_button: #8594b2;
+        --on_third_button: #071021;
+        --error_button: #F2B6B6;
+        --on_error_button: #611010;
+        --text_border: #33363d;
+        --autocomplete: #434956;
+        --text_border_hover: #4e545f;
+        --text_border_focus: #626b7f;
+        
+        --select:#495469;
+        --speaker:#4e5565;
+        --on_speaker:#d6e4ff;
+        --leaderboard:#33363d;
+        --close_moblie:#595c64;
+        --add_user_back:#404244;
+        --add_user_back_focus:#404145;
+        --view_user_group:#404244;
+        --settings_back_focus:#3f434b;
+        --settings_cards:#484e5b;
+        --flash_indicator:#34373c;
+    }
+}
+
+#orange{
+    :root{
+        --back: #1e1d1a;
+        --top_back: #2e2d29;
+        --on_top_back:#434038;
+        --border: 1px solid #4c483e;
+        --border_hover: #8a826a;
+        --text: #f2f2f2;
+        --text2: #141414;
+        --text3: #848484;
+        --text4: #ccc;
+        --text5: #bcb6a4;
+        --back2: #323232;
+        --border2: 2px solid #3b3b3b;
+        --error: #8c1d18;
+        --on_error: #f9dedc;
+        --error_hover: #483235;
+        --top_green: #2e2d29;
+        --hover_top_green: #363530;
+        --hover_top_green-2: #3c3a34;
+        --top_green_opactiy: #2e2d29bb;
+        --top_green_2: #3d3b33;
+        --on_top_green: #dad2b9;
+        --on_top_green_2: #c0b9a5;
+        --main_button: #ffedbd;
+        --on_main_button: #5c480f;
+        --second_button: #dacca4;
+        --on_second_button: #3f320d;
+        --third_button: #b2a685;
+        --on_third_button: #211a07;
+        --error_button: #F2B6B6;
+        --on_error_button: #611010;
+        --text_border: #3d3b33;
+        --autocomplete: #565143;
+        --text_border_hover: #5f5b4e;
+        --text_border_focus: #7f7762;
+        
+        --select:#696049;
+        --speaker:#655e4e;
+        --on_speaker:#fff2d6;
+        --leaderboard:#3d3a33;
+        --close_moblie:#646059;
+        --add_user_back:#444340;
+        --add_user_back_focus:#454340;
+        --view_user_group:#444340;
+        --settings_back_focus:#4b473f;
+        --settings_cards:#5b5548;
+        --flash_indicator:#3c3a34;
+    }
+}
+
+#red{
+    :root{
+        --back: #1e1a1a;
+        --top_back: #2e2d29;
+        --on_top_back:#433838;
+        --border: 1px solid #4c483e;
+        --border_hover: #8a6a6a;
+        --text5: #bca4a4;
+        --back2: #323232;
+        --border2: 2px solid #3b3b3b;
+        --top_green: #2e2929;
+        --hover_top_green: #363030;
+        --hover_top_green-2: #3c3434;
+        --top_green_opactiy: #2e2929bb;
+        --top_green_2: #3d3333;
+        --on_top_green: #dcbcbc;
+        --on_top_green_2: #c0b9a5;
+        --main_button: #ffbdbd;
+        --on_main_button: #5c0f0f;
+        --second_button: #daa4a4;
+        --on_second_button: #3f0d0d;
+        --third_button: #b28585;
+        --on_third_button: #072007;
+        --error_button: #F2B6B6;
+        --on_error_button: #611010;
+        --text_border: #3d3333;
+        --autocomplete: #564343;
+        --text_border_hover: #5f4e4e;
+        --text_border_focus: #7f6262;
+        
+        --select:#694949;
+        --speaker:#654e4e;
+        --on_speaker:#ffd6d6;
+        --leaderboard:#3d3333;
+        --close_moblie:#645959;
+        --add_user_back:#444040;
+        --add_user_back_focus:#454040;
+        --view_user_group:#444040;
+        --settings_back_focus:#4b3f3f;
+        --settings_cards:#5b4848;
+        --flash_indicator:#3c3434;
+    }
+}

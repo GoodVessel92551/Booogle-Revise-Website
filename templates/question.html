@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block page_title %} {{title}} {% endblock %}
+{% block title %}Questions{% endblock %}
+{% block main %}
+    <form method="post" style="display:flex;justify-content: center;flex-wrap:wrap;width:calc(min(90%,900px) + 2px);" class="main">
+        <button type="button" class="speaker" id="speaker"><ion-icon name="volume-high-outline"></ion-icon></button>
+        <div class="flashcard_container">
+            <div class="flashcard_container_top">
+            <div id="flashcard" class="flashcard quest_card">
+                <h1 id="quest">{{question}}</h1>
+            </div>
+            <div id="quest_answer_container" class="quest_answer_container">
+                <h2 id="answer_title"></h2>
+                <p id="answer_text"></p>
+            </div>
+            </div>
+            <br>
+        <button name="button" type="button" value="{{ans[0]}}" id="ans1" class="quest_ans_but">{{ans[0]}}</button>
+        <button name="button" type="button" value="{{ans[1]}}" id="ans2" class="quest_ans_but">{{ans[1]}}</button>
+        <button name="button" type="button" value="{{ans[2]}}" id="ans3" class="quest_ans_but">{{ans[2]}}</button>
+        <div class="flash_indicator">
+            <span><span id="flash_indicator_correct" style="width: 0%;"></span><span id="flash_indicator_wrong" style="width: 0%"></span></span>
+        </div>
+    </form>
+    <div class="flash_buttons">
+        <a href="/" class="main_button second_button"><span>Exit</span><ion-icon name="exit-outline"></ion-icon></a>
+    </div>
+</div>
+<script>
+    var flash_indicator_correct = document.getElementById("flash_indicator_correct");
+    var flash_indicator_wrong = document.getElementById("flash_indicator_wrong");
+    var quest_num = {{quest_num|tojson}}
+    var set = {{set|tojson}}
+    var total_quests = {{total_quests|tojson}}
+    var correct = 0
+    var wrong = 0
+    var user = {{owner|tojson}}
+    console.log(set)
+    var speaker = document.getElementById("speaker")
+    var quest = document.getElementById("quest")
+    var ans1 = document.getElementById("ans1")
+    var ans2 = document.getElementById("ans2")
+    var ans3 = document.getElementById("ans3")
+    var flashcard = document.getElementById("flashcard")
+    var answer_title = document.getElementById("answer_title")
+    var answer_text = document.getElementById("answer_text")
+    var quest_answer_container = document.getElementById("quest_answer_container")
+    ans1.addEventListener("click",() => {
+        answer(ans1.innerText)
+    })
+    ans2.addEventListener("click",() => {
+        answer(ans2.innerText)
+    })
+    ans3.addEventListener("click",() => {
+        answer(ans3.innerText)
+    })
+    speaker.addEventListener("click",() => {
+        var text = `Question: ${quest.innerText}. Answer One: ${ans1.innerText}. Answer Two: ${ans2.innerText}. Answer Three: ${ans3.innerText}`
+        voice(text)
+    })
+    const answer = (ans) => {
+        var url = "/api/questions"
+        console.log(ans)
+        var data = {
+            "answer":ans,
+            "question": quest_num,
+            "set":set,
+            "user":user
+        }
+        fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then(data => {
+              console.log(data)
+              if (data["correct"]) {
+                  correct += 1
+                  flash_indicator_correct.style.width = correct/(total_quests)*100+"%"
+                  open_side()
+                  quest_answer_container.classList.add("question_correct")
+                  setTimeout(() => {
+                        answer_title.innerText = "Well Done!"
+                        answer_text.innerText = "You got it right!"
+                  },300)
+              }else{
+                    wrong += 1
+                    flash_indicator_wrong.style.width = "calc("+wrong/(total_quests)*100+"% + 8px)"
+                    open_side()
+                    quest_answer_container.classList.add("question_wrong")
+                    setTimeout(() => {
+                        answer_title.innerText = "The Correct Answer Is"
+                        answer_text.innerText = data["answer"]
+                    },300)
+              }
+              setTimeout(() => {
+                  answer_title.innerText = ""
+                  answer_text.innerText = ""
+                  close_side()
+                    if (data["done"]){
+                        console.log("done")
+                        window.location = "/finish/questions"
+                    }else{
+                          quest.innerText = data["question"]
+                          ans1.innerText = data["answers"]["ans1"]
+                          ans2.innerText = data["answers"]["ans2"]
+                          ans3.innerText = data["answers"]["ans3"]
+                          quest_num = data["quest_num"]
+                    }
+              },2500)
+          })
+          .catch(error => {
+            console.error('Fetch error:', error);
+              
+          });
+    }
+
+    const open_side = () => {
+        flashcard.style.maxHeight = flashcard.offsetHeight+"px"
+        flashcard.style.minHeight = flashcard.offsetHeight+"px"
+        flashcard.style.width = "50%";
+        quest_answer_container.style.width = "calc(50% - 16px)";
+        flashcard.style.marginRight = "16px";
+        flashcard.style.aspectRatio = "2/1.4";
+          setTimeout(() => {
+              flashcard.style.maxHeight = flashcard.offsetHeight+"px"
+              flashcard.style.minHeight = flashcard.offsetHeight+"px"
+          },500)
+    }
+    const close_side = () => {
+        flashcard.style.aspectRatio = "2/0.7";
+        flashcard.style.maxHeight = flashcard.offsetHeight+"px"
+        flashcard.style.minHeight = flashcard.offsetHeight+"px"
+        flashcard.style.width = "100%";
+        quest_answer_container.style.width = "0px";
+        flashcard.style.marginRight = "0px";
+          setTimeout(() => {
+              quest_answer_container.classList.remove("question_wrong", "question_correct")
+              flashcard.style.maxHeight = flashcard.offsetHeight+"px"
+              flashcard.style.minHeight = flashcard.offsetHeight+"px"
+          },500)
+    }
+</script>
+<script src="/static/text-to-voice.js"></script>
+{% endblock %}

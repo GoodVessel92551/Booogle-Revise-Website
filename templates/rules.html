@@ -1,0 +1,117 @@
+{% extends "base.html" %} 
+{% block page_title %} Automations {% endblock %}
+{% block title %}Automations{% endblock %} 
+{% block main %}
+<form method="post" class="main">
+    <h1>Automations</h1>
+    <div class="home_buttons">
+        <button onclick="save=false;document.getElementById('save_text').innerText = 'Saving...';" type="submit" class="main_button">
+            <span id="save_text">Save</span><ion-icon name="save-outline"></ion-icon>
+        </button>
+    </div>
+    <p>Automations are a way of automating where you sets are stored using Smartsubject you can move sets of a certain subject to a chosen folder.</p>
+    <div id="rules" class="rules">
+
+    </div>
+    <button style="margin-top:8px;" type="button" onclick="new_rule()" class="main_button new_rule"><span>New Automation</span><ion-icon name="add-outline"></ion-icon></button>
+</form>
+<script>
+    var folders = {{folders|tojson}};
+    var current_rules = {{rules|tojson}};
+    current_rules_keys = Object.keys(current_rules)
+    console.log(current_rules)
+    var keys = Object.keys(folders);
+    var rules = document.getElementById("rules");
+    var id = 0
+    var subjects = ["Computer Science", "Chemistry", "Biology", "Physics", "Maths", "Sport", "English", "History", "Geography","Music","Other"];
+    const new_rule = () => {
+        id = rules.childElementCount
+        var a = document.createElement("a")
+        a.id = `rule${id}`
+        var select = document.createElement("select")
+        select.name = `subject${id}`
+        var folder = document.createElement("select")
+        folder.name = `folder${id}`
+        var move = document.createElement("span")
+        var to = document.createElement("span")
+        var del = document.createElement("button")
+        del.classList.add("del_button","del_rule","main_button")
+        del.innerText = "Delete"
+        del.id = id
+        del.addEventListener("click", (e) => {
+            a.remove()
+            var kids = Array.from(rules.children)
+            for (var i = 0; i < kids.length; i++){
+                kids[i].id = `rule${i}`
+            }
+        })
+        move.innerText = "Move"
+        to.innerText = "sets to"
+        select.id = "move"
+        for (var i = 0; i < subjects.length; i++){
+            var option = document.createElement("option");
+            option.innerText = subjects[i];
+            option.value = subjects[i];
+            select.appendChild(option);
+        }
+        for (var i = 0; i < keys.length; i++){
+            var option = document.createElement("option");
+            option.innerText = keys[i];
+            option.value = keys[i];
+            folder.appendChild(option);
+        }
+        rules.appendChild(a)
+        a.appendChild(move)
+        a.appendChild(select)
+        a.appendChild(to)
+        a.appendChild(folder)
+        a.appendChild(del)
+    }
+    for(var i = 0; i < current_rules_keys.length; i++){
+        var id = rules.childElementCount
+        var a = document.createElement("a")
+        a.id = `rule${id}`
+        var select = document.createElement("select")
+        select.name = `subject${id}`
+        var folder = document.createElement("select")
+        folder.name = `folder${id}`
+        var move = document.createElement("span")
+        var to = document.createElement("span")
+        var del = document.createElement("button")
+        del.type = "button"
+        del.classList.add("del_button","del_rule","main_button")
+        del.innerText = "Delete"
+        del.id = id
+        del.addEventListener("click", (e) => {
+            a.remove()
+            var kids = Array.from(rules.children)
+            for (var j = 0; j < kids.length; j++){
+                kids[j].id = `rule${j}`
+            }
+        })
+        move.innerText = "Move"
+        to.innerText = "sets to"
+        select.id = "move"
+        for (var j = 0; j < subjects.length; j++){
+            var option = document.createElement("option");
+            option.innerText = subjects[j];
+            option.value = subjects[j];
+            select.appendChild(option);
+        }
+        for (var j = 0; j < keys.length; j++){
+            var option = document.createElement("option");
+            option.innerText = keys[j];
+            option.value = keys[j];
+            folder.appendChild(option);
+        }
+        select.value = current_rules[current_rules_keys[i]]["subject"]
+        folder.value = current_rules[current_rules_keys[i]]["folder"]
+        rules.appendChild(a)
+        a.appendChild(move)
+        a.appendChild(select)
+        a.appendChild(to)
+        a.appendChild(folder)
+        a.appendChild(del)
+    }
+</script>
+{% endblock %}

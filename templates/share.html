@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block page_title %} {{title}} {% endblock %}
+{% block title %} {{title}} {% endblock %}
+{% block main %}
+<div class="share_set" id="share_set">
+    <div class="all_contain_start">
+        <img class="set_image" id="set_image">
+        <div class="text_contain_start">
+            <h1 id="set_title" class="set_title_dialog">Set Name</h1>
+            <p id="set_desc"></p>
+        </div>
+    </div>
+    </button>
+    <h2>Revise</h2>
+    <div class="start_options">
+        <a href="{{flash_link}}" id="flashcards">
+            <span id="flash_rec">
+                <ion-icon name="sparkles-outline"></ion-icon>
+            </span>
+            <ion-icon name="albums-outline"></ion-icon>
+            <strong>Flashcards</strong>
+        </a>
+        <a href="{{quest_link}}" id="questions">
+            <span id="quest_rec">
+                <ion-icon name="sparkles-outline"></ion-icon>
+            </span>
+            <ion-icon name="help-outline"></ion-icon>
+            <strong>Questions</strong>
+        </a>
+        <a href="{{fill_link}}" id="fill">
+            <ion-icon name="create-outline"></ion-icon>
+            <strong>Fill The Gaps</strong>
+        </a>
+        <a href="/upgrade" id="test">
+            <ion-icon id="test_lock" class="start_lock" name="lock-closed-outline"></ion-icon>
+            <ion-icon name="list-outline"></ion-icon>
+            <strong>Test</strong>
+        </a>
+    </div>
+    <div class="start_buttons">
+        <a href="/download" id="download_button" class="main_button">
+            <span>Download</span><ion-icon name="download-outline"></ion-icon>
+        </a>
+    </div>
+</div>
+<script>
+    var title = {{title|tojson}}
+    var desc = {{desc|tojson}}
+    var user = {{user|tojson}}
+    document.getElementById("set_title").innerText = title;
+    document.getElementById("set_desc").innerText = desc;
+    document.getElementById("flashcards").href = `/flashcards/@${user}/${title}`;
+    document.getElementById("questions").href = `/questions/@${user}/${title}`;
+    document.getElementById("fill").href = `/fill/@${user}/${title}`;
+    document.getElementById("download_button").href = `/download/@${user}/${title}`;
+</script>
+{% endblock %}

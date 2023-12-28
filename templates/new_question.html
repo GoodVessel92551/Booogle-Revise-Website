@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block page_title %} New Question {% endblock %}
+{% block title %}New{% endblock %}
+{% block main %}
+    <main class="main">
+        <h1>New Question</h1>
+        <form id="gen_form" method="post" action="/new/question/generate">
+            <span id="warn" style="display:none;" class="error_message"><ion-icon name="warning-outline"></ion-icon>Unable To Generate, Due To Question Possibly Containing Rude Text.</a></span>
+            <span id="len_warn" style="display:none;" class="error_message warn_message"><ion-icon name="warning-outline"></ion-icon>Unable To Generate, Due To Question Not Containing The Required 3 Words.</a></span>
+            <input autofocus id="quest" autocomplete="off" placeholder="Question" value="{{quest}}" name="quest" required class="new_title text">
+            <div style="margin-top:-52px;" class="autocomplete"><span class="autocomplete_current" id="quest_autocomplete_current"></span><span class="autocomplete_next" id="quest_autocomplete_next"></span><button class="autocomplete_button" id="quest_autocomplete_button" type="button">Tab</button><button id="voice_quest" class="mic" type="button" onclick="record('quest',this.id)"><ion-icon name="mic-outline"></ion-icon></button></div>
+        </form>
+            <form method="post">
+            <input id="quest2" hidden autocomplete="off" placeholder="Question" value="{{quest}}" name="quest" required class="new_title text">
+            <button name="button" value="next" class="main_button next top_title_button" style="position:absolute;top:34.5px;right:0px;"><span>Next</span><ion-icon name="arrow-forward-outline"></ion-icon></button>
+            <button name="button" value="finish" class="main_button second_button home_button top_title_button" style="position:absolute;top:34.5px;right:130.64px;"><span>Finish</span><ion-icon name="checkmark-done-outline"></ion-icon></button>
+            <div id="answers">
+                <textarea maxlength="200" required name="ans1" id="ans1" placeholder="Answer" class="text new_answer">{{ans}}</textarea>
+                <div style="height:300px;margin-top:-312px;" class="autocomplete"><span class="autocomplete_current" id="ans_autocomplete_current"></span><span class="autocomplete_next" id="ans_autocomplete_next"></span><button class="autocomplete_button" id="ans_autocomplete_button" type="button">Tab</button><button id="voice_ans" class="mic" type="button" onclick="record('ans1',this.id)"><ion-icon name="mic-outline"></ion-icon></button></div>
+            </div>
+            <input class="new_title text" type="url" name="image_url" placeholder="Image URL (Shown In Flashcards)">
+        </form>
+        </form>
+    </main>
+<script>
+    setInterval(() => {
+        var quest = document.getElementById("quest")
+        var quest2 = document.getElementById("quest2")
+        if(quest.value != quest2.value){
+            quest2.value = quest.value
+        }
+    },500)
+    var rude = {{rude|tojson}};
+    var len = {{len|tojson}};
+    var level = {{boosting|tojson}}
+    if(rude){
+        document.getElementById("warn").style.display = "block";
+    }
+    if(len){
+        document.getElementById("len_warn").style.display = "block";
+    }
+    document.getElementById("quest").addEventListener("keyup",() => {
+        document.getElementById("warn").style.display = "none";
+        document.getElementById("len_warn").style.display = "none";
+    })
+    
+</script>
+<script src="/static/autocomplete.js"></script>
+<script src="/static/voice-recorder.js"></script>
+{% endblock %}

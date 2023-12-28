@@ -1,0 +1,25 @@
+{% extends "base.html" %} 
+{% block page_title %} Well Done {% endblock %}
+{% block title %}Finish{% endblock %} {% block main %}
+<h1 class="you_did_it">You Did It!</h1>
+<p class="you_did_well">Well Done You Have Completed This Set.</p>
+<a class="next_set main_button next keep_text" href="/">Start Your Next Set<ion-icon name="arrow-forward-outline"></ion-icon></a>
+
+<script>
+  function gen(num1, num2) {
+    min = Math.ceil(num1);
+    max = Math.floor(num2);
+    number = Math.floor(Math.random() * (max - min + 1) + min);
+    return number;
+  }
+  for (var i = 0; i < 100; i++) {
+    var a = document.createElement("span");
+    a.id = "star";
+    a.style.top = gen(5, 95) + "%";
+    a.style.left = gen(5, 95) + "%";
+    a.style.filter = "saturate(" + gen(0, 100) + "%)";
+    a.style.animationDelay = gen(0, 5) + "s";
+    document.body.appendChild(a);
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}{% block page_title %} Play {% endblock %} {% block title %}Play{% endblock %} {% block main %}
+<main class="main">
+    <h1>Play</h1>
+        <a id="Start Game" href="/play/start/{{code}}" class="main_button home_button1 next top_title_button" style="position: absolute; top: 34.5px; right: 20px" ><span>Start</span><ion-icon name="play-outline"></ion-icon></a>
+</main>
+<h2 class="play_code_h2">{{code}}</h2>
+<p class="play_code_p">Code</p>
+<h2 class="your_in" style="font-size:30px;bottom:50px;top:unset;">🎉 Playing Has Started!</h2>
+<p class="waiting_for" style="font-size:15px;bottom:32px;top:unset;">Waiting For Players...</p>
+{% endblock %}

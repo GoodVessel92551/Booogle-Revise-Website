@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block page_title %} Edit Folder {% endblock %}
+{% block title %}Edit Folder{% endblock %}
+{% block main %}
+    <main class="main">
+        <h1>Edit Folder</h1>
+        <form method="post">
+            <button class="main_button top_title_button" type="submit" style="position:absolute;top:34.5px;right:0px;"><span>Save</span><ion-icon name="save-outline"></ion-icon></button>
+            <input value="{{folder['name']}}" required oninvalid="this.setCustomValidity('Please enter only letters and numbers.')" oninput="this.setCustomValidity('')" pattern="^[A-Za-z0-9\s]+$" value="" id="quest"  maxlength="80" placeholder="Title" name="title" class="new_title text" autofocus>
+            <div style="margin-top:-52px;" class="autocomplete"><span class="autocomplete_current" id="quest_autocomplete_current"></span><span class="autocomplete_next" id="quest_autocomplete_next"></span><button class="autocomplete_button" id="quest_autocomplete_button" type="button">Tab</button><button id="voice_title" class="mic" type="button" onclick="record('quest',this.id)"><ion-icon name="mic-outline"></ion-icon></button></div>
+            <textarea required id="ans1" maxlength="150"  placeholder="Description" name="desc" class="new_desc text">{{folder["desc"]}}</textarea>
+            <div style="height:200px;margin-top:-212px;" class="autocomplete"><span class="autocomplete_current" id="ans_autocomplete_current"></span><span class="autocomplete_next" id="ans_autocomplete_next"></span><button class="autocomplete_button" id="ans_autocomplete_button" type="button">Tab</button><button id="voice_desc" class="mic" type="button" onclick="record('ans1',this.id)"><ion-icon name="mic-outline"></ion-icon></button></div>
+            <div class="new_images">
+                <h3 style="color:var(--text)">Cover Image</h3>
+                <div class="new_images_here">
+                    <a><img class="cover_img" draggable="false" src="/static/folders/Folder.webp" onclick="document.getElementById('Folder').checked = true"><input id="Folder" type="radio" name="cover" value="Folder" checked></a>
+                    <a><img class="cover_img" draggable="false" src="/static/folders/Folder-1.webp" onclick="document.getElementById('Folder-1').checked = true"><input id="Folder-1" type="radio" name="cover" value="Folder-1"></a> 
+                    <a><img class="cover_img" draggable="false" src="/static/folders/Folder-2.webp" onclick="document.getElementById('Folder-2').checked = true"><input id="Folder-2" type="radio" name="cover" value="Folder-2"></a>
+                    <a><img class="cover_img" draggable="false" src="/static/folders/Folder-3.webp" onclick="document.getElementById('Folder-3').checked = true"><input id="Folder-3" type="radio" name="cover" value="Folder-3"></a>  
+                    <a><img class="cover_img" draggable="false" src="/static/folders/Folder-4.webp" onclick="document.getElementById('Folder-4').checked = true"><input id="Folder-4" type="radio" name="cover" value="Folder-4"></a>  
+                    <a><img class="cover_img" draggable="false" src="/static/folders/Folder-5.webp" onclick="document.getElementById('Folder-5').checked = true"><input id="Folder-5" type="radio" name="cover" value="Folder-5"></a>  
+                    <a><img class="cover_img" draggable="false" src="/static/folders/Folder-6.webp" onclick="document.getElementById('Folder-6').checked = true"><input id="Folder-6" type="radio" name="cover" value="Folder-6"></a>  
+                </div>
+                    
+            </div>
+        </form>
+    </main>
+<script>
+    var folder = {{folder|tojson}};
+    document.getElementById(folder["background"]).checked = true
+</script>
+<script src="/static/auto_complete.js"></script>
+<script src="/static/voice-recorder.js"></script>
+{% endblock %}
