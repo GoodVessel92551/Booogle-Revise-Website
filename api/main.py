@@ -926,44 +926,11 @@ def fill(name):
 def server_error(e):
     session["notifications"] = ["There Was An Error 😭 Please Try Again Later"]
     return redirect("/")
-    #return render_template('500.html'), 500
 
 @app.errorhandler(404)
 def page_not_found(e):
     session["notifications"] = ["The Page That You Were Looking For Does Not Exist Here 😭"]
     return redirect("/")
-    #return render_template('404.html'), 404
-
-@app.route("/stats/@<user>")
-def stats(user):
-    db[user]["stats"] = update(db[user]["stats"])
-    return render_template("stats.html",stats=stats_dict(update(db[user]["stats"])))
-
-@app.route("/leaderboard")
-def leaderboard():
-    users = db["users"]
-    leaderboard = {}
-    for i in users:
-        try:
-            current_user = db[i]["stats"]["total"]["sets"]
-        except:
-            db[i]["stats"] = {"last_7":{}}
-            last_7_days = last_7()
-            for j in last_7_days:
-                db[i]["stats"]["last_7"][j] = {"sets":0}
-            db[i]["stats"]["total"] = {"sets":0,"published":0,"made":0}
-        current_user = db[i]["stats"]["total"]["sets"]
-        leaderboard[i] = current_user
-    sorted_leaderboard = sorted(leaderboard.items(), key=lambda item: item[1])
-    sorted_leaderboard.reverse()
-    return render_template("leaderboard.html",leaderboard=sorted_leaderboard[0:10])
-
-@app.route("/ai/revise")
-def ai_revise():
-    if login() == False:
-        return render_template("login.html")
-    notifications = []
-    return render_template("ai_revise.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/ai/revise/generate",methods=["POST","GET"])
 def ai_revise_generate():
@@ -1286,13 +1253,6 @@ def test():
     print(username())
     return redirect("/")
 
-@app.route("/login/code",methods=["GET","POST"])
-def code():
-    if request.method == "POST":
-        for i in db["codes"]:
-            if db["codes"][i] == request.form["code"]:
-                session["Code"] = request.form["code"]
-    return redirect("/")
 
     
 @app.route("/code")
@@ -1452,13 +1412,6 @@ def settings():
         theme = request.form["theme"]
         db[username()]["settings"]["interface"]["theme"] = theme
     return render_template("settings/settings.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
-
-@app.route("/community/rate/@<usersname>/<set_name>")
-def rate(usersname,set_name):
-    if login() == False:
-        return render_template("login.html")
-    notifications = {}
-    return render_template("rate.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/focus")
 def focuse():
