@@ -1,8 +1,5 @@
 import requests,os,json,random,re
 from better_profanity import profanity
-from booogle_ai_tools.moderation import moderation
-from booogle_ai_tools.smartmatch import smartmatch
-from booogle_ai_tools.smartsubject import smartsubject
 import datetime,time
 from datetime import datetime
 from Levenshtein import distance
