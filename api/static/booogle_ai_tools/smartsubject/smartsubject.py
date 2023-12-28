@@ -9,7 +9,7 @@ try:
         clf = pickle.load(f)
         vectorizer = pickle.load(f)
 except FileNotFoundError:
-    with open("booogle_ai_tools/smartsubject/smartsubject.csv", "r") as f:
+    with open("booogle_ai_tools/smartsubject/smartsubject_csv.csv", "r") as f:
         reader = csv.DictReader(f)
         data = list(reader)
     texts = []
