@@ -48,7 +48,6 @@ def gen_user_token():
 
 def streak():
     current_streak = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["streak"]
-    print(current_streak)
     current_time = datetime.now()
     time_difference = current_time - datetime.strptime(current_streak["time"], "%Y-%m-%d %H:%M:%S.%f")
     if current_streak["time"] == 0:
@@ -80,9 +79,6 @@ def add_streak():
 def login():
     if session.get("token"):
         keys = global_data_db.find_one({"name":"B-KEYS"})
-        print(keys["data"])
-        print(session.get("token"))
-        print(hash_value(session.get("token")))
         if str(hash_value(session.get("token"))) in keys["data"]:
             return True
     return False
@@ -242,7 +238,6 @@ def gen_id():
     for i in range(10):
         id += random.choice(chars)
     id += str(time.time())
-    print(id)
     return id
 
 def make_dict(dictionary):
@@ -295,5 +290,4 @@ def make_dict_group(group):
 
 def check_image(url):
     r = requests.get("https://api.moderatecontent.com/moderate/?key="+os.environ['image_key']+"&url="+url)
-    print(r.text)
     return r.json()

@@ -34,8 +34,6 @@
 
 * {
     font-family: "Roboto", sans-serif;
-    -webkit-tap-highlight-color: transparent;
-    tap-highlight-color: transparent;
 }
 
 body,
@@ -342,6 +340,7 @@ html {
     align-items:center;
     cursor:pointer;
     transition:.2s background-color;
+    font-size:14px;
 }
 
 .sign_up_option_button:focus-visible{

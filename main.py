@@ -22,7 +22,6 @@ compress = Compress(app)
 
 @app.route("/")
 def home():
-    print(login())
     if login() == False:
         return render_template("login/login.html")
     if session.get("notifications"):
@@ -30,6 +29,7 @@ def home():
         session.pop("notifications")
     else:
         notifications = []
+    print(username())
     users_groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"]
     added_groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["added_groups"]
     for i in added_groups:
@@ -38,7 +38,7 @@ def home():
         group_data = user_data_db.fin_one({"username":owners_username,"type":"user_data"})["data"]["groups"][group]
         users_groups[group] = group_data
     streak()
-    return render_template("home.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets(),is_new=new,notifications=notifications,folders=get_folders(),groups=users_groups)
+    return render_template("/home/home.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets(),is_new=new,notifications=notifications,folders=get_folders(),groups=users_groups)
 
 @app.route("/signup",methods=["POST","GET"])
 def signup():
@@ -78,12 +78,17 @@ def signup():
 def user_login():
     if request.method == "POST":
         username = request.form["username"]
-        password = hash(request.form["password"]+os.getenv('salt'))
-        if username in db["usernames"]:
-            if password == db["B-AUTH-"+username]["password"]:
+        password = hash_value(request.form["password"])
+        usernames = global_data_db.find_one({"name":"usernames"})
+        if username in usernames["data"]:
+            print("correct")
+            user_data = user_data_db.find_one({"username":username,"type":"user_data"})
+            if password == user_data["data"]["password"]:
                 user_token = gen_user_token()
                 session["token"] = user_token
-                db["B-KEYS"][hash(user_token+os.getenv('salt'))] = username
+                query = {"name":"B-KEYS"}
+                update = {"$set":{f"data.{hash_value(user_token)}":username}}
+                global_data_db.update_one(query, update)
                 return redirect("/")
     return render_template("login/login_account.html")
 
@@ -146,7 +151,7 @@ def community():
         share_links.append("/share/@"+name_key+"/"+set_name)
         set_data = name["data"]["sets"][set_name]
         view_sets[i] = set_data
-    return render_template("community.html",streak=streak,share_links=share_links,name=users_name,settings=settings,boosting=boosting,sets=make_dict(view_sets),notifications=notifications)
+    return render_template("home/community.html",streak=streak,share_links=share_links,name=users_name,settings=settings,boosting=boosting,sets=make_dict(view_sets),notifications=notifications)
 
 @app.route("/recommended")
 def recommended():
@@ -194,17 +199,17 @@ def publish(name):
     for i in range(1,len(set)):
         quest = set[f"Q{i}"]["question"]
         if mod(quest) == "1" or profanity.contains_profanity(quest):
-            session["notifications"] = ["You Can't Publish This Set, Due To It Cointains Profanity Or Rude Text. (Question:"+str(i)+")"]
+            session["notifications"] = [{"title":"Failed","body":"You Can't Publish This Set, Due To It Contains Profanity Or Rude Text. (Question:"+str(i)+")","type":"wanning","icon":"alert-circle"}]
             return redirect("/")
         for j in set[f"Q{i}"]["answers"]:
             ans = set[f"Q{i}"]["answers"][j]
             if mod(ans) == "1" or profanity.contains_profanity(ans):
-                session["notifications"] = ["You Can't Publish This Set, Due To It Cointains Profanity Or Rude Text. (Answer:"+str(i)+")"]
+                session["notifications"] = [{"title":"Failed","body":"You Can't Publish This Set, Due To It Contains Profanity Or Rude Text. (Question:"+str(i)+")","type":"wanning","icon":"alert-circle"}]
                 return redirect("/")
     query = {"name":"sets"}
     update = {"$push": {"data": [username(),name]}}
     global_data_db.update_one(query, update)
-    session["notifications"] = [f"Success! ✅ You Have Published: {name}"]
+    session["notifications"] = [{"title":"Success","body":f"You Have Published: {name}","type":"success","icon":"checkmark-circle"}]
     return redirect("/community")
 
 @app.route("/download/@<user_name>/<name>")
@@ -240,9 +245,9 @@ def delete2(user_name,name):
             if user_name in i and name in i:
                 db["sets"].remove(i)
     else:
-        session["notifications"] = ["You Can Not Delete This Set. 🔒"]
+        session["notifications"] = [{"title":"Failed","body":"You Can Not Delete This Set.","type":"warning","icon":"alert-circle"}]
         return redirect("/community")
-    session["notifications"] = [f"Success! ✅ You Deleted This From The Community: {name}"]
+    session["notifications"] = [{"title":"Success","body":f"You Deleted This From The Community: {name}","type":"success","icon":"checkmark-circle"}]
     return redirect("/")
 
 @app.route("/flashcards/@<username>/<name>")
@@ -319,7 +324,7 @@ def new_folder():
             db[username()]["folders"] = {}
         else:
             if title in list(db[username()]["folders"]):
-                session["notifications"] = ["📂 You already have a folder with that name!"]
+                session["notifications"] = [{"title":"Failed","body":"You already have a folder with that name","type":"warning","icon":"alert-circle"}]
                 return redirect("/")
             else:
                 db[username()]["folders"][title] = {
@@ -429,7 +434,7 @@ def new():
             session["new_set"] = {"title":title,"desc":desc,"background":cover}
             return redirect("/new")
         if title in get_sets().keys():
-            session["notifications"] = ["This Set Already Exists."]
+            session["notifications"] = [{"title":"Failed","body":"This Set With This Name Already Exists","type":"warning","icon":"alert-circle"}]
             return redirect("/")
         else:
             new_set = {
@@ -541,7 +546,7 @@ def edit(name):
         level = userinfo(username())[0]
         for i in range(1,len(list(request.form)[3:])):
             if (len(db[username()]["sets"][emoji.demojize(request.form["title"])]) >= 15 and (level == False or level == "boost")) or (len(db[username()]["sets"][emoji.demojize(request.form["title"])]) >= 20 and level == "premium") or (len(db[username()]["sets"][emoji.demojize(request.form["title"])]) >= 25 and level == "pro") or (len(db[username()]["sets"][emoji.demojize(request.form["title"])]) >= 35 and level == "elite"):
-                session["notifications"] = ["Max Amount Of Questions."]
+                session["notifications"] = [{"title":"Failed","body":"Your Have Reached The Max Amount Of Questions","type":"warning","icon":"alert-circle"}]
                 return redirect("/")
             else:
                 try:
@@ -562,7 +567,7 @@ def edit(name):
                                 db[username()]["sets"][emoji.demojize(request.form["title"])][f"Q{i}"]["image"] = {"url":image_url,"rating":image_data["rating_label"]}
                     if quest_profanity:
                         db[username()]["sets"][emoji.demojize(request.form["title"])][f"Q{i}"]["status"] = mod(quest)        
-        session["notifications"] = [f"Success! ✅ You Have Edited: {name}"]
+        session["notifications"] = [{"title":"Success","body":f"You Have Edited: {name}","type":"success","icon":"checkmark-circle"}]
         return redirect("/")
     return render_template("sets/edit.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets()[name],notifications=notifications)
 
@@ -601,7 +606,7 @@ def question(name):
     notifications = []
     set = get_sets()[name]
     if len(set) < 4:
-        session["notifications"] = ["You Need More Questions"]
+        session["notifications"] = [{"title":"Failed","body":"You Need More Questions","type":"warning","icon":"alert-circle"}]
         return redirect("/")
     if session.get("stats"):
         session.pop("stats")
@@ -722,7 +727,7 @@ def delete(name):
         if name in i and username() in i:
             db["sets"].remove(i)
     del db[username()]["sets"][name] 
-    session["notifications"] = [f"Success! ✅ You Have Deleted: {name}"]
+    session["notifications"] = [[{"title":"Success","body":f"You Have Deleted: {name}","type":"success","icon":"checkmark-circle"}]]
     return redirect("/")
 
 
@@ -766,12 +771,12 @@ def fill(name):
 
 @app.errorhandler(500)
 def server_error(e):
-    session["notifications"] = ["There Was An Error 😭 Please Try Again Later"]
+    session["notifications"] = [{"title":"Error","body":"There Was An Error Try Again Later","type":"error","icon":"close-circle"}]
     return redirect("/")
 
 @app.errorhandler(404)
 def page_not_found(e):
-    session["notifications"] = ["The Page That You Were Looking For Does Not Exist Here 😭"]
+    session["notifications"] = [{"title":"Error","body":"We Were Unable To Find The Page That You Were Looking For","type":"error","icon":"close-circle"}]
     return redirect("/")
 
 @app.route("/test/<set>",methods=["POST","GET"])
@@ -782,7 +787,7 @@ def test_mode(set):
     questions = []
     quest_set = {}
     if db[username()]["level"] != "elite":
-        session["notifications"] = ["🔐 You Are Not Elite "]
+        session["notifications"] = [{"title":"Upgrade","body":"You Need To Upgrade To Access Test Mode","type":"warning","icon":"alert-circle"}]
         return redirect("/")
     if request.method == "POST":
         for i in range(1,len(db[username()]["sets"][set])):
@@ -841,7 +846,7 @@ def play():
         try:
             db["play"][code]
         except:
-            session["notifications"] = [f"🔑 {code} Is Not A valid Key, Please Try Again"]
+            session["notifications"] = [{"title":"Failed","body":f"{code} Is Not A valid Key, Please Try Again","type":"warning","icon":"alert-circle"}]
             return redirect("/play")
         else:
             return redirect(f"/play/{code}")
@@ -867,10 +872,10 @@ def play_code(code):
     players = len(db["play"][code]["users"])
     level = userinfo(username())[0]
     if (players >= 3 and (level == False or level == "boost")) or (players >= 5 and level == "premium") or (players >= 10 and level == "pro") or (players >= 15 and level == "elite"):
-        session["notifications"] = ["👥 There Are No More Spaces For More Players"]
+        session["notifications"] = [{"title":"Failed","body":"There Are No Spaces Left For You","type":"warning","icon":"alert-circle"}]
         return redirect("/")
     if code not in list(db["play"]):
-        session["notifications"] = ["🗝️ Please Enter A Valid Code"]
+        session["notifications"] = [{"title":"Failed","body":f"{code} Is Not A valid Key, Please Try Again","type":"warning","icon":"alert-circle"}]
         return redirect("/play")
     db["play"][code]["users"][username()] = {
         "score":{},
@@ -954,7 +959,7 @@ def play_started(code):
             session["next"] = "False"
     else:
         if len(set) < 4:
-            session["notifications"] = ["You Need More Questions"]
+            session["notifications"] = [{"title":"Failed","body":"You Need More Questions","type":"warning","icon":"alert-circle"}]
             return redirect("/")
         if session.get("stats"):
             session.pop("stats")
@@ -1008,7 +1013,7 @@ def play_end(code):
     if username() == db["play"][code]["host"]:
         del db["play"][code]
     else:
-        session["notifications"] = ["🔐 You Are Not The Host"]
+        session["notifications"] = [{"title":"Failed","body":"You Are Not The Host","type":"warning","icon":"alert-circle"}]
         return redirect("/")
     return redirect("/")
 
@@ -1042,7 +1047,7 @@ def automations():
             else:
                 for j in db[username()]["rules"]:
                     if subject in db[username()]["rules"][j]["subject"]:
-                        session["notifications"] = ["🤖 Automation Already Exists For Subject"]
+                        session["notifications"] = [{"title":"Failed","body":"You Already Have A Rule For This Subject","type":"warning","icon":"alert-circle"}]
                         return redirect("/")
                 db[username()]["rules"][rule_id()] = {
                     "subject":subject,
@@ -1148,9 +1153,9 @@ def group(group):
     if request.method == "POST":
         add_username = request.form["username"]
         if add_username not in db["users"]:
-            session["notifications"] = ["Unable To Find User"]
+            session["notifications"] = [{"title":"Failed","body":"User Does Not Exist","type":"warning","icon":"alert-circle"}]
         elif add_username in db[username()]["groups"][group]["users"]:
-            session["notifications"] = ["User Is Already In Group"]
+            session["notifications"] = [{"title":"Failed","body":"User Is Already In The Group","type":"warning","icon":"alert-circle"}]
         else:
             try:
                 db[username()]["groups"]
@@ -1160,7 +1165,7 @@ def group(group):
                 db[add_username]["added_groups"] = []
             db[add_username]["added_groups"].append([username(),group])
             db[username()]["groups"][group]["users"].append(add_username)
-            session["notifications"] = ["User Added To The Group"]
+            session["notifications"] = [{"title":"Success","body":"User Has Been Added To The Group","type":"success","icon":"checkmark-circle"}]
         return redirect("/group/"+group)
     else:
         sets = {}

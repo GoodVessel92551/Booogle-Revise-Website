@@ -26,9 +26,13 @@
     --black: #000;
     --warn: #ae4c0e;
     --on_warn: #ffeed8;
-    --error: #8c1d18;
-    --on_error: #f9dedc;
-    --error_hover: #483235;
+    --error: #442726;
+    --on_error: #ff99a4;
+    --error_hover: #ffffff1a;
+    --success: #393d1b;
+    --on_success: #6ccb5f;
+    --wanning:#433519;
+    --on_wanning:#fce100;
     --text: #f2f2f2;
     --text2: #141414;
     --text3: #848484;
@@ -229,6 +233,7 @@ html {
 .nav_title {
     color: var(--text);
     font-size: 20px;
+    text-decoration: none;
 }
 
 .nav_pro {
@@ -1573,23 +1578,55 @@ html {
     z-index: 10;
 }
 
+.error_notification{
+    background: var(--error);
+    color: var(--on_error);
+}
+
+.warning_notification{
+    background: var(--wanning);
+    color: var(--on_wanning);
+}
+
+.success_notification{
+    background: var(--success);
+    color: var(--on_success);
+}
+
 .notifications>a {
     height: 50px;
-    background-color: var(--top_green);
     display: block;
     border: none;
     border-radius:var(--main_border_radius);
-    padding: 10px 64px 10px 16px;
+    padding: 10px 128px 10px 16px;
     box-sizing: border-box;
     transition: 0.3s;
     margin-top: 8px;
     position: relative;
+    display: flex;
+    flex-direction: row;
+    gap:12px;
+    align-items:center;
+}
+
+.notifications > a > ion-icon{
+    font-size: 20px;
+
+}
+
+.notifications > a > strong{
+    margin: 0px;
+    color: var(--text);
+    line-height: 30px;
+    font-weight: semi-bold;
 }
 
 .notifications>a>p {
     margin: 0px;
-    color: var(--on_top_green);
+    color: var(--text);
     line-height: 30px;
+    line-height: 30px;
+
 }
 
 .notifications>a>button {
@@ -1614,7 +1651,7 @@ html {
 }
 
 .notifications>a>button>ion-icon {
-    color: var(--on_error);
+    color: var(--text);
     font-size: 18px;
     padding: 4px;
 }

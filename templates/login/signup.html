@@ -17,7 +17,7 @@
     <script rel="preconnect" type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" defer></script>
     <script rel="preconnect" nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js" defer></script>
     <meta name="description" content="Find out what Booogle Revise offers to help you revise">
-    <link href="/static/login.css" type="text/css" rel="stylesheet" />
+    <link href="/static/css/login.css" type="text/css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
@@ -51,7 +51,6 @@
         </div>
     </nav>
     <form method="post" style="max-width: none;" class="features_main">
-        <p style="color:#ffb5b5">This Page Is In Testing <strong>DO NOT USE!</strong></p>
         <h1>Create Your Account</h1>
         <p>Create your Booogle Revise account so you can start using Booogle to help you revise.</p>
         <div class="username">
@@ -66,18 +65,36 @@
         <div>
             <h3>How Did You Find Us</h3>
             <span>
-                <button class="sign_up_option_button" onclick="document.getElementById('mouth').checked = true">Somone Told You <input id="mouth" value="mouth" type="radio" name="how"></button>
-                <button class="sign_up_option_button" onclick="document.getElementById('search').checked = true">Search <input id="search" value="search" type="radio" name="how"></button>
-                <button class="sign_up_option_button" onclick="document.getElementById('replit').checked = true">Replit <input id="replit" value="replit" type="radio" name="how"></button>
-                <button class="sign_up_option_button" onclick="document.getElementById('github').checked = true">Github <input id="github" value="github" type="radio" name="how"></button>
-                <button class="sign_up_option_button" onclick="document.getElementById('webiste').checked = true">A Website <input id="webiste" value="webiste" type="radio" name="how"></button>
-                <button class="sign_up_option_button" onclick="document.getElementById('other').checked = true">Other <input checked id="other" value="other" type="radio" name="how"></button>
+                <label for="mouth" class="sign_up_option_button" onclick="document.getElementById('mouth').checked = true">Someone Told You<input id="mouth" value="mouth" type="radio" name="how"></label>
+                <label class="sign_up_option_button" for="search">
+                    <input id="search" value="search" type="radio" name="how">
+                    Search
+                </label>
+                <label class="sign_up_option_button" for="replit">
+                    <input id="replit" value="replit" type="radio" name="how">
+                    Replit
+                </label>
+                <label class="sign_up_option_button" for="github">
+                    <input id="github" value="github" type="radio" name="how">
+                    Github
+                </label>
+                <label class="sign_up_option_button" for="webiste">
+                    <input id="webiste" value="website" type="radio" name="how">
+                    A Website
+                </label>
+                <label class="sign_up_option_button" for="other">
+                    <input checked id="other" value="other" type="radio" name="how">
+                    Other
+                </label>
             </span>
             <h3>What Role Are You</h3>
             <span>
-                <button class="sign_up_option_button" onclick="document.getElementById('student').checked = true">Student<input value="student" name="role" id="student" type="radio"></button>
-                <button class="sign_up_option_button" onclick="document.getElementById('teacher').checked = true">Teacher<input value="teacher" name="role" id="teacher" type="radio"></button>
-                <button class="sign_up_option_button" onclick="document.getElementById('other_role').checked = true">Other<input checked value="other" name="role" id="other_role" type="radio"></button>
+                <label class="sign_up_option_button" for="student">
+                    <input value="student" name="role" id="student" type="radio">
+                    student
+                </label>
+                <label for="teacher" type="button" class="sign_up_option_button" onclick="document.getElementById('teacher').checked = true">Teacher<input value="teacher" name="role" id="teacher" type="radio"></label>
+                <label for="other_role" type="button" class="sign_up_option_button" onclick="document.getElementById('other_role').checked = true">Other<input checked value="other" name="role" id="other_role" type="radio"></label>
             </span>
         </div>
         <button class="main_button"><ion-icon name="person-add-outline"></ion-icon><span>Create Account</span></button>

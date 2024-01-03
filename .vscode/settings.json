@@ -18,5 +18,8 @@
     "titleBar.inactiveBackground": "#282c3499",
     "titleBar.inactiveForeground": "#e7e7e799"
   },
-  "peacock.color": "282c34"
+  "peacock.color": "282c34",
+  "cSpell.words": [
+    "checkmark"
+  ]
 }
