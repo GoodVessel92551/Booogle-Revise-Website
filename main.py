@@ -648,6 +648,67 @@ def question(name):
         random.shuffle(ans)
     return render_template("question.html",title=name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets()[name],ans=ans,question=question,notifications=notifications,quest_num = current["order"][current["current"]],set=name,total_quests=len(current["order"]),owner=username())
 
+@app.route("/api/questions",methods=["POST","GET"])
+def api_quest_ans():
+    correct = False
+    data = request.get_json()
+    print(data)
+    owner = data["user"]
+    current = session.get("current")
+    set = user_data_db.find_one({"username":owner,"type":"user_data"})["data"]["sets"][data["set"]]
+    current_ans = set[data["question"]]["answers"]["ans1"]
+    current["current"] += 1
+    session["current"] = current
+    if data["answer"] == current_ans:
+        session["stats"][str(current["current"])] = {"quest":set[data["question"]]["question"],"correct":True}
+        correct = True
+    else:
+        session["stats"][str(current["current"])] = {"quest":set[data["question"]]["question"],"correct":False}
+    if session.get("current")["current"] == len(session.get("current")["order"]):
+        add_streak()
+        return {"done":True,"answer":current_ans,"correct":correct}
+    quest_num = current["order"][current["current"]]
+    next_quest = set[quest_num]
+
+    ans = []
+    temp = list(current["order"])
+    temp.remove(current["order"][current["current"]])
+    ans.append(set[current["order"][session["current"]["current"]]]["answers"]["ans1"])
+    try:
+        type = set[current["order"][current["current"]]]["type"]
+    except:
+        pass
+    else:
+        ans = []
+        for i in temp:
+            if set[i]["type"] == type:
+                temp.remove(i)
+                ans.append(set[i]["answers"]["ans1"])
+        if len(ans) >= 3:
+            random.shuffle(ans)
+            ans = ans[:2]
+            ans.append(set[current["order"][session["current"]["current"]]]["answers"]["ans1"])
+        else:
+            ans.append(set[current["order"][session["current"]["current"]]]["answers"]["ans1"])
+    while len(ans) < 3:
+        quest = random.choice(temp)
+        temp.remove(quest)
+        ans.append([set[quest]["answers"]["ans1"]])
+    random.shuffle(ans)
+
+    send_data = {
+        "done":False,
+        "correct":correct,
+        "answer":current_ans,
+        "question":next_quest["question"],
+        "answers":{
+            "ans1":ans[0],
+            "ans2":ans[1],
+            "ans3":ans[2]
+        },
+        "quest_num":quest_num
+    }
+    return send_data
 
 @app.route("/finish/questions")
 def finish_questions():
