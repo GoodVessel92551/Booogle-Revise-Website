@@ -24,7 +24,7 @@ compress = Compress(app)
 def home():
     print(login())
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     if session.get("notifications"):
         notifications = session.get("notifications")
         session.pop("notifications")
@@ -72,7 +72,7 @@ def signup():
             return redirect("/")
         how = request.form["how"]
         role = request.form["role"]
-    return render_template("signup.html")
+    return render_template("login/signup.html")
 
 @app.route("/login",methods=["POST","GET"])
 def user_login():
@@ -85,7 +85,7 @@ def user_login():
                 session["token"] = user_token
                 db["B-KEYS"][hash(user_token+os.getenv('salt'))] = username
                 return redirect("/")
-    return render_template("login_account.html")
+    return render_template("login/login_account.html")
 
 @app.route("/mobile")
 def mobile():
@@ -151,7 +151,7 @@ def community():
 @app.route("/recommended")
 def recommended():
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     recommended = recommend(db[username()]["sets"])
     recommended_sets = {}
     notifications = []
@@ -164,7 +164,7 @@ def recommended():
 @app.route("/community/update")
 def community_update():
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     sets = list(db["sets"])
     for i in range(len(sets)):
         db[sets[i][0]]["sets"][sets[i][1]]["settings"]["subject"] = subject(sets[i][1])
@@ -173,7 +173,7 @@ def community_update():
 @app.route("/publish/<name>")
 def publish(name):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     level = userinfo(username())[0]
     amount = 0
     sets_list = global_data_db.find_one({"name":"sets"})["data"]
@@ -210,7 +210,7 @@ def publish(name):
 @app.route("/download/@<user_name>/<name>")
 def download(user_name,name):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     amount = 0
     if name in db[username()]["sets"].keys():
         for i in db[username()]["sets"].keys():
@@ -234,7 +234,7 @@ def download(user_name,name):
 @app.route("/delete/@<user_name>/<name>")
 def delete2(user_name,name):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     if username() == user_name or "GoodVessel92551" == username():
         for i in db["sets"]:
             if user_name in i and name in i:
@@ -249,13 +249,13 @@ def delete2(user_name,name):
 def falshcards2(username,name):
     notifications = []
     settings = {"interface":{"theme":"green","cards":"straight"},"accessibility":{"fontSize":"normal","font":"roboto"}}
-    return render_template("cards.html",streak=0,title=name,settings=settings,name="Guest",boosting=False,profile_pic="https://booogle-revise-2.goodvessel92551.repl.co/static/logo.png",sets=make_dict(db[username]["sets"])[name],notifications=notifications)
+    return render_template("tools/cards.html",streak=0,title=name,settings=settings,name="Guest",boosting=False,profile_pic="https://booogle-revise-2.goodvessel92551.repl.co/static/logo.png",sets=make_dict(db[username]["sets"])[name],notifications=notifications)
 
 @app.route("/fill/@<username>/<name>")
 def fills(username,name):
     notifications = []
     settings = {"interface":{"theme":"green","cards":"straight"},"accessibility":{"fontSize":"normal","font":"roboto"}}
-    return render_template("fill.html",streak=0,title=name,name="Guest",settings=settings,boosting=False,profile_pic="https://booogle-revise-2.goodvessel92551.repl.co/static/logo.png",set=make_dict(db[username]["sets"])[name],notifications=notifications)
+    return render_template("tools/fill.html",streak=0,title=name,name="Guest",settings=settings,boosting=False,profile_pic="https://booogle-revise-2.goodvessel92551.repl.co/static/logo.png",set=make_dict(db[username]["sets"])[name],notifications=notifications)
 
 @app.route("/questions/@<username>/<name>",methods=["POST","GET"])
 def questions(username,name):
@@ -270,7 +270,7 @@ def questions(username,name):
     session["current"] = {"current":0,"order":order}
     ans = []
     if session.get("current")["current"] == len(session.get("current")["order"]):
-        return render_template("finish.html",settings=settings,name="Guest",boosting=False,profile_pic="https://booogle-revise-2.goodvessel92551.repl.co/static/logo.png",notifications=notifications)
+        return render_template("tools/finish.html",settings=settings,name="Guest",boosting=False,profile_pic="https://booogle-revise-2.goodvessel92551.repl.co/static/logo.png",notifications=notifications)
     current = session.get("current")
     question = set[current["order"][current["current"]]]["question"]
     amount_needed = 3-len(set[current["order"][session["current"]["current"]]]["answers"])
@@ -302,12 +302,12 @@ def questions(username,name):
             temp.remove(quest)
             ans.append(set[quest]["answers"][random.choice(list(set[quest]["answers"].keys()))])
         random.shuffle(ans)
-    return render_template("question.html",streak=0,title=name,settings=settings,name="Guest",boosting=False,profile_pic="https://booogle-revise-2.goodvessel92551.repl.co/static/logo.png",sets=make_dict(db[username]["sets"])[name],ans=ans,question=question,notifications=notifications,owner=username,total_quests=len(current["order"]),set=name,quest_num = current["order"][current["current"]])
+    return render_template("tools/question.html",streak=0,title=name,settings=settings,name="Guest",boosting=False,profile_pic="https://booogle-revise-2.goodvessel92551.repl.co/static/logo.png",sets=make_dict(db[username]["sets"])[name],ans=ans,question=question,notifications=notifications,owner=username,total_quests=len(current["order"]),set=name,quest_num = current["order"][current["current"]])
 
 @app.route("/new/folder",methods=["POST","GET"])
 def new_folder():
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     notifications = []
     if request.method == "POST":
         title = emoji.demojize(request.form["title"]).strip()
@@ -329,23 +329,23 @@ def new_folder():
                     "sets":[]
                 }
             return redirect("/")
-    return render_template("new_folder.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+    return render_template("folders/new_folder.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/folder/<folder>",methods=["POST","GET"])
 def folder(folder):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     notifications = []
     sets = {}
     names = db[username()]["folders"][folder]["sets"]
     for i in names:
         sets[i] = db[username()]["sets"][i]
-    return render_template("folder.html",sets=make_dict(sets),name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,title=db[username()]["folders"][folder]["name"])
+    return render_template("folders/folder.html",sets=make_dict(sets),name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,title=db[username()]["folders"][folder]["name"])
 
 @app.route("/add/folder/<folder>")
 def add_folder(folder):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     notifications = []
     sets = get_sets()
     return render_template("folder_add.html",sets=sets,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,folder_title=db[username()]["folders"][folder]["name"])
@@ -353,7 +353,7 @@ def add_folder(folder):
 @app.route("/edit/folder/<folder>",methods=["POST","GET"])
 def edit_folder(folder):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     notifications = []
     sets = {}
     if request.method == "POST":
@@ -373,12 +373,12 @@ def edit_folder(folder):
         names = db[username()]["folders"][folder]["sets"]
         for i in names:
             sets[i] = db[username()]["sets"][i]
-    return render_template("edit_folder.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,folder=make_dict_folder(db[username()]["folders"])[folder])
+    return render_template("folders/edit_folder.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,folder=make_dict_folder(db[username()]["folders"])[folder])
 
 @app.route("/remove/folder/<folder>")
 def remove_folder(folder):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     for i in db[username()]["folders"][folder]["sets"]:
         db[username()]["sets"][i]["settings"]["folder"] = False
     del db[username()]["folders"][folder]
@@ -387,7 +387,7 @@ def remove_folder(folder):
 @app.route("/remove/folder/<folder>/<name>")
 def remove_folder_sey(folder,name):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     db[username()]["folders"][folder]["sets"].remove(name)
     db[username()]["sets"][name]["settings"]["folder"] = False
     return redirect("/folder/"+folder)
@@ -395,7 +395,7 @@ def remove_folder_sey(folder,name):
 @app.route("/add/folder/<folder>/<name>")
 def add_folder_set(folder,name):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     if name in list(db[username()]["folders"][folder]["sets"]):
         return "Error"
     else:
@@ -406,7 +406,7 @@ def add_folder_set(folder,name):
 @app.route("/new",methods=["POST","GET"])
 def new():
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     notifications = []
     level = userinfo(username())[0]
     if request.method == "POST":
@@ -457,12 +457,12 @@ def new():
             title = ""
             desc = ""
             background = "animals"
-        return render_template("new.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),title=title,desc=desc,background=background,notifications=notifications)
+        return render_template("sets/new.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),title=title,desc=desc,background=background,notifications=notifications)
 
 @app.route("/new/question",methods=["POST","GET"])
 def new_question():
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     notifications = []
     if request.method == "POST":
         level = userinfo(username())[0]
@@ -499,12 +499,12 @@ def new_question():
         length = True
         quest = session.get("quest_len")
         session.pop("quest_len")
-    return render_template("new_question.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),quest=quest,ans=ans,rude=rude,len=length,notifications=notifications)
+    return render_template("sets/new_question.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),quest=quest,ans=ans,rude=rude,len=length,notifications=notifications)
 
 @app.route("/edit/<name>",methods=["POST","GET"])
 def edit(name):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     notifications = []
     if request.method == "POST":
         for i in range(len(list(db["sets"]))):
@@ -564,11 +564,11 @@ def edit(name):
                         db[username()]["sets"][emoji.demojize(request.form["title"])][f"Q{i}"]["status"] = mod(quest)        
         session["notifications"] = [f"Success! ✅ You Have Edited: {name}"]
         return redirect("/")
-    return render_template("edit.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets()[name],notifications=notifications)
+    return render_template("sets/edit.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets()[name],notifications=notifications)
 
 @app.route("/sw.js", methods=["GET"])
 def sw():
-    return current_app.send_static_file("sw.js")
+    return current_app.send_static_file("javascript/sw.js")
 
 @app.route("/robots.txt", methods=["GET"])
 def robots():
@@ -589,15 +589,15 @@ def offline_cards():
 @app.route("/flashcards/<name>")
 def flashcards(name):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     notifications = []
     add_streak()
-    return render_template("cards.html",title=name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets()[name],notifications=notifications)
+    return render_template("tools/cards.html",title=name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets()[name],notifications=notifications)
 
 @app.route("/questions/<name>",methods=["POST","GET"])
 def question(name):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     notifications = []
     set = get_sets()[name]
     if len(set) < 4:
@@ -614,7 +614,7 @@ def question(name):
     session["current"] = {"current":0,"order":order}
     ans = []
     if session.get("current")["current"] == len(session.get("current")["order"]):
-        return render_template("finish.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,stats=session["stats"])
+        return render_template("tools/finish.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,stats=session["stats"])
     current = session.get("current")
     question = set[current["order"][current["current"]]]["question"]
     amount_needed = 3-len(set[current["order"][session["current"]["current"]]]["answers"])
@@ -646,7 +646,7 @@ def question(name):
             temp.remove(quest)
             ans.append(set[quest]["answers"][random.choice(list(set[quest]["answers"].keys()))])
         random.shuffle(ans)
-    return render_template("question.html",title=name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets()[name],ans=ans,question=question,notifications=notifications,quest_num = current["order"][current["current"]],set=name,total_quests=len(current["order"]),owner=username())
+    return render_template("tools/question.html",title=name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets()[name],ans=ans,question=question,notifications=notifications,quest_num = current["order"][current["current"]],set=name,total_quests=len(current["order"]),owner=username())
 
 @app.route("/api/questions",methods=["POST","GET"])
 def api_quest_ans():
@@ -712,12 +712,12 @@ def api_quest_ans():
 
 @app.route("/finish/questions")
 def finish_questions():
-    return render_template("finish.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=[],stats=session["stats"])
+    return render_template("tools/finish.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=[],stats=session["stats"])
 
 @app.route("/delete/<name>")
 def delete(name):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     for i in db["sets"]:
         if name in i and username() in i:
             db["sets"].remove(i)
@@ -752,17 +752,17 @@ def upgrade():
 @app.route("/finish")
 def finish():
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     notifications = []
-    return render_template("finish_flash.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+    return render_template("tools/finish_flash.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/fill/<name>")
 def fill(name):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     notifications = []
     add_streak()
-    return render_template("fill.html",title=name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),set=get_sets()[name],notifications=notifications)
+    return render_template("tools/fill.html",title=name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),set=get_sets()[name],notifications=notifications)
 
 @app.errorhandler(500)
 def server_error(e):
@@ -777,7 +777,7 @@ def page_not_found(e):
 @app.route("/test/<set>",methods=["POST","GET"])
 def test_mode(set):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     notifications = []
     questions = []
     quest_set = {}
@@ -793,7 +793,7 @@ def test_mode(set):
                 session["stats"][str(i)] = {"quest":quest,"correct":True}
             else:
                 session["stats"][str(i)] = {"quest":quest,"correct":False}
-        return render_template("finish.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,stats=session["stats"])
+        return render_template("tools/finish.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,stats=session["stats"])
     else:
         for i in range(1,len(db[username()]["sets"][set])):
             questions = []
@@ -830,12 +830,12 @@ def test_mode(set):
             if session.get("stats"):
                 session.pop("stats")
             session["stats"] = {}
-    return render_template("test_mode.html",title=set,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),set=get_sets()[set],notifications=notifications,quest_set=quest_set)
+    return render_template("tools/test_mode.html",title=set,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),set=get_sets()[set],notifications=notifications,quest_set=quest_set)
 
 @app.route("/play", methods=["POST","GET"])
 def play():
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     if request.method == "POST":
         code = request.form["code"]
         try:
@@ -850,19 +850,19 @@ def play():
         session.pop("notifications")
     else:
         notifications = []
-    return render_template("play.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+    return render_template("play/play.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/play/stats/<code>")
 def play_sets(code):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     notifications = []
-    return render_template("play_stats.html",code=code,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+    return render_template("play/play_stats.html",code=code,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/play/<code>")
 def play_code(code):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     notifications = []
     players = len(db["play"][code]["users"])
     level = userinfo(username())[0]
@@ -876,31 +876,31 @@ def play_code(code):
         "score":{},
         "user_image":userinfo(username())[1]
     }
-    return render_template("play_hub.html",code=code,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+    return render_template("play/play_hub.html",code=code,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/play/leave/<code>")
 def leave_code(code):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     db["play"][code]["users"].pop(username())
     return redirect("/")
 
 @app.route("/host")
 def host():
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     notifications = []
     for i in db["play"]:
         if db["play"][i]["host"] == username():
             del db["play"][i]
     code = random.randint(100000,999999)
-    return render_template("host.html",code=code,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,sets=get_sets())
+    return render_template("play/host.html",code=code,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,sets=get_sets())
 
 
 @app.route("/play/host/<code>/<set>")
 def play_host(code,set):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     notifications = []
     db["play"][code] = {
         "host":username(),
@@ -908,12 +908,12 @@ def play_host(code,set):
         "started":False,
         "set":set
     }
-    return render_template("play_host.html",code=code,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+    return render_template("play/play_host.html",code=code,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/play/start/<code>")
 def play_start(code):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     notifications = []
     if db["play"][code]["host"] == username():
         db["play"][code]["started"] = True
@@ -924,7 +924,7 @@ def play_start(code):
 @app.route("/play/started/<code>",methods=["POST","GET"])
 def play_started(code):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     name = db["play"][code]["set"]
     host = db["play"][code]["host"]
     notifications = []
@@ -932,7 +932,7 @@ def play_started(code):
     if request.method == "POST":
         current = session.get("current")
         if session.get("current")["current"] == len(session.get("current")["order"]):
-            return render_template("play_finish.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,stats=session["stats"])
+            return render_template("play/play_finish.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,stats=session["stats"])
         if session.get("next") == "False":
             answer = request.form["button"]
             answers = []
@@ -967,7 +967,7 @@ def play_started(code):
         session["current"] = {"current":0,"order":order}
     ans = []
     if session.get("current")["current"] == len(session.get("current")["order"]):
-        return render_template("play_finish.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,stats=session["stats"])
+        return render_template("play/play_finish.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,stats=session["stats"])
     current = session.get("current")
     question = set[current["order"][current["current"]]]["question"]
     amount_needed = 3-len(set[current["order"][session["current"]["current"]]]["answers"])
@@ -999,12 +999,12 @@ def play_started(code):
             temp.remove(quest)
             ans.append(set[quest]["answers"][random.choice(list(set[quest]["answers"].keys()))])
         random.shuffle(ans)
-    return render_template("question.html",title=name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=make_dict(db[host]["sets"])[name],ans=ans,question=question,notifications=notifications)
+    return render_template("tools/question.html",title=name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=make_dict(db[host]["sets"])[name],ans=ans,question=question,notifications=notifications)
 
 @app.route("/play/end/<code>")
 def play_end(code):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     if username() == db["play"][code]["host"]:
         del db["play"][code]
     else:
@@ -1015,21 +1015,21 @@ def play_end(code):
 @app.route("/api/play/started/<code>")
 def play_started_api(code):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     started = {"started":db["play"][code]["started"]}
     return started
 
 @app.route("/api/play/leaderboard/<code>")
 def play_leaderboard_api(code):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     leaderboard = play_dict(db["play"][code]["users"])
     return leaderboard
 
 @app.route("/automations",methods=["GET","POST"])
 def automations():
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     if request.method == "POST":
         db[username()]["rules"] = {}
         i = 0
@@ -1066,7 +1066,7 @@ def test():
 @app.route("/code")
 def user_code():
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     try:
         db[username()]["code"]
     except:
@@ -1084,28 +1084,28 @@ def ping():
 @app.route("/schedule")
 def schedule():
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     notifications = []
     return render_template("schedule.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/teach")
 def teach():
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     notifications = []
     return render_template("teach/teach.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/teach/classroom/<id>")
 def classroom(id):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     notifications = []
     return render_template("teach/classroom.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/new/group",methods=["GET","POST"])
 def new_group():
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     if request.method == "POST":
         title = request.form["title"]
         desc = request.form["desc"]
@@ -1131,7 +1131,7 @@ def new_group():
 @app.route("/edit/group/<group>")
 def edit_group(group):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     group_info = make_dict_group(db[username()]["groups"][group])
     notifications = []
     return render_template("groups/edit_group.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),group_info=group_info,notifications=notifications)
@@ -1139,7 +1139,7 @@ def edit_group(group):
 @app.route("/group/<group>",methods=["POST","GET"])
 def group(group):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     if session.get("notifications"):
         notifications = session.get("notifications")
         session.pop("notifications")
@@ -1180,7 +1180,7 @@ def group(group):
 @app.route("/add/group/<group>/<name>")
 def add_group_set(group,name):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     if name in list(db[username()]["groups"][group]["sets"]):
         return "Error"
     else:
@@ -1190,14 +1190,14 @@ def add_group_set(group,name):
 @app.route("/remove/group/<group>")
 def remove_group(group):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     del db[username()]["groups"][group]
     return redirect("/")
 
 @app.route("/remove/group/<group>/<name>")
 def remove_group_user(group,name):
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     owner = db[username()]["groups"][group]["settings"]["Owner"]
     db[owner]["groups"][group]["users"].remove(name)
     for i in range(len(db[name]["added_groups"])):
@@ -1214,7 +1214,7 @@ def api_smartsubject():
 @app.route("/settings",methods=["POST","GET"])
 def settings():
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login/login.html")
     notifications = {}
     if request.method == "POST":
         theme = request.form["theme"]
@@ -1224,18 +1224,18 @@ def settings():
 @app.route("/focus")
 def focuse():
     if login() == False:
-        return render_template("login.html")
+        return render_template("login/login.html")
     notifications = {}
     return render_template("focus.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/features")
 def about():
-    return render_template("about.html")
+    return render_template("login/about.html")
 
 @app.route("/streaks")
 def streaks():
     if login() == False:
-        return redner_template("login.html")
+        return render_template("login/login.html")
     notifications = {}
     return render_template("focus.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 

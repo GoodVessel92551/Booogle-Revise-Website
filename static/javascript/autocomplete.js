@@ -1,5 +1,5 @@
 var spelling_words = [];
-fetch("/static/text.txt")
+fetch("/static/resources/text.txt")
   .then((response) => response.text())
   .then((data) => {
     var words = data.toLowerCase().match(/\b\w+\b/g);
@@ -18,7 +18,7 @@ fetch("/static/text.txt")
   })
   .catch((error) => console.error(error));
 
-fetch("/static/words.txt")
+fetch("/static/resources/words.txt")
    
   .then((response) => response.text())
   .then((data) => {
