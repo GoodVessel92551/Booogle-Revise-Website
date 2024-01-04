@@ -7,10 +7,10 @@ from collections import Counter
 from flask import session
 from pymongo import MongoClient
 from dotenv import load_dotenv
-from booogle_ai_tools.moderation import moderation
-from booogle_ai_tools.smartmatch import smartmatch
-from booogle_ai_tools.smartsubject import smartsubject
-from booogle_ai_tools.username_mod import username_mod
+#from booogle_ai_tools.moderation import moderation
+#from booogle_ai_tools.smartmatch import smartmatch
+#from booogle_ai_tools.smartsubject import smartsubject
+#from booogle_ai_tools.username_mod import username_mod
 import hashlib
 
 load_dotenv()
@@ -162,13 +162,16 @@ def leaderboard_dict(dictionary):
     #return generation.prompt(prompt)
 
 def smart(text):
-    return smartmatch.text(text)
+    #return smartmatch.text(text)
+    return 0
 
 def subject(text):
-    return smartsubject.text(text)
+    #return smartsubject.text(text)
+    return "Other"
 
 def mod(text):
-    ans = moderation.prompt(text)
+    #ans = moderation.prompt(text)
+    ans = 0
     if "?" not in text and ans == "2":
         ans = 0
     if profanity.contains_profanity(text):
