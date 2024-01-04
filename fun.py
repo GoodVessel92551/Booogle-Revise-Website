@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 from booogle_ai_tools.moderation import moderation
 from booogle_ai_tools.smartmatch import smartmatch
 from booogle_ai_tools.smartsubject import smartsubject
+from booogle_ai_tools.username_mod import username_mod
 import hashlib
 
 load_dotenv()
