@@ -2,4 +2,12 @@
     "rewrites": [
       { "source": "/(.*)", "destination": "/api/main" }
     ]
+
+},
+{
+    "functions": {
+      "api/**": {
+        "excludeFiles": "{.next,*.cache,node_modules,public,app}/**"
+      }
+    }
   }

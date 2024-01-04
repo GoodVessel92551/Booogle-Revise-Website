@@ -5,11 +5,11 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.svm import LinearSVC
 
 try:
-    with open("booogle_ai_tools/smartsubject/smartsubject_pkl.pkl", "rb") as f:
+    with open("api/booogle_ai_tools/smartsubject/smartsubject_pkl.pkl", "rb") as f:
         clf = pickle.load(f)
         vectorizer = pickle.load(f)
 except FileNotFoundError:
-    with open("booogle_ai_tools/smartsubject/smartsubject_csv.csv", "r") as f:
+    with open("api/booogle_ai_tools/smartsubject/smartsubject_csv.csv", "r") as f:
         reader = csv.DictReader(f)
         data = list(reader)
     texts = []
