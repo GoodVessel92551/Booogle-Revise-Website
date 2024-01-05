@@ -5,11 +5,11 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.svm import LinearSVC
 
 try:
-    with open("api/booogle_ai_tools/username_mod/username_mod_pkl.pkl", "rb") as f:
+    with open("booogle_ai_tools/username_mod/username_mod_pkl.pkl", "rb") as f:
         clf = pickle.load(f)
         vectorizer = pickle.load(f)
 except:
-    with open("api/booogle_ai_tools/username_mod/username_mod_csv.csv", "r") as f:
+    with open("booogle_ai_tools/username_mod/username_mod_csv.csv", "r") as f:
         reader = csv.DictReader(f)
         data = list(reader)
     texts = []
@@ -24,7 +24,7 @@ except:
     clf = LinearSVC()
     clf.fit(X, labels)
 
-    with open("api/booogle_ai_tools/username_mod/username_mod_pkl.pkl", "wb") as f:
+    with open("booogle_ai_tools/username_mod/username_mod_pkl.pkl", "wb") as f:
         pickle.dump(clf, f)
         pickle.dump(vectorizer, f)
 

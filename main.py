@@ -47,7 +47,7 @@ def signup():
         password = hash_value(request.form["password"])
         pattern = re.compile('^[a-zA-Z0-9]+$')
         usernames = global_data_db.find_one({"name":"usernames"})
-        if username not in usernames["data"] and len(username) < 15 and bool(pattern.match(username)) and request.form["password"] == request.form["repeat_password"]:
+        if username not in usernames["data"] and len(username) < 15 and len(username) > 4 and bool(pattern.match(username)) and request.form["password"] == request.form["repeat_password"] and len(request.form["password"]) >= 8 and len(request.form["password"]) <= 30:
             print("correct")
             user_data = {"username":username,"type":"user_data","data":{
                 "streak":{"streak":0,"time":str(datetime.now())},
@@ -70,9 +70,24 @@ def signup():
             update = {"$push":{"data":username}}
             global_data_db.update_one(query, update)
             return redirect("/")
+        else:
+            if username in usernames["data"]:
+                error = "Username Already Exists"
+            elif len(username) > 15 or len(username) < 4:
+                error = "Username Too Long Or Too Short"
+            elif bool(pattern.match(username)) == False:
+                error = "Username Contains Special Characters"
+            elif request.form["password"] != request.form["repeat_password"]:
+                error = "Passwords Do Not Match"
+            elif len(request.form["password"]) < 8 or len(request.form["password"]) > 30:
+                error = "Password Too Long Or Too Short"
+            else:
+                error = "Unknown Error Please Try Again"
         how = request.form["how"]
         role = request.form["role"]
-    return render_template("login/signup.html")
+    else:
+        error = False
+    return render_template("login/signup.html",error=error)
 
 @app.route("/login",methods=["POST","GET"])
 def user_login():
@@ -81,7 +96,6 @@ def user_login():
         password = hash_value(request.form["password"])
         usernames = global_data_db.find_one({"name":"usernames"})
         if username in usernames["data"]:
-            print("correct")
             user_data = user_data_db.find_one({"username":username,"type":"user_data"})
             if password == user_data["data"]["password"]:
                 user_token = gen_user_token()
@@ -90,7 +104,13 @@ def user_login():
                 update = {"$set":{f"data.{hash_value(user_token)}":username}}
                 global_data_db.update_one(query, update)
                 return redirect("/")
-    return render_template("login/login_account.html")
+            else:
+                error = "Incorrect Password"
+        else:
+            error = "Username Does Not Exist"
+    else:
+        error = False
+    return render_template("login/login_account.html",error=error)
 
 @app.route("/mobile")
 def mobile():
@@ -782,12 +802,12 @@ def fill(name):
 
 @app.errorhandler(500)
 def server_error(e):
-    session["notifications"] = [{"title":"Error","body":"There Was An Error Try Again Later","type":"error","icon":"close-circle"}]
+    session["notifications"] = [{"title":"Error 500","body":"There Was An Error Try Again Later","type":"error","icon":"close-circle"}]
     return redirect("/")
 
 @app.errorhandler(404)
 def page_not_found(e):
-    session["notifications"] = [{"title":"Error","body":"We Were Unable To Find The Page That You Were Looking For","type":"error","icon":"close-circle"}]
+    session["notifications"] = [{"title":"Error 404","body":"We Were Unable To Find The Page That You Were Looking For","type":"error","icon":"close-circle"}]
     return redirect("/")
 
 @app.route("/test/<set>",methods=["POST","GET"])
@@ -1255,4 +1275,4 @@ def streaks():
     notifications = {}
     return render_template("focus.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
-app.run(host="0.0.0.0",port=8080,debug=True)
+app.run(host='0.0.0.0', port=80,debug=False)

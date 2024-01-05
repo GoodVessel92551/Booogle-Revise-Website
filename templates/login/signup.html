@@ -52,10 +52,11 @@
     </nav>
     <form method="post" style="max-width: none;" class="features_main">
         <h1>Create Your Account</h1>
+        <div id="error" class="error"><ion-icon name="close-circle"></ion-icon><strong>Error</strong><p>{{error}}</p></div>
         <p>Create your Booogle Revise account so you can start using Booogle to help you revise.</p>
         <div class="username">
             <h3>Username</h3>
-            <input type="text" name="username" class="sign_up_input" id="username" placeholder="Username">
+            <input required pattern="[a-zA-Z0-9]+$" type="text" name="username" class="sign_up_input" id="username" placeholder="Username">
         </div>
         <div class="password">
             <h3>Password</h3>
@@ -101,6 +102,10 @@
     </form>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3B95SWPDXZ"></script>
     <script>
+        var error = {{error|tojson}}
+        if (error != false){
+            document.getElementById("error").style.display = "flex";
+        }
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());

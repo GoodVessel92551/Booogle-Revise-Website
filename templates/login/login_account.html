@@ -52,6 +52,7 @@
     </nav>
     <form method="post" style="max-width: none;" class="features_main">
         <h1>Login</h1>
+        <div id="error" class="error"><ion-icon name="close-circle"></ion-icon><strong>Error</strong><p>{{error}}</p></div>
         <p>Login with your Booogle Revise account to view your sets.</p>
         <div class="username">
             <h3>Username</h3>
@@ -65,6 +66,10 @@
     </form>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3B95SWPDXZ"></script>
     <script>
+        var error = {{error|tojson}}
+        if (error != false){
+            document.getElementById("error").style.display = "flex";
+        }
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());

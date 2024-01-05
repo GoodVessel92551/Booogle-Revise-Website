@@ -3,7 +3,7 @@ import csv
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.svm import LinearSVC
 
-with open("api/booogle_ai_tools/moderation/moderation_pkl.pkl", "rb") as f:
+with open("booogle_ai_tools/moderation/moderation_pkl.pkl", "rb") as f:
     clf = pickle.load(f)
     vectorizer = pickle.load(f)
 

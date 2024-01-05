@@ -40,6 +40,11 @@
     --main_border_radius:16px;
 }
 
+@keyframes fade_in{
+    from{opacity:0;transform:translateY(100%) scale(0.9);}
+}
+
+
 
 .top_menu {
     z-index: 100;
@@ -448,6 +453,7 @@ html {
     overflow-x: scroll;
     padding: 0px;
     padding-bottom: 8px;
+
 }
 
 .home_sets > set, .home_sets > a {
@@ -1574,7 +1580,7 @@ html {
 .notifications {
     position: fixed;
     bottom: 16px;
-    right: 16px;
+    right: 76px;
     z-index: 10;
 }
 
@@ -1611,7 +1617,6 @@ html {
 
 .notifications > a > ion-icon{
     font-size: 20px;
-
 }
 
 .notifications > a > strong{
