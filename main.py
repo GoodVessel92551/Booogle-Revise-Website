@@ -1275,4 +1275,4 @@ def streaks():
     notifications = {}
     return render_template("focus.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
-app.run(host='0.0.0.0', port=80,debug=False)
+app.run(host='0.0.0.0', port=8080,debug=False)
