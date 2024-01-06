@@ -2292,15 +2292,12 @@ html {
 }
 
 .play_code {
-    width: 50%;
+    width: 70%;
     min-width: 300px;
-    top: 256px;
-    left: 50%;
-    transform: translateX(-50%);
-    position: absolute;
     display:flex;
     gap:16px;
     justify-content: center;
+    margin:0px auto;
 }
 
 .play_code>input {
@@ -2312,10 +2309,6 @@ html {
 
 
 .play_code_h2 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     font-size: 80px;
     color: var(--text);
     margin: 0px;
@@ -2340,7 +2333,7 @@ html {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 50px;
+    font-size: 32px;
     color: var(--text);
     margin: 0px;
     width: 100%;
@@ -2349,7 +2342,7 @@ html {
 
 .waiting_for {
     position: absolute;
-    top: calc(50% + 70px);
+    top: calc(50% + 60px);
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 16px;
@@ -2357,6 +2350,7 @@ html {
     margin: 0px;
     width: 100%;
     text-align: center;
+    max-width: 500px;
 }
 
 .leaderboard_play {
@@ -3668,14 +3662,13 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .create_new_play > a{
     color:var(--text);
-    font-weight:bold;
     cursor:pointer;
-    text-decoration:none;
+    text-decoration:underline;
     transition:.3s filter;
 }
 
 .create_new_play > a:hover{
-    filter:brightness(90%);
+    text-decoration:none;
 }
 
 .loader{
@@ -3850,4 +3843,26 @@ input[type="number"]::-webkit-outer-spin-button {
     gap:8px;
     color:var(--text);
     margin-left:auto;
+}
+
+.play_svgs{
+    margin-top:132px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height:340px;
+}
+
+.play_svgs_play{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.play_title{
+    color:var(--text);
+    text-align: center;
+    margin-bottom: 32px;
 }

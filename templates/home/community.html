@@ -13,7 +13,7 @@
         <ion-icon name="options-outline"></ion-icon>
     </div>
     <input type="text" autocomplete="off" placeholder="Search" class="search" id="search">
-      <div class="search_subject" id="search_subject">Veiw Subject Sets</div>
+      <div class="search_subject" id="search_subject">View Subject Sets</div>
     <div id="search_filter_container" class="search_filter_container">
         <strong class="search_filters_title">Filters</strong>
         <p>Customize What Sets That You See. (Not Functional)</p>
@@ -246,7 +246,7 @@
             var data = {
                 "text": query
             }
-            var url = "https://revise.booogle.app/api/smartsubject"
+            var url = "/api/smartsubject"
             fetch(url, {
                 method: 'POST',
                 headers: {

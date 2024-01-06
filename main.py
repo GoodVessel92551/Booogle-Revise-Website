@@ -874,9 +874,8 @@ def play():
         return render_template("login/login.html")
     if request.method == "POST":
         code = request.form["code"]
-        try:
-            db["play"][code]
-        except:
+        codes = global_data_db.find_one({"name":"play"})["data"]
+        if code not in codes:
             session["notifications"] = [{"title":"Failed","body":f"{code} Is Not A valid Key, Please Try Again","type":"warning","icon":"alert-circle"}]
             return redirect("/play")
         else:
@@ -900,15 +899,18 @@ def play_code(code):
     if login() == False:
         return render_template("login/login.html")
     notifications = []
-    players = len(db["play"][code]["users"])
+    codes = global_data_db.find_one({"name":"play"})["data"]
+    play_info = codes[code]
+    players = len(play_info["users"])
     level = userinfo(username())[0]
     if (players >= 3 and (level == False or level == "boost")) or (players >= 5 and level == "premium") or (players >= 10 and level == "pro") or (players >= 15 and level == "elite"):
         session["notifications"] = [{"title":"Failed","body":"There Are No Spaces Left For You","type":"warning","icon":"alert-circle"}]
+        session["notifications"] = [{"title":"Failed","body":f"{code} Is Not A valid Key, Please Try Again","type":"warning","icon":"alert-circle"}]
         return redirect("/")
-    if code not in list(db["play"]):
+    if code not in list(codes):
         session["notifications"] = [{"title":"Failed","body":f"{code} Is Not A valid Key, Please Try Again","type":"warning","icon":"alert-circle"}]
         return redirect("/play")
-    db["play"][code]["users"][username()] = {
+    play_info["users"][username()] = {
         "score":{},
         "user_image":userinfo(username())[1]
     }
@@ -926,9 +928,12 @@ def host():
     if login() == False:
         return render_template("login/login.html")
     notifications = []
-    for i in db["play"]:
-        if db["play"][i]["host"] == username():
-            del db["play"][i]
+    play = global_data_db.find_one({"name":"play"})["data"]
+    for i in play:
+        if play[i]["host"] == username():
+            qurry = {"name":"play"}
+            update = {"$unset":{"data."+i:""}}
+            global_data_db.update_one(qurry, update)
     code = random.randint(100000,999999)
     return render_template("play/host.html",code=code,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,sets=get_sets())
 
@@ -938,12 +943,15 @@ def play_host(code,set):
     if login() == False:
         return render_template("login/login.html")
     notifications = []
-    db["play"][code] = {
+    play_data = {
         "host":username(),
         "users":{},
         "started":False,
         "set":set
     }
+    qurry = {"name":"play"}
+    update = {"$set":{"data."+code:play_data}}
+    global_data_db.update_one(qurry, update)
     return render_template("play/play_host.html",code=code,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/play/start/<code>")
@@ -1275,4 +1283,4 @@ def streaks():
     notifications = {}
     return render_template("focus.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
-app.run(host='0.0.0.0', port=8080,debug=False)
+app.run(host='0.0.0.0', port=80,debug=True)
