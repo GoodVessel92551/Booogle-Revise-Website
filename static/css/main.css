@@ -577,7 +577,7 @@ html {
 }
 
 .home_add > ion-icon{
-    transition:.2s;
+    transition:667ms cubic-bezier(0.13, 1.62, 0.59, 1.72),
 }
 
 .home_menu>a {
@@ -585,6 +585,7 @@ html {
     text-decoration: none;
     padding: 4px 8px;
     transition: 0.3s background;
+    
     cursor: pointer;
     display: block;
     border-radius:var(--main_border_radius);
