@@ -6,11 +6,12 @@ import os,random,re
 from datetime import timedelta
 from datetime import datetime
 from flask_compress import Compress
-from pymongo import MongoClient
 from dotenv import load_dotenv
+from pymongo import MongoClient
 
-load_dotenv()
+load_dotenv(override=True, interpolate=False)
 client = MongoClient(os.getenv('mongo_url'))
+
 db = client["Booogle_Revise"]
 global_data_db = db["Global_Data"]
 user_data_db = db["User_Data"]
@@ -910,17 +911,22 @@ def play_code(code):
     if code not in list(codes):
         session["notifications"] = [{"title":"Failed","body":f"{code} Is Not A valid Key, Please Try Again","type":"warning","icon":"alert-circle"}]
         return redirect("/play")
-    play_info["users"][username()] = {
+    play_info = {
         "score":{},
         "user_image":userinfo(username())[1]
     }
+    query = {"name":"play"}
+    update = {"$set":{"data."+code+".users":play_info}}
+    global_data_db.update_one(query, update)
     return render_template("play/play_hub.html",code=code,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/play/leave/<code>")
 def leave_code(code):
     if login() == False:
         return render_template("login/login.html")
-    db["play"][code]["users"].pop(username())
+    query = {"name":"play"}
+    update = {"$unset":{"data."+code+".users."+username():""}}
+    global_data_db.update_one(query, update)
     return redirect("/")
 
 @app.route("/host")
@@ -931,9 +937,9 @@ def host():
     play = global_data_db.find_one({"name":"play"})["data"]
     for i in play:
         if play[i]["host"] == username():
-            qurry = {"name":"play"}
+            query = {"name":"play"}
             update = {"$unset":{"data."+i:""}}
-            global_data_db.update_one(qurry, update)
+            global_data_db.update_one(query, update)
     code = random.randint(100000,999999)
     return render_template("play/host.html",code=code,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,sets=get_sets())
 
@@ -949,9 +955,9 @@ def play_host(code,set):
         "started":False,
         "set":set
     }
-    qurry = {"name":"play"}
+    query = {"name":"play"}
     update = {"$set":{"data."+code:play_data}}
-    global_data_db.update_one(qurry, update)
+    global_data_db.update_one(query, update)
     return render_template("play/play_host.html",code=code,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/play/start/<code>")
@@ -959,9 +965,13 @@ def play_start(code):
     if login() == False:
         return render_template("login/login.html")
     notifications = []
-    if db["play"][code]["host"] == username():
-        db["play"][code]["started"] = True
-        return render_template("play_start.html",quests=len(db[db["play"][code]["host"]]["sets"][db["play"][code]["set"]]),users=play_dict(db["play"][code]["users"]),code=code,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+    play = global_data_db.find_one({"name":"play"})["data"]
+    set = user_data_db.find_one({"username":play[code]["host"],"type":"user_data"})["data"]["sets"][play[code]["set"]]
+    if play[code]["host"] == username():
+        query = {"name":"play"}
+        update = {"$set":{"data."+code+".started":True}}
+        global_data_db.update_one(query, update)
+        return render_template("play/play_start.html",quests=len(set),users=play[code]["users"],code=code,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
     else:
         return redirect(f"/play/{code}")
 
@@ -969,10 +979,11 @@ def play_start(code):
 def play_started(code):
     if login() == False:
         return render_template("login/login.html")
-    name = db["play"][code]["set"]
-    host = db["play"][code]["host"]
+    play = global_data_db.find_one({"name":"play"})["data"]
+    name = play[code]["set"]
+    host = play[code]["host"]
     notifications = []
-    set = make_dict(db[host]["sets"])[name]
+    set = user_data_db.find_one({"username":host,"type":"user_data"})["data"]["sets"][name]
     if request.method == "POST":
         current = session.get("current")
         if session.get("current")["current"] == len(session.get("current")["order"]):
@@ -989,7 +1000,9 @@ def play_started(code):
             session["current"] = {"current":current["current"]+1,"order":current["order"]}
             quest = set[current["order"][current["current"]]]["question"]
             if answer in answers:
-                db["play"][code]["users"][username()]["score"][str(current["current"]+1)] = {"quest":quest,"correct":True}
+                query = {"name":"play"}
+                update = {"$set":{"data."+code+".users."+username()+".score."+str(current["current"]+1):{"quest":quest,"correct":True}}}
+                global_data_db.update_one(query, update)
                 return render_template("correct.html",title=name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),answer=answer1,notifications=notifications)
             else:
                 db["play"][code]["users"][username()]["score"][str(current["current"]+1)] = {"quest":quest,"correct":False}
@@ -1043,7 +1056,8 @@ def play_started(code):
             temp.remove(quest)
             ans.append(set[quest]["answers"][random.choice(list(set[quest]["answers"].keys()))])
         random.shuffle(ans)
-    return render_template("tools/question.html",title=name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=make_dict(db[host]["sets"])[name],ans=ans,question=question,notifications=notifications)
+        quest_num =len(set)
+    return render_template("tools/question.html",total_quest_num=quest_num,quest_num=quest_num,title=name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),set=set,ans=ans,question=question,notifications=notifications)
 
 @app.route("/play/end/<code>")
 def play_end(code):
@@ -1060,14 +1074,16 @@ def play_end(code):
 def play_started_api(code):
     if login() == False:
         return render_template("login/login.html")
-    started = {"started":db["play"][code]["started"]}
+    play = global_data_db.find_one({"name":"play"})["data"]
+    started = {"started":play[code]["started"]}
     return started
 
 @app.route("/api/play/leaderboard/<code>")
 def play_leaderboard_api(code):
     if login() == False:
         return render_template("login/login.html")
-    leaderboard = play_dict(db["play"][code]["users"])
+    play = global_data_db.find_one({"name":"play"})["data"]
+    leaderboard = play[code]["users"]
     return leaderboard
 
 @app.route("/automations",methods=["GET","POST"])
@@ -1286,5 +1302,9 @@ def streaks():
 @app.route("/updates")
 def updates():
     return render_template("login/update.html")
+
+@app.route("/updates/<title>")
+def view_update(title):
+    return render_template("login/view_update.html",title=title)
 
 app.run(host='0.0.0.0', port=80,debug=True)

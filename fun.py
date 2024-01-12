@@ -13,7 +13,7 @@ from booogle_ai_tools.smartsubject import smartsubject
 from booogle_ai_tools.username_mod import username_mod
 import hashlib
 
-load_dotenv()
+load_dotenv(override=True, interpolate=False)
 client = MongoClient(os.getenv('mongo_url'))
 db = client["Booogle_Revise"]
 global_data_db = db["Global_Data"]
