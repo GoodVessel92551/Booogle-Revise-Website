@@ -1600,6 +1600,13 @@ html {
     color: var(--on_success);
 }
 
+@keyframes load_notification {
+    from{
+        transform: translateY(10px);
+    }
+    
+}
+
 .notifications>a {
     height: 50px;
     display: block;
@@ -1614,6 +1621,8 @@ html {
     flex-direction: row;
     gap:12px;
     align-items:center;
+    animation: load_notification 667ms cubic-bezier(0.13, 1.62, 0.71, 2.08);
+    width: fit-content;
 }
 
 .notifications > a > ion-icon{
@@ -3866,4 +3875,36 @@ input[type="number"]::-webkit-outer-spin-button {
     color:var(--text);
     text-align: center;
     margin-bottom: 32px;
+}
+
+@keyframes like {
+    from {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.8);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.like_learn {
+    background: var(--top_green);
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 6px 6px;
+    color: var(--on_top_green);
+    border-radius:var(--main_border_radius);
+    font-size: 12px;
+    display:flex;
+    align-items:center;
+    gap:4px;
+    cursor: pointer;
+}
+
+.like_learn_selected{
+    color:var(--error_button);
+    animation: like .5s ease-in-out;
 }

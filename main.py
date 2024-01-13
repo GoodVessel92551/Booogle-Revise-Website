@@ -916,7 +916,7 @@ def play_code(code):
         "user_image":userinfo(username())[1]
     }
     query = {"name":"play"}
-    update = {"$set":{"data."+code+".users":play_info}}
+    update = {"$set":{"data."+code+".users."+username():play_info}}
     global_data_db.update_one(query, update)
     return render_template("play/play_hub.html",code=code,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
@@ -1057,7 +1057,7 @@ def play_started(code):
             ans.append(set[quest]["answers"][random.choice(list(set[quest]["answers"].keys()))])
         random.shuffle(ans)
         quest_num =len(set)
-    return render_template("tools/question.html",total_quest_num=quest_num,quest_num=quest_num,title=name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),set=set,ans=ans,question=question,notifications=notifications)
+    return render_template("tools/question.html",owner=host,total_quests=quest_num,quest_num=quest_num,title=name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),set=name,ans=ans,question=question,notifications=notifications)
 
 @app.route("/play/end/<code>")
 def play_end(code):
@@ -1306,5 +1306,29 @@ def updates():
 @app.route("/updates/<title>")
 def view_update(title):
     return render_template("login/view_update.html",title=title)
+
+@app.route("/learn")
+def learn():
+    if login() == False:
+        return render_template("login/login.html")
+    notifications = {}
+    learn_sets = {
+        "id-ejejeje":{
+            "settings":{
+            "name":"Title",
+            "desc":"Desc",
+            "background":"gear",
+            "user":"Test",
+            "level":False,
+            "subject":"Other"
+            }
+        }
+    }
+    return render_template("home/learn.html",learn_sets=learn_sets,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+
+@app.route("/api/learn/like",methods=["POST","GET"])
+def api_learn_like():
+    data = request.get_json()
+    return {"liked":True}
 
 app.run(host='0.0.0.0', port=80,debug=True)

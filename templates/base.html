@@ -277,6 +277,36 @@
             a.appendChild(button);
             document.getElementById("notifications").appendChild(a);
         }
+
+        const new_notification = (title,body,icon,type) => {
+            var a = document.createElement("a");
+            var title_element = document.createElement("strong")
+            var icon = document.createElement("ion-icon")
+            icon.name = icon
+            title_element.innerText = title
+            a.id = `notification_${i}_notification`
+            var p = document.createElement("p");
+            var button = document.createElement("button");
+            button.id = `notification_${i}`;
+            button.addEventListener("click", (e) => {
+                document.getElementById(`${e.target.id}_notification`).remove();
+            })
+            button.innerHTML = `<ion-icon id="notification_${i}" name="close-outline"></ion-icon>`;
+            p.innerText = body;
+            if (type == "error"){
+                a.classList.add("error_notification")
+            }else if (type == "warning"){
+                a.classList.add("warning_notification")
+            }else if (type == "success"){
+                a.classList.add("success_notification")
+            }
+            a.appendChild(icon);
+            a.appendChild(title_element);
+            a.appendChild(p);
+            a.appendChild(button);
+            document.getElementById("notifications").appendChild(a);
+        }
+        
         var level_icon = document.getElementById("level_icon")
         var level_text = document.getElementById("level")
         var level_button = document.getElementById("level_button")

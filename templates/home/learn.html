@@ -108,7 +108,7 @@
             }
         }, { passive: false });
         var set = sets[name]
-        var sets_keys = Object.keys(set) 
+        var sets_keys = Object.keys(set)
         sets_keys.pop()
         var mean = 0
         var total_ans_len = 0
@@ -144,95 +144,8 @@
             document.getElementById("test_lock").remove()
         }
     }
-    var sets = {{sets|tojson}};
+    var sets = {{learn_sets|tojson}};
     var sets_keys = Object.keys(sets)
-    var folders = {{folders|tojson}}
-    var folder_keys = Object.keys(folders)
-    var groups = {{groups|tojson}}
-    var group_keys = Object.keys(groups)
-
-    for (var i = 0; i < group_keys.length; i++) {
-        var home = document.getElementById("home_sets")
-        var a = document.createElement("a")
-        a.classList.add("droppable","folder_home")
-        var img = document.createElement("img")
-        var what_class = document.createElement("span")
-        what_class.innerHTML = '<ion-icon name="people-outline"></ion-icon> Group'
-        what_class.classList.add("subject")
-        img.draggable = false
-        a.draggable = false
-        var strong = document.createElement("strong")
-        var p = document.createElement("p")
-        var amount_of_sets = document.createElement("p")
-        amount_of_sets.classList.add("amount_of_sets")
-        a.href = `/group/${groups[group_keys[i]]["settings"]["Title"]}`
-        img.src = `/static/groups/${groups[group_keys[i]]["settings"]["Cover"]}.webp`
-        img.alt = groups[group_keys[i]]["settings"]["Title"]
-        strong.innerText = groups[group_keys[i]]["settings"]["Title"]
-        p.innerText = groups[group_keys[i]]["settings"]["Desc"]
-        a.id = group_keys[i]
-        var amount_sets = groups[group_keys[i]]["users"].length
-        if (amount_sets <= 1){
-            amount_of_sets.innerText = `Contains ${amount_sets} Person`
-        }else{
-            amount_of_sets.innerText = `Contains ${amount_sets} People`
-        }
-        a.appendChild(img)
-        a.appendChild(what_class)
-        a.appendChild(strong)
-        a.appendChild(p)
-        a.appendChild(amount_of_sets)
-        home.appendChild(a)
-    }
-    
-    for (var i = 0; i < folder_keys.length; i++) {
-        var home = document.getElementById("home_sets")
-        var a = document.createElement("a")
-        a.classList.add("droppable","folder_home")
-        var img = document.createElement("img")
-        var loader = document.createElement("loding")
-        var spinner = document.createElement("spinner")
-        loader.classList.add("loader")
-        img.draggable = false
-        a.draggable = false
-        var strong = document.createElement("strong")
-        var p = document.createElement("p")
-        var amount_of_sets = document.createElement("p")
-        var what_class = document.createElement("span")
-        what_class.innerHTML = '<ion-icon name="folder-open-outline"></ion-icon> Folder'
-        what_class.classList.add("subject")
-        amount_of_sets.classList.add("amount_of_sets")
-        a.href = `/folder/${folders[folder_keys[i]]["name"]}`
-        img.src = `/static/folders/${folders[folder_keys[i]]["background"]}.webp`
-        img.alt = folders[folder_keys[i]]["name"]
-        strong.innerText = folders[folder_keys[i]]["name"]
-        p.innerText = folders[folder_keys[i]]["desc"]
-        a.id = folder_keys[i]
-        var amount_sets = Object.keys(folders[folder_keys[i]]["sets"]).length
-        if (amount_sets <= 1){
-            amount_of_sets.innerText = `Contains ${amount_sets} Set`
-        }else{
-            amount_of_sets.innerText = `Contains ${amount_sets} Sets`
-        }
-        loader.id = `loader_${folder_keys[i]}`
-        loader.appendChild(spinner)
-        a.appendChild(loader)
-        a.appendChild(img)
-        a.appendChild(what_class)
-        a.appendChild(strong)
-        a.appendChild(p)
-        a.appendChild(amount_of_sets)
-        home.appendChild(a)
-        img.id = folder_keys[i]
-        p.id = folder_keys[i]
-        strong.id = folder_keys[i]
-        what_class.id = folder_keys[i]
-        var current_loader = document.getElementById(`loader_${folder_keys[i]}`)
-        a.addEventListener("click",(e)=>{
-            console.log(e.target.id)
-            document.getElementById(`loader_${e.target.id}`).style.display = "flex"
-        })
-    }
 
     for (var i = 0; i < sets_keys.length; i++) {
         const droppableContainers = document.querySelectorAll('.droppable');
@@ -245,8 +158,58 @@
             a.draggable = true
             img.draggable = false
             var what_class = document.createElement("span")
-            what_class.innerHTML = '<ion-icon name="albums-outline"></ion-icon> Set'
-            what_class.classList.add("subject")
+            what_class.id = "like_learn"
+            what_class.innerHTML = '<ion-icon name="heart-outline"></ion-icon>'
+            what_class.classList.add("like_learn")
+            what_class.addEventListener("click",(e) => {
+                if (e.target.id != "like_learn"){
+                    e.target.classList.toggle("like_learn_selected")
+                    target_name = e.target.name
+                    console.log(e.target.id)
+                    var url = "api/learn/like"
+                    if (target_name == "heart-outline"){
+                        e.target.name = "heart"
+                        like_data = {
+                            "set":sets_keys[i],
+                            "type":"like"
+                        }
+                        fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(like_data),
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data);
+                            })
+                            .catch(error => {
+                                new_notification("Error", "There was an error liking this set, please try again later","close-circle", "error")
+                            });
+                    }else{
+                        e.target.name = "heart-outline"
+                        like_data = {
+                            "set":sets_keys[i],
+                            "type":"unlike"
+                        }
+                        fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(like_data),
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data);
+                            })
+                            .catch(error => {
+                                new_notification("Error", "There was an error unliking this set, please try again later","close-circle", "error")
+                            });
+                }
+                }
+            })
             var strong = document.createElement("strong")
             var p = document.createElement("p")
             var user = document.createElement("p")
