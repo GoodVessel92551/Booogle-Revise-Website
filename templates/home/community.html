@@ -119,17 +119,16 @@
             <ion-icon onclick="document.getElementById('start_set').close()" class="close_start"
                 name="close-outline"></ion-icon>
         </button>
-        <h2>Revise</h2>
         <div class="start_options">
             <a onclick="document.getElementById('cards_loading').style.display = 'flex'" href="/flashcards" id="flashcards">
                 <loading id="cards_loading" class="loader"><spinner></spinner></loading>
-                <span id="flash_rec"><ion-icon name="sparkles"></ion-icon></span>
+                <span id="flash_rec" class="subject"><ion-icon name="sparkles"></ion-icon>Recommend</span>
                 <ion-icon src="/static/revise_icons/Fashcards.svg"></ion-icon>
                 <strong>Flashcards</strong>
             </a>
             <a onclick="document.getElementById('quest_loading').style.display = 'flex'" href="/questions" id="questions">
                 <loading id="quest_loading" class="loader"><spinner></spinner></loading>
-                <span id="quest_rec"><ion-icon name="sparkles"></ion-icon></span>
+                <span id="quest_rec" class="subject"><ion-icon name="sparkles"></ion-icon>Recommend</span>
                 <ion-icon src="/static/revise_icons/Questions.svg"></ion-icon>
                 <strong>Questions</strong>
             </a>
@@ -194,10 +193,10 @@
         }
         mean = total_ans_len / sets_keys.length;
         if (mean <= 2 && sets_keys.length > 3) {
-            document.getElementById("quest_rec").style.display = "block";
+            document.getElementById("quest_rec").style.display = "flex";
             document.getElementById("flash_rec").style.display = "none";
         } else {
-            document.getElementById("flash_rec").style.display = "block";
+            document.getElementById("flash_rec").style.display = "flex";
             document.getElementById("quest_rec").style.display = "none";
         }
         document.getElementById("start_set").showModal();

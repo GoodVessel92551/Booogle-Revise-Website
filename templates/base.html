@@ -32,8 +32,9 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <style id="customStyles">
         :root {
-            --back: #1b1e1a;
-            --top_back: #2a2f2d;
+            --back: #1B1E1A;
+            --top_back_border:1px solid #282C27;
+            --top_back: #20231F;
             --on_top_back:#37423e;
             --border: 1px solid #3f4b3d;
             --border_hover: #6f896a;
@@ -41,12 +42,13 @@
             --back2: #323232;
             --border2: 2px solid #3d3c3c;
             --top_green: #2a2f2d;
-            --hover_top_green: #303634;
+            --hover_top_green: #282b2a;
             --hover_top_green-2: #343c3a;
             --top_green_opactiy: #2a2f2dbb;
-            --top_green_2: #303634;
-            --on_top_green: #badbca;
-            --on_top_green_2: #A5C1B2;
+            --top_green_2: #262b27;
+            --top_green_border: 1px solid #2e3532;
+            --on_top_green: #FFFFFFCC;
+            --on_top_green_2: #FFFFFFCC;
             --main_button: #bfffc2;
             --on_main_button: #0F5B11;
             --second_button: #a3d9a5;
@@ -115,8 +117,7 @@
         if(theme == "blue"){
             var newStyles = `
             :root{
-                --back: #1a1b1e;
-                --top_back: #292a2e;
+                --top_back_border: #282C27;
                 --on_top_back:#383b43;
                 --border: 1px solid #3e434c;
                 --border_hover: #6a758a;

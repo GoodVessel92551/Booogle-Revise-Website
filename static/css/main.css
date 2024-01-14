@@ -115,10 +115,10 @@ html {
     left: 0;
     top: 0;
     z-index: 5;
-    border-radius: 0px 0px 16px 16px;
     padding: 0px 16px;
     box-sizing: border-box;
     gap:16px;
+    border-bottom:var(--top_back_border);
 }
 
 @media (display-mode: window-controls-overlay) {
@@ -460,15 +460,16 @@ html {
     padding:0px;
     min-width: 250px;
     max-width: 250px;
-    height: 300px;
+    height: 290px;
     border: none;
     border-radius:var(--main_border_radius);
     cursor: pointer;
     transition: 0.3s background-color;
     position: relative;
     overflow: hidden;
-    background: var(--top_green);
+    background: var(--top_back);
     text-decoration: none;
+    border:var(--top_back_border)
 }
 
 .home_sets set img,.home_sets a img {
@@ -479,23 +480,24 @@ html {
 }
 
 .home_sets>set:hover,.home_sets > a:hover {
-    background-color: var(--top_green_2);
+    background-color: var(--hover_top_green);
 }
 
 .home_sets set strong,.home_sets a strong {
     color: var(--text);
-    margin: 16px;
+    margin: 16px 16px 8px 16px;
     display: block;
     font-weight: 500;
 }
 
 .home_sets set p:not(.user_name, .amount_of_sets),.home_sets a p:not(.user_name, .amount_of_sets) {
     display: block;
-    margin: 16px;
+    margin: 8px 16px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     color: var(--on_top_green);
+    font-size: 15px;
 }
 
 .user_name {
@@ -543,7 +545,7 @@ html {
     width: 50px;
     height: 50px;
     border-radius:var(--main_border_radius);
-    background: var(--top_green);
+    background: var(--top_back);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -551,6 +553,7 @@ html {
     transition: 0.3s background-color;
     border: none;
     font-size: 16px;
+    border:var(--top_back_border);
 }
 
 .home_add:hover {
@@ -564,7 +567,7 @@ html {
 
 .home_menu {
     width: 200px;
-    background: var(--top_green);
+    background: var(--top_back);
     position: absolute;
     bottom: 76px;
     right: 16px;
@@ -574,10 +577,11 @@ html {
     box-sizing: border-box;
     display: none;
     gap: 4px;
+    border:var(--top_back_border);
 }
 
 .home_add > ion-icon{
-    transition:667ms cubic-bezier(0.13, 1.62, 0.59, 1.72),
+    transition:667ms cubic-bezier(0.13, 1.62, 0.59, 1.72);
 }
 
 .home_menu>a {
@@ -589,7 +593,7 @@ html {
     cursor: pointer;
     display: block;
     border-radius:var(--main_border_radius);
-    background: var(--top_green);
+    background: var(--top_back);
     display:flex;
     align-items:center;
 }
@@ -876,17 +880,18 @@ html {
 .start_set {
     width: 700px;
     height: 450px;
-    background-color: var(--top_green);
+    background-color: var(--top_back);
     border: none;
-    border-radius:var(--main_border_radius);
+    border-radius:32px;
     padding: 32px;
     border: none;
+    border:var(--top_back_border);
 }
 
 .share_set{
     width: 700px;
     height: 450px;
-    background-color: var(--top_green);
+    background-color: var(--top_back);
     border: none;
     border-radius:var(--main_border_radius);
     padding: 32px;
@@ -927,25 +932,41 @@ html {
     height: 150px;
     width: 100%;
     display: flex;
-    gap: 16px;
+    margin-top: 64px;
 }
 
 .start_options a {
-    min-width: 163.5px;
-    min-height: 163.5px;
+    min-width: 175px;
+    min-height: 175px;
     background-color: var(--top_green_2);
     display: block;
-    border-radius:var(--main_border_radius);
+    border-radius:0px;
     border: none;
     cursor: pointer;
     transition: 0.3s;
     position: relative;
     user-select: none;
+    border:var(--top_green_border);
+    border-right:none;
+}
+
+.start_recommend{
+    background-color: var(--top_back);
+    pad
+}
+
+.start_options :first-child{
+    border-radius: 16px 0px 0px 16px;
+}
+
+.start_options :last-child{
+    border-radius: 0px 16px 16px 0px;
+    border-right: var(--top_green_border);
 }
 
 .start_options a:focus:not(:disabled) {
-    border-color: var(--color) !important;
-    outline: none;
+    filter: brightness(110%);
+    outline:none;
 }
 
 .start_options a:has(.start_lock) {
@@ -961,41 +982,12 @@ html {
 .start_options>a>ion-icon:not(.start_lock) {
     font-size: 80px;
     position: absolute;
-    top: 20px;
+    top: 40px;
     left: 50%;
     transform: translateX(-50%);
     color: var(--on_top_green_2);
 }
 
-#flash_rec,
-#quest_rec {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    color: var(--on_top_green_2);
-    display: none;
-}
-
-#flash_rec:hover::before,
-#quest_rec:hover::before {
-    display: block;
-}
-
-#flash_rec::before,
-#quest_rec::before {
-    content: "Recommended";
-    display: none;
-    position: absolute;
-    bottom: -32px;
-    right: 0px;
-    z-index: 4;
-    color: var(--text);
-    padding: 6px 10px;
-    border-radius:var(--main_border_radius);
-    font-size: 14px;
-    background: var(--top_back);
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-}
 
 .start_lock {
     top: 8px;
@@ -1075,7 +1067,7 @@ html {
 .flashcard {
     width: 100%;
     aspect-ratio: 2/1;
-    background-color: var(--top_green);
+    background-color: var(--top_back);
     border: none;
     border-radius:var(--main_border_radius);
     display: flex;
@@ -1086,6 +1078,7 @@ html {
     padding: 32px;
     box-sizing: border-box;
     position:relative;
+    border:var(--top_back_border)
 }
 
 .card_title{
@@ -1148,7 +1141,7 @@ html {
     margin-top: 8px;
     width: 100%;
     min-height: 40px;
-    background-color: var(--top_green);
+    background-color: var(--top_back);
     border: none;
     border-radius:var(--main_border_radius);
     display: flex;
@@ -1159,6 +1152,7 @@ html {
     color: var(--on_top_green);
     font-size: 16px;
     padding: 8px 32px;
+    border: var(--top_back_border);
 }
 
 .error_message {
@@ -1256,7 +1250,7 @@ html {
 
 .up_container>.up_upgrade {
     width: 320px;
-    background-color: var(--top_green);
+    background-color: var(--top_back);
     display: block;
     border-radius:var(--main_border_radius);
     transition: 0.3s filter;
@@ -1452,11 +1446,12 @@ html {
     transition: 0.3s border-color;
     color: var(--text);
     font-size: 16px;
-    background:var(--top_green);
+    background:var(--top_back);
     padding:8px 16px;
     border-radius:30px;
     outline: 1px solid transparent;
     transition:.3s outline;
+    border: var(--top_back_border);
 }
 
 .fill_ans:not(:disabled):hover {
@@ -1673,7 +1668,7 @@ html {
 
 .mic {
     float: right;
-    background: var(--top_green);
+    background: var(--top_back);
     padding: 0px;
     border: none;
     height: 30px;
@@ -1686,6 +1681,7 @@ html {
     cursor: pointer;
     color: var(--text);
     transition: 0.3s;
+    border:var(--top_back_border)
 }
 
 .mic:hover {
@@ -2026,7 +2022,7 @@ html {
 }
 
 .your_sets_button>a,.your_sets_button > folder {
-    background: var(--top_green);
+    background: var(--top_back);
     color: var(--on_top_green);
     padding: 8px 16px;
     border-radius:var(--main_border_radius);
@@ -2040,6 +2036,7 @@ html {
     transition: .3s background-color;
     text-decoration: none;
     font-weight: bold;
+    border:var(--top_back_border)
 }
 
 .your_sets_button_hover {
@@ -2071,7 +2068,7 @@ html {
 }
 
 .score {
-    background: var(--top_green);
+    background: var(--top_back);
     width: calc(50% - 250px);
     max-width: 400px;
     position: absolute;
@@ -2079,6 +2076,7 @@ html {
     top: 76px;
     right: 16px;
     border-radius:var(--main_border_radius);
+    border:var(--top_back_border)
 }
 
 
@@ -2203,7 +2201,7 @@ html {
     appearance: none;
     width: 20px;
     height: 20px;
-    background: var(--top_green);
+    background: var(--top_back);
     border-radius:var(--main_border_radius);
     border: var(--border);
     cursor: pointer;
@@ -2247,11 +2245,12 @@ html {
     background: none;
     padding: 0px 16px;
     border-radius: 32px;
-    background: var(--top_green);
+    background: var(--top_back);
     color: var(--text);
     transition: .3s outline;
     font-size: 16px;
     outline:1px solid transparent;
+    border:var(--top_back_border);
 }
 
 .search:hover {
@@ -2315,6 +2314,7 @@ html {
     margin-bottom:0px !important;
     width: 60%;
     height: 35px;
+    border:var(--top_back_border);
 }
 
 
@@ -2368,9 +2368,10 @@ html {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    background:var(--top_green);
+    background:var(--top_back);
     padding:16px;
     border-radius:var(--main_border_radius);
+    border:var(--top_back_border)
     
 }
 
@@ -2456,7 +2457,7 @@ html {
 .play_code_text {
     padding: 10px 16px;
     border-radius: 32px;
-    background: var(--top_green);
+    background: var(--top_back);
     border:none;
     outline:1px solid transparent;
     transition:.3s outline;
@@ -2486,12 +2487,11 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .subject_info > span{
-    background: var(--top_green);
+    background: var(--top_back);
     padding: 4px 8px;
     color: var(--on_top_green);
     border-radius:var(--main_border_radius);
     font-size: 14px;
-    backdrop-filter: blur(8px);
     display:flex;
     align-items:center;
     gap:4px;
@@ -2500,7 +2500,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .subject {
-    background: var(--top_green);
+    background: var(--top_back);
     position: absolute;
     top: 8px;
     right: 8px;
@@ -2508,7 +2508,6 @@ input[type="number"]::-webkit-outer-spin-button {
     color: var(--on_top_green);
     border-radius:var(--main_border_radius);
     font-size: 12px;
-    backdrop-filter: blur(8px);
     display:flex;
     align-items:center;
     gap:4px;
@@ -2521,7 +2520,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .rules>a {
     width: calc(100% - 32px);
     height: 40px;
-    background: var(--top_green);
+    background: var(--top_back);
     padding: 8px 16px;
     display: block;
     margin-bottom: 8px;
@@ -2776,7 +2775,7 @@ input[type="number"]::-webkit-outer-spin-button {
         min-width: 100vw;
         margin: calc(100vh - 400px) 0px 0px 0px;
         box-sizing: border-box;
-        border-radius:var(--main_border_radius); 16px 0px 0px;
+        border-radius:var(--main_border_radius);
         padding: 32px;
         height: 400px;
         animation: slide_in .5s ease-in-out;
@@ -2963,7 +2962,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .average{
     width:50%;
     max-width:1000px;
-    background:var(--top_green);
+    background:var(--top_back);
     height:150px;
     border-radius:var(--main_border_radius);
     display:flex;
@@ -3342,7 +3341,7 @@ input[type="number"]::-webkit-outer-spin-button {
     appearance: none;
     width: 20px;
     height: 20px;
-    background: var(--top_green);
+    background: var(--top_back);
     border-radius:var(--main_border_radius);
     border: var(--border);
     cursor: pointer;
@@ -3383,6 +3382,7 @@ input[type="number"]::-webkit-outer-spin-button {
     position:relative;
     transition:background .3s;
     cursor:pointer;
+    border:var(--top_back_border);
 }
 
 .community_subjects > a > img{
@@ -3583,6 +3583,7 @@ input[type="number"]::-webkit-outer-spin-button {
     border-radius:50px;
     cursor:pointer;
     transition:.3s;
+    border:var(--top_back_border);
 }
 
 .filter_search:hover{
@@ -3689,7 +3690,7 @@ input[type="number"]::-webkit-outer-spin-button {
     position:absolute;
     top:8px;
     left:8px;
-    border-radius:var(--main_border_radius);
+    border-radius:var(--main_border_radius) !important;
     justify-content:center;
     align-items:center;
 }
@@ -3718,6 +3719,7 @@ input[type="number"]::-webkit-outer-spin-button {
     border-radius:var(--main_border_radius);
     justify-content:center;
     align-items:center;
+    border:var(--top_back_border)
 }
 
 .flash_indicator > span{
@@ -3853,6 +3855,7 @@ input[type="number"]::-webkit-outer-spin-button {
     gap:8px;
     color:var(--text);
     margin-left:auto;
+    border: var(--top_green_border);
 }
 
 .play_svgs{
@@ -3890,7 +3893,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .like_learn {
-    background: var(--top_green);
+    background: var(--top_back);
     position: absolute;
     top: 8px;
     right: 8px;
