@@ -1256,17 +1256,20 @@ html {
     transition: 0.3s filter;
     position: relative;
     padding-bottom: 64px;
+    border: var(--top_back_border);
 }
 
-.up_container>.up_upgrade:hover {
-    filter: brightness(110%);
+.up_recommend{
+    color:var(--on_top_green);
+    margin-left:32px;
+    font-size: 14px;
 }
 
 .up_title {
     display: block;
     font-size: 16px;
     font-weight: 500;
-    color: var(--on_top_green_2);
+    color: var(--text);
     margin-top: 16px;
     text-align: left;
     margin-left:32px;
@@ -1277,7 +1280,7 @@ html {
     display: block;
     font-size: 20px;
     font-weight: 600;
-    color: var(--on_top_green);
+    color: var(--text);
     margin-top: 4px;
     text-align: left;
 }
@@ -1315,6 +1318,10 @@ html {
     display: block;
     color: var(--up_text);
     padding:0px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:8px;
 }
 
 .up_button:focus {

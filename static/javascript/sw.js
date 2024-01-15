@@ -50,6 +50,7 @@ self.addEventListener("fetch", (event) => {
   // Only call event.respondWith() if this is a navigation request
   // for an HTML page.
   if (event.request.mode === "navigate") {
+    console.log("Handling fetch event for", event.request.url);
     event.respondWith(
       (async () => {
         try {

@@ -350,6 +350,18 @@
         }
         
     }
+    const offline_backup = () => {
+        const jsonString = JSON.stringify(sets);
+        localStorage.setItem('sets', jsonString);
+    }
+    const get_offline = () => {
+        const offline_sets = localStorage.getItem('sets');
+        if (offline_sets != null) {
+            sets = JSON.parse(offline_sets);
+        }
+        return sets
+    }
+    
 </script>
     <div class="home_menu" id="home_menu">
         <a href="/new"><ion-icon name="add-outline"></ion-icon>New Set</a>

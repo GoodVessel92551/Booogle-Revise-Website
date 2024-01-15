@@ -603,9 +603,6 @@ def edit(name):
         return redirect("/")
     return render_template("sets/edit.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets()[name],notifications=notifications)
 
-@app.route("/sw.js", methods=["GET"])
-def sw():
-    return current_app.send_static_file("javascript/sw.js")
 
 @app.route("/robots.txt", methods=["GET"])
 def robots():
@@ -621,7 +618,7 @@ def offline():
 
 @app.route("/offline/flashcards")
 def offline_cards():
-    return "Ofline"
+    return "Offline"
 
 @app.route("/flashcards/<name>")
 def flashcards(name):
@@ -1331,4 +1328,9 @@ def api_learn_like():
     data = request.get_json()
     return {"liked":True}
 
+@app.route("/offline/home")
+def offline_home():
+    return render_template("offline_home.html")
+
 app.run(host='0.0.0.0', port=80,debug=True)
+

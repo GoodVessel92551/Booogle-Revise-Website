@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Introducing Booogle Revise 2, the ultimate revision app that revolutionizes the way you study. With Booogle Revise 2, you can enhance your learning experience by collaborating with friends and accessing an extensive collection of study sets from the vibrant community.">
+    <meta property="og:image" content="/static/embed.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="675">
+    <meta property="og:image:alt" content="Booogle Revise">
+    <link rel="icon" href="{{url_for('static',filename='favicon.ico')}}" type="image/x-icon" />
+    <link rel="stylesheet" href="/static/css/main.css" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+    <title>Booogle Revise - Offline</title>
+    <meta property="og:title" content="Booogle Revise - The Ultimate Revision App" />
+    <meta property="og:description" content="Booogle Revise is a simple to use revision app that allows you to revise in the way that you want from flashcards to fill the gap." />
+    <meta property="og:image" content="/static/images/embed.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="675">
+    <meta property="og:image:alt" content="Booogle Revise">
+    <meta property="og:url" content="https://revise.booogle.app/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_GB" />
+    <meta name="theme-color" id="theme" content="#2A2F2D" />
+    <link rel="manifest" href="/static/json/webmanifest.json" />
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <style id="customStyles">
+        :root {
+            --back: #1B1E1A;
+            --top_back_border:1px solid #282C27;
+            --top_back: #20231F;
+            --on_top_back:#37423e;
+            --border: 1px solid #3f4b3d;
+            --border_hover: #6f896a;
+            --text5: #a4bcb0;
+            --back2: #323232;
+            --border2: 2px solid #3d3c3c;
+            --top_green: #2a2f2d;
+            --hover_top_green: #282b2a;
+            --hover_top_green-2: #343c3a;
+            --top_green_opactiy: #2a2f2dbb;
+            --top_green_2: #262b27;
+            --top_green_border: 1px solid #2e3532;
+            --on_top_green: #FFFFFFCC;
+            --on_top_green_2: #FFFFFFCC;
+            --main_button: #bfffc2;
+            --on_main_button: #0F5B11;
+            --second_button: #a3d9a5;
+            --on_second_button: #0D400E;
+            --third_button: #86b388;
+            --on_third_button: #072007;
+            --error_button: #F2B6B6;
+            --on_error_button: #611010;
+            --focus:#2e80a3;
+            --text_border: #323c32;
+            --autocomplete: #435643;
+            --text_border_hover: #4e5f4e;
+            --text_border_focus: #627f62;
+            --select:#496949;
+            --speaker:#51654e;
+            --on_speaker:#ebffd6;
+            --leaderboard:#333D39;
+            --close_moblie:#5a655f;
+            --add_user_back:#404443;
+            --add_user_back_focus:#404543;
+            --view_user_group:#404443;
+            --settings_back_focus:#3f4b46;
+            --settings_cards:#475A53;
+            --flash_indicator:#333b38;
+        }
+    </style>
+</head>
+
+<body id="body">
+    <div id="top_text" class="top_menu">
+        <span>Booogle Revise - Offline</span>
+    </div>
+
+    <nav class="nav">
+        <a href="/" title="Home" class="nav_img">
+            <svg width="119" height="119" viewBox="0 0 119 119" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M56.88 0.44938C53.8834 1.16596 51.1865 3.04211 49.3885 5.64785C48.7632 6.55986 47.9814 8.27966 47.6818 9.42619C47.343 10.7291 47.2128 13.2175 47.4212 14.5726C47.6427 15.9797 48.3462 17.9209 49.0758 19.1587C50.3266 21.2693 52.8802 23.4321 55.1081 24.2659C56.7236 24.8783 57.4793 25.0086 60.6843 25.191C62.4301 25.2952 64.4756 25.4776 65.2443 25.5949C69.4134 26.2072 74.1037 27.9921 77.9081 30.4025C88.4612 37.0862 94.4413 48.799 93.6857 61.3197C93.399 66.0361 92.2655 70.1922 90.1028 74.5047C87.4971 79.6641 83.1065 84.5108 78.1165 87.7289C72.7227 91.2076 66.4559 93.0186 59.8114 93.0316C54.9387 93.0316 50.978 92.2499 46.6916 90.4519C39.8125 87.5726 34.0409 82.4523 30.2626 75.8467C27.6178 71.2085 26.2237 66.2575 25.9371 60.4337C25.7808 57.3329 25.7287 56.8769 25.3378 55.5088C24.7255 53.4242 23.6441 51.6393 22.0155 50.0628C20.8429 48.9424 20.1133 48.4342 18.7323 47.7958C16.8562 46.9099 15.7618 46.7014 13.2994 46.7014C11.5014 46.7014 10.9803 46.7535 10.1074 46.988C8.94783 47.3138 7.21503 48.0955 6.31606 48.7209C3.71034 50.5058 1.80818 53.2679 1.13069 56.2254C0.844062 57.4892 0.844062 62.6746 1.11766 65.3325C2.10783 74.6741 5.52131 84.2111 10.6285 91.872C12.8564 95.2335 14.9931 97.8262 18.0548 100.888C24.7385 107.598 32.6599 112.431 41.8841 115.415C45.2976 116.509 49.5058 117.382 53.688 117.851C56.5021 118.164 63.1206 118.164 65.9088 117.851C75.0939 116.822 84.2269 113.656 91.5359 108.992C104.382 100.771 113.515 88.0286 117.137 73.28C118.323 68.4333 118.753 64.6941 118.753 59.1308C118.753 54.7271 118.596 52.7989 117.984 49.1248C116.733 41.7375 113.593 33.5424 109.672 27.4059C99.9263 12.1753 83.9533 2.3125 66.039 0.436355C63.5115 0.17578 57.9874 0.188806 56.88 0.44938Z" fill="#ADF0CE"/>
+            </svg>
+        </a>
+        <a class="nav_title" id="nav_title" href="/">Home</a>
+    </nav>
+    <div id="notifications" class="notifications"></div>
+    <main class="main">
+        <h1>Your Sets</h1>
+        <div class="home_sets" id="home_sets"></div>
+        <dialog class="start_set" id="start_set">
+            <div class="all_contain_start">
+                <img class="set_image" id="set_image">
+                <div class="text_contain_start">
+                    <h1 id="set_title" class="set_title_dialog">Set Name</h1>
+                    <p id="set_desc"></p>
+                </div>
+            </div>
+            <button id="close_mobile" class="close_moblie no_pull"><div></div></button>
+            <button class="close_start_set">
+                <ion-icon onclick="document.getElementById('start_set').close()" class="close_start"
+                    name="close-outline"></ion-icon>
+            </button>
+            <div class="start_options">
+                <a onclick="document.getElementById('cards_loading').style.display = 'flex'" href="/flashcards" id="flashcards">
+                    <loading id="cards_loading" class="loader"><spinner></spinner></loading>
+                    <span id="flash_rec" class="subject"><ion-icon name="sparkles"></ion-icon>Recommend</span>
+                    <ion-icon src="/static/revise_icons/Fashcards.svg"></ion-icon>
+                    <strong>Flashcards</strong>
+                </a>
+                <a onclick="document.getElementById('quest_loading').style.display = 'flex'" href="/questions" id="questions">
+                    <loading id="quest_loading" class="loader"><spinner></spinner></loading>
+                    <span id="quest_rec" class="subject"><ion-icon name="sparkles"></ion-icon>Recommend</span>
+                    <ion-icon src="/static/revise_icons/Questions.svg"></ion-icon>
+                    <strong>Questions</strong>
+                </a>
+                <a onclick="document.getElementById('fill_loading').style.display = 'flex'" href="/fill" id="fill">
+                    <loading id="fill_loading" class="loader"><spinner></spinner></loading>
+                    <ion-icon src="/static/revise_icons/Fill The Gaps.svg"></ion-icon>
+                    <strong>Fill The Gaps</strong>
+                </a>
+                <a onclick="document.getElementById('test_loading').style.display = 'flex'" href="/upgrade" id="test">
+                    <loading id="test_loading" class="loader"><spinner></spinner></loading>
+                    <ion-icon id="test_lock" class="start_lock" name="arrow-up-circle-outline"></ion-icon>
+                    <ion-icon src="/static/revise_icons/Test.svg"></ion-icon>
+                    <strong>Test</strong>
+                </a>
+            </div>
+            <div class="start_buttons">
+                <a href="/delete" id="del_button" class="main_button del_button">
+                    <span>Delete</span><ion-icon name="trash-outline"></ion-icon>
+                </a>
+                <a id="share" class="main_button third_button">
+                    <span>Share</span><ion-icon name="share-social-outline"></ion-icon>
+                </a>
+                <a href="/upload" id="upload" class="second_button main_button">
+                    <span>Publish</span><ion-icon name="push-outline"></ion-icon>
+                </a>
+                <a href="/edit" id="edit_button" href="/edit" class="main_button">
+                    <span>Edit</span><ion-icon name="pencil-outline"></ion-icon>
+                </a>
+            </div>
+        </dialog>
+    </main>
+        <nav class="bottom_nav">
+            <a href="/new/group"><ion-icon name="people-outline"></ion-icon></a>
+            <a href="/new/folder"><ion-icon name="folder-open-outline"></ion-icon></a>
+            <a href="/community"><ion-icon name="earth-outline"></ion-icon></a>
+            <a href="/play"><ion-icon name="play-outline"></ion-icon></a>
+            <a href="/new" class="add_button_nav"><ion-icon name="add-outline"></ion-icon></a>
+        </nav>
+    <script>
+        const copy = (text) => {
+            navigator.clipboard.writeText(text)
+            document.getElementById("share").innerHTML = "<span>Copyed!</span><ion-icon name='clipboard-outline'></ion-icon>"
+        }
+        function show(name) {
+            const dialog = document.getElementById('start_set');
+            const closeButton = document.getElementById('close_mobile');
+            var isDragging = false;
+            
+            closeButton.addEventListener('touchstart', (e) => {
+                isDragging = true;
+            });
+            
+            closeButton.addEventListener('touchmove', (e) => {
+              if (isDragging) {
+                    dialog.classList.add("slide_out_animation");
+                    setTimeout(() => {
+                        dialog.classList.remove("slide_out_animation");
+                        dialog.close()
+                    }, 500);
+                }
+            });
+            document.addEventListener('touchstart', function(e) {
+                if (e.target.classList.contains('no_pull')) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            var set = sets[name]
+            var sets_keys = Object.keys(set) 
+            sets_keys.pop()
+            var mean = 0
+            var total_ans_len = 0
+            for (var i = 0; i < sets_keys.length; i++) {
+                var ans = set[sets_keys[i]]["answers"]["ans1"]
+                total_ans_len += ans.split(" ").length
+            }
+            mean = total_ans_len / sets_keys.length;
+            if (mean <= 2 && sets_keys.length > 3) {
+                document.getElementById("quest_rec").style.display = "flex"
+                document.getElementById("flash_rec").style.display = "none"
+            } else {
+                document.getElementById("flash_rec").style.display = "flex"
+                document.getElementById("quest_rec").style.display = "none"
+            }
+            document.getElementById("start_set").showModal()
+            document.getElementById("share").innerHTML = "<span>Share</span><ion-icon name='share-social-outline'></ion-icon>"
+            document.getElementById("set_image").src = `/static/set_icons/${sets[name]["settings"]["background"]}.webp`
+            document.getElementById("set_title").innerText = sets[name]["settings"]["name"]
+            document.getElementById("set_desc").innerText = sets[name]["settings"]["desc"]
+            document.getElementById("flashcards").href = `/flashcards/${name}`
+            document.getElementById("questions").href = `/questions/${name}`
+            document.getElementById("fill").href = `/fill/${name}`
+            document.getElementById("del_button").href = `/delete/${name}`
+            document.getElementById("edit_button").href = `/edit/${name}`
+            document.getElementById("upload").href = `/publish/${name}`
+            var share = document.getElementById("share")
+            share.addEventListener("click", () => {
+                copy(`revise.booogle.app/share/@${sets[name]["settings"]["user"]}/${name}`)
+            })
+            if (level == "elite") {
+                document.getElementById("test").href = `/test/${name}`
+                document.getElementById("test_lock").remove()
+            }
+        }
+        const get_offline = () => {
+            const offline_sets = localStorage.getItem('sets');
+            if (offline_sets != null) {
+                var got_sets = JSON.parse(offline_sets);
+            }
+            console.log(got_sets)
+            return got_sets
+        }
+        var sets = get_offline()
+        var sets_keys = Object.keys(sets)
+    
+        for (var i = 0; i < sets_keys.length; i++) {
+            const droppableContainers = document.querySelectorAll('.droppable');
+            if (!sets[sets_keys[i]]["settings"]["folder"]) {
+                var level = sets[sets_keys[i]]["settings"]["level"]
+                var home = document.getElementById("home_sets")
+                var a = document.createElement("set")
+                var img = document.createElement("img")
+                a.classList.add("draggable","set_home")
+                a.draggable = true
+                img.draggable = false
+                var what_class = document.createElement("span")
+                what_class.innerHTML = '<ion-icon name="albums-outline"></ion-icon> Set'
+                what_class.classList.add("subject")
+                var strong = document.createElement("strong")
+                var p = document.createElement("p")
+                var user = document.createElement("p")
+                a.addEventListener("click", (e) => {
+                    show(e.target.id)
+                })
+                img.src = `/static/set_icons/${sets[sets_keys[i]]["settings"]["background"]}.webp`
+                img.alt = sets[sets_keys[i]]
+                user.innerText = sets[sets_keys[i]]["settings"]["user"]
+                user.classList.add("user_name")
+                strong.innerText = sets[sets_keys[i]]["settings"]["name"]
+                p.innerText = sets[sets_keys[i]]["settings"]["desc"]
+                a.id = sets_keys[i]
+                strong.id = sets_keys[i]
+                img.id = sets_keys[i]
+                p.id = sets_keys[i]
+                user.id = sets_keys[i]
+                if (level != false) {
+                    var badge = document.createElement("ion-icon")
+                    badge.classList.add("badge")
+                    if (level == "boost") {
+                        badge.name = "rocket-outline";
+                        badge.style.background = "var(--boost1)";
+                        badge.style.color = "var(--on_boost)";
+                    } else if (level == "premium") {
+                        badge.name = "sparkles-outline";
+                        badge.style.background = "var(--premium1)";
+                        badge.style.color = "var(--on_premium)";
+                    } else if (level == "pro") {
+                        badge.name = "medal-outline";
+                        badge.style.background = "var(--pro1)";
+                        badge.style.color = "var(--on_pro)";
+                    } else if (level == "elite") {
+                        badge.name = "diamond-outline";
+                        badge.style.background = "var(--elite1)";
+                        badge.style.color = "var(--on_elite)";
+                    } else if (level == "booogle") {
+                        badge.name = "repeat-outline";
+                        badge.style.background = "#A3D89D";
+                        badge.style.color = "#243822)";
+                    }
+                    badge.id = sets[sets_keys[i]]["settings"]["name"]
+                    user.appendChild(badge)
+                    document.querySelector('svg').addEventListener('load', () => {
+                        document.querySelectorAll(".badge").forEach((badge_item) => {
+                            badge_item.style.display = "inline-block"
+                        })
+                    })
+                }
+                a.appendChild(img)
+                a.appendChild(what_class)
+                a.appendChild(strong)
+                a.appendChild(p)
+                a.appendChild(user)
+                home.appendChild(a)
+                a.setAttribute('draggable', true);
+                a.style.cursor = 'move';
+    
+                a.addEventListener('dragstart', (event) => {
+                    event.dataTransfer.setData('text/plain', event.target.id);
+                });
+    
+                a.addEventListener('dragend', (event) => {
+    
+                });
+            }
+    
+            var current_set = ""
+            for (let j = 0; j < droppableContainers.length; j++) {
+                const droppableContainer = droppableContainers[j];
+                const droppableContainer_id = droppableContainer.id
+                droppableContainer.addEventListener('dragover', (event) => {
+                    event.preventDefault();
+                });
+    
+                droppableContainer.addEventListener('drop', (event) => {
+                    event.preventDefault();
+                    const draggedElementId = event.dataTransfer.getData('text/plain');
+                    const draggedElement = document.getElementById(draggedElementId);
+                    if (folder_keys.includes(droppableContainer.id)){
+                        draggedElement.remove()
+                        fetch(`/add/folder/${droppableContainer.id}/${draggedElement.id}`)
+                    }else{
+                        if(current_set != draggedElement.id){
+                            console.log("Sending")
+                            current_set = draggedElement.id
+                            fetch(`/add/group/${droppableContainer.id}/${draggedElement.id}`)
+                        }
+                    }
+                });
+            }
+        }
+        const menu_open = () => {
+            var menu_button = document.getElementById("home_menu_button")
+            var menu = document.getElementById("home_menu")
+            if(menu.style.display == "flex") {
+                menu_button.classList.remove("home_menu_button_selected")
+                menu.style.display = "none"
+            }else{
+                menu_button.classList.add("home_menu_button_selected")
+                menu.style.display = "flex"
+            }
+            
+        }
+        const offline_backup = () => {
+            const jsonString = JSON.stringify(sets);
+            localStorage.setItem('sets', jsonString);
+        }
+        
+    </script>
+        <div class="home_menu" id="home_menu">
+            <a href="/new"><ion-icon name="add-outline"></ion-icon>New Set</a>
+            <a href="/new/folder"><ion-icon name="folder-open-outline"></ion-icon>New Folder</a>
+            <a href="/new/group"><ion-icon name="people-outline"></ion-icon>New Group</a>
+            <a href="/automations"><ion-icon name="git-merge-outline"></ion-icon>Automations</a>
+        </div>
+    <button onclick="menu_open()" id="home_menu_button" class="home_add"><ion-icon name="add-outline"></ion-icon></button>
+    <script src="/static/notification.js"></script>
+    <script>
+        var body = document.getElementById("body")
+        console.log(body)
+        body.setAttribute("data-value",`theme_${theme}`)
+
+        const new_notification = (title,body,icon,type) => {
+            var a = document.createElement("a");
+            var title_element = document.createElement("strong")
+            var icon = document.createElement("ion-icon")
+            icon.name = icon
+            title_element.innerText = title
+            a.id = `notification_${i}_notification`
+            var p = document.createElement("p");
+            var button = document.createElement("button");
+            button.id = `notification_${i}`;
+            button.addEventListener("click", (e) => {
+                document.getElementById(`${e.target.id}_notification`).remove();
+            })
+            button.innerHTML = `<ion-icon id="notification_${i}" name="close-outline"></ion-icon>`;
+            p.innerText = body;
+            if (type == "error"){
+                a.classList.add("error_notification")
+            }else if (type == "warning"){
+                a.classList.add("warning_notification")
+            }else if (type == "success"){
+                a.classList.add("success_notification")
+            }
+            a.appendChild(icon);
+            a.appendChild(title_element);
+            a.appendChild(p);
+            a.appendChild(button);
+            document.getElementById("notifications").appendChild(a);
+        }
+
+        const send_notification = () => {
+            if ("Notification" in window) {
+              Notification.requestPermission().then(function (permission) {
+                if (permission === "granted") {
+                  var notification = new Notification("Save Your Steak!", {
+                     body: "Your steak is about to end.",
+                     icon: "static/save_steak.png"
+                   });
+                  notification.onclick = function () {
+                    console.log("Notification clicked!");
+                  };
+                }
+              });
+            }
+        }
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3B95SWPDXZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-3B95SWPDXZ');
+    </script>
+    <script src="/static/javascript/app.js"></script>
+</body>
+
+</html>
