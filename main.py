@@ -377,10 +377,12 @@ def folder(folder):
         return render_template("login/login.html")
     notifications = []
     sets = {}
+    user_sets = get_sets()
     names = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["folders"][folder]["sets"]
     for i in names:
-        sets[i] = names[i]
-    return render_template("folders/folder.html",sets=make_dict(sets),name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,title=user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["folders"][folder]["name"])
+        print(i)
+        sets[i] = user_sets[i]
+    return render_template("folders/folder.html",sets=sets,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,title=user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["folders"][folder]["name"])
 
 @app.route("/edit/folder/<folder>",methods=["POST","GET"])
 def edit_folder(folder):
@@ -425,19 +427,28 @@ def remove_folder(folder):
 def remove_folder_sey(folder,name):
     if login() == False:
         return render_template("login/login.html")
-    db[username()]["folders"][folder]["sets"].remove(name)
-    db[username()]["sets"][name]["settings"]["folder"] = False
+    query = {"username":username(),"type":"user_data"}
+    sets = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["folders"][folder]["sets"]
+    sets.remove(name)
+    update = {"$set":{"data.folders."+folder+".sets":sets}}
+    user_data_db.update_one(query, update)
+    update = {"$set":{"data.sets."+name+".settings.folder":False}}
+    user_data_db.update_one(query, update)
     return redirect("/folder/"+folder)
     
 @app.route("/add/folder/<folder>/<name>")
 def add_folder_set(folder,name):
     if login() == False:
         return render_template("login/login.html")
-    if name in list(db[username()]["folders"][folder]["sets"]):
+    folders = get_folders()
+    if name in list(folders[folder]["sets"]):
         return "Error"
     else:
-        db[username()]["folders"][folder]["sets"].append(name)
-        db[username()]["sets"][name]["settings"]["folder"] = True
+        query = {"username":username(),"type":"user_data"}
+        update = {"$push":{"data.folders."+folder+".sets":name}}
+        user_data_db.update_one(query, update)
+        update = {"$set":{"data.sets."+name+".settings.folder":True}}
+        user_data_db.update_one(query, update)
         return redirect("/folder/"+folder)
 
 @app.route("/new",methods=["POST","GET"])
@@ -752,11 +763,11 @@ def finish_questions():
 def delete(name):
     if login() == False:
         return render_template("login/login.html")
-    for i in db["sets"]:
-        if name in i and username() in i:
-            db["sets"].remove(i)
-    del db[username()]["sets"][name] 
-    session["notifications"] = [[{"title":"Success","body":f"You Have Deleted: {name}","type":"success","icon":"checkmark-circle"}]]
+    sets = get_sets()
+    query = {"username":username()}
+    update = {"$unset":{"data.sets."+name:{}}}
+    user_data_db.update_one(query,update)
+    session["notifications"] = {"title":"Success","body":f"You Have Deleted: {name}","type":"success","icon":"checkmark-circle"}
     return redirect("/")
 
 

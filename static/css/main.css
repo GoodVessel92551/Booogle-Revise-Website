@@ -58,7 +58,6 @@
     justify-content: center;
     align-items: center;
     -webkit-app-region: drag;
-    app-region: drag;
 }
 
 ::selection {
@@ -69,7 +68,6 @@
 .top_menu span {
     transform: translateX(env(titlebar-area-height, 33px));
     -webkit-app-region: drag;
-    app-region: drag;
     color: var(--text4);
 }
 
@@ -147,6 +145,7 @@ html {
     height: calc(100% - 10px);
     box-sizing: border-box;
     object-fit: cover;
+    -webkit-user-select: none;
     user-select: none;
 }
 
@@ -169,6 +168,7 @@ html {
 
 .boost {
     font-weight:500;
+    -webkit-user-select: none;
     user-select: none;
     border: 1px solid var(--main_button);
     box-shadow: none;
@@ -945,6 +945,7 @@ html {
     cursor: pointer;
     transition: 0.3s;
     position: relative;
+    -webkit-user-select: none;
     user-select: none;
     border:var(--top_green_border);
     border-right:none;
@@ -952,14 +953,13 @@ html {
 
 .start_recommend{
     background-color: var(--top_back);
-    pad
 }
 
-.start_options :first-child{
+.start_options :first-child:not(spinner){
     border-radius: 16px 0px 0px 16px;
 }
 
-.start_options :last-child{
+.start_options :last-child:not(spinner){
     border-radius: 0px 16px 16px 0px;
     border-right: var(--top_green_border);
 }
@@ -1044,10 +1044,6 @@ html {
     font-size: 25px;
     cursor: pointer;
     transition: 0.3s;
-}
-
-.close_start:hover {
-    filter: bightness(90%);
 }
 
 .del_question {

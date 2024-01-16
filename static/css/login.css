@@ -93,11 +93,17 @@ html {
     to{width:100%}
 }
 
+@media(max-width: 400px){
+    .title{
+        font-size:24px !important;
+    }
+}
+
 
 
 .login{
     position:absolute;
-    bottom:150px;
+    bottom:130px;
     left:50%;
     transform:translateX(-50%);
     color:var(--text);
@@ -113,14 +119,14 @@ html {
 
 .login_button{
     position:absolute;
-    bottom:80px;
+    bottom:70px;
     left:50%;
     transform:translateX(-50%);
     color:var(--text);
     background:none;
     border:none;
     padding-bottom:8px;
-    font-size:14px;
+    font-size:12px;
     cursor:pointer;
     transition:.4s;
 }
@@ -241,6 +247,7 @@ html {
     padding:64px;
     box-sizing:border-box;
     max-width:840px;
+    padding-top: 32px;
 }
 
 .features_main h1{
