@@ -274,7 +274,7 @@ def delete2(user_name,name):
     if login() == False:
         return render_template("login/login.html")
     sets = global_data_db.find_one({"name":"sets"})["data"]
-    if username() == user_name or "GoodVessel92551" == username():
+    if username() == user_name or userinfo(username())[0] == "admin":
         for i in sets:
             if user_name in i and name in i:
                 sets.remove(i)
@@ -1124,9 +1124,13 @@ def automations():
     
 @app.route("/test")
 def test():
-    print(db[username()])
-    print(login())
-    print(username())
+    import json
+
+    with open('db.json', 'r') as file:
+        json_data = json.load(file)
+    query = {"username":username()}
+    update = {'$set': {'data.sets': json_data}}
+    user_data_db.update_one(query, update, upsert=True)
     return redirect("/")
 
 
@@ -1191,7 +1195,9 @@ def new_group():
                 "upload_own":False
             }
         }
-        db[username()]["groups"][title] = group
+        query = {"username":username()}
+        update = {"$set":{"data.groups."+title:group}}
+        user_data_db.update_one(query, update)
         return redirect("/")
     notifications = []
     return render_template("groups/new_group.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
@@ -1232,18 +1238,23 @@ def group(group):
         return redirect("/group/"+group)
     else:
         sets = {}
-        if group in list(db[username()]["groups"]):
-            names = db[username()]["groups"][group]["sets"]
-            owner = db[username()]["groups"][group]["settings"]["Owner"]
+        group = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"]
+        if group in list(group):
+            names = group[group]["sets"]
+            owner = group[group]["settings"]["Owner"]
+            for i in names:
+                sets[i] = group[group]["sets"][i]
         else:
-            for i in db[username()]["added_groups"]:
+            added_groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["added_groups"]
+            for i in added_groups:
                 if i[1] == group:
-                    names = db[i[0]]["groups"][group]["sets"]
-                    owner = db[i[0]]["groups"][group]["settings"]["Owner"]
-        for i in names:
-            sets[i] = db[owner]["sets"][i]
-        user_data = user_data_group(list(db[owner]["groups"][group]["users"]))
-        return render_template("groups/group.html",user_data=user_data,sets=make_dict(sets),name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,title=group,owner=owner)
+                    group = user_data_db.find_one({"username":i[1],"type":"user_data"})["data"]["groups"]
+                    names = group[group]["sets"]
+                    owner = group[group]["settings"]["Owner"]
+                    for i in names:
+                        sets[i] = group[group]["sets"][i]
+        user_data = user_data_group(group[group]["users"])
+        return render_template("groups/group.html",user_data=user_data,sets=sets,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,title=group,owner=owner)
     
 @app.route("/add/group/<group>/<name>")
 def add_group_set(group,name):

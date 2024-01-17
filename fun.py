@@ -258,7 +258,10 @@ def make_dict(dictionary):
 
 
 def userinfo(username):
-    return [False,"/static/logo.png"]
+    level = False
+    if username in ["Booogle","BooogleRevise","GoodVessel92551","BadVessel92551"]:
+        level = "admin"
+    return [level,"/static/logo.png"]
 
 def gen_code():
     code = ""

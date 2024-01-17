@@ -19,6 +19,8 @@
     --on_teacher:#601010;
     --elite1: #E8B6F2;
     --on_elite:#561061;
+    --admin:#f2ecb6;
+    --on_admin:#615210;
     --shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
     --shadow2: 0px 0px 16px rgba(0, 0, 0, 0.4);
     --add_back: #3d3c3c;
@@ -82,7 +84,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--top_back);
+    background: var(--top_green_2);
     transition: 0.2s;
     border-radius: 10px;
     z-index: 5;
@@ -1265,7 +1267,7 @@ html {
     display: block;
     font-size: 16px;
     font-weight: 500;
-    color: var(--text);
+    color: var(--text4);
     margin-top: 16px;
     text-align: left;
     margin-left:32px;

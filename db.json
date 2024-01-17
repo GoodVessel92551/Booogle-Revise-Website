@@ -1,0 +1,3086 @@
+{
+    "Algorithms": {
+      "Q1": {
+        "answers": {
+          "ans1": "Randomness"
+        },
+        "question": "What is NOT a characteristic of a good algorithm?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q10": {
+        "answers": {
+          "ans1": "Flowchart"
+        },
+        "question": "Which term refers to a visual representation of the flow of a program or algorithm, using different shapes and arrows?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q11": {
+        "answers": {
+          "ans1": "Debugging"
+        },
+        "question": "Which term describes the process of testing and improving a program or algorithm in multiple iterations?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q12": {
+        "answers": {
+          "ans1": "Brute-force"
+        },
+        "question": "Which term refers to the process of systematically examining all possible solutions to a problem?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q13": {
+        "answers": {
+          "ans1": "Pseudocode"
+        },
+        "question": "Which term describes a simplified, high-level description of a program or algorithm using natural language?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q14": {
+        "answers": {
+          "ans1": "Optimization"
+        },
+        "question": "Which term describes the process of making a program or algorithm more efficient or effective?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "Algorithm"
+        },
+        "question": "What is the process of finding a solution to a problem called?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "Bubble sort"
+        },
+        "question": "Which sorting algorithm has the worst-case time complexity?",
+        "status": "0",
+        "type": "Algorithm"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "Binary search"
+        },
+        "question": "Which search algorithm requires the data to be sorted beforehand?",
+        "status": "0",
+        "type": "Algorithm"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "Merge sort"
+        },
+        "question": "Which algorithm is used to sort elements by repeatedly dividing the list into two halves and merging them back together?",
+        "status": "2",
+        "type": "Algorithm"
+      },
+      "Q6": {
+        "answers": {
+          "ans1": "Selection sort"
+        },
+        "question": "Which algorithm is used to find the maximum or minimum value in a list or array?",
+        "status": "2",
+        "type": "Algorithm"
+      },
+      "Q7": {
+        "answers": {
+          "ans1": "Decomposition"
+        },
+        "question": "Which term describes breaking down a complex problem into smaller, more manageable parts?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q8": {
+        "answers": {
+          "ans1": "Abstraction"
+        },
+        "question": "Which term describes the process of removing unnecessary details to focus on the important aspects of a problem?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q9": {
+        "answers": {
+          "ans1": "Iteration"
+        },
+        "question": "Which term describes the repetition of a process or set of instructions until a specific condition is met?",
+        "status": "2",
+        "type": "Name"
+      },
+      "settings": {
+        "background": "brain",
+        "desc": "Algorithms",
+        "folder": false,
+        "level": "admin",
+        "name": "Algorithms",
+        "public": false,
+        "subject": "Computer Science",
+        "user": "GoodVessel92551"
+      }
+    },
+    "B4": {
+      "Q1": {
+        "answers": {
+          "ans1": "Fungi"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://assets.website-files.com/620e6fc20903c76d73735e50/622f374116a3b43e25893611_main.jpg"
+        },
+        "question": "Besides bacteria, which other type of microorganism is often responsible for decay?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q10": {
+        "answers": {
+          "ans1": "Fungi"
+        },
+        "question": "As well as bacteria, what other type of microorganism is often involved in decay?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q11": {
+        "answers": {
+          "ans1": "Food chain"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://www.sciencefacts.net/wp-content/uploads/2022/05/Food-Chain.jpg"
+        },
+        "question": "What is the name of the simple chart that shows the flow of energy from one organism to another?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q12": {
+        "answers": {
+          "ans1": "Egestion"
+        },
+        "question": "What is the scientific term for the process of getting rid of undigested food?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q13": {
+        "answers": {
+          "ans1": "Excretion"
+        },
+        "question": "A lot of energy is not stored in biomass but is used for biological processes instead. Which process removes waste from the body? Give the scientific term.",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q14": {
+        "answers": {
+          "ans1": "Owl"
+        },
+        "question": "Mice and owls have predator-prey interdependence. Which of these animals is the predator?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q15": {
+        "answers": {
+          "ans1": "Interdependence"
+        },
+        "question": "If a population of organisms can't exist without being affected by other populations of organisms, it is called?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q16": {
+        "answers": {
+          "ans1": "Abiotic"
+        },
+        "question": "Is temperature a biotic or an abiotic factor on a community?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q17": {
+        "answers": {
+          "ans1": "Water"
+        },
+        "question": "In a dry desert, what do plants mainly compete for?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q18": {
+        "answers": {
+          "ans1": "Interdependence"
+        },
+        "question": "If one species is removed it can impact the whole community. This is called?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q19": {
+        "answers": {
+          "ans1": "Population"
+        },
+        "question": "What is a group of organisms of one species, living in the same area at one time called?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "Plants"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://www.realsimple.com/thmb/P9g1f-xU0Zr2cq2_3dMwfXizZcM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/impossible-to-kill-outdoor-plants-1-2000-f513b0574cb04674a1bce40b832b28dd.jpg"
+        },
+        "question": "Apart from microorganisms, what other organisms use the nutrients released by decay?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "Precipitation"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://www.worldatlas.com/r/w1200/upload/b7/e8/4a/transpiration.png"
+        },
+        "question": "In the water cycle what is the name given to the process of water falling from clouds?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "Rrespiration"
+        },
+        "question": "Name a process that releases water from plants back into the atmosphere.",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "Photosynthesis"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://cdn.britannica.com/22/94122-050-93F6BAE0/trees-plants-carbon-dioxide-sunlight-sugars-water.jpg"
+        },
+        "question": "What is the only part of the carbon cycle that removes carbon from the air?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q6": {
+        "answers": {
+          "ans1": "Respiration"
+        },
+        "question": "What process carried out by microorganisms in the carbon cycle releases carbon dioxide into the atmosphere?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q7": {
+        "answers": {
+          "ans1": "Microorganisms"
+        },
+        "question": "When animals and plants die, organisms cause the decay of their bodies. Name one of these types of organism.",
+        "status": 0,
+        "type": "Name"
+      },
+      "Q8": {
+        "answers": {
+          "ans1": "Microorganisms"
+        },
+        "question": "What type of living thing is the main organism involved in decay?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q9": {
+        "answers": {
+          "ans1": "Anaerobic"
+        },
+        "question": "What term is used to describe decay that happens when there is no oxygen present?",
+        "status": "2",
+        "type": "Name"
+      },
+      "settings": {
+        "background": "biology",
+        "desc": "Community Level Systems",
+        "folder": false,
+        "level": "admin",
+        "name": "B4",
+        "public": false,
+        "subject": "Other",
+        "user": "GoodVessel92551"
+      }
+    },
+    "Biology B1": {
+      "Q1": {
+        "answers": {
+          "ans1": "Complex Cells"
+        },
+        "question": "What are Eukaryotes made from?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q10": {
+        "answers": {
+          "ans1": "Double Helix"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://med.stanford.edu/content/dam/sm-news/images/2023/09/dna.jpg"
+        },
+        "question": "What form does DNA Take?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q11": {
+        "answers": {
+          "ans1": "Nucleotides"
+        },
+        "question": "Each of the DNA strands are made up of?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q12": {
+        "answers": {
+          "ans1": "Phosphate > Suger > Base"
+        },
+        "question": "What are Nucleotides made up of?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q13": {
+        "answers": {
+          "ans1": "A Polymer (Long Chain Of Monomers Joined Together)"
+        },
+        "question": "What is DNA?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q14": {
+        "answers": {
+          "ans1": "The Production Of Proteines."
+        },
+        "question": "What does DNA control?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q15": {
+        "answers": {
+          "ans1": "Amino Acids"
+        },
+        "question": "What are Proteins made up of?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q16": {
+        "answers": {
+          "ans1": "mRNA"
+        },
+        "question": "What is the molecule used to transport a copy of DNA?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q17": {
+        "answers": {
+          "ans1": "Ribosome"
+        },
+        "question": "What part of the cell decodes the mRNA?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q18": {
+        "answers": {
+          "ans1": "tRNA"
+        },
+        "question": "What molecule brings the amino acids to the ribosome?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q19": {
+        "answers": {
+          "ans1": "Chemical Reactions link Respiration, Photosynthesis."
+        },
+        "question": "What do Enzymes Control?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "Simple Cells"
+        },
+        "question": "What are Prokaryotes made from?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q20": {
+        "answers": {
+          "ans1": "Active Site"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://www.shalom-education.com/wp-content/uploads/2023/08/Shutterstock_1218104026.png"
+        },
+        "question": "What is the part of the enzymes where the substrate connects to the enzyme.",
+        "status": 0,
+        "type": "Name"
+      },
+      "Q21": {
+        "answers": {
+          "ans1": "The Enzyme Will Work The Fastest That It Can."
+        },
+        "question": "What does optimum temperature mean?",
+        "status": "2",
+        "type": "River"
+      },
+      "Q22": {
+        "answers": {
+          "ans1": "It Is The Transfer Of Energy From The Breakdown Of Glucose."
+        },
+        "question": "What is Respiration?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q23": {
+        "answers": {
+          "ans1": "Creating ATP"
+        },
+        "question": "What is the energy used of in respiration?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q24": {
+        "answers": {
+          "ans1": "Glucose + Oxygen -> Carbon Dioxide + Water"
+        },
+        "question": "What is the formula for respiration?",
+        "status": "2",
+        "type": "Chemical Element"
+      },
+      "Q25": {
+        "answers": {
+          "ans1": "Oxygen"
+        },
+        "question": "What does anaerobic respiration not use?",
+        "status": "2",
+        "type": "Chemical Element"
+      },
+      "Q26": {
+        "answers": {
+          "ans1": "Glucose -> Lactic Acid"
+        },
+        "question": "What is the formula for Anaerobic Respiration in Animals?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q27": {
+        "answers": {
+          "ans1": "Glucose -> Ethanol + Carbon Dioxide"
+        },
+        "question": "What is the formula for Anaerobic Respiration in plants?",
+        "status": "2",
+        "type": "Chemical Element"
+      },
+      "Q28": {
+        "answers": {
+          "ans1": "Simple Sugars"
+        },
+        "question": "Carbohydrates are made up of?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q29": {
+        "answers": {
+          "ans1": "Polymers e.g. starch and glycogen."
+        },
+        "question": "The monormer (simpler sugars) and be joined together to create?",
+        "status": "0",
+        "type": "Logical Operator"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "Eukaryotic"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://www.sciencefacts.net/wp-content/uploads/2021/02/Eukaryotic-Cell-Diagram.jpg"
+        },
+        "question": "What type of cell contains a Nucleus?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q30": {
+        "answers": {
+          "ans1": "Fatty Acids and Glycerol"
+        },
+        "question": "What are lipids made up of?",
+        "status": "0",
+        "type": "Logical Operator"
+      },
+      "Q31": {
+        "answers": {
+          "ans1": "In the chloroplasts."
+        },
+        "question": "Where does photosynthesis happen?",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q32": {
+        "answers": {
+          "ans1": "Carbon Dioxide + Water -- Light --> Glucose + Oxygen."
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://dnk4skl3hw8rq.cloudfront.net/assets/1a5c78c0a38e25262ec375a0ca7a496482c76051/leaves-5424297_1280.content.jpg"
+        },
+        "question": "What is the equation for Photosynthesis?",
+        "status": "2",
+        "type": "Chemical Element"
+      },
+      "Q33": {
+        "answers": {
+          "ans1": "It Means That Something Is Stopping It Happening Any Faster."
+        },
+        "question": "What does a limiting factor mean?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "Prokaryotic"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://sciencenotes.org/wp-content/uploads/2023/06/prokaryotic-cell-diagram.png"
+        },
+        "question": "What type of cell contains plasmids?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "Electron Microscopes "
+        },
+        "question": "What type of Microscopes have a higher magnification and resolution?",
+        "status": "2",
+        "type": "Subatomic Particle"
+      },
+      "Q6": {
+        "answers": {
+          "ans1": "Light Microscopes "
+        },
+        "question": "What Microscopes are portable?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q7": {
+        "answers": {
+          "ans1": "Magnification = Image Size / Real Size"
+        },
+        "question": "What is the equation for magnification?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q8": {
+        "answers": {
+          "ans1": "T"
+        },
+        "question": "What Base connects to A?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q9": {
+        "answers": {
+          "ans1": "G"
+        },
+        "question": "What Base connects to C?",
+        "status": "2",
+        "type": "Name"
+      },
+      "settings": {
+        "background": "biology",
+        "desc": "Biology B1",
+        "folder": false,
+        "level": "admin",
+        "name": "Biology B1",
+        "public": false,
+        "subject": "Biology",
+        "user": "GoodVessel92551"
+      }
+    },
+    "Biology B2": {
+      "Q1": {
+        "answers": {
+          "ans1": "Grow and Replacement"
+        },
+        "question": "What are new cells needed for?",
+        "status": "0",
+        "type": "Logical Operator"
+      },
+      "Q10": {
+        "answers": {
+          "ans1": "It is the net movement of water molecules across a partially permeable membrane "
+        },
+        "question": "What is Osmosis?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q11": {
+        "answers": {
+          "ans1": "Is the likelihood that water molecules to diffuse out of or into a solution. "
+        },
+        "question": "What is Water Potential?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q12": {
+        "answers": {
+          "ans1": "The cells become flaccid."
+        },
+        "question": "What happens when there is not enghor water for a plant?",
+        "status": "0",
+        "type": "River"
+      },
+      "Q13": {
+        "answers": {
+          "ans1": "It is higher in cells that have a large surface area to volume ratio."
+        },
+        "question": "Where is the rate of diffusion highest?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q14": {
+        "answers": {
+          "ans1": "They are adapted the maximize exchange."
+        },
+        "question": "What are Exchange Sufaces?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q15": {
+        "answers": {
+          "ans1": "Cattay the blood away from the heart."
+        },
+        "question": "What is the function of Arteries?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q16": {
+        "answers": {
+          "ans1": "Involved in the exchange of materials."
+        },
+        "question": "What is the function of capillaries?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q17": {
+        "answers": {
+          "ans1": "To carry blood to the heart."
+        },
+        "question": "What is the function of veins?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q18": {
+        "answers": {
+          "ans1": "To transport food."
+        },
+        "question": "What is the function of the Phloem?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q19": {
+        "answers": {
+          "ans1": "To take water UP."
+        },
+        "question": "What is the function of the Xylem?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "3 (G1, S and G2)"
+        },
+        "question": "How many stages are in cell growth?",
+        "status": "2",
+        "type": "Logical Operator"
+      },
+      "Q20": {
+        "answers": {
+          "ans1": "It is the Loss of Water from the Plant."
+        },
+        "question": "What is Transpiration?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q21": {
+        "answers": {
+          "ans1": "Increase in Light\r\nIncrease in Temperature\r\nIncrease in Air Moment"
+        },
+        "question": "What effect's the Rate of Transpiration?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q22": {
+        "answers": {
+          "ans1": "With a potometer."
+        },
+        "question": "How do you measure the rate of transpiration?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "Mitosis"
+        },
+        "question": "What is the process of the cell splitting called? ",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "When a cell changes to become specialised for its job"
+        },
+        "question": "What is Differentiation? ",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "They can divide and make new cells which can differentiate."
+        },
+        "question": "What can stem cells do?",
+        "status": "0",
+        "type": "Logical Operator"
+      },
+      "Q6": {
+        "answers": {
+          "ans1": "Meristems."
+        },
+        "question": "Where are cells in plant that can divide by mitosis?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q7": {
+        "answers": {
+          "ans1": "It is the movement of particles from a Higher to Lower Concentration."
+        },
+        "question": "What is Diffusion?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q8": {
+        "answers": {
+          "ans1": "The moment of substances."
+        },
+        "question": "What do cell membranes allow?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q9": {
+        "answers": {
+          "ans1": "It is the moment of particles from a Lower concentration to a Higher concentration using ATP from respiration."
+        },
+        "question": "What is active transport?",
+        "status": "2",
+        "type": "Description"
+      },
+      "settings": {
+        "background": "biology",
+        "desc": "Biology B2",
+        "folder": false,
+        "level": "admin",
+        "name": "Biology B2",
+        "public": false,
+        "subject": "Biology",
+        "user": "GoodVessel92551"
+      }
+    },
+    "Chemical Formulas": {
+      "Q1": {
+        "answers": {
+          "ans1": "H2O"
+        },
+        "question": "What is the chemical formula for water?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q10": {
+        "answers": {
+          "ans1": "CaCO3"
+        },
+        "question": "What is the chemical formula for calcium carbonate?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q11": {
+        "answers": {
+          "ans1": "HNO3"
+        },
+        "question": "What is the chemical formula for nitric acid?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q12": {
+        "answers": {
+          "ans1": "SO2"
+        },
+        "question": "What is the chemical formula for sulfur dioxide?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "CO2"
+        },
+        "question": "What is the chemical formula for carbon dioxide?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "CH4"
+        },
+        "question": "What is the chemical formula for methane?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "NaCl"
+        },
+        "question": "What is the chemical formula for sodium chloride?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "H2SO4"
+        },
+        "question": "What is the chemical formula for sulfuric acid?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q6": {
+        "answers": {
+          "ans1": "C6H12O6"
+        },
+        "question": "What is the chemical formula for glucose?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q7": {
+        "answers": {
+          "ans1": "NH3"
+        },
+        "question": "What is the chemical formula for ammonia?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q8": {
+        "answers": {
+          "ans1": "HCl"
+        },
+        "question": "What is the chemical formula for hydrochloric acid?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q9": {
+        "answers": {
+          "ans1": "NaOH"
+        },
+        "question": "What is the chemical formula for sodium hydroxide?",
+        "status": "2",
+        "type": "Name"
+      },
+      "settings": {
+        "background": "chemistry",
+        "desc": "Chemical Formulas",
+        "folder": false,
+        "level": "admin",
+        "name": "Chemical Formulas",
+        "public": false,
+        "subject": "Chemistry",
+        "user": "GoodVessel92551"
+      }
+    },
+    "Chemistry Terms": {
+      "Q1": {
+        "answers": {
+          "ans1": "Atom"
+        },
+        "question": "What is the term for the smallest unit of a chemical element that retains its chemical properties?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q10": {
+        "answers": {
+          "ans1": "Base"
+        },
+        "question": "What is the term for a substance that accepts hydrogen ions (H+) or releases hydroxide ions (OH-) in a solution?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q11": {
+        "answers": {
+          "ans1": "Concentration"
+        },
+        "question": "What is the term for a measure of the total amount of substance in a given volume?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q12": {
+        "answers": {
+          "ans1": "Endothermic reaction"
+        },
+        "question": "What is the term for a chemical reaction in which heat is absorbed from the surroundings?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q13": {
+        "answers": {
+          "ans1": "Sublimation"
+        },
+        "question": "What is the term for a process in which a solid directly changes to a gas without passing through the liquid state?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q14": {
+        "answers": {
+          "ans1": "Synthesis reaction"
+        },
+        "question": "What is the term for a chemical reaction in which two or more substances combine to form a new substance?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q15": {
+        "answers": {
+          "ans1": "Ionic bond"
+        },
+        "question": "What is the term for a type of chemical bond formed by the electrostatic attraction between positive and negative ions?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q16": {
+        "answers": {
+          "ans1": "Salt"
+        },
+        "question": "What is the term for a substance formed by the combination of an acid and a base?",
+        "status": "2",
+        "type": "Lake"
+      },
+      "Q17": {
+        "answers": {
+          "ans1": "Volume"
+        },
+        "question": "What is the term for the measure of the amount of space occupied by an object or substance?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "Element"
+        },
+        "question": "What is the term for a pure substance made up of only one type of atom?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "Compound"
+        },
+        "question": "What is the term for a substance made up of two or more different elements chemically bonded together?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "Catalyst"
+        },
+        "question": "What is the term for a substance that speeds up a chemical reaction without being consumed in the process?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "Mass"
+        },
+        "question": "What is the term for the amount of matter in an object or substance?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q6": {
+        "answers": {
+          "ans1": "Element"
+        },
+        "question": "What is the term for a substance that cannot be broken down into simpler substances by chemical means?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q7": {
+        "answers": {
+          "ans1": "pH"
+        },
+        "question": "What is the term for a measure of the acidity or alkalinity of a solution?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q8": {
+        "answers": {
+          "ans1": "Covalent bond"
+        },
+        "question": "What is the term for a chemical bond in which electrons are shared between atoms?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q9": {
+        "answers": {
+          "ans1": "Acid"
+        },
+        "question": "What is the term for a substance that releases hydrogen ions (H+) in a solution?",
+        "status": "2",
+        "type": "Name"
+      },
+      "settings": {
+        "background": "chemistry",
+        "desc": "Chemistry Terms",
+        "folder": false,
+        "level": "admin",
+        "name": "Chemistry Terms",
+        "public": false,
+        "subject": "Chemistry",
+        "user": "GoodVessel92551"
+      }
+    },
+    "Data Representation": {
+      "Q1": {
+        "answers": {
+          "ans1": "Bit"
+        },
+        "question": "Which is the smallest unit of data storage?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q10": {
+        "answers": {
+          "ans1": "1100"
+        },
+        "question": "What is the binary representation of the hexadecimal number C?",
+        "status": "2",
+        "type": "Number"
+      },
+      "Q11": {
+        "answers": {
+          "ans1": "Unicode"
+        },
+        "question": "Which data representation is used to represent characters from various writing systems?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q12": {
+        "answers": {
+          "ans1": "8"
+        },
+        "question": "How many bits are required to represent 256 unique values?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q13": {
+        "answers": {
+          "ans1": "2A"
+        },
+        "question": "What is the hexadecimal representation of the decimal number 42?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "8"
+        },
+        "question": "How many bits are in a byte?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "1010"
+        },
+        "question": "What is the binary representation of the decimal number 10?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "D"
+        },
+        "question": "What is the hexadecimal representation of the binary number 1101?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "42"
+        },
+        "question": "What is the decimal representation of the binary number 101010?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q6": {
+        "answers": {
+          "ans1": "4"
+        },
+        "question": "How many bits are required to represent 16 unique values?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q7": {
+        "answers": {
+          "ans1": "ASCII"
+        },
+        "question": "Which data representation is commonly used for storing and transmitting text characters?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q8": {
+        "answers": {
+          "ans1": "Binary"
+        },
+        "question": "Which data representation is used by computers internally for processing and storage?",
+        "status": "2",
+        "type": "Algorithm"
+      },
+      "Q9": {
+        "answers": {
+          "ans1": "256"
+        },
+        "question": "How many unique values can be represented with 8 bits?",
+        "status": "0",
+        "type": "Name"
+      },
+      "settings": {
+        "background": "cpu",
+        "desc": "Data Representation",
+        "folder": false,
+        "level": "admin",
+        "name": "Data Representation",
+        "public": false,
+        "subject": "Computer Science",
+        "user": "GoodVessel92551"
+      }
+    },
+    "Data Units": {
+      "Q1": {
+        "answers": {
+          "ans1": "4"
+        },
+        "question": "How many bits are in a nibble?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q10": {
+        "answers": {
+          "ans1": "8"
+        },
+        "question": "How many bytes is \"Good Day\"",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "1000"
+        },
+        "question": "How many bytes are in a kilobyte?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "16"
+        },
+        "question": "How many bases do hexadecimal use?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "2"
+        },
+        "question": "How many bases does binary use?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "Binary code that tells the CPU what machine operation that it needs to perform."
+        },
+        "question": "What is Opcode?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q6": {
+        "answers": {
+          "ans1": "Data or value that the CPU operates on."
+        },
+        "question": "What is Operand?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q7": {
+        "answers": {
+          "ans1": "Unicode"
+        },
+        "question": "What one of the following in a character set?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q8": {
+        "answers": {
+          "ans1": "128"
+        },
+        "question": "How many characters does ASCII allow for? ",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q9": {
+        "answers": {
+          "ans1": "65536"
+        },
+        "question": "How many characters does Unicode allow?",
+        "status": "2",
+        "type": "Name"
+      },
+      "settings": {
+        "background": "cpu",
+        "desc": "Data Units Revision",
+        "folder": false,
+        "level": "admin",
+        "name": "Data Units",
+        "public": false,
+        "subject": "Computer Science",
+        "user": "GoodVessel92551"
+      }
+    },
+    "General knowledge (1)": {
+      "Q1": {
+        "answers": {
+          "ans1": "Canberra"
+        },
+        "question": "What is the capital of Australia?",
+        "status": "2",
+        "type": "City"
+      },
+      "Q10": {
+        "answers": {
+          "ans1": "Vatican City"
+        },
+        "question": "What is the smallest country in the world?",
+        "status": "2",
+        "type": "Country"
+      },
+      "Q11": {
+        "answers": {
+          "ans1": "Alexander Graham Bell"
+        },
+        "question": "Who invented the telephone?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q12": {
+        "answers": {
+          "ans1": "Mount Kilimanjaro"
+        },
+        "question": "What is the highest mountain in Africa?",
+        "status": "2",
+        "type": "Mountain"
+      },
+      "Q13": {
+        "answers": {
+          "ans1": "Bill Gates"
+        },
+        "question": "Who is the founder of Microsoft?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q14": {
+        "answers": {
+          "ans1": "Japanese yen"
+        },
+        "question": "What is the currency of Japan?",
+        "status": "2",
+        "type": "Currency"
+      },
+      "Q15": {
+        "answers": {
+          "ans1": "Steven Spielberg"
+        },
+        "question": "Who directed the movie \"Jurassic Park\"?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q16": {
+        "answers": {
+          "ans1": "Mars"
+        },
+        "question": "Which planet is known as the Red Planet?",
+        "status": "0",
+        "type": "Planet"
+      },
+      "Q17": {
+        "answers": {
+          "ans1": "F. Scott Fitzgerald"
+        },
+        "question": "Who is the author of \"The Great Gatsby\"?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q18": {
+        "answers": {
+          "ans1": "Victoria Falls"
+        },
+        "question": "What is the name of the world's largest waterfall?",
+        "status": "2",
+        "type": "Location"
+      },
+      "Q19": {
+        "answers": {
+          "ans1": "Swiss franc"
+        },
+        "question": "What is the currency of Switzerland?",
+        "status": "2",
+        "type": "Currency"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "Pacific Ocean"
+        },
+        "question": "What is the world's largest ocean?",
+        "status": "2",
+        "type": "Ocean"
+      },
+      "Q20": {
+        "answers": {
+          "ans1": "Jane Austen"
+        },
+        "question": "Who wrote the novel \"Pride and Prejudice\"?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q21": {
+        "answers": {
+          "ans1": "Mariana Trench"
+        },
+        "question": "What is the world's deepest ocean trench?",
+        "status": "2",
+        "type": "Location"
+      },
+      "Q22": {
+        "answers": {
+          "ans1": "Russia"
+        },
+        "question": "Which country is the largest by land area?",
+        "status": "2",
+        "type": "Country"
+      },
+      "Q23": {
+        "answers": {
+          "ans1": "Leonardo da Vinci"
+        },
+        "question": "Who painted the famous artwork \"Mona Lisa\"?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q24": {
+        "answers": {
+          "ans1": "Great Barrier Reef"
+        },
+        "question": "What is the name of the world's largest coral reef system?",
+        "status": "2",
+        "type": "Location"
+      },
+      "Q25": {
+        "answers": {
+          "ans1": "J.D. Salinger"
+        },
+        "question": "Who is the author of \"The Catcher in the Rye\"?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "Mercury"
+        },
+        "question": "What is the smallest planet in our solar system?",
+        "status": "2",
+        "type": "Planet"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "Japan"
+        },
+        "question": "Which country is known as the Land of the Rising Sun?",
+        "status": "2",
+        "type": "Country"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "Sahara"
+        },
+        "question": "What is the name of the world's largest desert?",
+        "status": "2",
+        "type": "Desert"
+      },
+      "Q6": {
+        "answers": {
+          "ans1": "Vincent van Gogh"
+        },
+        "question": "Who painted the famous artwork \"The Starry Night\"?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q7": {
+        "answers": {
+          "ans1": "J.K. Rowling"
+        },
+        "question": "Who is the author of the Harry Potter series?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q8": {
+        "answers": {
+          "ans1": "George Orwell"
+        },
+        "question": "Who wrote the novel \"1984\"?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q9": {
+        "answers": {
+          "ans1": "Camel"
+        },
+        "question": "Which animal is known as the \"ship of the desert\"?",
+        "status": "2",
+        "type": "Animal"
+      },
+      "settings": {
+        "background": "brain",
+        "desc": "General knowledge revision set.",
+        "folder": false,
+        "level": "admin",
+        "name": "General knowledge",
+        "public": false,
+        "subject": "Other",
+        "user": "GoodVessel92551"
+      }
+    },
+    "Geographical Terms": {
+      "Q1": {
+        "answers": {
+          "ans1": "Geography"
+        },
+        "question": "What is the term for the study of the Earth's physical features, climate, and weather patterns?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q10": {
+        "answers": {
+          "ans1": "Divergent boundary"
+        },
+        "question": "What is the term for the boundary where two tectonic plates are moving away from each other?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "Ocean"
+        },
+        "question": "What is the term for a large body of saltwater that covers most of the earth surface?",
+        "status": "2",
+        "type": "Ocean"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "Earthquake"
+        },
+        "question": "What is the term for a sudden and violent shaking of the ground, often caused by the movement of tectonic plates?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "Stratovolcano"
+        },
+        "question": "What is the term for a steep-sided volcano composed of layers of lava, ash, and volcanic materials?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "Tundra"
+        },
+        "question": "What is the term for a large, flat, treeless area of land found in the Arctic and Antarctic regions ",
+        "status": 0,
+        "type": "Geographic Location"
+      },
+      "Q6": {
+        "answers": {
+          "ans1": "Lake"
+        },
+        "question": "What is the term for a body of water surrounded by land on all sides?",
+        "status": "2",
+        "type": "Location"
+      },
+      "Q7": {
+        "answers": {
+          "ans1": "Erosion"
+        },
+        "question": "What is the term for the process of the Earth's surface being worn away by the action of water, wind, or ice?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q8": {
+        "answers": {
+          "ans1": "Plateau"
+        },
+        "question": "What is the term for a large, flat, elevated area of land with steep sides, usually found between mountain ranges?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q9": {
+        "answers": {
+          "ans1": "Peninsula"
+        },
+        "question": "What is the term for a large body of land surrounded by water on three sides?",
+        "status": "2",
+        "type": "Location"
+      },
+      "settings": {
+        "background": "world",
+        "desc": "Geographical Terms",
+        "folder": false,
+        "level": "admin",
+        "name": "Geographical Terms",
+        "public": false,
+        "subject": "Geography",
+        "user": "GoodVessel92551"
+      }
+    },
+    "Hide and Seek": {
+      "Q1": {
+        "answers": {
+          "ans1": "Suspense, creepy, uncomfortable"
+        },
+        "question": "What effects does Personification have?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q10": {
+        "answers": {
+          "ans1": "\"Call\u201d & \u201cCome\u201d on the first line"
+        },
+        "question": "What is a example of Alliteration?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q11": {
+        "answers": {
+          "ans1": "The word \u201cThe\u201d"
+        },
+        "question": "What is a example of a Anaphora?",
+        "status": "2",
+        "type": "River"
+      },
+      "Q12": {
+        "answers": {
+          "ans1": "1 Stanza. Has a narrative . It is a young person that is playing a game of hide and seek when the people that are looking for them stop and go inside and then they leave the place that they are hiding and the sun has set and it is dark. "
+        },
+        "question": "Summary",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q13": {
+        "answers": {
+          "ans1": "It is an extended metaphor for life and loneliness because the people that were searching for him have now abandoned him. \r\n\r\nAlso it shows that he did not know his friends because he trusted that they were going to try and find him yet they gave up.\r\n\r\nThe person in the poem also thought that everyone in the game was enjoying it like they were, however they might not be enjoying it as much as him. "
+        },
+        "question": "Meaning / poets message",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q14": {
+        "answers": {
+          "ans1": "Fun at the start however gets more sad/sinister towards the end\r\nYouthful / childlike feeling of expression"
+        },
+        "question": "Mood / tone",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": " Makes it flow more in places, childhood nostalgia"
+        },
+        "question": "What is the effect of Rhyme?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "sharp feeling - like salty air"
+        },
+        "question": "What is the effect of Sibilance?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "Child like feel, children's stories contain rhyme and repetition"
+        },
+        "question": "What is the effect of Repetition?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "Suspense - leaves you wanting more information or answers, leaves you thinking"
+        },
+        "question": "What is the effect of Rhetorical Questions?",
+        "status": "2",
+        "type": "Logical Operator"
+      },
+      "Q6": {
+        "answers": {
+          "ans1": "Creates an awkwardness / strange feeling"
+        },
+        "question": "What is the effect of Enjambment?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q7": {
+        "answers": {
+          "ans1": "Makes you think about it more, draws attention of reader to it"
+        },
+        "question": "What is the effect of Caesura? ",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q8": {
+        "answers": {
+          "ans1": "Smell like the seaside"
+        },
+        "question": "What is a example of a Simile?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q9": {
+        "answers": {
+          "ans1": "Hide in your blindness"
+        },
+        "question": "What is a example of a Metaphor?",
+        "status": "2",
+        "type": "Description"
+      },
+      "settings": {
+        "background": "book",
+        "desc": "Hide and Seek by Vernon Scannell",
+        "folder": false,
+        "level": "admin",
+        "name": "Hide and Seek",
+        "public": false,
+        "subject": "Other",
+        "user": "GoodVessel92551"
+      }
+    },
+    "History Terms And Dates": {
+      "Q1": {
+        "answers": {
+          "ans1": "1492"
+        },
+        "question": "In which year did Christopher Columbus reach the Americas?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q10": {
+        "answers": {
+          "ans1": "Crusades"
+        },
+        "question": "What is the term for a series of military campaigns undertaken by European Christians in the 11th to 13th centuries to recapture the Holy Land from Muslims?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q11": {
+        "answers": {
+          "ans1": "Industrial Revolution"
+        },
+        "question": "What is the term for a period of rapid industrialization and technological advancements that occurred in the late 18th to early 19th centuries?",
+        "status": "2",
+        "type": "Event"
+      },
+      "Q12": {
+        "answers": {
+          "ans1": "Imperialism"
+        },
+        "question": "What is the term for a policy of territorial expansion by a powerful country, often through military force?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q13": {
+        "answers": {
+          "ans1": "Feudalism"
+        },
+        "question": "What is the term for the economic and social system in medieval Europe where land was exchanged for military service and loyalty?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "1914"
+        },
+        "question": "In which year did World War I begin?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "1776"
+        },
+        "question": "In which year did the United States declare independence from Great Britain?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "1917"
+        },
+        "question": "In which year did the Russian Revolution take place?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "1945"
+        },
+        "question": "In which year did World War II end?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q6": {
+        "answers": {
+          "ans1": "1215"
+        },
+        "question": "In which year was the Magna cart signed?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q7": {
+        "answers": {
+          "ans1": "1989"
+        },
+        "question": "In which year did the Berlin Wall fall?",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q8": {
+        "answers": {
+          "ans1": "Monarchy"
+        },
+        "question": "What is the term for a system of government in which power is held by a single ruler?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q9": {
+        "answers": {
+          "ans1": "Renaissance"
+        },
+        "question": "What is the term for a period of cultural and intellectual flourishing that occurred in Europe during the 14th to 17th centuries?",
+        "status": "2",
+        "type": "Name"
+      },
+      "settings": {
+        "background": "book",
+        "desc": "History Terms And Dates",
+        "folder": false,
+        "level": "admin",
+        "name": "History Terms And Dates",
+        "public": false,
+        "subject": "History",
+        "user": "GoodVessel92551"
+      }
+    },
+    "Image Data": {
+      "Q1": {
+        "answers": {
+          "ans1": "PNG"
+        },
+        "question": "What is a common image format?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "One made up of pixels."
+        },
+        "question": "What is a bitmap image?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "The amount of color options."
+        },
+        "question": "What is bit death?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "Increase file size."
+        },
+        "question": "Increasing the resolution will do what?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "Information about the image."
+        },
+        "question": "What is image meta data?",
+        "status": "2",
+        "type": "River"
+      },
+      "settings": {
+        "background": "image",
+        "desc": "Images Revision",
+        "folder": false,
+        "level": "admin",
+        "name": "Image Data",
+        "public": false,
+        "subject": "Computer Science",
+        "user": "GoodVessel92551"
+      }
+    },
+    "Impacts of digital technology": {
+      "Q1": {
+        "answers": {
+          "ans1": "It increases the risk of obesity and sedentary behavior."
+        },
+        "question": "How does excessive screen time affect physical health?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q10": {
+        "answers": {
+          "ans1": "Job displacement and changes in the nature of work."
+        },
+        "question": "What is a potential social impact of digital technology on employment?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "It can lead to feelings of inadequacy, depression, and anxiety."
+        },
+        "question": "What is a potential negative impact of social media on mental health?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "Unequal access to information and opportunities."
+        },
+        "question": "What is a consequence of the digital divide?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "It can lead to psychological distress and low self-esteem."
+        },
+        "question": "What is a potential negative effect of cyberbullying?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "It disrupts circadian rhythm."
+        },
+        "question": "How can excessive use of digital devices impact sleep quality?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q6": {
+        "answers": {
+          "ans1": "Impaired academic or professional performance and neglect of responsibilities."
+        },
+        "question": "What is a potential consequence of digital addiction?",
+        "status": "2",
+        "type": "Logical Operator"
+      },
+      "Q7": {
+        "answers": {
+          "ans1": "It can lead to decreased face-to-face interactions and social isolation."
+        },
+        "question": "What is a potential negative impact of excessive reliance on digital communication?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q8": {
+        "answers": {
+          "ans1": "Excessive use of natural resources in the production of electronic devices."
+        },
+        "question": "What is a potential environmental concern associated with digital technology?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q9": {
+        "answers": {
+          "ans1": "It can lead to information fatigue and reduced attention span."
+        },
+        "question": "What is a potential negative impact of online information overload?",
+        "status": "2",
+        "type": "Description"
+      },
+      "settings": {
+        "background": "cpu",
+        "desc": "Impacts of digital technology",
+        "folder": false,
+        "level": "admin",
+        "name": "Impacts of digital technology",
+        "public": false,
+        "subject": "Computer Science",
+        "user": "GoodVessel92551"
+      }
+    },
+    "Logic Gates": {
+      "Q1": {
+        "answers": {
+          "ans1": "A logic gate whose output is 1 only when both the inputs are 1."
+        },
+        "question": "What is an AND Gate?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "A part of a processor that is responsible for arithmetic functions such as addition, subtraction, multiplication, etc. and logic operations such as AND, OR, NOT, etc."
+        },
+        "question": "What is the Arithmetic and Logic unit?",
+        "status": "2",
+        "type": "Logical Operator"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "Circuit used to perform binary addition of two bits."
+        },
+        "question": "What is the half-adder logic circuit?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "Building blocks of electronic circuits that are used in computer components. Logic gates work on the bina stem."
+        },
+        "question": "What are Logic Gates?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "Combination of logic gates that perform a specific function."
+        },
+        "question": "What is a Logic Circuit?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q6": {
+        "answers": {
+          "ans1": "A combination of AND gate and NOT gate, that produces an output complementary to that of AND ate."
+        },
+        "question": "What is a NAND Gate?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q7": {
+        "answers": {
+          "ans1": "A combination of OR gate and NOT gate, that produces an output complementary to that of a OR gate."
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://static.vecteezy.com/system/resources/previews/023/735/756/non_2x/nor-gate-icon-image-suitable-for-mobile-apps-web-apps-and-print-media-vector.jpg"
+        },
+        "question": "What is a NOR Gate?",
+        "status": "2",
+        "type": "Logical Operator"
+      },
+      "Q8": {
+        "answers": {
+          "ans1": "A combination of OR gate and NOT gate, that produces an output complementary to that of a OR gate."
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://static.vecteezy.com/system/resources/previews/023/735/756/non_2x/nor-gate-icon-image-suitable-for-mobile-apps-web-apps-and-print-media-vector.jpg"
+        },
+        "question": "What is a NOR Gate?",
+        "status": "2",
+        "type": "Logical Operator"
+      },
+      "settings": {
+        "background": "cpu",
+        "desc": "Logic Gates Revision",
+        "folder": false,
+        "level": "admin",
+        "name": "Logic Gates",
+        "public": false,
+        "subject": "Computer Science",
+        "user": "GoodVessel92551"
+      }
+    },
+    "Networks": {
+      "Q1": {
+        "answers": {
+          "ans1": "To connect multiple networks together"
+        },
+        "question": "What is the primary purpose of a router in a computer network?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "SMTP"
+        },
+        "question": "Which is a protocol used for sending emails?",
+        "status": "2",
+        "type": "Protocol"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "To translate domain names into IP addresses"
+        },
+        "question": "What is the function of a DNS in a network?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "To filter incoming and outgoing network traffic"
+        },
+        "question": "What is the purpose of a firewall in a network?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "HTTPS"
+        },
+        "question": "Which protocol is used for secure transmission of data over the internet?",
+        "status": "2",
+        "type": "Protocol"
+      },
+      "Q6": {
+        "answers": {
+          "ans1": "To transmit data within a single network"
+        },
+        "question": "What is the purpose of a switch in a network?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q7": {
+        "answers": {
+          "ans1": "To convert digital signals to analog signals and vice versa"
+        },
+        "question": "What is the purpose of a modem in a network?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q8": {
+        "answers": {
+          "ans1": "1 Gbps"
+        },
+        "question": "What is the maximum transmission speed of a standard Ethernet connection?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q9": {
+        "answers": {
+          "ans1": "Switch"
+        },
+        "question": "Which network device operates at the data link layer of the os model?",
+        "status": "2",
+        "type": "Product"
+      },
+      "settings": {
+        "background": "networks",
+        "desc": "Networks",
+        "folder": false,
+        "level": "admin",
+        "name": "Networks",
+        "public": false,
+        "subject": "Computer Science",
+        "user": "GoodVessel92551"
+      }
+    },
+    "Physics Equations": {
+      "Q1": {
+        "answers": {
+          "ans1": "Mass / Volume"
+        },
+        "question": "What is the equation for Density?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q10": {
+        "answers": {
+          "ans1": "Mass x 10"
+        },
+        "question": "What is the equation for gravity force?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q11": {
+        "answers": {
+          "ans1": "Mass x 10 x Height"
+        },
+        "question": "What is the equation for gravitational field strength?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q12": {
+        "answers": {
+          "ans1": "Force / Area"
+        },
+        "question": "What is the equation for pressure?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q13": {
+        "answers": {
+          "ans1": "Force x Distance"
+        },
+        "question": "What is the equation for a moment?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q14": {
+        "answers": {
+          "ans1": "Current x Time"
+        },
+        "question": "What is the equation for charge?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q15": {
+        "answers": {
+          "ans1": "Current x Resistance"
+        },
+        "question": "What is the equation for voltage?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q16": {
+        "answers": {
+          "ans1": "Charge x Voltage"
+        },
+        "question": "What is the equation for energy transferred?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q17": {
+        "answers": {
+          "ans1": "Voltage x Current x Resistance"
+        },
+        "question": "What is the equation for power in a circuit?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "Speed x Time"
+        },
+        "question": "What is the equation for distance?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "Change In Speed / Time Taken"
+        },
+        "question": "What is the equation for acceleration?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "Mass x Acceleration"
+        },
+        "question": "What is the equation for force?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "0.5 x mass x Speed^2"
+        },
+        "question": "What is the equation for kinetic energy?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q6": {
+        "answers": {
+          "ans1": "Mass x Velocity"
+        },
+        "question": "What is the equation for momentum?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q7": {
+        "answers": {
+          "ans1": "Force x Distance Moved"
+        },
+        "question": "What is the equation for work done?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q8": {
+        "answers": {
+          "ans1": "Work Done / Time"
+        },
+        "question": "What is the equation for power?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q9": {
+        "answers": {
+          "ans1": "Extension x Spring Constant"
+        },
+        "question": "What is the equation for force on a spring?",
+        "status": "2",
+        "type": "Name"
+      },
+      "settings": {
+        "background": "physics",
+        "desc": "Physics Equations",
+        "folder": false,
+        "level": "admin",
+        "name": "Physics Equations",
+        "public": false,
+        "subject": "Physics",
+        "user": "GoodVessel92551"
+      }
+    },
+    "Physics P1": {
+      "Q1": {
+        "answers": {
+          "ans1": "About 0.1 nanometres or 1 x 10^-10 m1"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://www.thoughtco.com/thmb/umeBisQXr0xg_q2ubj0Yzo0vUPk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/atom-artwork-160936095-58a8f5683df78c345b8e53be.jpg"
+        },
+        "question": "What is the radius of an atom?",
+        "status": "2",
+        "type": "Logical Operator"
+      },
+      "Q10": {
+        "answers": {
+          "ans1": "The amount of mass contained within a certain volume"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://www.ssc.education.ed.ac.uk/BSL/pictures/density.jpg"
+        },
+        "question": "What is density?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q11": {
+        "answers": {
+          "ans1": "The material it is made of and how its particles are arranged"
+        },
+        "question": "What does the density of an object depend on?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q12": {
+        "answers": {
+          "ans1": "When the upthrust on the object is equal to the weight of the object, or when the density of the object is lower than the density of the fluid1"
+        },
+        "question": "When will an object float in a fluid?",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q13": {
+        "answers": {
+          "ans1": "The upwards force exerted by a fluid on a submerged object"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://images.twinkl.co.uk/tw1n/image/private/t_630_eco/website/uploaded/upthrust-1588783409.png"
+        },
+        "question": "What is upthrust?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "About 1 x 10^-15 m"
+        },
+        "question": "What is the radius of an atom nucleus?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "Protons, neutrons and electrons"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://physfox.s3.eu-west-2.amazonaws.com/!electricity/pne/table-pne.png"
+        },
+        "question": "What are the three subatomic particles in an atom?",
+        "status": "2",
+        "type": "Logical Operator"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "The number of protons in an atom of that element"
+        },
+        "question": "What is the atomic number of an element?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "Because they have equal numbers of protons and electrons, so the charges cancel out"
+        },
+        "question": "Why do atoms have no overall charge?",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q6": {
+        "answers": {
+          "ans1": "In shells or energy levels at different distances from the nucleus"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://www.science-sparks.com/wp-content/uploads/2023/05/Model-of-the-atom-1024x1024.jpg"
+        },
+        "question": "How are electrons arranged in an atom?",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q7": {
+        "answers": {
+          "ans1": "The nuclear model or the Bohr model"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://cdn.britannica.com/09/149209-050-57443291/Bohr-model-nitrogen-atom.jpg"
+        },
+        "question": "What is the name of the model of the atom that has a positive nucleus surrounded by writing electrons?",
+        "status": "2",
+        "type": "Logical Operator"
+      },
+      "Q8": {
+        "answers": {
+          "ans1": "The plum pudding model or the Thomson model"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://haygot.s3.amazonaws.com/questions/1836392_1879785_ans_6ea7ac9adbdf4d2b9497d7f598c73854.png"
+        },
+        "question": "What is the name of the model of the atom that has a ball of positive charge with electrons embedded in it?",
+        "status": "2",
+        "type": "Logical Operator"
+      },
+      "Q9": {
+        "answers": {
+          "ans1": "The Rutherford gold foil experiment"
+        },
+        "question": "What is the name of the experiment that led to the discovery of the nucleus?",
+        "status": "2",
+        "type": "Color"
+      },
+      "settings": {
+        "background": "physics",
+        "desc": "Physics P1: Matter",
+        "folder": false,
+        "level": "admin",
+        "name": "Physics P1",
+        "public": false,
+        "subject": "Physics",
+        "user": "GoodVessel92551"
+      }
+    },
+    "Physics P2": {
+      "Q1": {
+        "answers": {
+          "ans1": "Speed is the distance travelled per unit time, velocity is the speed in a given direction"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://cdn1.byjus.com/wp-content/uploads/2020/09/Average-Speed-And-Average-Velocity.png"
+        },
+        "question": "What is the difference between speed and velocity?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q10": {
+        "answers": {
+          "ans1": "Newton\u2019s second law of motion"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://labster-image-manager.s3.amazonaws.com/v2/NL2/54160233-dc7b-4be0-83aa-c977ee107370/NL2_FinalConcept.en.x512.png"
+        },
+        "question": "What is the name of the principle that states that the resultant force on an object is equal to its mass times its acceleration?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q11": {
+        "answers": {
+          "ans1": "Newton\u2019s third law of motion"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://media.wired.com/photos/59331cde95879f6d0c00aa5e/191:100/w_1280,c_limit/fall_2013_sketcheskey_3.jpg"
+        },
+        "question": "What is the name of the principle that states that for every action there is an equal and opposite reaction?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q12": {
+        "answers": {
+          "ans1": "An elastic collision"
+        },
+        "question": "What is the name of the type of collision in which kinetic energy is conserved?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "A velocity-time graph"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://cdn1.byjus.com/wp-content/uploads/2020/09/Velocity-Time-Graphs-2.png"
+        },
+        "question": "What is the name of the graph that shows how velocity changes with time?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "The displacement or distance travelled"
+        },
+        "question": "What is the area under a velocity-time graph equal to?",
+        "status": "0",
+        "type": "Logical Operator"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "Friction or drag"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://cdn1.byjus.com/wp-content/uploads/2020/02/Frictional-Force.png"
+        },
+        "question": "What is the name of the force that opposes motion?",
+        "status": "2",
+        "type": "Logical Operator"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "Air resistance or terminal velocity"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://s3mn.mnimgs.com/img/shared/ck-files/ck_58da006d8072d.jpg"
+        },
+        "question": "What is the name of the force that acts on an object when it falls through a fluid?",
+        "status": "2",
+        "type": "Logical Operator"
+      },
+      "Q6": {
+        "answers": {
+          "ans1": "Elastic force or spring force"
+        },
+        "question": "What is the name of the force that acts on an object when it is stretched or compressed?",
+        "status": "2",
+        "type": "Logical Operator"
+      },
+      "Q7": {
+        "answers": {
+          "ans1": "Magnetic force"
+        },
+        "question": "What is the name of the force that acts between two magnets or two electric currents?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q8": {
+        "answers": {
+          "ans1": "Newtons (N)"
+        },
+        "question": "What is the unit of weight?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q9": {
+        "answers": {
+          "ans1": "Newton\u2019s first law of motion or the law of inertia"
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://labster-image-manager.s3.amazonaws.com/v2/NL1/bdb1028f-dbb2-4ae1-a06a-93d07db909a9/NL1_Inertia.en.x1024.png"
+        },
+        "question": "What is the name of the principle that states that an object at rest will stay at rest and an object in motion will stay in motion unless acted upon by an unbalanced force?",
+        "status": "0",
+        "type": "Description"
+      },
+      "settings": {
+        "background": "physics",
+        "desc": "Physics P2: Forces",
+        "folder": false,
+        "level": "admin",
+        "name": "Physics P2",
+        "public": false,
+        "subject": "Physics",
+        "user": "GoodVessel92551"
+      }
+    },
+    "Programming Languages": {
+      "Q1": {
+        "answers": {
+          "ans1": "HTML"
+        },
+        "question": "Which of the following programming languages is primarily used for web development?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "C"
+        },
+        "question": "Which of the following programming languages is considered a high-level language?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "Easier to read and write"
+        },
+        "question": "Which of the following is an advantage of high-level languages compared to low-level languages?",
+        "status": "2",
+        "type": "Book"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "Assembly language"
+        },
+        "question": "Which of the following is an example of a low-level programming language?",
+        "status": "2",
+        "type": "Name"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "A program that translates high-level code into low-level code before execution."
+        },
+        "question": "Which of the following best describes a compiler?",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q6": {
+        "answers": {
+          "ans1": "Easier debugging"
+        },
+        "question": "Which of the following is an advantage of interpreters compared to compilers?",
+        "status": "2",
+        "type": "Name"
+      },
+      "settings": {
+        "background": "code_lang",
+        "desc": "Programming Languages",
+        "folder": false,
+        "level": "admin",
+        "name": "Programming Languages",
+        "public": false,
+        "subject": "Computer Science",
+        "user": "GoodVessel92551"
+      }
+    },
+    "Space Knowledge": {
+      "Q1": {
+        "answers": {
+          "ans1": "Mercury"
+        },
+        "question": "Which is the smallest planet within our solar system?",
+        "status": "2",
+        "type": "Planet"
+      },
+      "Q10": {
+        "answers": {
+          "ans1": "Venus"
+        },
+        "question": "Which planet is known as the Evening Star?",
+        "status": "0",
+        "type": "Planet"
+      },
+      "Q11": {
+        "answers": {
+          "ans1": "Uranus"
+        },
+        "question": "Which planet rotates on its side?",
+        "status": "0",
+        "type": "Planet"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "Mars"
+        },
+        "question": "Which is the second smallest planet within our solar system?",
+        "status": "2",
+        "type": "Planet"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "Saturn"
+        },
+        "question": "The moon called Titan orbits which planet?",
+        "status": "0",
+        "type": "Planet"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "Venus"
+        },
+        "question": "Which is the brightest planet in the nights sky?",
+        "status": "0",
+        "type": "Planet"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "voyager 2"
+        },
+        "question": "Uranus has only been visited by what spacecraft?",
+        "status": "0",
+        "type": " Space"
+      },
+      "Q6": {
+        "answers": {
+          "ans1": "Mars"
+        },
+        "question": "There have been more missions to this planet versus any other planet",
+        "status": "0",
+        "type": "Planet"
+      },
+      "Q7": {
+        "answers": {
+          "ans1": "The atmosphere"
+        },
+        "question": "What protects Earth from meteoroids and radiation from the sun?",
+        "status": "0",
+        "type": "River"
+      },
+      "Q8": {
+        "answers": {
+          "ans1": "Mars"
+        },
+        "question": "Phobos and Deimos are the Moons of which planet?",
+        "status": "2",
+        "type": "Planet"
+      },
+      "Q9": {
+        "answers": {
+          "ans1": "Venus"
+        },
+        "question": "Which planet is closest in size to Earth?",
+        "status": "0",
+        "type": "Planet"
+      },
+      "settings": {
+        "background": "rocket",
+        "desc": "Space Knowledge",
+        "folder": false,
+        "level": "admin",
+        "name": "Space Knowledge",
+        "public": false,
+        "subject": "Physics",
+        "user": "GoodVessel92551"
+      }
+    },
+    "System Performance": {
+      "Q1": {
+        "answers": {
+          "ans1": "It is the number of calculations that a CPU can do a second."
+        },
+        "question": "What is clock speed?",
+        "status": "2",
+        "type": "Description"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "They can run independently."
+        },
+        "question": "What can Cores do?",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "Circuits specific for handling graphics and images."
+        },
+        "question": "What are GPUs?",
+        "status": "2",
+        "type": "Logical Operator"
+      },
+      "settings": {
+        "background": "cpu",
+        "desc": "System Performance Revision",
+        "folder": false,
+        "level": "admin",
+        "name": "System Performance",
+        "public": false,
+        "subject": " Computer Science",
+        "user": "GoodVessel92551"
+      }
+    },
+    "Systems Architecture": {
+      "Q1": {
+        "answers": {
+          "ans1": "A machine that processes data more efficiently than humans."
+        },
+        "question": "Computer",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q10": {
+        "answers": {
+          "ans1": "Internal secondary storage."
+        },
+        "question": "Hard Disk Drive",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q11": {
+        "answers": {
+          "ans1": "Describes the main components and interactions of the CPU."
+        },
+        "question": "CPU architecture",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q12": {
+        "answers": {
+          "ans1": "CPU runs programs stored in memory with instructions and data."
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://media.geeksforgeeks.org/wp-content/uploads/basic_structure.png"
+        },
+        "question": "Von Neumann architecture",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q13": {
+        "answers": {
+          "ans1": "Separates program and data memory."
+        },
+        "image": {
+          "rating": "everyone",
+          "url": "https://media.geeksforgeeks.org/wp-content/uploads/20200513095200/harvard-1.png"
+        },
+        "question": "Harvard architecture",
+        "status": "0",
+        "type": "Artwork"
+      },
+      "Q14": {
+        "answers": {
+          "ans1": "Manages fetching, decoding, and execution of program instructions."
+        },
+        "question": "Control Unit (CU)",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q15": {
+        "answers": {
+          "ans1": "Performs calculations, logic operations, and binary shifts."
+        },
+        "question": "Arithmetic Logic Unit (ALU)",
+        "status": "0",
+        "type": "Algorithm"
+      },
+      "Q16": {
+        "answers": {
+          "ans1": "Fast memory in the CPU that stores regularly used data."
+        },
+        "question": "Cache",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q17": {
+        "answers": {
+          "ans1": "Temporarily hold data needed by the CPU."
+        },
+        "question": "Registers",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q18": {
+        "answers": {
+          "ans1": "CPU runs programs stored in memory addresses."
+        },
+        "question": "Von Neumann's Design",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q19": {
+        "answers": {
+          "ans1": "Holds the memory address of the instruction for each cycle."
+        },
+        "question": "Program counter (PC)",
+        "status": "0",
+        "type": "Artwork"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "Consists of hardware and software that work together to process data."
+        },
+        "question": "Computer system",
+        "status": 0,
+        "type": "Description"
+      },
+      "Q20": {
+        "answers": {
+          "ans1": "Stores intermediate results of calculations in the ALU."
+        },
+        "question": "Accumulator",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q21": {
+        "answers": {
+          "ans1": "Holds any memory address about to be used by the CPU."
+        },
+        "question": "Memory address register (MAR)",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q22": {
+        "answers": {
+          "ans1": "Holds program instructions and data."
+        },
+        "question": "Memory",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q23": {
+        "answers": {
+          "ans1": "Describes how the CPU carries out instructions."
+        },
+        "question": "Fetch-Execute Cycle",
+        "status": "0",
+        "type": "River"
+      },
+      "Q24": {
+        "answers": {
+          "ans1": "Main memory used for data, files, and programs."
+        },
+        "question": "Random Access Memory (RAM)",
+        "status": "0",
+        "type": "Artwork"
+      },
+      "Q25": {
+        "answers": {
+          "ans1": "Secondary storage used when RAM is full."
+        },
+        "question": "Virtual Memory",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q26": {
+        "answers": {
+          "ans1": "Non-volatile memory with instructions on how the system should boot up."
+        },
+        "question": "Read Only Memory (ROM)",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q27": {
+        "answers": {
+          "ans1": "Number of instructions a single processor core can carry out per second."
+        },
+        "question": "CPU Clock Speed",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q28": {
+        "answers": {
+          "ans1": "Independent processors that can carry out instructions simultaneously."
+        },
+        "question": "Number of Cores",
+        "status": 0,
+        "type": "Description"
+      },
+      "Q29": {
+        "answers": {
+          "ans1": "Data storage inside the CPU that provides faster access to data."
+        },
+        "question": "Cache Size",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "Computers built into other devices to control and achieve desired results."
+        },
+        "question": "Embedded systems",
+        "status": 0,
+        "type": "Description"
+      },
+      "Q30": {
+        "answers": {
+          "ans1": "Specialized circuits for handling graphics and images."
+        },
+        "question": "Graphics processing units (GPUs)",
+        "status": 0,
+        "type": "Logical Operator"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "Supplies power to the motherboard, drives, and other devices."
+        },
+        "question": "Power Supply",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "Extracts hot air from the computer case."
+        },
+        "question": "Case Cooling fan",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q6": {
+        "answers": {
+          "ans1": "Keeps the CPU at a steady temperature."
+        },
+        "question": "CPU heatsink and cooling fan",
+        "status": 0,
+        "type": "Location"
+      },
+      "Q7": {
+        "answers": {
+          "ans1": "Processes all data and instructions in a computer system."
+        },
+        "question": "CPU",
+        "status": "0",
+        "type": "Description"
+      },
+      "Q8": {
+        "answers": {
+          "ans1": "Reads/writes optical discs."
+        },
+        "question": "Optical drive",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q9": {
+        "answers": {
+          "ans1": "Computer memory slots."
+        },
+        "question": "RAM sticks",
+        "status": "0",
+        "type": "Artwork"
+      },
+      "settings": {
+        "background": "comp",
+        "desc": "Systems Architecture Terms Revision",
+        "folder": false,
+        "level": "admin",
+        "name": "Systems Architecture",
+        "public": false,
+        "subject": "Computer Science",
+        "user": "GoodVessel92551"
+      }
+    },
+    "Systems Architecture Gaps": {
+      "Q1": {
+        "answers": {
+          "ans1": "cycle"
+        },
+        "question": "The CPU is responsible for executing instructions stored in the computer's memory ",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "operations"
+        },
+        "question": ".Registers are small, fast storage locations within the CPU that hold data temporarily during",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "transfers"
+        },
+        "question": ".The system bus is a component of the computer system that manages the flow of data between the CPU and other devices",
+        "status": 0,
+        "type": "Name"
+      },
+      "Q4": {
+        "answers": {
+          "ans1": "access times"
+        },
+        "question": ".Cache memory is used to store frequently accessed data to reduce",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q5": {
+        "answers": {
+          "ans1": "location"
+        },
+        "question": ".In a von Neumann architecture, the program instructions and data are stored in the same memory unit",
+        "status": "0",
+        "type": "Name"
+      },
+      "settings": {
+        "background": "comp",
+        "desc": " Systems Architecture - Fill The Gaps",
+        "folder": false,
+        "level": "admin",
+        "name": "Systems Architecture Gaps",
+        "public": false,
+        "subject": "Computer Science",
+        "user": "GoodVessel92551"
+      }
+    },
+    "Test": {
+      "Q1": {
+        "answers": {
+          "ans1": "Q1"
+        },
+        "question": "A1",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q2": {
+        "answers": {
+          "ans1": "Q2"
+        },
+        "question": "A2",
+        "status": "0",
+        "type": "Name"
+      },
+      "Q3": {
+        "answers": {
+          "ans1": "A3"
+        },
+        "question": "Q3",
+        "status": "0",
+        "type": "Name"
+      },
+      "settings": {
+        "background": "gear",
+        "desc": "This set is for testing groups.",
+        "folder": false,
+        "level": "admin",
+        "name": "Test",
+        "public": false,
+        "subject": "Other",
+        "user": "GoodVessel92551"
+      }
+    }
+  }
