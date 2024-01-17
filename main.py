@@ -45,10 +45,10 @@ def home():
 def signup():
     if request.method == "POST":
         username = request.form["username"]
-        password = hash_value(request.form["password"])
+        password = hash_value(request.form["password"]+os.getenv("salt"))
         pattern = re.compile('^[a-zA-Z0-9]+$')
         usernames = global_data_db.find_one({"name":"usernames"})
-        if username not in usernames["data"] and len(username) < 15 and len(username) > 4 and bool(pattern.match(username)) and request.form["password"] == request.form["repeat_password"] and len(request.form["password"]) >= 8 and len(request.form["password"]) <= 30:
+        if username not in usernames["data"] and len(username) < 16 and len(username) > 4 and bool(pattern.match(username)) and request.form["password"] == request.form["repeat_password"] and len(request.form["password"]) >= 6 and len(request.form["password"]) <= 30:
             print("correct")
             user_data = {"username":username,"type":"user_data","data":{
                 "streak":{"streak":0,"time":str(datetime.now())},
@@ -74,16 +74,16 @@ def signup():
         else:
             if username in usernames["data"]:
                 error = "Username Already Exists"
-            elif len(username) > 15 or len(username) < 4:
+            elif len(username) > 16 or len(username) < 4:
                 error = "Username Too Long Or Too Short"
             elif bool(pattern.match(username)) == False:
                 error = "Username Contains Special Characters"
             elif request.form["password"] != request.form["repeat_password"]:
                 error = "Passwords Do Not Match"
-            elif len(request.form["password"]) < 8 or len(request.form["password"]) > 30:
+            elif len(request.form["password"]) < 6 or len(request.form["password"]) > 30:
                 error = "Password Too Long Or Too Short"
             else:
-                error = "Unknown Error Please Try Again"
+                error = "Unknown Error"
         how = request.form["how"]
         role = request.form["role"]
     else:
@@ -94,7 +94,7 @@ def signup():
 def user_login():
     if request.method == "POST":
         username = request.form["username"]
-        password = hash_value(request.form["password"])
+        password = hash_value(request.form["password"]+os.getenv("salt"))
         usernames = global_data_db.find_one({"name":"usernames"})
         if username in usernames["data"]:
             user_data = user_data_db.find_one({"username":username,"type":"user_data"})
