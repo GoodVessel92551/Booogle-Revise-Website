@@ -3,7 +3,7 @@
 {% block title %}Home{% endblock %}
 {% block main %}
 <main class="main">
-    <h1>Your Sets</h1>
+    <h1 id="welcome" class="welcome_text">Your Sets</h1>
     <div class="home_buttons">
         <a href="/play" class="main_button third_button next">
             <span>Play</span><ion-icon name="play-outline"></ion-icon>
@@ -78,6 +78,18 @@
         <a href="/new" class="add_button_nav"><ion-icon name="add-outline"></ion-icon></a>
     </nav>
 <script>
+    // Welcome title
+    var username = {{name|tojson}};
+    var date = new Date();
+    var hour = date.getHours();
+    if (hour < 12) {
+        document.getElementById("welcome").innerText = `Good Morning, ${username}`
+    } else if (hour < 18) {
+        document.getElementById("welcome").innerText = `Good Afternoon, ${username}`
+    } else {
+        document.getElementById("welcome").innerText = `Good Evening, ${username}`
+    }
+
     var level = {{boosting|tojson}};
     const copy = (text) => {
         navigator.clipboard.writeText(text)

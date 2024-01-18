@@ -184,6 +184,7 @@ html {
     display: inline-block;
 }
 
+
 .boost:hover{
     background:var(--main_button);
     color:var(--on_main_button);
@@ -438,6 +439,20 @@ html {
 .main h1 {
     color: var(--text);
     font-size: 40px;
+}
+
+.welcome_text{
+    color:var(--text);
+    font-size: 28px !important;
+    margin:36px 0px !important;
+}
+
+@media (max-width:1000px){
+    .welcome_text{
+        font-size: 20px !important;
+        margin: 40px 0px !important;
+    }
+    
 }
 
 .main>p {

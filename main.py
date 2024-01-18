@@ -30,7 +30,6 @@ def home():
         session.pop("notifications")
     else:
         notifications = []
-    print(username())
     users_groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"]
     added_groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["added_groups"]
     for i in added_groups:
@@ -49,7 +48,6 @@ def signup():
         pattern = re.compile('^[a-zA-Z0-9]+$')
         usernames = global_data_db.find_one({"name":"usernames"})
         if username not in usernames["data"] and len(username) < 16 and len(username) > 4 and bool(pattern.match(username)) and request.form["password"] == request.form["repeat_password"] and len(request.form["password"]) >= 6 and len(request.form["password"]) <= 30:
-            print("correct")
             user_data = {"username":username,"type":"user_data","data":{
                 "streak":{"streak":0,"time":str(datetime.now())},
                 "sets":{},
@@ -380,7 +378,6 @@ def folder(folder):
     user_sets = get_sets()
     names = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["folders"][folder]["sets"]
     for i in names:
-        print(i)
         sets[i] = user_sets[i]
     return render_template("folders/folder.html",sets=sets,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,title=user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["folders"][folder]["name"])
 
@@ -697,7 +694,6 @@ def question(name):
 def api_quest_ans():
     correct = False
     data = request.get_json()
-    print(data)
     owner = data["user"]
     current = session.get("current")
     set = user_data_db.find_one({"username":owner,"type":"user_data"})["data"]["sets"][data["set"]]
@@ -1124,13 +1120,6 @@ def automations():
     
 @app.route("/test")
 def test():
-    import json
-
-    with open('db.json', 'r') as file:
-        json_data = json.load(file)
-    query = {"username":username()}
-    update = {'$set': {'data.sets': json_data}}
-    user_data_db.update_one(query, update, upsert=True)
     return redirect("/")
 
 
@@ -1183,7 +1172,6 @@ def new_group():
         desc = request.form["desc"]
         cover = request.form["cover"]
         id = gen_id()
-        print(id)
         group = {
             "sets":[],
             "users":[username()],
@@ -1280,7 +1268,6 @@ def remove_group_user(group,name):
     owner = db[username()]["groups"][group]["settings"]["Owner"]
     db[owner]["groups"][group]["users"].remove(name)
     for i in range(len(db[name]["added_groups"])):
-        print(i)
         if owner in db[name]["added_groups"][i] and group in db[name]["added_groups"][i]:
             db[name]["added_groups"].pop(i)
     return redirect("/group/"+group)
