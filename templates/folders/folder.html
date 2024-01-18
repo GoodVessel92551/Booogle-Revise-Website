@@ -147,27 +147,27 @@
       if(level != false){
           var badge = document.createElement("ion-icon")
           badge.classList.add("badge")
-                if (level == "boost") {
-                    badge.name = "rocket-outline";
-                    badge.style.background = "var(--boost1)";
-                    badge.style.color = "var(--on_boost)";
-                } else if (level == "premium") {
-                    badge.name = "sparkles-outline";
-                    badge.style.background = "var(--premium1)";
-                    badge.style.color = "var(--on_premium)";
-                } else if (level == "pro") {
-                    badge.name = "medal-outline";
-                    badge.style.background = "var(--pro1)";
-                    badge.style.color = "var(--on_pro)";
-                } else if (level == "elite") {
-                    badge.name = "diamond-outline";
-                    badge.style.background = "var(--elite1)";
-                    badge.style.color = "var(--on_elite)";
-                } else if (level == "booogle") {
-                    badge.name = "repeat-outline";
-                    badge.style.background = "#A3D89D";
-                    badge.style.color = "#243822)";
-                }
+          if (level == "boost") {
+                badge.name = "rocket-outline";
+                badge.style.background = "var(--boost1)";
+                badge.style.color = "var(--on_boost)";
+            } else if (level == "premium") {
+                badge.name = "sparkles-outline";
+                badge.style.background = "var(--premium1)";
+                badge.style.color = "var(--on_premium)";
+            } else if (level == "pro") {
+                badge.name = "medal-outline";
+                badge.style.background = "var(--pro1)";
+                badge.style.color = "var(--on_pro)";
+            } else if (level == "elite") {
+                badge.name = "diamond-outline";
+                badge.style.background = "var(--elite1)";
+                badge.style.color = "var(--on_elite)";
+            } else if (level == "admin") {
+                badge.name = "shield-checkmark";
+                badge.style.background = "#f2ecb6";
+                badge.style.color = "#615210";
+            }
           badge.id = sets[sets_keys[i]]["settings"]["name"]
           user.appendChild(badge)
           document.querySelector('svg').addEventListener('load', () => {

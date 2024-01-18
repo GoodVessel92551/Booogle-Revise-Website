@@ -78,18 +78,19 @@
         <a href="/new" class="add_button_nav"><ion-icon name="add-outline"></ion-icon></a>
     </nav>
 <script>
-    // Welcome title
     var username = {{name|tojson}};
     var date = new Date();
     var hour = date.getHours();
+    var span = document.createElement("span")
+    span.innerText = username
     if (hour < 12) {
-        document.getElementById("welcome").innerText = `Good Morning, ${username}`
+        document.getElementById("welcome").innerText = `Good Morning `
     } else if (hour < 18) {
-        document.getElementById("welcome").innerText = `Good Afternoon, ${username}`
+        document.getElementById("welcome").innerText = `Good Afternoon `
     } else {
-        document.getElementById("welcome").innerText = `Good Evening, ${username}`
+        document.getElementById("welcome").innerText = `Good Evening `
     }
-
+    document.getElementById("welcome").appendChild(span)
     var level = {{boosting|tojson}};
     const copy = (text) => {
         navigator.clipboard.writeText(text)

@@ -447,6 +447,11 @@ html {
     margin:36px 0px !important;
 }
 
+.welcome_text > span{
+    font-weight: normal;
+    color:var(--text4)
+}
+
 @media (max-width:1000px){
     .welcome_text{
         font-size: 20px !important;
