@@ -62,9 +62,9 @@ title %}Upgrade{% endblock %} {% block main %}
             <ion-icon name="color-palette-outline"></ion-icon>2 Color Themes
         </span>
       </div>
-      <button
+      <form action="/join/premium" method="POST">
+        <button
         id="premium"
-        onclick="window.open('/__repl')"
         style="
           --up_text: var(--on_premium);
           --up_color: #00a7ff55;
@@ -72,9 +72,11 @@ title %}Upgrade{% endblock %} {% block main %}
           background: var(--premium1);
         "
         class="up_button"
+        onclick="document.getElementById('premium_button_text').innerText = 'Joining...';"
       ><ion-icon name="sparkles-outline"></ion-icon>
-        Join Premium
+        <span id="premium_button_text">Join Premium</span>
       </button>
+      </form>
     </a>
     <a class="up_upgrade">
       <strong class="up_title">Pro</strong>
@@ -109,9 +111,9 @@ title %}Upgrade{% endblock %} {% block main %}
             <ion-icon name="color-palette-outline"></ion-icon>3 Color Themes
         </span>
       </div>
+      <form action="/join/pro" method="POST">
       <button
         id="pro"
-        onclick="window.open('/__repl')"
         style="
           --up_text: var(--on_pro);
           --up_color: #00f8ff55;
@@ -119,10 +121,12 @@ title %}Upgrade{% endblock %} {% block main %}
           background: var(--pro1);
         "
         class="up_button"
+        onclick="document.getElementById('pro_button_text').innerText = 'Joining...';"
       >
-      <ion-icon name="medal-outline"></ion-icon>
-        Join Pro
+        <ion-icon name="medal-outline"></ion-icon>
+        <span id="pro_button_text">Join Pro</span>
       </button>
+      </form>
     </a>
     <a class="up_upgrade" style="border-color: #692a7d">
       <strong class="up_title">Elite</strong>
@@ -163,10 +167,9 @@ title %}Upgrade{% endblock %} {% block main %}
         <span><ion-icon name="wifi-outline"></ion-icon>Offline Mode
         </span>
       </div>
-
-      <button
+      <form action="/join/elite" method="POST">
+        <button
         id="elite"
-        onclick="window.open('/__repl')"
         style="
           --up_text: var(--on_elite);
           --up_color: #ff00ff55;
@@ -174,10 +177,12 @@ title %}Upgrade{% endblock %} {% block main %}
           background: var(--elite1);
         "
         class="up_button"
+        onclick="document.getElementById('elite_button_text').innerText = 'Joining...';"
       >
       <ion-icon name="diamond-outline"></ion-icon>
-        Join Elite
+        <span id="elite_button_text">Join Elite</span>
       </button>
+      </form>
     </a>
   </div>
 </main>

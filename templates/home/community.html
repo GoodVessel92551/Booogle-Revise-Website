@@ -282,6 +282,10 @@
                     search_subject.innerHTML = '<ion-icon name="albums-outline"></ion-icon> View '+data["subject"]+' Sets';
                 }else if(data["subject"].trim()  == "Music"){
                     search_subject.innerHTML = '<ion-icon name="musical-notes-outline"></ion-icon> View '+data["subject"]+' Sets';
+                }else if (data["subject"].trim()  == "Engineering"){
+                    search_subject.innerHTML = '<ion-icon name="construct-outline"></ion-icon> Engineering';
+                }else if (data["subject"].trim()  == "Design"){
+                    search_subject.innerHTML = '<ion-icon name="color-palette-outline"></ion-icon> Design';
                 }
                 else{
                     search_subject.innerHTML = data["subject"];

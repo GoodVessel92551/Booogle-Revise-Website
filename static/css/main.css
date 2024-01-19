@@ -624,7 +624,7 @@ html {
     background-color: var(--hover_top_green-2);
 }
 
-.home_menu>a>ion-icon {
+.home_menu>a>i{
     margin-right: 8px;
     margin-left:-3px;
     background:var(--main_button);
@@ -648,9 +648,13 @@ html {
     text-decoration: none;
     background: var(--main_button);
     box-shadow: none;
-    display: inline-block;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     font-weight:500;
     border:1px solid var(--main_button);
+    gap:16px;
+    flex-direction: row-reverse;
 }
 
 .main_button:focus-visible {
@@ -665,6 +669,29 @@ html {
 .main_button:disabled {
     cursor: not-allowed;
     filter: saturate(0.5) brightness(90%);
+}
+
+.main_button i {
+    color: inherit;
+    position: relative;
+    font-size: 18px;
+    top: 0.5px;
+    font-size: 18px;
+    float: left;
+}
+
+.main_button ion-icon {
+    --ionicon-stroke-width: 45px;
+    color: inherit;
+    position: relative;
+    font-size: 18px;
+    top: 0.5px;
+    font-size: 18px;
+    float: left;
+}
+
+.main_button:has(.next) ion-icon {
+    transition: 0.3s;
 }
 
 @media (max-width: 800px) {
@@ -751,20 +778,6 @@ html {
     color:var(--on_error_button) !important;
 }
 
-.main_button ion-icon {
-    --ionicon-stroke-width: 45px;
-    color: inherit;
-    position: relative;
-    font-size: 18px;
-    top: 0.5px;
-    font-size: 18px;
-    margin-right: 15px;
-    float: left;
-}
-
-.main_button:has(.next) ion-icon {
-    transition: 0.3s;
-}
 .third_button {
     border-color: var(--third_button) !important;
     color: var(--third_button) !important;
@@ -1342,7 +1355,7 @@ html {
     gap:8px;
 }
 
-.up_button:focus {
+.up_button:focus-visible {
     outline:3px solid var(--focus);
     outline-offset:-1px;
 }

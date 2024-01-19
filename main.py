@@ -8,6 +8,10 @@ from datetime import datetime
 from flask_compress import Compress
 from dotenv import load_dotenv
 from pymongo import MongoClient
+from flask import Flask, redirect, request,jsonify
+from flask.templating import render_template
+import stripe
+from stripe.error import StripeError
 
 load_dotenv(override=True, interpolate=False)
 client = MongoClient(os.getenv('mongo_url'))
@@ -15,6 +19,8 @@ client = MongoClient(os.getenv('mongo_url'))
 db = client["Booogle_Revise"]
 global_data_db = db["Global_Data"]
 user_data_db = db["User_Data"]
+stripe.api_key = os.environ['PAY_API']
+endpoint_secret = os.environ['WEB_HOOK']
 
 app = Flask(__name__)
 app.secret_key = os.getenv('secret_key')
@@ -552,61 +558,68 @@ def edit(name):
         return render_template("login/login.html")
     notifications = []
     if request.method == "POST":
-        for i in range(len(list(db["sets"]))):
-            if name in db["sets"][i] and username() in db["sets"][i]:
-                db["sets"][i] = [username(),emoji.demojize(request.form["title"])]
-        what_user = db[username()]["sets"][name]["settings"]["user"]
-        if what_user == username():
-            what_level = userinfo(username())[0]
+        title = emoji.demojize(request.form["title"]).strip()
+        desc = request.form["desc"]
+        cover = request.form["cover"]
+        old_set = get_sets()[name]
+        query = {"username":username(),"type":"user_data"}
+        update = {"$unset":{"data.sets."+name:""}}
+        user_data_db.update_one(query, update)
+        if len(title) > 80 or len(title) == 0 or len(desc) > 150 or len(desc) == 0:
+            session["new_set"] = {"title":title,"desc":desc,"background":cover}
+            return redirect("/new")
+        if title in get_sets().keys():
+            session["notifications"] = [{"title":"Failed","body":"This Set With This Name Already Exists","type":"warning","icon":"alert-circle"}]
+            return redirect("/")
         else:
-            what_level = db[username()]["sets"][name]["settings"]["level"]
-        try:
-            folder = db[username()]["sets"][name]["settings"]["folder"]
-        except:
-            folder = False
-        set = db[username()]["sets"][name]
-        del db[username()]["sets"][name]
-        db[username()]["sets"][emoji.demojize(request.form["title"])]  = {
-            "settings":{
-                "name":emoji.demojize(request.form["title"]),
-                "desc":request.form["desc"],
-                "public":False,
-                "background":request.form["cover"],
-                "user":what_user,
-                "level":what_level,
-                "folder":folder,
-                "subject":subject(emoji.demojize(request.form["title"]))
+            if old_set["settings"]["user"] != username():
+                level = old_set["settings"]["level"]
+            else:
+                level = userinfo(username())[0]
+            new_set = {
+                "settings":{
+                    "name":title,
+                    "desc":desc,
+                    "public":False,
+                    "background":cover,
+                    "user":old_set["settings"]["user"],
+                    "level":level,
+                    "subject":subject(emoji.demojize(request.form["title"])),
+                    "folder":old_set["settings"]["folder"]
+                }
             }
-        }
-        if folder == True:
-            for i in db[username()]["folders"].keys():
-                if set in db[username()]["folders"][i]["sets"]:
-                    db[username()]["folders"][i]["sets"].remove(set)
-                    db[username()]["folders"][i]["sets"].append(emoji.demojize(request.form["title"]))
-        level = userinfo(username())[0]
+            user_data_db.update_one({"username":username(),"type":"user_data"},{"$set":{"data.sets."+title:new_set}})
+            folders = get_folders()
+            for i in folders:
+                if name in folders[i]["sets"]:
+                    folders[i]["sets"].remove(name)
+                    folders[i]["sets"].append(title)
+                    user_data_db.update_one({"username":username(),"type":"user_data"},{"$set":{"data.folders."+i+".sets":folders[i]["sets"]}})
         for i in range(1,len(list(request.form)[3:])):
-            if (len(db[username()]["sets"][emoji.demojize(request.form["title"])]) >= 15 and (level == False or level == "boost")) or (len(db[username()]["sets"][emoji.demojize(request.form["title"])]) >= 20 and level == "premium") or (len(db[username()]["sets"][emoji.demojize(request.form["title"])]) >= 25 and level == "pro") or (len(db[username()]["sets"][emoji.demojize(request.form["title"])]) >= 35 and level == "elite"):
+            if (i >= 15 and (level == False or level == "boost")) or (i >= 20 and level == "premium") or (i >= 25 and level == "pro") or (i >= 50 and level == "elite"):
                 session["notifications"] = [{"title":"Failed","body":"Your Have Reached The Max Amount Of Questions","type":"warning","icon":"alert-circle"}]
                 return redirect("/")
             else:
                 try:
                     quest = request.form[f"Q{i}"]
-
                 except:
                     break
                 else:
+                    query = {"username":username(),"type":"user_data"}
+                    question = {}
                     quest_profanity = profanity.contains_profanity(quest)
-                    db[username()]["sets"][emoji.demojize(request.form["title"])][f"Q{i}"] = {"status":mod(quest),"question":quest,"answers":{"ans1":request.form[f"A{i}"]}}
-                    db[username()]["sets"][emoji.demojize(request.form["title"])][f"Q{i}"]["type"] = smart(request.form[f"A{i}"])
+                    question = {"status":mod(quest),"question":quest,"answers":{"ans1":request.form[f"A{i}"]},"type":smart(request.form[f"A{i}"])}
                     image_url = request.form[f"img{i}"]
                     pattern = re.compile(r'\.(jpg|jpeg|png|gif|bmp|svg|tiff)$', re.IGNORECASE)
                     if bool(pattern.search(image_url)):
                         image_data = check_image(image_url)
                         if "rating_label" in image_data:
                             if image_data["rating_label"] != "adult":
-                                db[username()]["sets"][emoji.demojize(request.form["title"])][f"Q{i}"]["image"] = {"url":image_url,"rating":image_data["rating_label"]}
-                    if quest_profanity:
-                        db[username()]["sets"][emoji.demojize(request.form["title"])][f"Q{i}"]["status"] = mod(quest)        
+                                question["image"] = {"url":image_url,"rating":image_data["rating_label"]}   
+                    if mod(quest) == "1" or quest_profanity: 
+                        pass
+                    else:
+                        user_data_db.update_one(query, {"$set":{"data.sets."+title+".Q"+str(i):question}})
         session["notifications"] = [{"title":"Success","body":f"You Have Edited: {name}","type":"success","icon":"checkmark-circle"}]
         return redirect("/")
     return render_template("sets/edit.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets()[name],notifications=notifications)
@@ -1340,5 +1353,64 @@ def api_learn_like():
 @app.route("/offline/home")
 def offline_home():
     return render_template("offline_home.html")
+
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    event = None
+    payload = request.data
+    sig_header = request.headers['STRIPE_SIGNATURE']
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        raise e
+
+    except stripe.error.SignatureVerificationError as e:
+        raise e
+
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+        print(session)
+        if session["payment_status"] == "paid":
+            user_data_db.update_one({"username":session["metadata"]["name"],"type":"user_data"},{"$set":{"data.level":session["metadata"]["plan"]}})
+    else:
+        print('Unhandled event type {}'.format(event['type']))
+    return jsonify(success=True)
+
+@app.route('/join/<plan>', methods=['POST'])
+def create_checkout_session(plan):
+    YOUR_DOMAIN = "https://dev.booogle.app/"
+    if plan == "premium":
+        price_id = "price_1O42nmEg9DaDrNLanEjHmmf3"
+    elif plan == "pro":
+        price_id = "price_1O42nmEg9DaDrNLanEjHmmf3"
+    elif plan == "elite":
+        price_id = "price_1O42nmEg9DaDrNLanEjHmmf3"
+    else:
+        session["notifications"] = [{"title":"Failed","body":"Invalid Plan","type":"warning","icon":"alert-circle"}]
+
+        return redirect("/")
+    try:
+        checkout_session = stripe.checkout.Session.create(
+
+            line_items=[
+                {
+                    # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+                    'price': price_id,
+                    'quantity': 1,
+                },
+            ],
+            mode='payment',
+            success_url=YOUR_DOMAIN + 'join/success/'+plan,
+            cancel_url=YOUR_DOMAIN + 'join/cancel/'+plan,
+            metadata = {
+                "name":username(),
+                "plan":plan
+            },
+        )
+    except Exception as e:
+        return str(e)
+    return redirect(checkout_session.url, code=303)
 
 app.run(host='0.0.0.0', port=80,debug=True)

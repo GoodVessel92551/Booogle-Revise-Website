@@ -12,6 +12,11 @@ from booogle_ai_tools.smartmatch import smartmatch
 from booogle_ai_tools.smartsubject import smartsubject
 from booogle_ai_tools.username_mod import username_mod
 import hashlib
+from flask import Flask, redirect, request,jsonify
+from flask.templating import render_template
+
+import stripe
+from stripe.error import StripeError
 
 load_dotenv(override=True, interpolate=False)
 client = MongoClient(os.getenv('mongo_url'))
@@ -259,8 +264,7 @@ def make_dict(dictionary):
 
 def userinfo(username):
     level = False
-    if username in ["Booogle","BooogleRevise","GoodVessel92551","BadVessel92551"]:
-        level = "admin"
+    level = user_data_db.find_one({"username":username,"type":"user_data"})["data"]["level"]
     return [level,"/static/logo.png"]
 
 def gen_code():
@@ -295,3 +299,24 @@ def make_dict_group(group):
 def check_image(url):
     r = requests.get("https://api.moderatecontent.com/moderate/?key="+os.environ['image_key']+"&url="+url)
     return r.json()
+
+
+def payment_webhook():
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        raise e
+
+    except stripe.error.SignatureVerificationError as e:
+        raise e
+
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+        if session["payment_status"] == "paid":
+            print("User:",session["metadata"]["name"])
+    else:
+        print('Unhandled event type {}'.format(event['type']))
+    return True
