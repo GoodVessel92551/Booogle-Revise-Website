@@ -414,9 +414,9 @@ title %}{{title}}{% endblock %} {% block main %}
                 fetch(`/group/{{title}}/folder/add/${droppableContainer.id}/${draggedElement.id}`)
             }else{
                 if(current_set != draggedElement.id){
-                    console.log("Sending")
+                    draggedElement.remove()
                     current_set = draggedElement.id
-                    fetch(`/group/{{title}}/remove/${draggedElement.id}`)
+                    fetch(`/group/remove/{{title}}/${draggedElement.id}`)
                 }
             }
         });

@@ -1352,6 +1352,18 @@ def add_group_folder_set(group,folder,name):
     user_data_db.update_one(query, update)
     return {"success":True}
 
+@app.route("/group/remove/<group_name>/<set_pos>")
+def remove_group_set(group_name,set_pos):
+    group = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"][group_name]["sets"]
+    print(group)
+    set_name = group[int(set_pos)]
+    group.remove(set_name)
+    print(group)
+    query = {"username":username()}
+    update = {"$set":{"data.groups."+group_name+".sets":group}}
+    user_data_db.update_one(query, update)
+    return {"success":True}
+
 @app.route("/remove/group/<group>/<name>")
 def remove_group_user(group,name):
     if login() == False:
@@ -1362,6 +1374,20 @@ def remove_group_user(group,name):
         if owner in db[name]["added_groups"][i] and group in db[name]["added_groups"][i]:
             db[name]["added_groups"].pop(i)
     return redirect("/group/"+group)
+
+@app.route("/group/<group>/folder/remove/<folder>/<name>")
+def remove_group_folder_set(group,folder,name):
+    if login() == False:
+        return render_template("login/login.html")
+    groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"]
+    group_info = groups[group]
+    sets = group_info["folders"][folder]["sets"]
+    set_name = sets[int(name)]
+    sets.remove(set_name)
+    query = {"username":username()}
+    update = {"$set":{"data.groups."+group+".folders."+folder+".sets":sets}}
+    user_data_db.update_one(query, update)
+    return {"success":True}
 
 @app.route("/api/smartsubject",methods=["POST","GET"])
 def api_smartsubject():

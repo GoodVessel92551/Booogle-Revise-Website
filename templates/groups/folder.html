@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-{% block page_title %} {{title}} {% endblock %}
-{% block title %}{{title}}{% endblock %} {% block main %}
+{% block page_title %} {{folder_name}} {% endblock %}
+{% block title %}{{folder_name}}{% endblock %} {% block main %}
 <main class="main">
-  <div class="your_sets_button"><a class="droppable your_sets_button_hover" href="/">Your Sets</a><a href="/group/{{group_name}}" class="droppable your_sets_button_hover">{{group_name}}</a><folder>{{folder_name}}</folder></div>
+  <div class="your_sets_button"><a id="groups" class="droppable your_sets_button_hover" href="/">Your Groups</a><a id="folder" href="/group/{{group_name}}" class="droppable your_sets_button_hover">{{group_name}}</a><folder>{{folder_name}}</folder></div>
     <div class="home_buttons host_buttons">
         <a href="/remove/folder/{{title}}" class="del_button main_button">
             <span>Delete</span><ion-icon name="trash-outline"></ion-icon>
@@ -119,7 +119,7 @@
   }
   var sets = {{sets|tojson}};
   var sets_keys = Object.keys(sets)
-    const droppableElement = document.querySelector('.droppable');
+  const droppableContainers = document.querySelectorAll('.droppable');
   for(var i=0;i<sets_keys.length;i++){
       var level = sets[sets_keys[i]]["settings"]["level"]
       var home = document.getElementById("home_sets")
@@ -188,30 +188,52 @@
 
     a.addEventListener('dragstart', (event) => {
       event.dataTransfer.setData('text/plain', event.target.id);
+      console.log(event.target.id)
     });
 
     a.addEventListener('dragend', (event) => {
 
     });
   }
+
+
+  var current_set = ""
+    for (let j = 0; j < droppableContainers.length; j++) {
+        const droppableContainer = droppableContainers[j];
+        const droppableContainer_id = droppableContainer.id
+        droppableContainer.addEventListener('dragover', (event) => {
+            droppableContainer.style.borderColor = "var(--border_hover)"
+            event.preventDefault();
+        });
+        droppableContainer.addEventListener('dragleave', (event) => {
+            droppableContainer.style.border = "var(--top_back_border)"
+        });
+
+        droppableContainer.addEventListener('drop', (event) => {
+            event.preventDefault();
+            droppableContainer.style.border = "var(--top_back_border)"
+            const draggedElementId = event.dataTransfer.getData('text/plain');
+            const draggedElement = document.getElementById(draggedElementId);
+            if (droppableContainer.id == "groups"){
+                console.log("Sending")
+                draggedElement.remove()
+                fetch(`/group/{{group_name}}/folder/remove/{{folder_name}}/${draggedElement.id}`)
+                .then(fetch(`/group/remove/{{group_name}}/${draggedElement.id}`))
+            }else{
+                if(current_set != draggedElement.id){
+                    current_set = draggedElement.id
+                    draggedElement.remove()
+                    fetch(`/group/{{group_name}}/folder/remove/{{folder_name}}/${draggedElement.id}`)
+                }
+            }
+        });
+    }
   droppableElement.addEventListener('dragenter', (event) => {
     droppableElement.style.outline = '1px solid var(--border_hover)';
   });
 
   droppableElement.addEventListener('dragleave', (event) => {
     droppableElement.style.outline = 'none';
-  });
-  droppableElement.addEventListener('dragover', (event) => {
-    event.preventDefault();
-  });
-
-  droppableElement.addEventListener('drop', (event) => {
-    event.preventDefault();
-    droppableElement.style.outline = 'none';
-    const draggedElementId = event.dataTransfer.getData('text/plain');
-    const draggedElement = document.getElementById(draggedElementId);
-    draggedElement.remove()
-    fetch(`/remove/folder/{{title}}/${draggedElement.id}`)
   });
     const dialog = document.getElementById('start_set');
     const closeButton = document.getElementById('close_mobile');
