@@ -287,6 +287,7 @@ def user_data_group(users):
             "profile_pic":profile_pic,
             "level":level
         }
+    print(users_data)
     return users_data
 
 def make_dict_group(group):

@@ -38,10 +38,11 @@ def home():
         notifications = []
     users_groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"]
     added_groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["added_groups"]
+    print(added_groups)
     for i in added_groups:
         owners_username = i[0]
         group = i[1]
-        group_data = user_data_db.fin_one({"username":owners_username,"type":"user_data"})["data"]["groups"][group]
+        group_data = user_data_db.find_one({"username":owners_username,"type":"user_data"})["data"]["groups"][group]
         users_groups[group] = group_data
     streak()
     return render_template("/home/home.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets(),is_new=new,notifications=notifications,folders=get_folders(),groups=users_groups)
@@ -1222,50 +1223,62 @@ def group(group):
         notifications = []
     if request.method == "POST":
         add_username = request.form["username"]
-        if add_username not in db["users"]:
+        users = global_data_db.find_one({"name":"usernames"})["data"]
+        group_users = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"][group]["users"]
+        if add_username not in users:
             session["notifications"] = [{"title":"Failed","body":"User Does Not Exist","type":"warning","icon":"alert-circle"}]
-        elif add_username in db[username()]["groups"][group]["users"]:
+        elif add_username in group_users:
             session["notifications"] = [{"title":"Failed","body":"User Is Already In The Group","type":"warning","icon":"alert-circle"}]
         else:
-            try:
-                db[username()]["groups"]
-                db[add_username]["added_groups"]
-            except:
-                db[add_username]["groups"] = {}
-                db[add_username]["added_groups"] = []
-            db[add_username]["added_groups"].append([username(),group])
-            db[username()]["groups"][group]["users"].append(add_username)
+            query = {"username":add_username}
+            update = {"$push":{"data.added_groups":[username(),group]}}
+            user_data_db.update_one(query, update)
+            query = {"username":username()}
+            update = {"$push":{"data.groups."+group+".users":add_username}}
+            user_data_db.update_one(query, update)
             session["notifications"] = [{"title":"Success","body":"User Has Been Added To The Group","type":"success","icon":"checkmark-circle"}]
         return redirect("/group/"+group)
     else:
         sets = {}
-        group = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"]
-        if group in list(group):
-            names = group[group]["sets"]
-            owner = group[group]["settings"]["Owner"]
-            for i in names:
-                sets[i] = group[group]["sets"][i]
+        groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"]
+        user_sets = get_sets()
+
+        if group in list(groups):
+            names = groups[group]["sets"]
+            owner = groups[group]["settings"]["Owner"]
+            for i in range(len(names)):
+                sets[i] = user_sets[groups[group]["sets"][i]]
+            user_data = user_data_group(groups[group]["users"])
         else:
             added_groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["added_groups"]
             for i in added_groups:
                 if i[1] == group:
-                    group = user_data_db.find_one({"username":i[1],"type":"user_data"})["data"]["groups"]
-                    names = group[group]["sets"]
-                    owner = group[group]["settings"]["Owner"]
-                    for i in names:
-                        sets[i] = group[group]["sets"][i]
-        user_data = user_data_group(group[group]["users"])
+                    this_group = user_data_db.find_one({"username":i[0],"type":"user_data"})["data"]["groups"][group]
+                    owner_sets = user_data_db.find_one({"username":i[0],"type":"user_data"})["data"]["sets"]
+                    names = this_group["sets"]
+                    owner = this_group["settings"]["Owner"]
+                    for i in range(len(names)):
+                        print(this_group["sets"][i])
+                        sets[i] = owner_sets[this_group["sets"][i]]
+                    user_data = user_data_group(this_group["users"])
         return render_template("groups/group.html",user_data=user_data,sets=sets,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,title=group,owner=owner)
     
 @app.route("/add/group/<group>/<name>")
 def add_group_set(group,name):
     if login() == False:
         return render_template("login/login.html")
-    if name in list(db[username()]["groups"][group]["sets"]):
+    groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"]
+    owner = groups[group]["settings"]["Owner"]
+    if username() != owner:
         return "Error"
     else:
-        db[username()]["groups"][group]["sets"].append(name)
-        return redirect("/group/"+group)
+        if name in list(groups[group]["sets"]):
+            return "Error"
+        else:
+            query = {"username":username()}
+            update = {"$push":{"data.groups."+group+".sets":name}}
+            user_data_db.update_one(query, update)
+            return redirect("/group/"+group)
         
 @app.route("/remove/group/<group>")
 def remove_group(group):
@@ -1273,6 +1286,13 @@ def remove_group(group):
         return render_template("login/login.html")
     del db[username()]["groups"][group]
     return redirect("/")
+
+@app.route("/group/folder/new/<group>")
+def new_group_folder(group):
+    if login() == False:
+        return render_template("login/login.html")
+    notifications = []
+    return render_template("folders/new_folder.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/remove/group/<group>/<name>")
 def remove_group_user(group,name):

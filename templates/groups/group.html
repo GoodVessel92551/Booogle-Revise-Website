@@ -1,8 +1,8 @@
-{% extends "base.html" %} {% block title %}{{title}}{% endblock %} {% block main %}
+{% extends "base.html" %}{% block page_title %} Group {% endblock %} {% block title %}{{title}}{% endblock %} {% block main %}
 <main class="main">
   <div class="your_sets_button"><a class="droppable your_sets_button_hover" href="/">Your Groups</a><folder>{{title}}</folder></div>
     <div class="home_buttons host_buttons">
-        <a id="del_button" href="/remove/group/{{title}}" class="del_button main_button">
+        <a id="leave_button" href="/remove/group/{{title}}" class="del_button main_button">
             <span>Delete</span><ion-icon name="trash-outline"></ion-icon>
         </a>
         <a class="main_button third_button" onclick="document.getElementById('view_user_group').showModal()">
@@ -75,7 +75,7 @@
         <p>Add A New User To This Group</p>
         <form method="post">
             <input placeholder="Username" name="username" type="text">
-            <button style="float:right;" class="main_button"><ion-icon name="person-add-outline"></ion-icon>Add</button>
+            <button style="float:right;" class="main_button add_user_button"><ion-icon name="person-add-outline"></ion-icon></button>
         </form>
         <button class="close_start_set">
             <ion-icon onclick="document.getElementById('add_user_group').close()" class="close_start"
@@ -116,13 +116,13 @@
         var level = document.createElement("span")
         var badge = document.createElement("ion-icon")
         var leave = document.createElement("a")
-        var owener_group = false
+        var owner_group = false
         leave.href = "/remove/group/{{title}}/"+user_data[user_data_keys[i]]["name"]
         leave.innerHTML = '<ion-icon name="exit-outline"></ion-icon>'
         leave.classList.add("leave_group")
         level.appendChild(badge)
         if (user_data[user_data_keys[i]]["name"] == owner){
-              owener_group = true
+              owner_group = true
         }
         if (user_data[user_data_keys[i]]["level"] == "boost") {
             badge.name = "rocket-outline";
@@ -149,7 +149,7 @@
         user.appendChild(img)
         user.appendChild(name_view)
         users.appendChild(user)
-        if (owener_group){
+        if (owner_group){
             var leader_badge = document.createElement("ion-icon")
             leader_badge.name = "person-circle-outline"
             user.appendChild(leader_badge)
@@ -335,5 +335,24 @@
             e.preventDefault();
         }
     }, { passive: false });
+    const menu_open = () => {
+        var menu_button = document.getElementById("home_menu_button")
+        var menu = document.getElementById("home_menu")
+        if(menu.style.display == "flex") {
+            menu_button.classList.remove("home_menu_button_selected")
+            menu.style.display = "none"
+        }else{
+            menu_button.classList.add("home_menu_button_selected")
+            menu.style.display = "flex"
+        }
+        
+    }
 </script>
+<div class="home_menu" id="home_menu">
+    <a href="/group/folder/new/{{title}}"><ion-icon name="folder-open-outline"></ion-icon>New Folder</a>
+    <a href="javascript:document.getElementById('add_user_group').showModal()"><ion-icon name="person-add-outline"></ion-icon>Add Person</a>
+    <a href="javascript:document.getElementById('view_user_group').showModal()"><ion-icon name="people-outline"></ion-icon>View People</a>
+    <a href="/group/Assignment/new/{{title}}"><ion-icon name="document-text-outline"></ion-icon>Assignment</a>
+</div>
+<button onclick="menu_open()" id="home_menu_button" class="home_add"><ion-icon name="add-outline"></ion-icon></button>
 {% endblock %}
