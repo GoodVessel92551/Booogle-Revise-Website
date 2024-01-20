@@ -1189,6 +1189,7 @@ def new_group():
         group = {
             "sets":[],
             "users":[username()],
+            "folders":{},
             "settings":{
                 "Title":title,
                 "Desc":desc,
@@ -1249,6 +1250,7 @@ def group(group):
             for i in range(len(names)):
                 sets[i] = user_sets[groups[group]["sets"][i]]
             user_data = user_data_group(groups[group]["users"])
+            folders = groups[group]["folders"]
         else:
             added_groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["added_groups"]
             for i in added_groups:
@@ -1261,7 +1263,8 @@ def group(group):
                         print(this_group["sets"][i])
                         sets[i] = owner_sets[this_group["sets"][i]]
                     user_data = user_data_group(this_group["users"])
-        return render_template("groups/group.html",user_data=user_data,sets=sets,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,title=group,owner=owner)
+                    folders = this_group[group]["folders"]
+        return render_template("groups/group.html",folders=folders,user_data=user_data,sets=sets,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,title=group,owner=owner)
     
 @app.route("/add/group/<group>/<name>")
 def add_group_set(group,name):
@@ -1280,6 +1283,7 @@ def add_group_set(group,name):
             user_data_db.update_one(query, update)
             return redirect("/group/"+group)
         
+
 @app.route("/remove/group/<group>")
 def remove_group(group):
     if login() == False:
@@ -1287,12 +1291,66 @@ def remove_group(group):
     del db[username()]["groups"][group]
     return redirect("/")
 
-@app.route("/group/folder/new/<group>")
+@app.route("/group/<group>/folder/<folder>")
+def group_folder(group,folder):
+    if login() == False:
+        return render_template("login/login.html")
+    notifications = []
+    groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"]
+    if group in list(groups):
+        folders = groups[group]["folders"]
+        folder_info = folders[folder]
+        sets = {}
+        user_sets = get_sets()
+        names = folder_info["sets"]
+        for i in range(len(names)):
+            sets[i] = user_sets[folder_info["sets"][i]]
+    else:
+        added_groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["added_groups"]
+        for i in added_groups:
+            if i[1] == group:
+                this_group = user_data_db.find_one({"username":i[0],"type":"user_data"})["data"]["groups"][group]
+                owner_sets = user_data_db.find_one({"username":i[0],"type":"user_data"})["data"]["sets"]
+                names = this_group["sets"]
+                for i in range(len(names)):
+                    sets[i] = owner_sets[this_group["sets"][i]]
+    return render_template("groups/folder.html",sets=sets,group_name=group,folder_name=folder,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+
+@app.route("/group/folder/new/<group>",methods=["POST","GET"])
 def new_group_folder(group):
     if login() == False:
         return render_template("login/login.html")
     notifications = []
+    if request.method == "POST":
+        title = request.form["title"]
+        desc = request.form["desc"]
+        cover = request.form["cover"]
+        id = gen_id()
+        folder = {
+            "sets":[],
+            "settings":{
+                "title":title,
+                "desc":desc,
+                "cover":cover,
+            }
+        }
+        query = {"username":username()}
+        update = {"$set":{"data.groups."+group+".folders."+id:folder}}
+        user_data_db.update_one(query, update)
+        return redirect("/group/"+group)
     return render_template("folders/new_folder.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+
+@app.route("/group/<group>/folder/add/<folder>/<name>")
+def add_group_folder_set(group,folder,name):
+    if login() == False:
+        return render_template("login/login.html")
+    groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"]
+    group_info = groups[group]
+    set_name = group_info["sets"][int(name)]
+    query = {"username":username()}
+    update = {"$push":{"data.groups."+group+".folders."+folder+".sets":set_name}}
+    user_data_db.update_one(query, update)
+    return {"success":True}
 
 @app.route("/remove/group/<group>/<name>")
 def remove_group_user(group,name):
@@ -1402,11 +1460,11 @@ def webhook():
 def create_checkout_session(plan):
     YOUR_DOMAIN = "https://dev.booogle.app/"
     if plan == "premium":
-        price_id = "price_1O42nmEg9DaDrNLanEjHmmf3"
+        price_id = "price_1OaKMPEg9DaDrNLaYFm4Uggt"
     elif plan == "pro":
-        price_id = "price_1O42nmEg9DaDrNLanEjHmmf3"
+        price_id = "price_1OaKNQEg9DaDrNLaRiOBrfzi"
     elif plan == "elite":
-        price_id = "price_1O42nmEg9DaDrNLanEjHmmf3"
+        price_id = "price_1OaKNrEg9DaDrNLaGPsrMJ28"
     else:
         session["notifications"] = [{"title":"Failed","body":"Invalid Plan","type":"warning","icon":"alert-circle"}]
 

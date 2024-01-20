@@ -1,111 +1,213 @@
-{% extends "base.html" %}{% block page_title %} Group {% endblock %} {% block title %}{{title}}{% endblock %} {% block main %}
+{% extends "base.html" %}{% block page_title %} Group {% endblock %} {% block
+title %}{{title}}{% endblock %} {% block main %}
 <main class="main">
-  <div class="your_sets_button"><a class="droppable your_sets_button_hover" href="/">Your Groups</a><folder>{{title}}</folder></div>
-    <div class="home_buttons host_buttons">
-        <a id="leave_button" href="/remove/group/{{title}}" class="del_button main_button">
-            <span>Delete</span><ion-icon name="trash-outline"></ion-icon>
-        </a>
-        <a class="main_button third_button" onclick="document.getElementById('view_user_group').showModal()">
-            <span>View Users</span><ion-icon name="people-outline"></ion-icon>
-        </a>
-        <a id="add_button" class="main_button second_button" onclick="document.getElementById('add_user_group').showModal()">
-            <span>Add User</span><ion-icon name="person-add-outline"></ion-icon>
-        </a>
-        <a id="edit_button" href="/edit/group/{{title}}" class="main_button">
-            <span>Edit</span><ion-icon name="pencil-outline"></ion-icon>
-        </a>
-    </div>
+  <div class="your_sets_button">
+    <a class="droppable your_sets_button_hover" href="/">Your Groups</a
+    ><folder>{{title}}</folder>
+  </div>
+  <div class="home_buttons host_buttons">
+    <a
+      id="leave_button"
+      href="/remove/group/{{title}}"
+      class="del_button main_button"
+    >
+      <span>Delete</span><ion-icon name="trash-outline"></ion-icon>
+    </a>
+    <a
+      class="main_button third_button"
+      onclick="document.getElementById('view_user_group').showModal()"
+    >
+      <span>View Users</span><ion-icon name="people-outline"></ion-icon>
+    </a>
+    <a
+      id="add_button"
+      class="main_button second_button"
+      onclick="document.getElementById('add_user_group').showModal()"
+    >
+      <span>Add User</span><ion-icon name="person-add-outline"></ion-icon>
+    </a>
+    <a id="edit_button" href="/edit/group/{{title}}" class="main_button">
+      <span>Edit</span><ion-icon name="pencil-outline"></ion-icon>
+    </a>
+  </div>
   <div class="home_sets" id="home_sets"></div>
-    <dialog class="start_set" id="start_set">
-        <div class="all_contain_start">
-            <img class="set_image" id="set_image">
-            <div class="text_contain_start">
-                <h1 id="set_title" class="set_title_dialog">Set Name</h1>
-                <p id="set_desc"></p>
-            </div>
-        </div>
-        <button id="close_mobile" class="close_moblie no_pull"><div></div></button>
-        <button class="close_start_set">
-            <ion-icon onclick="document.getElementById('start_set').close()" class="close_start"
-                name="close-outline"></ion-icon>
-        </button>
-        <h2>Revise</h2>
-        <div class="start_options">
-            <a onclick="document.getElementById('cards_loading').style.display = 'flex'" href="/flashcards" id="flashcards">
-                <loading id="cards_loading" class="loader"><spinner></spinner></loading>
-                <span id="flash_rec"><ion-icon name="sparkles"></ion-icon></span>
-                <ion-icon src="/static/revise_icons/Fashcards.svg"></ion-icon>
-                <strong>Flashcards</strong>
-            </a>
-            <a onclick="document.getElementById('quest_loading').style.display = 'flex'" href="/questions" id="questions">
-                <loading id="quest_loading" class="loader"><spinner></spinner></loading>
-                <span id="quest_rec"><ion-icon name="sparkles"></ion-icon></span>
-                <ion-icon src="/static/revise_icons/Questions.svg"></ion-icon>
-                <strong>Questions</strong>
-            </a>
-            <a onclick="document.getElementById('fill_loading').style.display = 'flex'" href="/fill" id="fill">
-                <loading id="fill_loading" class="loader"><spinner></spinner></loading>
-                <ion-icon src="/static/revise_icons/Fill The Gaps.svg"></ion-icon>
-                <strong>Fill The Gaps</strong>
-            </a>
-            <a onclick="document.getElementById('test_loading').style.display = 'flex'" href="/upgrade" id="test">
-                <loading id="test_loading" class="loader"><spinner></spinner></loading>
-                <ion-icon id="test_lock" class="start_lock" name="arrow-up-circle-outline"></ion-icon>
-                <ion-icon src="/static/revise_icons/Test.svg"></ion-icon>
-                <strong>Test</strong>
-            </a>
-        </div>
-        <div class="start_buttons">
-            <a href="/delete" id="del_button" class="main_button del_button">
-                <span>Delete</span><ion-icon name="trash-outline"></ion-icon>
-            </a>
-            <a id="share" class="third_button main_button">
-                <span>Share</span><ion-icon name="share-social-outline"></ion-icon>
-            </a>
-            <a href="/upload" id="upload" class="second_button main_button">
-                <span>Publish</span><ion-icon name="push-outline"></ion-icon>
-            </a>
-            <a href="/edit" id="edit_button" href="/edit" class="main_button">
-                <span>Edit</span><ion-icon name="pencil-outline"></ion-icon>
-            </a>
-        </div>
-    </dialog>
-    <dialog class="add_user_group" id="add_user_group">
-        <h2>Add User</h2>
-        <p>Add A New User To This Group</p>
-        <form method="post">
-            <input placeholder="Username" name="username" type="text">
-            <button style="float:right;" class="main_button add_user_button"><ion-icon name="person-add-outline"></ion-icon></button>
-        </form>
-        <button class="close_start_set">
-            <ion-icon onclick="document.getElementById('add_user_group').close()" class="close_start"
-                name="close-outline"></ion-icon>
-        </button>
-    </dialog>
-    <dialog class="view_user_group" id="view_user_group">
-        <button class="close_start_set">
-            <ion-icon onclick="document.getElementById('view_user_group').close()" class="close_start"
-                name="close-outline"></ion-icon>
-        </button>
-        <h2>Current Users</h2>
-        <p>View and Remove Users From This Group</p>
-        <div id="view_user_group_div">
-        </div>
-    </dialog>
+  <dialog class="start_set" id="start_set">
+    <div class="all_contain_start">
+      <img class="set_image" id="set_image" />
+      <div class="text_contain_start">
+        <h1 id="set_title" class="set_title_dialog">Set Name</h1>
+        <p id="set_desc"></p>
+      </div>
+    </div>
+    <button id="close_mobile" class="close_moblie no_pull"><div></div></button>
+    <button class="close_start_set">
+      <ion-icon
+        onclick="document.getElementById('start_set').close()"
+        class="close_start"
+        name="close-outline"
+      ></ion-icon>
+    </button>
+    <h2>Revise</h2>
+    <div class="start_options">
+      <a
+        onclick="document.getElementById('cards_loading').style.display = 'flex'"
+        href="/flashcards"
+        id="flashcards"
+      >
+        <loading id="cards_loading" class="loader"><spinner></spinner></loading>
+        <span id="flash_rec"><ion-icon name="sparkles"></ion-icon></span>
+        <ion-icon src="/static/revise_icons/Fashcards.svg"></ion-icon>
+        <strong>Flashcards</strong>
+      </a>
+      <a
+        onclick="document.getElementById('quest_loading').style.display = 'flex'"
+        href="/questions"
+        id="questions"
+      >
+        <loading id="quest_loading" class="loader"><spinner></spinner></loading>
+        <span id="quest_rec"><ion-icon name="sparkles"></ion-icon></span>
+        <ion-icon src="/static/revise_icons/Questions.svg"></ion-icon>
+        <strong>Questions</strong>
+      </a>
+      <a
+        onclick="document.getElementById('fill_loading').style.display = 'flex'"
+        href="/fill"
+        id="fill"
+      >
+        <loading id="fill_loading" class="loader"><spinner></spinner></loading>
+        <ion-icon src="/static/revise_icons/Fill The Gaps.svg"></ion-icon>
+        <strong>Fill The Gaps</strong>
+      </a>
+      <a
+        onclick="document.getElementById('test_loading').style.display = 'flex'"
+        href="/upgrade"
+        id="test"
+      >
+        <loading id="test_loading" class="loader"><spinner></spinner></loading>
+        <ion-icon
+          id="test_lock"
+          class="start_lock"
+          name="arrow-up-circle-outline"
+        ></ion-icon>
+        <ion-icon src="/static/revise_icons/Test.svg"></ion-icon>
+        <strong>Test</strong>
+      </a>
+    </div>
+    <div class="start_buttons">
+      <a href="/delete" id="del_button" class="main_button del_button">
+        <span>Delete</span><ion-icon name="trash-outline"></ion-icon>
+      </a>
+      <a id="share" class="third_button main_button">
+        <span>Share</span><ion-icon name="share-social-outline"></ion-icon>
+      </a>
+      <a href="/upload" id="upload" class="second_button main_button">
+        <span>Publish</span><ion-icon name="push-outline"></ion-icon>
+      </a>
+      <a href="/edit" id="edit_button" href="/edit" class="main_button">
+        <span>Edit</span><ion-icon name="pencil-outline"></ion-icon>
+      </a>
+    </div>
+  </dialog>
+  <dialog class="add_user_group" id="add_user_group">
+    <h2>Add User</h2>
+    <p>Add A New User To This Group</p>
+    <form method="post">
+      <input placeholder="Username" name="username" type="text" />
+      <button style="float: right" class="main_button add_user_button">
+        <ion-icon name="person-add-outline"></ion-icon>
+      </button>
+    </form>
+    <button class="close_start_set">
+      <ion-icon
+        onclick="document.getElementById('add_user_group').close()"
+        class="close_start"
+        name="close-outline"
+      ></ion-icon>
+    </button>
+  </dialog>
+  <dialog class="view_user_group" id="view_user_group">
+    <button class="close_start_set">
+      <ion-icon
+        onclick="document.getElementById('view_user_group').close()"
+        class="close_start"
+        name="close-outline"
+      ></ion-icon>
+    </button>
+    <h2>Current Users</h2>
+    <p>View and Remove Users From This Group</p>
+    <div id="view_user_group_div"></div>
+  </dialog>
 </main>
-    <nav class="bottom_nav">
-        <a href="/new/group"><ion-icon name="people-outline"></ion-icon></a>
-        <a href="/new/folder"><ion-icon name="folder-open-outline"></ion-icon></a>
-        <a href="/community"><ion-icon name="earth-outline"></ion-icon></a>
-        <a href="/play"><ion-icon name="play-outline"></ion-icon></a>
-        <a href="/new" class="add_button_nav"><ion-icon name="add-outline"></ion-icon></a>
-    </nav>
+<nav class="bottom_nav">
+  <a href="/new/group"><ion-icon name="people-outline"></ion-icon></a>
+  <a href="/new/folder"><ion-icon name="folder-open-outline"></ion-icon></a>
+  <a href="/community"><ion-icon name="earth-outline"></ion-icon></a>
+  <a href="/play"><ion-icon name="play-outline"></ion-icon></a>
+  <a href="/new" class="add_button_nav"
+    ><ion-icon name="add-outline"></ion-icon
+  ></a>
+</nav>
 <script>
+    var folders = {{folders|tojson}};
+    var folder_keys = Object.keys(folders)
+    console.log(folders)
     level = {{boosting|tojson}}
     owner = {{owner|tojson}}
     username = {{name|tojson}}
     user_data = {{user_data|tojson}}
     user_data_keys = Object.keys(user_data)
+    var folder_sets = []
+    for (var i = 0; i < folder_keys.length; i++) {
+        var home = document.getElementById("home_sets")
+        var a = document.createElement("a")
+        a.classList.add("droppable","folder_home")
+        var img = document.createElement("img")
+        var loader = document.createElement("loding")
+        var spinner = document.createElement("spinner")
+        loader.classList.add("loader")
+        img.draggable = false
+        a.draggable = false
+        var strong = document.createElement("strong")
+        var p = document.createElement("p")
+        var amount_of_sets = document.createElement("p")
+        var what_class = document.createElement("span")
+        what_class.innerHTML = '<ion-icon name="folder-open-outline"></ion-icon> Folder'
+        what_class.classList.add("subject")
+        amount_of_sets.classList.add("amount_of_sets")
+        a.href = `/group/{{title}}/folder/${folders[folder_keys[i]]["settings"]["title"]}`
+        img.src = `/static/folders/${folders[folder_keys[i]]["settings"]["cover"]}.webp`
+        img.alt = folders[folder_keys[i]]["settings"]["title"]
+        strong.innerText = folders[folder_keys[i]]["settings"]["title"]
+        p.innerText = folders[folder_keys[i]]["settings"]["desc"]
+        a.id = folder_keys[i]
+        for (var j = 0; j < folders[folder_keys[i]]["sets"].length; j++) {
+            folder_sets.push(folders[folder_keys[i]]["sets"][j])
+        }
+        var amount_sets = Object.keys(folders[folder_keys[i]]["sets"]).length
+        if (amount_sets <= 1){
+            amount_of_sets.innerText = `Contains ${amount_sets} Set`
+        }else{
+            amount_of_sets.innerText = `Contains ${amount_sets} Sets`
+        }
+        loader.id = `loader_${folder_keys[i]}`
+        loader.appendChild(spinner)
+        a.appendChild(loader)
+        a.appendChild(img)
+        a.appendChild(what_class)
+        a.appendChild(strong)
+        a.appendChild(p)
+        a.appendChild(amount_of_sets)
+        home.appendChild(a)
+        img.id = folder_keys[i]
+        p.id = folder_keys[i]
+        strong.id = folder_keys[i]
+        what_class.id = folder_keys[i]
+        var current_loader = document.getElementById(`loader_${folder_keys[i]}`)
+        a.addEventListener("click",(e)=>{
+            console.log(e.target.id)
+            document.getElementById(`loader_${e.target.id}`).style.display = "flex"
+        })
+    }
     for (var i = 0;user_data_keys.length > i; i++){
         var users = document.getElementById("view_user_group_div")
         var user = document.createElement("user")
@@ -122,13 +224,12 @@
         leave.classList.add("leave_group")
         level.appendChild(badge)
         if (user_data[user_data_keys[i]]["name"] == owner){
-              owner_group = true
+            owner_group = true
         }
         if (user_data[user_data_keys[i]]["level"] == "boost") {
             badge.name = "rocket-outline";
             level.style.background = "var(--boost1)";
             level.style.color = "var(--on_boost)";
-            
         } else if (user_data[user_data_keys[i]]["level"] == "premium") {
             badge.name = "sparkles-outline";
             level.style.background = "var(--premium1)";
@@ -159,7 +260,7 @@
         user.appendChild(leave)
     }
 
-    
+
     if (username != owner){
         var edit_button = document.getElementById("edit_button")
         var add_button = document.getElementById("add_button")
@@ -219,34 +320,35 @@
   }
   var sets = {{sets|tojson}};
   var sets_keys = Object.keys(sets)
-    const droppableElement = document.querySelector('.droppable');
+  const droppableContainers = document.querySelectorAll('.droppable');
   for(var i=0;i<sets_keys.length;i++){
-      var level = sets[sets_keys[i]]["settings"]["level"]
-      var home = document.getElementById("home_sets")
-      var a = document.createElement("set")
-      a.classList.add("set_home")
-      var img = document.createElement("img")
-      img.draggable = false
-      var strong = document.createElement("strong")
-      var p = document.createElement("p")
-      var user = document.createElement("p")
-      a.addEventListener("click",(e) => {
-          show(e.target.id)
-      })
-      img.alt = sets[sets_keys[i]]["settings"]["name"]
-      img.src = `/static/set_icons/${sets[sets_keys[i]]["settings"]["background"]}.webp`
-      user.innerText = sets[sets_keys[i]]["settings"]["user"]
-      user.classList.add("user_name")
-      strong.innerText = sets[sets_keys[i]]["settings"]["name"]
-      p.innerText = sets[sets_keys[i]]["settings"]["desc"]
-      a.id = sets_keys[i]
-      strong.id = sets_keys[i]
-      img.id = sets_keys[i]
-      p.id = sets_keys[i]
-      user.id = sets_keys[i]
-      if(level != false){
-          var badge = document.createElement("ion-icon")
-          badge.classList.add("badge")
+    if (!folder_sets.includes(sets[sets_keys[i]]["settings"]["name"])){
+        var level = sets[sets_keys[i]]["settings"]["level"]
+        var home = document.getElementById("home_sets")
+        var a = document.createElement("set")
+        a.classList.add("set_home")
+        var img = document.createElement("img")
+        img.draggable = false
+        var strong = document.createElement("strong")
+        var p = document.createElement("p")
+        var user = document.createElement("p")
+        a.addEventListener("click",(e) => {
+            show(e.target.id)
+        })
+        img.alt = sets[sets_keys[i]]["settings"]["name"]
+        img.src = `/static/set_icons/${sets[sets_keys[i]]["settings"]["background"]}.webp`
+        user.innerText = sets[sets_keys[i]]["settings"]["user"]
+        user.classList.add("user_name")
+        strong.innerText = sets[sets_keys[i]]["settings"]["name"]
+        p.innerText = sets[sets_keys[i]]["settings"]["desc"]
+        a.id = sets_keys[i]
+        strong.id = sets_keys[i]
+        img.id = sets_keys[i]
+        p.id = sets_keys[i]
+        user.id = sets_keys[i]
+        if(level != false){
+            var badge = document.createElement("ion-icon")
+            badge.classList.add("badge")
                 if (level == "boost") {
                     badge.name = "rocket-outline";
                     badge.style.background = "var(--boost1)";
@@ -268,11 +370,11 @@
                     badge.style.background = "#A3D89D";
                     badge.style.color = "#243822)";
                 }
-          badge.id = sets[sets_keys[i]]["settings"]["name"]
-          user.appendChild(badge)
-          document.querySelector('svg').addEventListener('load', () => {
-              document.querySelectorAll(".badge").forEach((badge_item) => {
-                  badge_item.style.display = "inline-block"
+             badge.id = sets[sets_keys[i]]["settings"]["name"]
+            user.appendChild(badge)
+            document.querySelector('svg').addEventListener('load', () => {
+                document.querySelectorAll(".badge").forEach((badge_item) => {
+                    badge_item.style.display = "inline-block"
               })
           })
         }
@@ -294,33 +396,39 @@
 
     });
   }
-  droppableElement.addEventListener('dragenter', (event) => {
-    droppableElement.style.outline = '1px solid var(--border_hover)';
-  });
+}
+  var current_set = ""
+    for (let j = 0; j < droppableContainers.length; j++) {
+        const droppableContainer = droppableContainers[j];
+        const droppableContainer_id = droppableContainer.id
+        droppableContainer.addEventListener('dragover', (event) => {
+            event.preventDefault();
+        });
 
-  droppableElement.addEventListener('dragleave', (event) => {
-    droppableElement.style.outline = 'none';
-  });
-  droppableElement.addEventListener('dragover', (event) => {
-    event.preventDefault();
-  });
-
-  droppableElement.addEventListener('drop', (event) => {
-    event.preventDefault();
-    droppableElement.style.outline = 'none';
-    const draggedElementId = event.dataTransfer.getData('text/plain');
-    const draggedElement = document.getElementById(draggedElementId);
-    draggedElement.remove()
-    fetch(`/remove/group/{{title}}/${draggedElement.id}`)
-  });
+        droppableContainer.addEventListener('drop', (event) => {
+            event.preventDefault();
+            const draggedElementId = event.dataTransfer.getData('text/plain');
+            const draggedElement = document.getElementById(draggedElementId);
+            if (folder_keys.includes(droppableContainer.id)){
+                draggedElement.remove()
+                fetch(`/group/{{title}}/folder/add/${droppableContainer.id}/${draggedElement.id}`)
+            }else{
+                if(current_set != draggedElement.id){
+                    console.log("Sending")
+                    current_set = draggedElement.id
+                    fetch(`/group/{{title}}/remove/${draggedElement.id}`)
+                }
+            }
+        });
+    }
     const dialog = document.getElementById('start_set');
     const closeButton = document.getElementById('close_mobile');
     var isDragging = false;
-    
+
     closeButton.addEventListener('touchstart', (e) => {
         isDragging = true;
     });
-    
+
     closeButton.addEventListener('touchmove', (e) => {
       if (isDragging) {
             dialog.classList.add("slide_out_animation");
@@ -345,14 +453,24 @@
             menu_button.classList.add("home_menu_button_selected")
             menu.style.display = "flex"
         }
-        
+
     }
 </script>
 <div class="home_menu" id="home_menu">
-    <a href="/group/folder/new/{{title}}"><ion-icon name="folder-open-outline"></ion-icon>New Folder</a>
-    <a href="javascript:document.getElementById('add_user_group').showModal()"><ion-icon name="person-add-outline"></ion-icon>Add Person</a>
-    <a href="javascript:document.getElementById('view_user_group').showModal()"><ion-icon name="people-outline"></ion-icon>View People</a>
-    <a href="/group/Assignment/new/{{title}}"><ion-icon name="document-text-outline"></ion-icon>Assignment</a>
+  <a href="/group/folder/new/{{title}}"
+    ><ion-icon name="folder-open-outline"></ion-icon>New Folder</a
+  >
+  <a href="javascript:document.getElementById('add_user_group').showModal()"
+    ><ion-icon name="person-add-outline"></ion-icon>Add Person</a
+  >
+  <a href="javascript:document.getElementById('view_user_group').showModal()"
+    ><ion-icon name="people-outline"></ion-icon>View People</a
+  >
+  <a href="/group/Assignment/new/{{title}}"
+    ><ion-icon name="document-text-outline"></ion-icon>Assignment</a
+  >
 </div>
-<button onclick="menu_open()" id="home_menu_button" class="home_add"><ion-icon name="add-outline"></ion-icon></button>
+<button onclick="menu_open()" id="home_menu_button" class="home_add">
+  <ion-icon name="add-outline"></ion-icon>
+</button>
 {% endblock %}
