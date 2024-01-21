@@ -182,7 +182,7 @@ def community():
 def recommended():
     if login() == False:
         return render_template("login/login.html")
-    recommended = recommend(db[username()]["sets"])
+    recommended = recommend(user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["sets"])
     recommended_sets = {}
     notifications = []
     for i in range(len(recommended)):

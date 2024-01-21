@@ -104,9 +104,10 @@ def recommend(sets):
             sets[i]["settings"]["subject"] = subject(i)
             subjects[sets[i]["settings"]["subject"]] += 1
     subjects = dict(sorted(subjects.items(), key=lambda x: x[1], reverse=True))
-    for i in db["sets"]:
+    community_sets = global_data_db.find_one({"name":"sets"})["data"]
+    for i in community_sets:
         for j in range(len(subjects)):
-            set_subject = db[i[0]]["sets"][i[1]]["settings"]["subject"]
+            set_subject = user_data_db.find_one({"username":i[0],"type":"user_data"})["data"]["sets"][i[1]]["settings"]["subject"]
             if i[0] != username() and i[1] not in sets and set_subject != "Other":
                 if set_subject == list(subjects.keys())[j]:
                     recommended.append([i[0], i[1]])
