@@ -90,48 +90,61 @@
 </nav>
 <script>
     level = {{ boosting | tojson }}
+    owner = {{ owner | tojson }}
     const copy = (text) => {
         navigator.clipboard.writeText(text)
         document.getElementById("share").innerHTML = "<ion-icon name='clipboard-outline'></ion-icon>Copyed!"
     }
-    function show(name) {
-        var set = sets[name]
-        var sets_keys = Object.keys(set)
-        sets_keys.pop()
-        var mean = 0
-        var total_ans_len = 0
-        for (var i = 0; i < sets_keys.length; i++) {
-            var ans = set[sets_keys[i]]["answers"]["ans1"]
-            total_ans_len += ans.split(" ").length
-        }
-        mean = total_ans_len / sets_keys.length;
-        if (mean <= 2 && sets_keys.length > 3) {
-            document.getElementById("share").innerHTML = "<ion-icon name='share-social-outline'></ion-icon>Share"
-            document.getElementById("quest_rec").style.display = "flex"
-            document.getElementById("flash_rec").style.display = "flex"
-        } else {
-            document.getElementById("flash_rec").style.display = "flex"
-            document.getElementById("quest_rec").style.display = "none"
-        }
-        document.getElementById("start_set").showModal()
-        document.getElementById("set_image").src = `/static/set_icons/${sets[name]["settings"]["background"]}.webp`
-        document.getElementById("set_title").innerText = sets[name]["settings"]["name"]
-        document.getElementById("set_desc").innerText = sets[name]["settings"]["desc"]
-        document.getElementById("flashcards").href = `/flashcards/${name}`
-        document.getElementById("questions").href = `/questions/${name}`
-        document.getElementById("fill").href = `/fill/${name}`
-        document.getElementById("del_button").href = `/remove/folder/{{title}}/${name}`
-        document.getElementById("edit_button").href = `/edit/${name}`
-        document.getElementById("upload").href = `/publish/${name}`
-        var share = document.getElementById("share")
-        share.addEventListener("click", () => {
-            copy(`revise.booogle.app/share/@${sets[name]["settings"]["user"]}/${name}`)
-        })
-        if (level == "elite") {
-            document.getElementById("test").href = `/test/${name}`
-            document.getElementById("test_lock").remove()
-        }
+    function show(name,keys) {
+    if (sets[name]["settings"]["id"]){
+      var set_id = sets[name]["settings"]["id"]
+    }else{
+      var set_id = sets[name]["settings"]["name"]
     }
+    var set = sets[name]
+    var sets_keys_local = Object.keys(set)
+    sets_keys_local.pop()
+    var mean = 0
+    var total_ans_len = 0
+    for (var i = 0; i < sets_keys_local.length; i++) {
+      var ans = set[sets_keys_local[i]]["answers"]["ans1"]
+      total_ans_len += ans.split(" ").length
+    }
+    mean = total_ans_len / sets_keys_local.length;
+    if (mean <= 2 && sets_keys_local.length > 3) {
+      document.getElementById("share").innerHTML = "<ion-icon name='share-social-outline'></ion-icon>Share"
+      document.getElementById("quest_rec").style.display = "block"
+      document.getElementById("flash_rec").style.display = "none"
+    } else {
+      document.getElementById("flash_rec").style.display = "block"
+      document.getElementById("quest_rec").style.display = "none"
+    }
+    document.getElementById("start_set").showModal()
+    document.getElementById("set_image").src = `/static/set_icons/${sets[name]["settings"]["background"]}.webp`
+    document.getElementById("set_title").innerText = sets[name]["settings"]["name"]
+    document.getElementById("set_desc").innerText = sets[name]["settings"]["desc"]
+    document.getElementById("flashcards").href = `/flashcards/@${owner}/${set_id}`
+    document.getElementById("questions").href = `/questions/@${owner}/${set_id}`
+    document.getElementById("fill").href = `/fill/@${owner}/${set_id}`
+    if (username != owner) {
+      document.getElementById("del_button").style.display = "none";
+      document.getElementById("edit_button").style.display = "none";
+      document.getElementById("upload").style.display = "none";
+      document.getElementById("share").document.getElementById("share")
+    } else {
+      document.getElementById("del_button").href = `/remove/folder/{{title}}/${name}`
+      document.getElementById("edit_button").href = `/edit/${name}`
+      document.getElementById("upload").href = `/publish/${name}`
+      var share = document.getElementById("share")
+      share.addEventListener("click", () => {
+        copy(`revise.booogle.app/share/@${sets[name]["settings"]["user"]}/${name}`)
+      })
+    }
+    if (level == "elite") {
+      document.getElementById("test").href = `/test/${name}`
+      document.getElementById("test_lock").remove()
+    }
+  }
     var sets = {{ sets| tojson}};
     var sets_keys = Object.keys(sets)
     const droppableContainers = document.querySelectorAll('.droppable');

@@ -234,7 +234,7 @@ def publish(name):
     query = {"name":"sets"}
     update = {"$push": {"data": [username(),name]}}
     global_data_db.update_one(query, update)
-    session["notifications"] = [{"title":"Success","body":f"You Have Published: {name}","type":"success","icon":"checkmark-circle"}]
+    session["notifications"] = [{"title":"Success","body":f"You Have Published: {set['settings']['name']}","type":"success","icon":"checkmark-circle"}]
     return redirect("/community")
 
 @app.route("/download/@<user_name>/<name>")
@@ -246,15 +246,9 @@ def download(user_name,name):
     user_sets = user_data["sets"]
     user_folders = user_data["folders"]
     user_rules = user_data["rules"]
-    if name in user_sets.keys():
-        for i in user_sets.keys():
-            if name in i:
-                amount += 1
-        name2 = f"{name} ({amount})"
-    else:
-        name2 = name
-    user_sets[name2] = user_data_db.find_one({"username":user_name,"type":"user_data"})["data"]["sets"][name]
-    user_sets[name2]["settings"]["folder"] = False
+    set_id = gen_id()
+    user_sets[set_id] = user_data_db.find_one({"username":user_name,"type":"user_data"})["data"]["sets"][name]
+    user_sets[set_id]["settings"]["folder"] = False
     for i in user_rules:
         which_subject = user_rules[i]["subject"]
         folder = user_rules[i]["folder"]
@@ -263,9 +257,9 @@ def download(user_name,name):
             query = {"username":username(),"type":"user_data"}
             update = {"$set":{"data.rules":user_rules}}
             user_data_db.update_one(query, update)
-        if subject(name) == which_subject and db[username()]["sets"][name2]["settings"]["folder"] == False:
-            user_folders[folder]["sets"].append(name2)
-            user_sets[name2]["settings"]["folder"] = True
+        if subject(name) == which_subject and db[username()]["sets"][set_id]["settings"]["folder"] == False:
+            user_folders[folder]["sets"].append(set_id)
+            user_sets[set_id]["settings"]["folder"] = True
     query = {"username":username(),"type":"user_data"}
     update = {"$set":{"data.folders":user_folders}}
     user_data_db.update_one(query, update)
@@ -289,7 +283,7 @@ def delete2(user_name,name):
     else:
         session["notifications"] = [{"title":"Failed","body":"You Can Not Delete This Set.","type":"warning","icon":"alert-circle"}]
         return redirect("/community")
-    session["notifications"] = [{"title":"Success","body":f"You Deleted This From The Community: {name}","type":"success","icon":"checkmark-circle"}]
+    session["notifications"] = [{"title":"Success","body":f"You Deleted This From The Community","type":"success","icon":"checkmark-circle"}]
     return redirect("/")
 
 @app.route("/flashcards/@<username>/<name>")
@@ -418,7 +412,7 @@ def edit_folder(folder):
 def remove_folder(folder):
     if login() == False:
         return render_template("login/login.html")
-    for i in user_data_db.find_one({"username":username(),"type":"user_data"})["folders"][folder]["sets"]:
+    for i in user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["folders"][folder]["sets"]:
         query = {"username":username(),"type":"user_data"}
         update = {"$set":{"data.sets."+i+".settings.folder":False}}
         user_data_db.update_one(query, update)
@@ -468,6 +462,7 @@ def new():
         title = emoji.demojize(request.form["title"]).strip()
         desc = request.form["desc"]
         cover = request.form["cover"]
+        set_id = gen_id()
         if level == "boost" or level == False:
             if cover in elite:
                 cover = "maths"
@@ -493,11 +488,12 @@ def new():
                     "user":username(),
                     "level":userinfo(username())[0],
                     "subject":subject(emoji.demojize(request.form["title"])),
-                    "folder":False
+                    "folder":False,
+                    "id":set_id
                 }
             }
-            user_data_db.update_one({"username":username(),"type":"user_data"},{"$set":{"data.sets."+title:new_set}})
-            session["current_set"] = title
+            user_data_db.update_one({"username":username(),"type":"user_data"},{"$set":{"data.sets."+set_id:new_set}})
+            session["current_set"] = set_id
             return redirect("/new/question")
     else:
         if session.get("new_set"):
@@ -589,13 +585,7 @@ def edit(name):
                     "folder":old_set["settings"]["folder"]
                 }
             }
-            user_data_db.update_one({"username":username(),"type":"user_data"},{"$set":{"data.sets."+title:new_set}})
-            folders = get_folders()
-            for i in folders:
-                if name in folders[i]["sets"]:
-                    folders[i]["sets"].remove(name)
-                    folders[i]["sets"].append(title)
-                    user_data_db.update_one({"username":username(),"type":"user_data"},{"$set":{"data.folders."+i+".sets":folders[i]["sets"]}})
+            user_data_db.update_one({"username":username(),"type":"user_data"},{"$set":{"data.sets."+name:new_set}})
         for i in range(1,len(list(request.form)[3:])):
             if (i >= 15 and (level == False or level == "boost")) or (i >= 20 and level == "premium") or (i >= 25 and level == "pro") or (i >= 50 and level == "elite"):
                 session["notifications"] = [{"title":"Failed","body":"Your Have Reached The Max Amount Of Questions","type":"warning","icon":"alert-circle"}]
@@ -620,8 +610,8 @@ def edit(name):
                     if mod(quest) == "1" or quest_profanity: 
                         pass
                     else:
-                        user_data_db.update_one(query, {"$set":{"data.sets."+title+".Q"+str(i):question}})
-        session["notifications"] = [{"title":"Success","body":f"You Have Edited: {name}","type":"success","icon":"checkmark-circle"}]
+                        user_data_db.update_one(query, {"$set":{"data.sets."+name+".Q"+str(i):question}})
+        session["notifications"] = [{"title":"Success","body":f"You Have Edited: {title}","type":"success","icon":"checkmark-circle"}]
         return redirect("/")
     return render_template("sets/edit.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets()[name],notifications=notifications)
 
@@ -1307,6 +1297,7 @@ def group_folder(group,folder):
         folder_name = folder_info["settings"]["title"]
         for i in range(len(names)):
             sets[i] = user_sets[folder_info["sets"][i]]
+        owner = groups[group]["settings"]["Owner"]
     else:
         sets = {}
         added_groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["added_groups"]
@@ -1319,7 +1310,8 @@ def group_folder(group,folder):
                 for i in range(len(names)):
                     sets[i] = owner_sets[this_group["sets"][i]]
         folder_name = this_group["folders"][folder]["settings"]["title"]
-    return render_template("groups/folder.html",group_name=group_name,folder_id=folder,sets=sets,group_id=group,folder_name=folder_name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+        owner = this_group["settings"]["Owner"]
+    return render_template("groups/folder.html",owner=owner,group_name=group_name,folder_id=folder,sets=sets,group_id=group,folder_name=folder_name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/group/folder/new/<group>",methods=["POST","GET"])
 def new_group_folder(group):
@@ -1464,25 +1456,6 @@ def updates():
 def view_update(title):
     return render_template("login/view_update.html",title=title)
 
-@app.route("/learn")
-def learn():
-    if login() == False:
-        return render_template("login/login.html")
-    notifications = {}
-    learn_sets = {
-        "id-ejejeje":{
-            "settings":{
-            "name":"Title",
-            "desc":"Desc",
-            "background":"gear",
-            "user":"Test",
-            "level":False,
-            "subject":"Other"
-            }
-        }
-    }
-    return render_template("home/learn.html",learn_sets=learn_sets,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
-
 @app.route("/api/learn/like",methods=["POST","GET"])
 def api_learn_like():
     data = request.get_json()
@@ -1561,5 +1534,42 @@ def classroom(classroom):
     sets = {}
     user_data = {}
     return render_template("groups/classes/classroom.html",folders=folders,owner=owner,sets=sets,user_data=user_data,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+
+@app.route("/new/learn",methods=["POST","GET"])
+def new_learn():
+    if login() == False:
+        return render_template("login/login.html")
+    notifications = []
+    if request.method == "POST":
+        title = request.form["title"]
+        desc = request.form["desc"]
+        subject = request.form["subject"]
+        background = request.form["background"]
+        title_mod = mod(title)
+        desc_mod = mod(desc)
+        if title_mod == 1 or desc_mod == 1:
+            session["notifications"] = [{"title":"Failed","body":"Title Or Description Contain Possible Rude/Inappropriate Content","type":"warning","icon":"alert-circle"}]
+            return redirect("/new/learn")
+        pass
+    return render_template("learn/new_learn.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+
+@app.route("/learn")
+def learn():
+    if login() == False:
+        return render_template("login/login.html")
+    notifications = {}
+    learn_sets = {
+        "id-ejejeje":{
+            "settings":{
+            "name":"Title",
+            "desc":"Desc",
+            "background":"gear",
+            "user":"Test",
+            "level":False,
+            "subject":"Other"
+            }
+        }
+    }
+    return render_template("learn/learn.html",learn_sets=learn_sets,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 app.run(host='0.0.0.0', port=80,debug=True)

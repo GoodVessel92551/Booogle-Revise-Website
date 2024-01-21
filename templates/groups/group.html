@@ -45,37 +45,29 @@ title %}{{group_name}}{% endblock %} {% block main %}
     <h2>Revise</h2>
     <div class="start_options">
       <a onclick="document.getElementById('cards_loading').style.display = 'flex'" href="/flashcards" id="flashcards">
-        <loading id="cards_loading" class="loader">
-          <spinner></spinner>
-        </loading>
-        <span id="flash_rec"><ion-icon name="sparkles"></ion-icon></span>
-        <ion-icon src="/static/revise_icons/Fashcards.svg"></ion-icon>
-        <strong>Flashcards</strong>
+          <loading id="cards_loading" class="loader"><spinner></spinner></loading>
+          <span id="flash_rec" class="subject"><ion-icon name="sparkles"></ion-icon>Recommend</span>
+          <ion-icon src="/static/revise_icons/Fashcards.svg"></ion-icon>
+          <strong>Flashcards</strong>
       </a>
       <a onclick="document.getElementById('quest_loading').style.display = 'flex'" href="/questions" id="questions">
-        <loading id="quest_loading" class="loader">
-          <spinner></spinner>
-        </loading>
-        <span id="quest_rec"><ion-icon name="sparkles"></ion-icon></span>
-        <ion-icon src="/static/revise_icons/Questions.svg"></ion-icon>
-        <strong>Questions</strong>
+          <loading id="quest_loading" class="loader"><spinner></spinner></loading>
+          <span id="quest_rec" class="subject"><ion-icon name="sparkles"></ion-icon>Recommend</span>
+          <ion-icon src="/static/revise_icons/Questions.svg"></ion-icon>
+          <strong>Questions</strong>
       </a>
       <a onclick="document.getElementById('fill_loading').style.display = 'flex'" href="/fill" id="fill">
-        <loading id="fill_loading" class="loader">
-          <spinner></spinner>
-        </loading>
-        <ion-icon src="/static/revise_icons/Fill The Gaps.svg"></ion-icon>
-        <strong>Fill The Gaps</strong>
+          <loading id="fill_loading" class="loader"><spinner></spinner></loading>
+          <ion-icon src="/static/revise_icons/Fill The Gaps.svg"></ion-icon>
+          <strong>Fill The Gaps</strong>
       </a>
       <a onclick="document.getElementById('test_loading').style.display = 'flex'" href="/upgrade" id="test">
-        <loading id="test_loading" class="loader">
-          <spinner></spinner>
-        </loading>
-        <ion-icon id="test_lock" class="start_lock" name="arrow-up-circle-outline"></ion-icon>
-        <ion-icon src="/static/revise_icons/Test.svg"></ion-icon>
-        <strong>Test</strong>
+          <loading id="test_loading" class="loader"><spinner></spinner></loading>
+          <ion-icon id="test_lock" class="start_lock" name="arrow-up-circle-outline"></ion-icon>
+          <ion-icon src="/static/revise_icons/Test.svg"></ion-icon>
+          <strong>Test</strong>
       </a>
-    </div>
+  </div>
     <div class="start_buttons">
       <a href="/delete" id="del_button" class="main_button del_button">
         <span>Delete</span><ion-icon name="trash-outline"></ion-icon>
@@ -157,7 +149,7 @@ title %}{{group_name}}{% endblock %} {% block main %}
     p.innerText = folders[folder_keys[i]]["settings"]["desc"]
     a.id = folder_keys[i]
     for (var j = 0; j < folders[folder_keys[i]]["sets"].length; j++) {
-      folder_sets.push(folders[folder_keys[i]]["sets"][j])
+      folder_sets.push(folders[folder_keys[i]]["sets"][i])
     }
     var amount_sets = Object.keys(folders[folder_keys[i]]["sets"]).length
     if (amount_sets <= 1) {
@@ -190,9 +182,7 @@ title %}{{group_name}}{% endblock %} {% block main %}
     var img = document.createElement("img")
     img.src = user_data[user_data_keys[i]]["profile_pic"]
     img.id = user_data_keys[i]+"img"
-    img.addEventListener("error", () => {
-      e.target.src = "/static/images/Booogle%20Logo%20User.png"
-    })
+
     var name_view = document.createElement("strong")
     name_view.innerText = user_data[user_data_keys[i]]["name"]
     var level = document.createElement("span")
@@ -264,18 +254,23 @@ title %}{{group_name}}{% endblock %} {% block main %}
   })
   }
 
-  function show(name) {
+  function show(name,keys) {
+    if (sets[name]["settings"]["id"]){
+      var set_id = sets[name]["settings"]["id"]
+    }else{
+      var set_id = sets[name]["settings"]["name"]
+    }
     var set = sets[name]
-    var sets_keys = Object.keys(set)
-    sets_keys.pop()
+    var sets_keys_local = Object.keys(set)
+    sets_keys_local.pop()
     var mean = 0
     var total_ans_len = 0
-    for (var i = 0; i < sets_keys.length; i++) {
-      var ans = set[sets_keys[i]]["answers"]["ans1"]
+    for (var i = 0; i < sets_keys_local.length; i++) {
+      var ans = set[sets_keys_local[i]]["answers"]["ans1"]
       total_ans_len += ans.split(" ").length
     }
-    mean = total_ans_len / sets_keys.length;
-    if (mean <= 2 && sets_keys.length > 3) {
+    mean = total_ans_len / sets_keys_local.length;
+    if (mean <= 2 && sets_keys_local.length > 3) {
       document.getElementById("share").innerHTML = "<ion-icon name='share-social-outline'></ion-icon>Share"
       document.getElementById("quest_rec").style.display = "block"
       document.getElementById("flash_rec").style.display = "none"
@@ -287,9 +282,9 @@ title %}{{group_name}}{% endblock %} {% block main %}
     document.getElementById("set_image").src = `/static/set_icons/${sets[name]["settings"]["background"]}.webp`
     document.getElementById("set_title").innerText = sets[name]["settings"]["name"]
     document.getElementById("set_desc").innerText = sets[name]["settings"]["desc"]
-    document.getElementById("flashcards").href = `/flashcards/@${owner}/${sets[name]["settings"]["name"]}`
-    document.getElementById("questions").href = `/questions/@${owner}//${sets[name]["settings"]["name"]}`
-    document.getElementById("fill").href = `/fill/@${owner}//${sets[name]["settings"]["name"]}`
+    document.getElementById("flashcards").href = `/flashcards/@${owner}/${set_id}`
+    document.getElementById("questions").href = `/questions/@${owner}/${set_id}`
+    document.getElementById("fill").href = `/fill/@${owner}/${set_id}`
     if (username != owner) {
       document.getElementById("del_button").style.display = "none";
       document.getElementById("edit_button").style.display = "none";
@@ -313,7 +308,13 @@ title %}{{group_name}}{% endblock %} {% block main %}
   var sets_keys = Object.keys(sets)
   const droppableContainers = document.querySelectorAll('.droppable');
   for (var i = 0; i < sets_keys.length; i++) {
-    if (!folder_sets.includes(sets[sets_keys[i]]["settings"]["name"])) {
+    console.log(sets[sets_keys[i]]["settings"]["id"])
+    if (!folder_sets.includes(sets[sets_keys[i]]["settings"]["id"])) {
+      if (sets[sets_keys[i]]["settings"]["id"]){
+        var set_id = sets[sets_keys[i]]["settings"]["id"]
+      }else{
+        var set_id = sets[sets_keys[i]]["settings"]["name"]
+      }
       var level = sets[sets_keys[i]]["settings"]["level"]
       var home = document.getElementById("home_sets")
       var a = document.createElement("set")
@@ -324,7 +325,7 @@ title %}{{group_name}}{% endblock %} {% block main %}
       var p = document.createElement("p")
       var user = document.createElement("p")
       a.addEventListener("click", (e) => {
-        show(e.target.id)
+        show(e.target.id,sets_keys)
       })
       img.alt = sets[sets_keys[i]]["settings"]["name"]
       img.src = `/static/set_icons/${sets[sets_keys[i]]["settings"]["background"]}.webp`

@@ -4064,3 +4064,24 @@ input[type="number"]::-webkit-outer-spin-button {
     margin-top:-16px;
     margin-bottom: 32px;
 }
+
+select{
+    appearance: none;
+    width:200px;
+    background: var(--top_back);
+    border:var(--top_back_border);
+    color:var(--text);
+    padding-left:16px;
+    border-radius: 16px;
+    height:32px;
+    font-size:16px;
+    background-image: url(/static/svgs/down.svg);
+    background-repeat: no-repeat;
+    background-position: 170px;
+    background-size: 20px 20px;
+}
+
+select:focus{
+    outline:none;
+    border-color:var(--border_hover);
+}

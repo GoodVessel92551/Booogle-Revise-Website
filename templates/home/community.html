@@ -182,6 +182,11 @@
         document.getElementById("share").innerHTML = "<ion-icon name='clipboard-outline'></ion-icon>Copyed!"
     }
     function show(name) {
+        if (sets[name]["settings"]["id"]){
+            var set_id = sets[name]["settings"]["id"]
+        }else{
+            var set_id = sets[name]["settings"]["name"]
+        }
         var set = sets[name];
         var sets_keys = Object.keys(set);
         sets_keys.pop();
@@ -206,19 +211,19 @@
         var user = sets[name]["settings"]["user"];
         document.getElementById("set_title").innerText = title;
         document.getElementById("set_desc").innerText = sets[name]["settings"]["desc"];
-        document.getElementById("flashcards").href = `/flashcards/@${user}/${title}`;
-        document.getElementById("questions").href = `/questions/@${user}/${title}`;
-        document.getElementById("fill").href = `/fill/@${user}/${title}`;
+        document.getElementById("flashcards").href = `/flashcards/@${user}/${set_id}`;
+        document.getElementById("questions").href = `/questions/@${user}/${set_id}`;
+        document.getElementById("fill").href = `/fill/@${user}/${set_id}`;
         if (level == "admin" || user == username) {
             document.getElementById("del_button").style.display = "inline-block";
         } else {
             document.getElementById("del_button").style.display = "none";
         }
-        document.getElementById("del_button").href = `/delete/@${user}/${title}`;
-        document.getElementById("download_button").href = `/download/@${user}/${title}`;
+        document.getElementById("del_button").href = `/delete/@${user}/${set_id}`;
+        document.getElementById("download_button").href = `/download/@${user}/${set_id}`;
         var share = document.getElementById("share")
         share.addEventListener("click", () => {
-            copy(`revise.booogle.app/share/@${sets[name]["settings"]["user"]}/${title}`)
+            copy(`revise.booogle.app/share/@${sets[name]["settings"]["user"]}/${set_id}`)
         })
     }
 
