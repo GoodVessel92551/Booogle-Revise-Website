@@ -177,7 +177,7 @@
         var p = document.createElement("p")
         var amount_of_sets = document.createElement("p")
         amount_of_sets.classList.add("amount_of_sets")
-        a.href = `/group/${groups[group_keys[i]]["settings"]["Title"]}`
+        a.href = `/group/${group_keys[i]}`
         img.src = `/static/groups/${groups[group_keys[i]]["settings"]["Cover"]}.webp`
         img.alt = groups[group_keys[i]]["settings"]["Title"]
         strong.innerText = groups[group_keys[i]]["settings"]["Title"]

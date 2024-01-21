@@ -9,11 +9,7 @@
             <input required oninvalid="this.setCustomValidity('Please enter only letters and numbers.')" oninput="this.setCustomValidity('')" pattern="^[A-Za-z0-9\s]+$" value="" id="quest"  maxlength="80" placeholder="Title" name="title" class="new_title text" autofocus>
             <div style="margin-top:-52px;" class="autocomplete"><span class="autocomplete_current" id="quest_autocomplete_current"></span><span class="autocomplete_next" id="quest_autocomplete_next"></span><button class="autocomplete_button" id="quest_autocomplete_button" type="button">Tab</button><button id="voice_title" class="mic" type="button" onclick="record('quest',this.id)"><ion-icon name="mic-outline"></ion-icon></button></div>
             <textarea required id="ans1" maxlength="150"  placeholder="Description" name="desc" class="new_desc text"></textarea>
-            <div style="height:200px;margin-top:-212px;" class="autocomplete"><span class="autocomplete_current" id="ans_autocomplete_current"></span><span class="autocomplete_next" id="ans_autocomplete_next"></span><button class="autocomplete_button" id="ans_autocomplete_button" type="button">Tab</button><button id="voice_desc" class="mic" type="button" onclick="record('ans1',this.id)"><ion-icon name="mic-outline"></ion-icon></button></div>
-            <div class="user_settings_group">
-                <h3>User Settings</h3>
-                <a><input type="checkbox"><p>Allow Users To Add/Remove Sets</p></a>
-            </div>
+            <div style="height:200px;margin-top:-212px;padding-top: 16px;" class="autocomplete"><span class="autocomplete_current" id="ans_autocomplete_current"></span><span class="autocomplete_next" id="ans_autocomplete_next"></span><button class="autocomplete_button" id="ans_autocomplete_button" type="button">Tab</button><button style="top:-10px" id="voice_desc" class="mic" type="button" onclick="record('ans1',this.id)"><ion-icon name="mic-outline"></ion-icon></button></div>
             <div class="new_images">
                 <h3 style="color:var(--text)">Cover Image</h3>
                 <div class="new_images_here">

@@ -16,7 +16,7 @@
             <button name="button" value="finish" class="main_button second_button home_button top_title_button" style="position:absolute;top:34.5px;right:130.64px;"><span>Finish</span><ion-icon name="checkmark-done-outline"></ion-icon></button>
             <div id="answers">
                 <textarea maxlength="200" required name="ans1" id="ans1" placeholder="Answer" class="text new_answer">{{ans}}</textarea>
-                <div style="height:300px;margin-top:-312px;" class="autocomplete"><span class="autocomplete_current" id="ans_autocomplete_current"></span><span class="autocomplete_next" id="ans_autocomplete_next"></span><button class="autocomplete_button" id="ans_autocomplete_button" type="button">Tab</button><button id="voice_ans" class="mic" type="button" onclick="record('ans1',this.id)"><ion-icon name="mic-outline"></ion-icon></button></div>
+                <div style="height:300px;margin-top:-312px;padding-top:16px" class="autocomplete"><span class="autocomplete_current" id="ans_autocomplete_current"></span><span class="autocomplete_next" id="ans_autocomplete_next"></span><button class="autocomplete_button" id="ans_autocomplete_button" type="button">Tab</button><button id="voice_ans" style="top:-10px" class="mic" type="button" onclick="record('ans1',this.id)"><ion-icon name="mic-outline"></ion-icon></button></div>
             </div>
             <input class="new_title text" type="url" name="image_url" placeholder="Image URL (Shown In Flashcards)">
         </form>

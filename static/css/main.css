@@ -823,7 +823,7 @@ html {
     padding: 10px;
     background: none;
     border: 1px solid var(--text_border);
-    border-radius: 4px;
+    border-radius: 25px;
     font-size: 16px;
     margin-bottom: 8px;
     resize: none;
@@ -831,6 +831,7 @@ html {
     transition: 0.3s border-color, 0.3s filter;
     box-sizing: border-box;
     line-height: 22px;
+    padding-left:16px;
 }
 
 .text:hover {
@@ -849,6 +850,7 @@ html {
 .new_desc {
     width: 100%;
     height: 200px;
+    padding-top:16px
 }
 
 .new_images {
@@ -889,28 +891,40 @@ html {
 
 .new_images_here input {
     position: absolute;
-    top:4px;
-    right: 4px;
+    top:-4px;
+    right: -4px;
 }
 
 .new_images_here input[type="radio"] {
     appearance: none;
-    width: 20px;
-    height: 20px;
-    background: var(--back);
+    width: 16px;
+    height: 16px;
+    background-color: var(--back);
     border-radius:var(--main_border_radius);
     cursor: pointer;
     transition: .3s border-color, .3s background-image;
     margin: 0px;
-    box-shadow: 0px 0px 0px 10px var(--back);
-    border:3px solid var(--back);
+    border:2px solid var(--back);
     z-index:2;
+    display: none;
+}
+
+@keyframes checked_load {
+    from {
+        transform: scale(0.5);
+    }
+    to{
+        transform: scale(1);
+    }
 }
 
 
 .new_images_here input:checked {
-    border-color: var(--border_hover);
-    background-image: url("/static/tick_choice.svg");
+    background-color: var(--main_button);
+    background-image: url("/static/svgs/tick_choice_2.svg");
+    display: block;
+    animation: checked_load 567ms cubic-bezier(0.27, 0.96, 0.9, 1.63);
+
 }
 
 .new_images_here img:hover {
@@ -921,6 +935,7 @@ html {
     width: 100%;
     height: 300px;
     transition: 0.3s border-color;
+    padding-top:16px;
 }
 
 .start_set {
@@ -1591,6 +1606,7 @@ html {
     height: 44px;
     pointer-events: none;
     border: 1px solid transparent;
+    padding-left: 16px;
 }
 
 .autocomplete_current {
@@ -3978,4 +3994,73 @@ input[type="number"]::-webkit-outer-spin-button {
 .like_learn_selected{
     color:var(--error_button);
     animation: like .5s ease-in-out;
+}
+
+.class_tasks_title{
+    color:var(--text);
+    font-size:24px;
+    margin-bottom:16px;
+}
+
+.class_tasks{
+    width:100%;
+    display:flex;
+    gap:16px;
+}
+
+.class_tasks > a{
+    height:48px;
+    background:var(--top_back);
+    border:var(--top_back_border);
+    border-radius:var(--main_border_radius);
+    cursor: pointer;
+    transition: .2s background;
+    display:flex;
+    position: relative;
+}
+
+.class_tasks > a:hover{
+    background:var(--hover_top_green);
+}
+
+.class_tasks > a > svg{
+    height:32px;
+    width:32px;
+    margin:8px;
+}
+
+.class_tasks > a > span{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:4px;
+    margin-right:16px;
+}
+
+.class_tasks > a > span > strong{
+    color:var(--text);
+    font-size:16px;
+    margin:0px;
+}
+
+.class_tasks > a > span > p{
+    color:var(--on_top_green);
+    font-size:12px;
+    color:var(--text4);
+    margin:0px;
+}
+
+.class_tasks_time{
+    color:var(--text4);
+    font-size:12px;
+    margin-top:0px;
+    position: absolute;
+    top:9px;
+    right:16px;
+}
+
+.new_set_desc{
+    max-width:800px;
+    margin-top:-16px;
+    margin-bottom: 32px;
 }

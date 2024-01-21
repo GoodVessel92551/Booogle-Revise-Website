@@ -241,9 +241,9 @@ def rule_id():
 def gen_id():
     chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
     id = ""
-    for i in range(10):
+    for i in range(5):
         id += random.choice(chars)
-    id += str(time.time())
+    id += str(time.time()*1000000)[0:-2]
     return id
 
 def make_dict(dictionary):
