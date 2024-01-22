@@ -151,7 +151,7 @@
         share.addEventListener("click", () => {
             copy(`revise.booogle.app/share/@${sets[name]["settings"]["user"]}/${name}`)
         })
-        if (level == "elite") {
+        if (level == "elite" || level == "admin") {
             document.getElementById("test").href = `/test/${name}`
             document.getElementById("test_lock").remove()
         }
