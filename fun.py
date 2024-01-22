@@ -62,7 +62,7 @@ def streak():
     elif time_difference.seconds/3600 > 24:
         current_streak["streak"] = 0
         current_streak["time"] = str(current_time)
-    query = {"name":username(),"type":"user_data"}
+    query = {"username":username(),"type":"user_data"}
     new_value = {"$set":{"data.streak":current_streak}}
     user_data_db.update_one(query,new_value)
     return
@@ -78,7 +78,7 @@ def add_streak():
     else:
         new_streak["streak"] += 1
         new_streak["time"] = str(current)
-    query = {"name":username(),"type":"user_data"}
+    query = {"username":username(),"type":"user_data"}
     new_value = {"$set":{"data.streak":new_streak}}
     user_data_db.update_one(query,new_value)
 

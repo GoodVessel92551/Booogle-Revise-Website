@@ -826,30 +826,32 @@ def test_mode(set):
     notifications = []
     questions = []
     quest_set = {}
-    if db[username()]["level"] != "elite":
+    level = userinfo(username())[0] 
+    if level != "elite" and level != "admin":
         session["notifications"] = [{"title":"Upgrade","body":"You Need To Upgrade To Access Test Mode","type":"warning","icon":"alert-circle"}]
         return redirect("/")
+    set_data = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["sets"][set]
     if request.method == "POST":
-        for i in range(1,len(db[username()]["sets"][set])):
+        for i in range(1,len(list(set_data))):
             ans = request.form[f"Q{i}"]
-            quest = db[username()]["sets"][set][f"Q{i}"]["question"]
-            similarity_num = similarity(ans.lower(),db[username()]["sets"][set][f"Q{i}"]["answers"]["ans1"].lower())
+            quest = set_data[f"Q{i}"]["question"]
+            similarity_num = similarity(ans.lower(),str(set_data[f"Q{i}"]["answers"]["ans1"]).lower())
             if similarity_num > 0.8:
                 session["stats"][str(i)] = {"quest":quest,"correct":True}
             else:
                 session["stats"][str(i)] = {"quest":quest,"correct":False}
         return render_template("tools/finish.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,stats=session["stats"])
     else:
-        for i in range(1,len(db[username()]["sets"][set])):
+        for i in range(1,len(list(set_data))):
             questions = []
-            for j in range(1,len(db[username()]["sets"][set])):
+            for j in range(1,len(list(set_data))):
                 questions.append(f"Q{j}")
             quest_set[f"Q{i}"] = {
-                "question":db[username()]["sets"][set][f"Q{i}"]["question"],
+                "question":set_data[f"Q{i}"]["question"],
                 "type":None,
                 "answer":None
             }
-            quest = db[username()]["sets"][set][f"Q{i}"]
+            quest = set_data[f"Q{i}"]
             if len(quest["answers"]["ans1"].split()) < 10 and random.randint(0,2) == 0:
                 quest_set[f"Q{i}"]["type"] = "text"
                 quest_set[f"Q{i}"]["answer"] = quest["answers"]["ans1"]
@@ -857,8 +859,8 @@ def test_mode(set):
                 answers = [quest["answers"]["ans1"]]
                 temp = questions
                 temp.remove(f"Q{i}")
-                for j in range(1,len(db[username()]["sets"][set])):
-                    ans = db[username()]["sets"][set][f"Q{j}"]
+                for j in range(1,len(list(set_data))):
+                    ans = set_data[f"Q{j}"]
                     if ans["type"] == quest["type"] and ans["answers"]["ans1"] != quest["answers"]["ans1"]:
                         answers.append(ans["answers"]["ans1"])
                     if len(answers) == 3:
@@ -867,7 +869,7 @@ def test_mode(set):
                 if len(answers) != 3:
                     while len(answers) != 3:
                         random_ans = random.choice(temp)
-                        answers.append(db[username()]["sets"][set][random_ans]["answers"]["ans1"])
+                        answers.append(set_data[random_ans]["answers"]["ans1"])
                         temp.remove(random_ans)
                 random.shuffle(answers)
                 quest_set[f"Q{i}"]["type"] = "multi"
