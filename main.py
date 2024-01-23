@@ -64,7 +64,8 @@ def signup():
                 "added_groups":[],
                 "folders":{},
                 "settings":{"interface":{"theme":"green","cards":"straight"},"accessibility":{"fontSize":"normal","font":"roboto"}},
-                "password":password
+                "password":password,
+                "profile_image":"blue"
             }}
             user_data_db.insert_one(user_data)
             user_token = gen_user_token()
@@ -1126,6 +1127,7 @@ def automations():
     
 @app.route("/test")
 def test():
+
     return ""
 
 
