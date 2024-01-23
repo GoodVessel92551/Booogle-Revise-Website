@@ -19,7 +19,7 @@
         var strong = document.createElement("strong");
         var p = document.createElement("p");
         var user = document.createElement("p");
-        a.href = `/play/host/{{code}}/${sets[sets_keys[i]]["settings"]["name"]}`;
+        a.href = `/play/host/{{code}}/${sets_keys[i]}`;
         img.alt = sets[sets_keys[i]]["settings"]["name"];
         img.src = `/static/set_icons/${sets[sets_keys[i]]["settings"]["background"]}.webp`;
         user.innerText = sets[sets_keys[i]]["settings"]["user"];

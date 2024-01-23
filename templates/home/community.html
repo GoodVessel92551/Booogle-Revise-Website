@@ -16,16 +16,10 @@
       <div class="search_subject" id="search_subject">View Subject Sets</div>
     <div id="search_filter_container" class="search_filter_container">
         <strong class="search_filters_title">Filters</strong>
-        <p>Customize What Sets That You See. (Not Functional)</p>
-        <strong>Age</strong>
-        <p>Chose If You Want To See The Oldest Or Newest Sets First</p>
-        <select>
-            <option selected>Oldest To Newest</option>
-            <option>Newest To Oldest</option>
-        </select>
+        <p>Customize What Sets That You See.</p>
         <strong>Subject</strong>
         <p>Chose Which Subjects That You Can Browse</p>
-        <select>
+        <select id="search_subject_pick" name="search_subject">
             <option value="all">All</option>
                 <option value="Computer Science">Computer Science</option>
                 <option value="Chemistry">Chemistry</option>
@@ -41,7 +35,7 @@
         </select>
         <strong>Creator</strong>
         <p>Only See Sets From One Person</p>
-        <input type="text" placeholder="Username">
+        <input id="creator" type="text" placeholder="Username">
     </div>
     
     <div class="home_buttons">
@@ -182,6 +176,7 @@
         document.getElementById("share").innerHTML = "<ion-icon name='clipboard-outline'></ion-icon>Copyed!"
     }
     function show(name) {
+        console.log(sets[name]["settings"])
         if (sets[name]["settings"]["id"]){
             var set_id = sets[name]["settings"]["id"]
         }else{
@@ -231,19 +226,36 @@
     var username = {{name|tojson}};
     var sets_keys = Object.keys(sets);
 
-    search_element = document.getElementById("search");
+    var search_element = document.getElementById("search");
+    var subject_element = document.getElementById("search_subject_pick");
+    var creator_element = document.getElementById("creator");
     search_element.addEventListener("input", () => {
+        search();
+    });
+    subject_element.addEventListener("change", () => {
+        search();
+    });
+    creator_element.addEventListener("input", () => {
         search();
     });
 
     const search = () => {
         var query = search_element.value
         var sets_list = document.querySelectorAll(".set_title");
+        var subject = subject_element.options[subject_element.selectedIndex]
         for (var i = 0; i < sets_list.length; i++) {
             if (!(sets[i]["settings"]["name"] + " " + sets[i]["settings"]["desc"]).toLowerCase().includes(search_element.value.toLowerCase())) {
                 document.getElementById(i).style.display = "none";
             } else {
                 document.getElementById(i).style.display = "block";
+            }if(subject.value != "all"){
+                if (sets[i]["settings"]["subject"].trim() != subject.value){
+                    document.getElementById(i).style.display = "none";
+                }
+            }if (creator_element.value != ""){
+                if (!sets[i]["settings"]["user"].trim().toLowerCase().includes(creator_element.value.toLowerCase())){
+                    document.getElementById(i).style.display = "none";
+                }
             }
         }
         if (query.length > 4){
@@ -324,6 +336,8 @@
         var subject = document.createElement("span")
         var amount_of_questons = document.createElement("span")
         var hidden_share_link = document.createElement("a")
+        a.setAttribute("data-subject", sets[sets_keys[i]]["settings"]["subject"].trim());
+        a.setAttribute("data-user", sets[sets_keys[i]]["settings"]["user"]);
         img.draggable = false;
         a.addEventListener("click", (e) => {
             show(e.target.id);
@@ -460,8 +474,28 @@
     }
     const open_filter = () => {
         var search_filter_container = document.getElementById("search_filter_container")
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                open_filter()
+                }
+        });
+        document.addEventListener('mousedown', function(event) {
+            if (search_filter_container && !search_filter_container.contains(event.target)) {
+                open_filter()
+            }
+        });
         if (search_filter_container.style.display == "flex"){
             search_filter_container.style.display = "none"
+            document.removeEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    open_filter()
+                }
+            });
+            document.removeEventListener('mousedown', function(event) {
+                if (search_filter_container && !search_filter_container.contains(event.target)) {
+                    open_filter()
+                }
+            });
         }else{
             search_filter_container.style.display = "flex"
         }

@@ -1574,4 +1574,19 @@ def learn():
     }
     return render_template("learn/learn.html",learn_sets=learn_sets,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
+
+@app.route("/set_profile_image",methods=["POST","GET"])
+def set_profile_image():
+    if login() == False:
+        return render_template("login/login.html")
+    if request.method == "POST":
+        image = request.form["image"]
+        query = {"username":username()}
+        update = {"$set":{"data.profile_image":image}}
+        user_data_db.update_one(query, update)
+        return redirect("/")
+    notifications = {}
+    current_color = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["profile_image"]
+    return render_template("set_profile_image.html",current_color=current_color,notifications=notifications,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()))
+
 app.run(host='0.0.0.0', port=80,debug=True)

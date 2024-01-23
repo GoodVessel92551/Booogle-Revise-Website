@@ -1,0 +1,57 @@
+{% extends "base.html" %}{% block page_title %} Set Profile Image {% endblock %} {% block title %}Set Profile Image{%
+endblock %} {% block main %}
+<main class="main">
+        <h1>Set Profile Image</h1>
+        <p style="margin-bottom: 64px;">Here you can change your profile image to something that represents you best.
+        </p>
+        <form  method="post">
+        <button onclick="save=false;document.getElementById('save_text').innerText = 'Saving...';" type="submit"
+                class="main_button top_title_button" style="position: absolute; top: 34.5px; right: 0px">
+                <span id="save_text">Save</span>
+                <ion-icon name="save-outline"></ion-icon>
+        </button>
+        <h3 style="color:var(--text)">Default Images</h3>
+        <div class="profile_images">
+                <a>
+                        <img src="/static/profile images/colors/blue.webp" alt="blue"
+                                onclick="document.getElementById('blue').checked = true">
+                        <input type="radio" name="image" value="blue" id="blue" checked>
+                </a>
+                <a>
+                        <img src="/static/profile images/colors/green.webp" alt="green"
+                                onclick="document.getElementById('green').checked = true">
+                        <input type="radio" name="image" value="green" id="green">
+                </a>
+                <a>
+                        <img src="/static/profile images/colors/orange.webp" alt="orange"
+                                onclick="document.getElementById('orange').checked = true">
+                        <input type="radio" name="image" value="orange" id="orange">
+                </a>
+                <a>
+                        <img src="/static/profile images/colors/pink.webp" alt="pink"
+                                onclick="document.getElementById('pink').checked = true">
+                        <input type="radio" name="image" value="pink" id="pink">
+                </a>
+                <a>
+                        <img src="/static/profile images/colors/purple.webp" alt="purple"
+                                onclick="document.getElementById('purple').checked = true">
+                        <input type="radio" name="image" value="purple" id="purple">
+                </a>
+                <a>
+                        <img src="/static/profile images/colors/red.webp" alt="red"
+                                onclick="document.getElementById('red').checked = true">
+                        <input type="radio" name="image" value="red" id="red">
+                </a>
+                <a>
+                        <img src="/static/profile images/colors/yellow.webp" alt="yellow"
+                                onclick="document.getElementById('yellow').checked = true">
+                        <input type="radio" name="image" value="yellow" id="yellow">
+                </a>
+        </div>
+</form>
+</main>
+<script>
+        var current= {{current_color|tojson}};
+        document.getElementById(current).checked = true;
+</script>
+{% endblock %}

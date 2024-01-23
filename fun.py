@@ -266,7 +266,9 @@ def make_dict(dictionary):
 def userinfo(username):
     level = False
     level = user_data_db.find_one({"username":username,"type":"user_data"})["data"]["level"]
-    return [level,"/static/logo.png"]
+    img = user_data_db.find_one({"username":username,"type":"user_data"})["data"]["profile_image"]
+    img  = "/static/profile images/colors/"+img+".webp"
+    return [level,img]
 
 def gen_code():
     code = ""
