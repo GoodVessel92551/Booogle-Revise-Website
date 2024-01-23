@@ -1523,7 +1523,7 @@ def create_checkout_session(plan):
             },
         )
     except Exception as e:
-        return str(e)
+        return "Error"
     return redirect(checkout_session.url, code=303)
 
 @app.route("/classroom/<classroom>")
