@@ -18,6 +18,7 @@ from flask.templating import render_template
 import stripe
 from stripe.error import StripeError
 
+
 load_dotenv(override=True, interpolate=False)
 client = MongoClient(os.getenv('mongo_url'))
 db = client["Booogle_Revise"]
@@ -40,10 +41,25 @@ def get_folders():
     folders = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["folders"]
     return folders
 
+
 def hash_value(data):
+    """
+    Calculates the SHA-256 hash value of the given data.
+
+    Args:
+        data: The data to be hashed.
+
+    Returns:
+        The SHA-256 hash value of the data as a hexadecimal string.
+    """
     sha256 = hashlib.sha256()
     sha256.update(str(data).encode('utf-8'))
     return sha256.hexdigest()
+
+def password_hash(password, salt, iterations=100000, dklen=64, hashfunc=hashlib.sha256):
+    key = password.encode('utf-8')
+    salt = salt.encode('utf-8')
+    return hashlib.pbkdf2_hmac(hashfunc().name, key, salt, iterations, dklen)
 
 def gen_user_token():
     chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"

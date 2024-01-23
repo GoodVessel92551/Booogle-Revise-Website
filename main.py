@@ -1,5 +1,5 @@
 from flask import Flask, render_template,redirect,request,current_app,session
-from fun import get_folders,get_settings,get_streak,get_sets,hash_value,gen_user_token,add_streak,streak,login,check_image,gen_id,make_dict_group,user_data_group,username,recommend,rule_id,gen_code,leaderboard_dict,similarity,userinfo,make_dict,mod,play_dict,smart,last_7,week_add,stats_dict,update,make_dict_folder,subject,make_dict_rules
+from fun import password_hash,get_folders,get_settings,get_streak,get_sets,hash_value,gen_user_token,add_streak,streak,login,check_image,gen_id,make_dict_group,user_data_group,username,recommend,rule_id,gen_code,leaderboard_dict,similarity,userinfo,make_dict,mod,play_dict,smart,last_7,week_add,stats_dict,update,make_dict_folder,subject,make_dict_rules
 from better_profanity import profanity
 import emoji
 import os,random,re
@@ -51,7 +51,7 @@ def home():
 def signup():
     if request.method == "POST":
         username = request.form["username"]
-        password = hash_value(request.form["password"]+os.getenv("salt"))
+        password = password_hash(request.form["password"],os.getenv("salt"))
         pattern = re.compile('^[a-zA-Z0-9]+$')
         usernames = global_data_db.find_one({"name":"usernames"})
         if username not in usernames["data"] and len(username) < 16 and len(username) > 4 and bool(pattern.match(username)) and request.form["password"] == request.form["repeat_password"] and len(request.form["password"]) >= 6 and len(request.form["password"]) <= 30:
@@ -99,7 +99,7 @@ def signup():
 def user_login():
     if request.method == "POST":
         username = request.form["username"]
-        password = hash_value(request.form["password"]+os.getenv("salt"))
+        password = password_hash(request.form["password"],os.getenv("salt"))
         usernames = global_data_db.find_one({"name":"usernames"})
         if username in usernames["data"]:
             user_data = user_data_db.find_one({"username":username,"type":"user_data"})
@@ -1126,7 +1126,7 @@ def automations():
     
 @app.route("/test")
 def test():
-    return redirect("/")
+    return ""
 
 
     
@@ -1456,7 +1456,17 @@ def updates():
 
 @app.route("/updates/<title>")
 def view_update(title):
+    """
+    Renders the view_update.html template with the specified title.
+
+    Args:
+        title (str): The title to be passed to the template.
+
+    Returns:
+        The rendered template.
+    """
     return render_template("login/view_update.html",title=title)
+
 
 @app.route("/api/learn/like",methods=["POST","GET"])
 def api_learn_like():
