@@ -56,6 +56,24 @@ def hash_value(data):
     sha256.update(str(data).encode('utf-8'))
     return sha256.hexdigest()
 
+def mode_b_keys():
+    keys = global_data_db.find_one({"name":"B-KEYS"})
+    value_counts = {}
+
+    for key, value in keys.items():
+        if value in value_counts:
+            value_counts[value] += 1
+        else:
+            value_counts[value] = 1
+    for key, value in keys.items():
+        if value_counts[value] > 3:
+            del keys[key]
+            value_counts[value] -= 1
+    
+    query = {"name":"B-KEYS"}
+    new_value = {"$set":{"data":keys}}
+    global_data_db.update_one(query,new_value)
+
 def password_hash(password, salt, iterations=100000, dklen=64, hashfunc=hashlib.sha256):
     key = password.encode('utf-8')
     salt = salt.encode('utf-8')
@@ -340,3 +358,4 @@ def payment_webhook():
     else:
         print('Unhandled event type {}'.format(event['type']))
     return True
+

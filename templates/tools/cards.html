@@ -45,6 +45,12 @@ main %}
     var img = document.getElementById("card_img")
     var img_visible = false
     var starttime, endtime
+    if (set["settings"]["id"]){
+        var set_id = set["settings"]["id"]
+    }else{
+        var set_id = set["settings"]["name"]
+    }
+    var quest_level
     const startTime = () => {
         starttime = new Date();
     }
@@ -53,17 +59,19 @@ main %}
             endtime = new Date();
             var timeDiff = endtime - starttime;
             if (timeDiff < 5000){
+                quest_level = 1
                 console.log("Very Strong")
             }else if(timeDiff < 10000){
+                quest_level = 2
                 console.log("Strong")
             }else if(timeDiff < 15000){
-                console.log("Weak")
+                quest_level = 3
             }else{
-                console.log("Very Weak")
+                quest_level = 4
             }
             starttime = null
         }else{
-            console.log("Weak")
+            quest_level = 1
         }
     }
     speaker.addEventListener("click", () => {
@@ -71,6 +79,20 @@ main %}
         voice(card_text.innerText)
     })
     const next = (() => {
+        var data = {
+            "level": quest_level,
+            "question_num": current,
+            "set": set_id
+        }
+        if (data.level){
+            fetch("/api/smartstudy", {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        }
         startTime()
         flash_indicator.style.width = (current-1)/(keys.length-1)*100+"%"
         if (!spin) {

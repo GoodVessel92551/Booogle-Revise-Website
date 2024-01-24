@@ -75,20 +75,20 @@ const spellCheck = (word) => {
 };
 
 const autocomplete = (sortedWords) => {
-  const complete = (input, current, next, button) => {
+  const complete = (input, current, next, button,spell) => {
     var word_list = input.value.split(" ");
     var current_word = word_list[word_list.length - 1].toLowerCase();
-    //if (word_list.length > 1) {
-      //var word_before = word_list[word_list.length - 2];
-     // var spell = spellCheck(word_before.toLowerCase());
-      //if (spell["confidence"] > 0.6) {
-        //if (spell["confidence"] != 1) {
-          //input.value = input.value.replace(word_before, spell["word"]);
-            //current.value = input.value.replace(word_before, spell["word"]);
-        //}
-      //}
-      //console.log(spellCheck(word_before));
-    //}
+    if (word_list.length > 1 && spell) {
+      var word_before = word_list[word_list.length - 2];
+     var spell = spellCheck(word_before.toLowerCase());
+      if (spell["confidence"] > 0.6) {
+        if (spell["confidence"] != 1) {
+          input.value = input.value.replace(word_before, spell["word"]);
+            current.value = input.value.replace(word_before, spell["word"]);
+        }
+      }
+      console.log(spellCheck(word_before));
+    }
     var done = false;
     current.innerText = input.value;
     next.innerHTML = "";
@@ -129,7 +129,9 @@ const autocomplete = (sortedWords) => {
   var next = document.getElementById("quest_autocomplete_next");
   var button = document.getElementById("quest_autocomplete_button");
   input.addEventListener("input", () => {
-    complete(input, current, next, button);
+    var spell = input.value[input.value.length - 1] === " ";
+    spell = false
+    complete(input, current, next, button,spell);
   });
   input.addEventListener("blur", () => {
     next.innerHTML = "";
