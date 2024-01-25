@@ -79,6 +79,8 @@
     </nav>
 <script>
     var username = {{name|tojson}};
+    var set_feedback = {{set_feedback|tojson}};
+    console.log(set_feedback)
     var date = new Date();
     var hour = date.getHours();
     var span = document.createElement("span")

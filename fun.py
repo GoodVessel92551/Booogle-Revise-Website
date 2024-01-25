@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 from booogle_ai_tools.moderation import moderation
 from booogle_ai_tools.smartmatch import smartmatch
 from booogle_ai_tools.smartsubject import smartsubject
+from booogle_ai_tools.smartfeedback import smartfeedback
 from booogle_ai_tools.username_mod import username_mod
 import hashlib
 from flask import Flask, redirect, request,jsonify
@@ -24,6 +25,9 @@ client = MongoClient(os.getenv('mongo_url'))
 db = client["Booogle_Revise"]
 global_data_db = db["Global_Data"]
 user_data_db = db["User_Data"]
+
+def ans_feeback(ans):
+    return smartfeedback.text(ans)
 
 def get_sets():
     sets = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["sets"]

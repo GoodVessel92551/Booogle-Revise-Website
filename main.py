@@ -1,5 +1,5 @@
 from flask import Flask, render_template,redirect,request,current_app,session
-from fun import mode_b_keys,password_hash,get_folders,get_settings,get_streak,get_sets,hash_value,gen_user_token,add_streak,streak,login,check_image,gen_id,make_dict_group,user_data_group,username,recommend,rule_id,gen_code,leaderboard_dict,similarity,userinfo,make_dict,mod,play_dict,smart,last_7,week_add,stats_dict,update,make_dict_folder,subject,make_dict_rules
+from fun import mode_b_keys,ans_feeback,password_hash,get_folders,get_settings,get_streak,get_sets,hash_value,gen_user_token,add_streak,streak,login,check_image,gen_id,make_dict_group,user_data_group,username,recommend,rule_id,gen_code,leaderboard_dict,similarity,userinfo,make_dict,mod,play_dict,smart,last_7,week_add,stats_dict,update,make_dict_folder,subject,make_dict_rules
 from better_profanity import profanity
 import emoji
 import os,random,re
@@ -45,7 +45,12 @@ def home():
         group_data = user_data_db.find_one({"username":owners_username,"type":"user_data"})["data"]["groups"][group]
         users_groups[group] = group_data
     streak()
-    return render_template("/home/home.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets(),is_new=new,notifications=notifications,folders=get_folders(),groups=users_groups)
+    if session.get("current_set_feedback"):
+        feedback = session.get("current_set_feedback")
+        session.pop("current_set_feedback")
+    else:
+        feedback = {}
+    return render_template("/home/home.html",set_feedback=feedback,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets(),is_new=new,notifications=notifications,folders=get_folders(),groups=users_groups)
 
 @app.route("/signup",methods=["POST","GET"])
 def signup():
@@ -493,6 +498,7 @@ def new():
                     "id":set_id
                 }
             }
+            session["current_set_feedback"] = {}
             user_data_db.update_one({"username":username(),"type":"user_data"},{"$set":{"data.sets."+set_id:new_set}})
             session["current_set"] = set_id
             return redirect("/new/question")
@@ -521,7 +527,7 @@ def new_question():
         pattern = re.compile(r'\.(jpg|jpeg|png|gif|bmp|svg|tiff)$', re.IGNORECASE)
         type = smart(ans)
         quest_num =str(len(get_sets()[session.get("current_set")]))
-        new_quest = {"status":mod(quest),"question":quest,"answers":{"ans1":ans},"type":type}
+        new_quest = {"status":mod(quest),"question":quest,"answers":{"ans1":ans},"type":type,"answer_feedback":ans_feeback(ans)}
         if bool(pattern.search(image_url)):
             image_data = check_image(image_url)
             if "rating_label" in image_data:
@@ -1127,8 +1133,7 @@ def automations():
     
 @app.route("/test")
 def test():
-
-    return ""
+    return "/test"
 
 
     

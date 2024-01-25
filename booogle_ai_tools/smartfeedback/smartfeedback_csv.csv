@@ -1,0 +1,634 @@
+answer,label
+Paris,Good
+the capital of France is Paris,Bad
+Banana,Good
+a yellow fruit is a banana,Bad
+Python,Good
+a programming language named Python,Bad
+Elephant,Good
+the largest land animal is an elephant,Bad
+Mars,Good
+the fourth planet from the sun is Mars,Bad
+Photosynthesis,Good
+the process by which plants make food is photosynthesis,Bad
+London,Good
+the capital city of the United Kingdom is London,Bad
+Gravity,Good
+the force that attracts objects toward the center of the Earth is gravity,Bad
+Beethoven,Good
+a famous composer named Beethoven,Bad
+E=mc^2,Good
+the famous equation by Einstein is E=mc^2,Bad
+Water,Good
+the chemical formula for water is H2O,Bad
+Himalayas,Good
+the highest mountain range in the world is the Himalayas,Bad
+Photoshop,Good
+a popular software for image editing is Photoshop,Bad
+Football,Good
+a sport played with a round ball is football,Bad
+Leonardo da Vinci,Good
+an Italian polymath named Leonardo da Vinci,Bad
+DNA,Good
+the genetic material in living organisms is DNA,Bad
+Socrates,Good
+an ancient Greek philosopher named Socrates,Bad
+Photosynthesis,Good
+plants use sunlight to convert carbon dioxide into glucose in photosynthesis,Bad
+Oxygen,Good
+a gas essential for life is oxygen,Bad
+Mona Lisa,Good
+a famous painting by Leonardo da Vinci is the Mona Lisa,Bad
+Java,Good
+a programming language named Java,Bad
+Statue of Liberty,Good
+a symbol of freedom located in New York is the Statue of Liberty,Bad
+Tokyo,Good
+the capital city of Japan is Tokyo,Bad
+Mitochondria,Good
+the powerhouse of the cell is mitochondria,Bad
+Shakespeare,Good
+a famous playwright and poet is Shakespeare,Bad
+Olympics,Good
+the international sports event held every four years is the Olympics,Bad
+Titanic,Good
+the infamous ship that sank in 1912 is the Titanic,Bad
+Photosynthesis,Good
+plants convert sunlight into energy through photosynthesis,Bad
+New York,Good
+the largest city in the United States is New York,Bad
+Gravity,Good
+objects fall towards the Earth due to gravity,Bad
+Google,Good
+a popular search engine is Google,Bad
+Dinosaurs,Good
+extinct reptiles from the prehistoric era are dinosaurs,Bad
+Gandhi,Good
+a leader in the Indian independence movement is Gandhi,Bad
+Photoshop,Good
+a software used for image editing is Photoshop,Bad
+Sun,Good
+the center of our solar system is the Sun,Bad
+Beethoven,Good
+a famous composer from the classical era is Beethoven,Bad
+DNA,Good
+the genetic material in living organisms is DNA,Bad
+Eiffel Tower,Good
+an iconic landmark in Paris is the Eiffel Tower,Bad
+Photosynthesis,Good
+plants produce oxygen during photosynthesis,Bad
+Hockey,Good
+a sport played with a puck and sticks is hockey,Bad
+Dalai Lama,Good
+a spiritual leader in Tibetan Buddhism is the Dalai Lama,Bad
+Astronomy,Good
+the study of celestial objects is astronomy,Bad
+Berlin,Good
+the capital city of Germany is Berlin,Bad
+Photoshop,Good
+a tool for graphic design is Photoshop,Bad
+E=mc^2,Good
+the famous equation by Einstein is E=mc^2,Bad
+Mona Lisa,Good
+a famous painting by Leonardo da Vinci is the Mona Lisa,Bad
+Pythagorean theorem,Good
+a mathematical principle for right-angled triangles is the Pythagorean theorem,Bad
+Mars,Good
+the fourth planet from the sun is Mars,Bad
+Football,Good
+a sport played with a round ball is football,Bad
+Galaxy,Good
+a vast system of stars and planets is a galaxy,Bad
+Economics,Good
+the study of production and distribution of goods is economics,Bad
+Java,Good
+a programming language named Java,Bad
+Napoleon,Good
+a military and political leader is Napoleon,Bad
+Pluto,Good
+a dwarf planet in our solar system is Pluto,Bad
+Chemistry,Good
+the study of matter and its properties is chemistry,Bad
+Easter Island,Good
+large stone statues are found on Easter Island,Bad
+Photography,Good
+the art or practice of taking and processing photographs is photography,Bad
+Washington, D.C.,Good
+the capital city of the United States is Washington, D.C.,Bad
+Alexander the Great,Good
+a military commander who conquered much of the ancient world is Alexander the Great,Bad
+Photosynthesis,Good
+plants convert carbon dioxide into oxygen during photosynthesis,Bad
+Monet,Good
+a French painter associated with Impressionism is Monet,Bad
+Wright Brothers,Good
+pioneers of aviation who built and flew the first successful powered airplane are the Wright Brothers,Bad
+Rome,Good
+the capital city of Italy is Rome,Bad
+Evolution,Good
+the process by which species change over time is evolution,Bad
+Shakespeare,Good
+a famous playwright and poet from the Renaissance is Shakespeare,Bad
+Internet,Good
+a global network connecting computers is the Internet,Bad
+Taj Mahal,Good
+an iconic marble mausoleum is the Taj Mahal,Bad
+Biology,Good
+the study of living organisms is biology,Bad
+Berlin Wall,Good
+a barrier that divided East and West Berlin is the Berlin Wall,Bad
+Solar System,Good
+a system comprising the Sun and the celestial objects orbiting it is the solar system,Bad
+Archimedes,Good
+an ancient Greek mathematician and inventor is Archimedes,Bad
+Van Gogh,Good
+a Dutch Post-Impressionist painter is Van Gogh,Bad
+DNA,Good
+the building blocks of life are coded in DNA,Bad
+Soccer,Good
+a sport played with a round ball is soccer,Bad
+Eiffel Tower,Good
+a famous landmark in Paris is the Eiffel Tower,Bad
+E=mc^2,Good
+the equation representing the equivalence of mass and energy is E=mc^2,Bad
+Newton,Good
+a scientist known for his laws of motion is Newton,Bad
+Amazon,Good
+an online retail giant is Amazon,Bad
+Oxygen,Good
+a gas essential for life is oxygen,Bad
+Gandhi,Good
+a leader in the Indian independence movement is Gandhi,Bad
+Statue of Liberty,Good
+a symbol of freedom located in New York is the Statue of Liberty,Bad
+Mount Everest,Good
+the highest peak in the world is Mount Everest,Bad
+Hubble Space Telescope,Good
+a telescope that has provided deep views into space is the Hubble Space Telescope,Bad
+Chemistry,Good
+the study of matter and its properties is chemistry,Bad
+Leonardo da Vinci,Good
+an Italian polymath known for his art and inventions is Leonardo da Vinci,Bad
+Photosynthesis,Good
+plants use sunlight to convert carbon dioxide into glucose in photosynthesis,Bad
+Oxygen,Good
+a gas essential for life is oxygen,Bad
+Mona Lisa,Good
+a famous painting by Leonardo da Vinci is the Mona Lisa,Bad
+Java,Good
+a programming language named Java,Bad
+Statue of Liberty,Good
+a symbol of freedom located in New York is the Statue of Liberty,Bad
+Tokyo,Good
+the capital city of Japan is Tokyo,Bad
+Mitochondria,Good
+the powerhouse of the cell is mitochondria,Bad
+Shakespeare,Good
+a famous playwright and poet is Shakespeare,Bad
+Olympics,Good
+the international sports event held every four years is the Olympics,Bad
+Titanic,Good
+the infamous ship that sank in 1912 is the Titanic,Bad
+Photosynthesis,Good
+plants convert sunlight into energy through photosynthesis,Bad
+New York,Good
+the largest city in the United States is New York,Bad
+Gravity,Good
+objects fall towards the Earth due to gravity,Bad
+Google,Good
+a popular search engine is Google,Bad
+Dinosaurs,Good
+extinct reptiles from the prehistoric era are dinosaurs,Bad
+Gandhi,Good
+a leader in the Indian independence movement is Gandhi,Bad
+Photoshop,Good
+a software used for image editing is Photoshop,Bad
+Sun,Good
+the center of our solar system is the Sun,Bad
+Beethoven,Good
+a famous composer from the classical era is Beethoven,Bad
+DNA,Good
+the genetic material in living organisms is DNA,Bad
+Eiffel Tower,Good
+an iconic landmark in Paris is the Eiffel Tower,Bad
+Photosynthesis,Good
+plants produce oxygen during photosynthesis,Bad
+Hockey,Good
+a sport played with a puck and sticks is hockey,Bad
+Dalai Lama,Good
+a spiritual leader in Tibetan Buddhism is the Dalai Lama,Bad
+Astronomy,Good
+the study of celestial objects is astronomy,Bad
+Berlin,Good
+the capital city of Germany is Berlin,Bad
+Photoshop,Good
+a tool for graphic design is Photoshop,Bad
+E=mc^2,Good
+the famous equation by Einstein is E=mc^2,Bad
+Mona Lisa,Good
+a famous painting by Leonardo da Vinci is the Mona Lisa,Bad
+Pythagorean theorem,Good
+a mathematical principle for right-angled triangles is the Pythagorean theorem,Bad
+Mars,Good
+the fourth planet from the sun is Mars,Bad
+Football,Good
+a sport played with a round ball is football,Bad
+Galaxy,Good
+a vast system of stars and planets is a galaxy,Bad
+Economics,Good
+the study of production and distribution of goods is economics,Bad
+Java,Good
+a programming language named Java,Bad
+Napoleon,Good
+a military and political leader is Napoleon,Bad
+Pluto,Good
+a dwarf planet in our solar system is Pluto,Bad
+Chemistry,Good
+the study of matter and its properties is chemistry,Bad
+Easter Island,Good
+large stone statues are found on Easter Island,Bad
+Photography,Good
+the art or practice of taking and processing photographs is photography,Bad
+Washington, D.C.,Good
+the capital city of the United States is Washington, D.C.,Bad
+Alexander the Great,Good
+a military commander who conquered much of the ancient world is Alexander the Great,Bad
+Photosynthesis,Good
+plants convert carbon dioxide into oxygen during photosynthesis,Bad
+Monet,Good
+a French painter associated with Impressionism is Monet,Bad
+Wright Brothers,Good
+pioneers of aviation who built and flew the first successful powered airplane are the Wright Brothers,Bad
+Rome,Good
+the capital city of Italy is Rome,Bad
+Evolution,Good
+the process by which species change over time is evolution,Bad
+Shakespeare,Good
+a famous playwright and poet from the Renaissance is Shakespeare,Bad
+Internet,Good
+a global network connecting computers is the Internet,Bad
+Taj Mahal,Good
+an iconic marble mausoleum is the Taj Mahal,Bad
+Biology,Good
+the study of living organisms is biology,Bad
+Berlin Wall,Good
+a barrier that divided East and West Berlin is the Berlin Wall,Bad
+Solar System,Good
+a system comprising the Sun and the celestial objects orbiting it is the solar system,Bad
+Archimedes,Good
+an ancient Greek mathematician and inventor is Archimedes,Bad
+Van Gogh,Good
+a Dutch Post-Impressionist painter is Van Gogh,Bad
+DNA,Good
+the building blocks of life are coded in DNA,Bad
+Soccer,Good
+a sport played with a round ball is soccer,Bad
+Eiffel Tower,Good
+a famous landmark in Paris is the Eiffel Tower,Bad
+E=mc^2,Good
+the equation representing the equivalence of mass and energy is E=mc^2,Bad
+Newton,Good
+a scientist known for his laws of motion is Newton,Bad
+Amazon,Good
+an online retail giant is Amazon,Bad
+Oxygen,Good
+a gas essential for life is oxygen,Bad
+Gandhi,Good
+a leader in the Indian independence movement is Gandhi,Bad
+Statue of Liberty,Good
+a symbol of freedom located in New York is the Statue of Liberty,Bad
+Mount Everest,Good
+the highest peak in the world is Mount Everest,Bad
+Hubble Space Telescope,Good
+a telescope that has provided deep views into space is the Hubble Space Telescope,Bad
+Chemistry,Good
+the study of matter and its properties is chemistry,Bad
+Leonardo da Vinci,Good
+an Italian polymath known for his art and inventions is Leonardo da Vinci,Bad
+Photosynthesis,Good
+plants use sunlight to convert carbon dioxide into glucose in photosynthesis,Bad
+Oxygen,Good
+a gas essential for life is oxygen,Bad
+Mona Lisa,Good
+a famous painting by Leonardo da Vinci is the Mona Lisa,Bad
+Java,Good
+a programming language named Java,Bad
+Statue of Liberty,Good
+a symbol of freedom located in New York is the Statue of Liberty,Bad
+Venice,Good
+a city known for its canals and historic architecture is Venice,Bad
+Photosynthesis,Good
+plants convert sunlight into energy through photosynthesis,Bad
+Mozart,Good
+a classical composer from the 18th century is Mozart,Bad
+Black Hole,Good
+an area in space with gravitational forces so strong that nothing can escape is a black hole,Bad
+Great Wall of China,Good
+a long wall built to protect against invasions is the Great Wall of China,Bad
+Atoms,Good
+the basic building blocks of matter are atoms,Bad
+Abraham Lincoln,Good
+the 16th President of the United States is Abraham Lincoln,Bad
+Global Warming,Good
+the increase in Earth's average surface temperature is global warming,Bad
+Mount Kilimanjaro,Good
+the highest mountain in Africa is Mount Kilimanjaro,Bad
+Cryptography,Good
+the practice and study of techniques for secure communication is cryptography,Bad
+Leonardo da Vinci,Good
+an Italian polymath known for his art and inventions is Leonardo da Vinci,Bad
+Cellular Respiration,Good
+the process by which cells break down glucose to produce energy is cellular respiration,Bad
+Apollo 11,Good
+the first manned mission to land on the Moon is Apollo 11,Bad
+Galileo Galilei,Good
+an Italian astronomer, physicist, and engineer is Galileo Galilei,Bad
+Internet,Good
+a global network connecting computers is the Internet,Bad
+The Great Gatsby,Good
+a novel written by F. Scott Fitzgerald is The Great Gatsby,Bad
+DNA,Good
+the genetic material in living organisms is DNA,Bad
+Cave Paintings,Good
+prehistoric art found on cave walls is cave paintings,Bad
+E=mc^2,Good
+the famous equation by Einstein is E=mc^2,Bad
+Taj Mahal,Good
+an iconic white marble mausoleum is the Taj Mahal,Bad
+World War II,Good
+a global conflict that took place from 1939 to 1945 is World War II,Bad
+Solar System,Good
+a system comprising the Sun and celestial objects orbiting it is the solar system,Bad
+Romeo and Juliet,Good
+a play written by William Shakespeare is Romeo and Juliet,Bad
+Renewable Energy,Good
+energy derived from natural resources like sunlight and wind is renewable energy,Bad
+Ancient Greece,Good
+a civilization that existed from the 8th to the 6th century BCE is Ancient Greece,Bad
+Microorganisms,Good
+tiny living organisms not visible to the naked eye are microorganisms,Bad
+Leon Trotsky,Good
+a key figure in the Russian Revolution is Leon Trotsky,Bad
+Inflation,Good
+the rate at which the general level of prices for goods and services rises is inflation,Bad
+Fibonacci Sequence,Good
+a series of numbers in which each number is the sum of the two preceding ones is the Fibonacci sequence,Bad
+Nelson Mandela,Good
+a South African anti-apartheid revolutionary is Nelson Mandela,Bad
+Mitosis,Good
+a process of cell division that results in two daughter cells is mitosis,Bad
+Machu Picchu,Good
+an ancient Incan city in the Andes is Machu Picchu,Bad
+Artificial Intelligence,Good
+the simulation of human intelligence in machines is artificial intelligence,Bad
+Abiotic Factors,Good
+non-living components of an ecosystem are abiotic factors,Bad
+Marie Curie,Good
+a pioneering physicist and chemist is Marie Curie,Bad
+Industrial Revolution,Good
+a period of major industrialization that took place from the late 18th to the 19th century is the Industrial Revolution,Bad
+Neptune,Good
+the eighth and farthest-known planet from the Sun in the Solar System is Neptune,Bad
+The Odyssey,Good
+an ancient Greek epic poem is The Odyssey,Bad
+Climate Change,Good
+long-term changes in the average weather patterns is climate change,Bad
+Antibiotics,Good
+medicines used to prevent and treat bacterial infections are antibiotics,Bad
+Maya Civilization,Good
+an ancient Mesoamerican civilization is the Maya Civilization,Bad
+Sigmund Freud,Good
+a neurologist and the founder of psychoanalysis is Sigmund Freud,Bad
+Plate Tectonics,Good
+the theory explaining the movement of Earth's lithosphere is plate tectonics,Bad
+The Mona Lisa,Good
+a famous painting by Leonardo da Vinci is The Mona Lisa,Bad
+Osmosis,Good
+the movement of solvent molecules from an area of low solute concentration to an area of high solute concentration is osmosis,Bad
+Napoleon Bonaparte,Good
+a military and political leader is Napoleon Bonaparte,Bad
+Human Rights,Good
+fundamental rights and freedoms to which all humans are entitled are human rights,Bad
+Charles Dickens,Good
+a Victorian-era English writer is Charles Dickens,Bad
+Hydroelectric Power,Good
+electricity generated by hydropower is hydroelectric power,Bad
+Leonardo Fibonacci,Good
+an Italian mathematician is Leonardo Fibonacci,Bad
+Photosynthesis,Good
+plants convert carbon dioxide into oxygen during photosynthesis,Bad
+Gravity,Good
+the force that attracts objects toward the center of the Earth is gravity,Bad
+Beethoven,Good
+a famous composer from the classical era is Beethoven,Bad
+E=mc^2,Good
+the famous equation by Einstein is E=mc^2,Bad
+Water,Good
+the chemical formula for water is H2O,Bad
+Himalayas,Good
+the highest mountain range in the world is the Himalayas,Bad
+Photoshop,Good
+a popular software for image editing is Photoshop,Bad
+Football,Good
+a sport played with a round ball is football,Bad
+Leonardo da Vinci,Good
+an Italian polymath named Leonardo da Vinci,Bad
+DNA,Good
+the genetic material in living organisms is DNA,Bad
+Socrates,Good
+an ancient Greek philosopher named Socrates,Bad
+Photosynthesis,Good
+plants use sunlight to convert carbon dioxide into glucose in photosynthesis,Bad
+Oxygen,Good
+a gas essential for life is oxygen,Bad
+Mona Lisa,Good
+a famous painting by Leonardo da Vinci is the Mona Lisa,Bad
+Java,Good
+a programming language named Java,Bad
+Statue of Liberty,Good
+a symbol of freedom located in New York is the Statue of Liberty,Bad
+Tokyo,Good
+the capital city of Japan is Tokyo,Bad
+Mitochondria,Good
+the powerhouse of the cell is mitochondria,Bad
+Shakespeare,Good
+a famous playwright and poet is Shakespeare,Bad
+Olympics,Good
+the international sports event held every four years is the Olympics,Bad
+Titanic,Good
+the infamous ship that sank in 1912 is the Titanic,Bad
+Photosynthesis,Good
+plants convert sunlight into energy through photosynthesis,Bad
+New York,Good
+the largest city in the United States is New York,Bad
+Gravity,Good
+objects fall towards the Earth due to gravity,Bad
+Google,Good
+a popular search engine is Google,Bad
+Dinosaurs,Good
+extinct reptiles from the prehistoric era are dinosaurs,Bad
+Gandhi,Good
+a leader in the Indian independence movement is Gandhi,Bad
+Photoshop,Good
+a software used for image editing is Photoshop,Bad
+Sun,Good
+the center of our solar system is the Sun,Bad
+Beethoven,Good
+a famous composer from the classical era is Beethoven,Bad
+DNA,Good
+the genetic material in living organisms is DNA,Bad
+Eiffel Tower,Good
+an iconic landmark in Paris is the Eiffel Tower,Bad
+Photosynthesis,Good
+plants produce oxygen during photosynthesis,Bad
+Hockey,Good
+a sport played with a puck and sticks is hockey,Bad
+Dalai Lama,Good
+a spiritual leader in Tibetan Buddhism is the Dalai Lama,Bad
+Astronomy,Good
+the study of celestial objects is astronomy,Bad
+Berlin,Good
+the capital city of Germany is Berlin,Bad
+Photoshop,Good
+a tool for graphic design is Photoshop,Bad
+E=mc^2,Good
+the famous equation by Einstein is E=mc^2,Bad
+Mona Lisa,Good
+a famous painting by Leonardo da Vinci is the Mona Lisa,Bad
+Pythagorean theorem,Good
+a mathematical principle for right-angled triangles is the Pythagorean theorem,Bad
+Mars,Good
+the fourth planet from the sun is Mars,Bad
+Football,Good
+a sport played with a round ball is football,Bad
+Galaxy,Good
+a vast system of stars and planets is a galaxy,Bad
+Economics,Good
+the study of production and distribution of goods is economics,Bad
+Java,Good
+a programming language named Java,Bad
+Napoleon,Good
+a military and political leader is Napoleon,Bad
+Pluto,Good
+a dwarf planet in our solar system is Pluto,Bad
+Chemistry,Good
+the study of matter and its properties is chemistry,Bad
+Easter Island,Good
+large stone statues are found on Easter Island,Bad
+Photography,Good
+the art or practice of taking and processing photographs is photography,Bad
+Washington, D.C.,Good
+the capital city of the United States is Washington, D.C.,Bad
+Alexander the Great,Good
+a military commander who conquered much of the ancient world is Alexander the Great,Bad
+Photosynthesis,Good
+plants convert carbon dioxide into oxygen during photosynthesis,Bad
+Monet,Good
+a French painter associated with Impressionism is Monet,Bad
+Wright Brothers,Good
+pioneers of aviation who built and flew the first successful powered airplane are the Wright Brothers,Bad
+Rome,Good
+the capital city of Italy is Rome,Bad
+Evolution,Good
+the process by which species change over time is evolution,Bad
+Shakespeare,Good
+a famous playwright and poet from the Renaissance is Shakespeare,Bad
+Internet,Good
+a global network connecting computers is the Internet,Bad
+Taj Mahal,Good
+an iconic marble mausoleum is the Taj Mahal,Bad
+Biology,Good
+the study of living organisms is biology,Bad
+Berlin Wall,Good
+a barrier that divided East and West Berlin is the Berlin Wall,Bad
+Solar System,Good
+a system comprising the Sun and the celestial objects orbiting it is the solar system,Bad
+Archimedes,Good
+an ancient Greek mathematician and inventor is Archimedes,Bad
+Van Gogh,Good
+a Dutch Post-Impressionist painter is Van Gogh,Bad
+DNA,Good
+the building blocks of life are coded in DNA,Bad
+Soccer,Good
+a sport played with a round ball is soccer,Bad
+Eiffel Tower,Good
+a famous landmark in Paris is the Eiffel Tower,Bad
+E=mc^2,Good
+the equation representing the equivalence of mass and energy is E=mc^2,Bad
+Newton,Good
+a scientist known for his laws of motion is Newton,Bad
+Amazon,Good
+an online retail giant is Amazon,Bad
+Oxygen,Good
+a gas essential for life is oxygen,Bad
+Gandhi,Good
+a leader in the Indian independence movement is Gandhi,Bad
+Statue of Liberty,Good
+a symbol of freedom located in New York is the Statue of Liberty,Bad
+Mount Everest,Good
+the highest peak in the world is Mount Everest,Bad
+Hubble Space Telescope,Good
+a telescope that has provided deep views into space is the Hubble Space Telescope,Bad
+Chemistry,Good
+the study of matter and its properties is chemistry,Bad
+Leonardo da Vinci,Good
+an Italian polymath known for his art and inventions is Leonardo da Vinci,Bad
+Photosynthesis,Good
+plants use sunlight to convert carbon dioxide into glucose in photosynthesis,Bad
+Oxygen,Good
+a gas essential for life is oxygen,Bad
+Mona Lisa,Good
+a famous painting by Leonardo da Vinci is the Mona Lisa,Bad
+Java,Good
+a programming language named Java,Bad
+Statue of Liberty,Good
+a symbol of freedom located in New York is the Statue of Liberty,Bad
+Tokyo,Good
+the capital city of Japan is Tokyo,Bad
+Mitochondria,Good
+the powerhouse of the cell is mitochondria,Bad
+Shakespeare,Good
+a famous playwright and poet is Shakespeare,Bad
+Olympics,Good
+the international sports event held every four years is the Olympics,Bad
+Titanic,Good
+the infamous ship that sank in 1912 is the Titanic,Bad
+Photosynthesis,Good
+plants convert sunlight into energy through photosynthesis,Bad
+New York,Good
+the largest city in the United States is New York,Bad
+Gravity,Good
+objects fall towards the Earth due to gravity,Bad
+Google,Good
+a popular search engine is Google,Bad
+Dinosaurs,Good
+extinct reptiles from the prehistoric era are dinosaurs,Bad
+Gandhi,Good
+a leader in the Indian independence movement is Gandhi,Bad
+Photoshop,Good
+a software used for image editing is Photoshop,Bad
+Sun,Good
+the center of our solar system is the Sun,Bad
+Beethoven,Good
+a famous composer from the classical era is Beethoven,Bad
+DNA,Good
+the genetic material in living organisms is DNA,Bad
+Eiffel Tower,Good
+an iconic landmark in Paris is the Eiffel Tower,Bad
+Photosynthesis,Good
+plants produce oxygen during photosynthesis,Bad
+Hockey,Good
+a sport played with a puck and sticks is hockey,Bad
+Dalai Lama,Good
+a spiritual leader in Tibetan Buddhism is the Dalai Lama,Bad
+Astronomy,Good
+the study of celestial objects is astronomy,Bad
+Berlin,Good
+the capital city of Germany is Berlin,Bad
+Photoshop,Good
+a tool for graphic design is Photoshop,Bad
+E=mc^2,Good
+the famous equation by Einstein is E=mc^2,Bad
+Mona Lisa,Good
+a famous painting by Leonardo da Vinci is the Mona Lisa,Bad
+Pythagorean theorem,Good
