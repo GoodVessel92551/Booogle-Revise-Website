@@ -39,6 +39,7 @@ main %}
     var ans, quest
     var card_text = document.getElementById("card_text")
     var speaker = document.getElementById("speaker")
+    var speak
     var flash_indicator = document.getElementById("flash_indicator")
     var title = document.getElementById("card_title")
     var ans_p = document.getElementById("card_ans")
@@ -75,8 +76,7 @@ main %}
         }
     }
     speaker.addEventListener("click", () => {
-        console.log(card_text.innerText)
-        voice(card_text.innerText)
+        voice(speak)
     })
     const next = (() => {
         var data = {
@@ -120,10 +120,10 @@ main %}
                 location.href = "/finish"
             }else{
                 quest = set[`Q${current}`]["question"]
+                speak = quest
                 card_text.innerText = set[`Q${current}`]["question"]
                 var answers = Object.keys(set[`Q${current}`]["answers"])
                 if (set[`Q${current}`]["image"]){
-                    console.log(set[`Q${current}`]["image"])
                     img.src = set[`Q${current}`]["image"]["url"]
                     img_visible = true
                 }else{
@@ -158,6 +158,7 @@ main %}
                     if (img_visible){
                         img.style.display = "block"
                     }
+                    speak = ans
                     ans_p.innerText = ans
                     if(ans.length < 15){
                         ans_p.classList.add("big_answer")

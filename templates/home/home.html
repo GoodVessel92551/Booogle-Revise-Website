@@ -2,6 +2,10 @@
 {% block page_title %} Home {% endblock %}
 {% block title %}Home{% endblock %}
 {% block main %}
+<a href="/new" id="no_sets" class="no_sets">
+    <span><ion-icon name="information-circle"></ion-icon><strong>No Sets</strong></span>
+    <p>You have no sets. To make one use the New button or Click Me!</p>
+</a>
 <main class="main">
     <h1 id="welcome" class="welcome_text">Your Sets</h1>
     <div class="home_buttons">
@@ -15,7 +19,8 @@
             <span>New</span><ion-icon name="add-outline"></ion-icon>
         </a>
     </div>
-    <div class="home_sets" id="home_sets"></div>
+    <div class="home_sets" id="home_sets">
+    </div>
     <dialog class="start_set" id="start_set">
         <div class="all_contain_start">
             <img class="set_image" id="set_image">
@@ -55,7 +60,7 @@
             </a>
         </div>
         <div class="start_buttons">
-            <a href="/delete" id="del_button" class="main_button del_button">
+            <a id="del_button" class="main_button del_button">
                 <span>Delete</span><ion-icon name="trash-outline"></ion-icon>
             </a>
             <a id="share" class="main_button third_button">
@@ -69,6 +74,15 @@
             </a>
         </div>
     </dialog>
+    <dialog id="delete_dialog" class="delete_dialog">
+        <h3>You Are About To Delete This Set</h3>
+        <p>This set will be permanently deleted and it can not be undone. Get more space by <a href="/upgrade">Upgrading</a></p>
+        <div>
+            <span id="delete_span_title" class="delete_span_title">Set Title: </span>
+            <button onclick="document.getElementById('delete_dialog').close()" class="delete_cancel">Cancel</button>
+            <button class="delete_button_dialog">Delete</button>
+        </div>
+    </dialog>
 </main>
     <nav class="bottom_nav">
         <a href="/new/group"><ion-icon name="people-outline"></ion-icon></a>
@@ -78,10 +92,22 @@
         <a href="/new" class="add_button_nav"><ion-icon name="add-outline"></ion-icon></a>
     </nav>
 <script>
+    const delete_set = (name,title) => {
+        document.getElementById("delete_dialog").showModal()
+        document.getElementById("delete_span_title").innerText = `Title: ${title}`
+        document.querySelector(".delete_button_dialog").addEventListener("click", () => {
+            fetch(`/delete/${name}`)
+            document.getElementById("delete_dialog").close()
+            document.getElementById("start_set").close()
+            document.getElementById(name).remove()
+            new_notification("Success", "This set has been deleted","checkmark-circle","success")
+        })
+    }
     var username = {{name|tojson}};
     var date = new Date();
     var hour = date.getHours();
     var span = document.createElement("span")
+    var no_sets = document.getElementById("no_sets")
     span.innerText = username
     if (hour < 12) {
         document.getElementById("welcome").innerText = `Good Morning `
@@ -144,7 +170,9 @@
         document.getElementById("flashcards").href = `/flashcards/${name}`
         document.getElementById("questions").href = `/questions/${name}`
         document.getElementById("fill").href = `/fill/${name}`
-        document.getElementById("del_button").href = `/delete/${name}`
+        document.getElementById("del_button").addEventListener("click", () => {
+            delete_set(name,sets[name]["settings"]["name"])
+        })
         document.getElementById("edit_button").href = `/edit/${name}`
         document.getElementById("upload").href = `/publish/${name}`
         var share = document.getElementById("share")
@@ -164,6 +192,7 @@
     var group_keys = Object.keys(groups)
 
     for (var i = 0; i < group_keys.length; i++) {
+        no_sets.style.display = "none"
         var home = document.getElementById("home_sets")
         var a = document.createElement("a")
         a.classList.add("droppable","folder_home")
@@ -198,6 +227,7 @@
     }
     
     for (var i = 0; i < folder_keys.length; i++) {
+        no_sets.style.display = "none"
         var home = document.getElementById("home_sets")
         var a = document.createElement("a")
         a.classList.add("droppable","folder_home")
@@ -247,6 +277,7 @@
     }
 
     for (var i = 0; i < sets_keys.length; i++) {
+        no_sets.style.display = "none"
         const droppableContainers = document.querySelectorAll('.droppable');
         if (!sets[sets_keys[i]]["settings"]["folder"]) {
             var level = sets[sets_keys[i]]["settings"]["level"]

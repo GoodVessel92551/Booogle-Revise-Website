@@ -1074,7 +1074,7 @@ html {
     gap: 16px;
 }
 
-.start_set::backdrop {
+dialog::backdrop {
     background-color: #000;
     opacity: 0.4;
 }
@@ -3709,6 +3709,7 @@ input[type="number"]::-webkit-outer-spin-button {
     width: 30%;
     background:var(--top_back);
     border-radius:var(--main_border_radius);
+    border:var(--top_back_border);
     z-index:10;
     box-shadow:0px 10px 20px #00000044;
     display:none;
@@ -4145,4 +4146,121 @@ select:focus{
 
 .profile_images img:hover {
     filter: brightness(90%);
+}
+
+.delete_dialog{
+    max-width:350px;
+    background: var(--top_back);
+    border: var(--top_back_border);
+    color:var(--text);
+    border-radius: var(--main_border_radius);
+    padding:0px;
+}
+
+.delete_dialog > h3{
+    margin:24px 16px 16px 16px;
+    font-size:16px;
+}
+
+.delete_dialog > p{
+    margin:0px 16px 24px 16px;
+    font-size:14px;
+    color: var(--text4);
+}
+
+.delete_dialog > p > a{
+    color:var(--text4);
+    text-decoration:underline;
+}
+
+.delete_dialog > p > a:hover{
+    text-decoration: none;
+}
+
+.delete_dialog > p > a:focus{
+    text-decoration: none;
+    outline: none;
+}
+
+.delete_dialog:focus{
+    outline: none;
+}
+
+.delete_dialog > div{
+    display:flex;
+    gap:16px;
+    padding:0px 16px 16px 16px;
+    box-sizing:border-box;
+    justify-content: flex-end;
+}
+
+.delete_cancel{
+    background:none;
+    font-size:12px;
+    border:none;
+    color:var(--text4);
+    cursor: pointer;
+}
+
+.delete_button_dialog{
+    background:var(--error_button);
+    color:var(--on_error_button);
+    border:none;
+    font-size:13px;
+    border-radius:var(--main_border_radius);
+    padding:8px 16px;
+    cursor: pointer;
+    transition:.3s filter;
+    font-weight: 600;
+}
+
+.delete_span_title{
+    color:var(--text4);
+    font-size:12px;
+    margin-top:8px;
+    display:block;
+    margin-right:auto;
+    max-width:150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.no_sets{
+    max-width:250px;
+    color:var(--text4);
+    background: var(--top_back);
+    border: var(--top_back_border);
+    border-radius:var(--main_border_radius);
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    z-index: 2;
+    padding:16px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: .2s background;
+    text-decoration: none;
+}
+
+.no_sets:hover{
+    background:var(--hover_top_green);
+}
+
+.no_sets > span{
+    display: flex;
+    align-items: center;
+    gap:8px;
+    color:var(--text);
+    margin-bottom: 8px;
+}
+
+.no_sets > span > ion-icon{
+    font-size:20px;
+}
+
+.no_sets > p{
+    margin:0px;
+    font-size:14px;
 }

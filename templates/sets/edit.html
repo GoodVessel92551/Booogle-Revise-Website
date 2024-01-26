@@ -635,7 +635,7 @@ block title %}Edit{% endblock %} {% block main %}
           
           var banner = document.createElement("span")
           banner.classList.add("wanning_message", "error_message")
-          banner.innerHTML = '<ion-icon name="information-circle"></ion-icon>This answer might not be in the best format for question mode. <a>Learn More</a><button type="button" onclick="fix_ans(`'+sets['Q'+i][`answers`][`ans1`]+'`)">Fix</button>'
+          banner.innerHTML = '<ion-icon name="information-circle"></ion-icon>This answer might not be in the best format for question mode. <a>Learn More</a>'
           div.appendChild(banner)
         }
         else if (sets[`Q${i}`]["answer_feedback"] == "Good" && sets[`Q${i}`]["status"] == "2") {

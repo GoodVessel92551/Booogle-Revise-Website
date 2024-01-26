@@ -215,16 +215,9 @@ def publish(name):
     for i in sets_list:
         if username() in i:
             amount += 1
-    if amount >= 2 and level == False:
-        return "Max Amount"
-    elif amount >= 3 and level == "boost":
-        return "Max Amount"
-    elif amount >= 5 and level == "pro":
-        return "Max Amount"
-    elif amount >= 10 and level == "premium":
-        return "Max Amount"
-    elif amount >= 20 and level == "elite":
-        return "Max Amount"
+    if ((level == False) and (amount >= 2)) or ((level == "premium") and (amount >= 5)) or ((level == "pro") and (amount >= 10)) or ((level == "elite") and (amount >= 30)):
+        session["notifications"] = [{"title":"Failed","body":"You Have Reached The Max Amount Of Sets You Can Publish","type":"warning","icon":"alert-circle"}]
+        return redirect("/")
     set = get_sets()[name]
     for i in range(1,len(set)):
         quest = set[f"Q{i}"]["question"]
@@ -460,6 +453,10 @@ def new():
         return render_template("login/login.html")
     notifications = []
     level = userinfo(username())[0]
+    len_sets = len(get_sets())
+    if ((level == False) and (len_sets > 10)) or ((level == "premium") and (len_sets > 20)) or ((level == "pro") and (len_sets > 35)) or ((level == "elite") and (len_sets > 100)):
+        session["notifications"] = [{"title":"Failed","body":"You Have Reached The Max Amount Of Sets","type":"warning","icon":"alert-circle"}]
+        return redirect("/")
     if request.method == "POST":
         premium = ["pro","art","bike","elite","car","castle","code","hill","map","flask"]
         pro = ["elite","car","castle","code","hill","map","flask"]
@@ -537,6 +534,10 @@ def new_question():
                 if image_data["rating_label"] != "adult":
                     new_quest["image"] = {"url":image_url,"rating":image_data["rating_label"]}
         user_data_db.update_one({"username":username(),"type":"user_data"},{"$set":{"data.sets."+session.get("current_set")+".Q"+quest_num:new_quest}})
+        len_quests = len(get_sets()[session.get("current_set")])
+        if ((level == False) and (len_quests >= 15)) or ((level == "premium") and (len_quests >= 20)) or ((level == "pro") and (len_quests >= 25)) or ((level == "elite") and (len_quests >= 50)):
+            session["notifications"] = [{"title":"Failed","body":"You Have Reached The Max Amount Of Questions","type":"warning","icon":"alert-circle"}]
+            return redirect("/")
         if request.form["button"] == "finish":
             session.pop("current_set")
             return redirect("/")
@@ -924,9 +925,8 @@ def play_code(code):
     play_info = codes[code]
     players = len(play_info["users"])
     level = userinfo(username())[0]
-    if (players >= 3 and (level == False or level == "boost")) or (players >= 5 and level == "premium") or (players >= 10 and level == "pro") or (players >= 15 and level == "elite"):
+    if (players >= 3 and level == False) or (players >= 5 and level == "premium") or (players >= 10 and level == "pro") or (players >= 44 and level == "elite"):
         session["notifications"] = [{"title":"Failed","body":"There Are No Spaces Left For You","type":"warning","icon":"alert-circle"}]
-        session["notifications"] = [{"title":"Failed","body":f"{code} Is Not A valid Key, Please Try Again","type":"warning","icon":"alert-circle"}]
         return redirect("/")
     if code not in list(codes):
         session["notifications"] = [{"title":"Failed","body":f"{code} Is Not A valid Key, Please Try Again","type":"warning","icon":"alert-circle"}]

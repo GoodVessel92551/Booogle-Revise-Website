@@ -9,7 +9,7 @@
         {% endfor %}
     </ul>
     <h1>Community</h1>
-    <div class="filter_search" onclick="open_filter()">
+    <div class="filter_search" id="open_filter" onclick="open_filter()">
         <ion-icon name="options-outline"></ion-icon>
     </div>
     <input type="text" autocomplete="off" placeholder="Search" class="search" id="search">
@@ -31,6 +31,8 @@
                 <option value="History">History</option>
                 <option value="Geography">Geography</option>
                 <option value="Music">Music</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Design">Design</option>
                 <option value="Other">Other</option>
         </select>
         <strong>Creator</strong>
@@ -46,59 +48,6 @@
     </div>
     <div class="home_sets" id="home_sets">
         <a onclick="document.getElementById('recommend_loading_spinner').style.display = 'flex'" style="display:none;" class="folder_home" draggable="false" href="/recommended" id="recommended_folder"><loading id="recommend_loading_spinner" class="loader"><spinner></spinner></loading><span class="subject"><ion-icon name="folder-open-outline"></ion-icon>Recommendations</span><img alt="Recommended" draggable="false" src="/static/folders/Recommend Folder.webp" id="recommended"><strong id="recommended">Recommended Sets</strong><p id="recommended">View Your Recommended Sets</p></a>
-    </div>
-    <h2>Subjects</h2>
-    <div class="community_subjects">
-        <a href="javascript:onlySubjectSets('Maths')">
-            <img alt="Maths Sets" src="static/subject_icons/maths.webp">
-            <strong>Maths</strong>
-            <p id="Maths">? Sets</p>
-        </a>
-        <a href="javascript:onlySubjectSets('Computer Science')">
-            <img alt="Computer Science Sets" src="static/subject_icons/comp.webp">
-            <strong>Computer Science</strong>
-            <p id="Computer Science">? Sets</p>
-        </a>
-        <a href="javascript:onlySubjectSets('Physics')">
-            <img alt="Physics Sets" src="static/subject_icons/physics.webp">
-            <strong>Physics</strong>
-            <p id="Physics">? Sets</p>
-        </a>
-        <a href="javascript:onlySubjectSets('Chemistry')">
-            <img alt="Chemistry Sets" src="static/subject_icons/chemistry.webp">
-            <strong>Chemistry</strong>
-            <p id="Chemistry">? Sets</p>
-        </a>
-        <a href="javascript:onlySubjectSets('Biology')">
-            <img alt="Biology Sets" src="static/subject_icons/biology.webp">
-            <strong>Biology</strong>
-            <p id="Biology">? Sets</p>
-        </a>
-        <a href="javascript:onlySubjectSets('Music')">
-            <img alt="Music Sets" src="static/subject_icons/music.webp">
-            <strong>Music</strong>
-            <p id="Music">? Sets</p>
-        </a>
-        <a href="javascript:onlySubjectSets('Geography')">
-            <img alt="Geography Sets" src="static/subject_icons/world.webp">
-            <strong>Geography</strong>
-            <p id="Geography">? Sets</p>
-        </a>
-        <a href="javascript:onlySubjectSets('History')">
-            <img alt="History Sets" src="static/subject_icons/history.webp">
-            <strong>History</strong>
-            <p id="History">? Sets</p>
-        </a>
-        <a href="javascript:onlySubjectSets('Sport')">
-            <img alt="Sport Sets" src="static/subject_icons/sport.webp">
-            <strong>Sport</strong>
-            <p id="Sport">? Sets</p>
-        </a>
-        <a href="javascript:onlySubjectSets('English')">
-            <img alt="English Sets" src="static/subject_icons/book.webp">
-            <strong>English</strong>
-            <p id="English">? Sets</p>
-        </a>
     </div>
     <dialog class="start_set" id="start_set">
         <div class="all_contain_start">
@@ -158,19 +107,6 @@
         <a href="/new" class="add_button_nav"><ion-icon name="add-outline"></ion-icon></a>
     </nav>
 <script>
-    var subject_numbers = {
-        "Maths":0,
-        "Computer Science":0,
-        "Physics":0,
-        "Chemistry":0,
-        "Biology":0,
-        "Music":0,
-        "Geography":0,
-        "History":0,
-        "Sport":0,
-        "English":0,
-        "Other":0
-    }
     const copy = (text) => {
         navigator.clipboard.writeText(text)
         document.getElementById("share").innerHTML = "<ion-icon name='clipboard-outline'></ion-icon>Copyed!"
@@ -350,7 +286,6 @@
         user.href = "/stats/@" + sets[sets_keys[i]]["settings"]["user"];
         strong.innerText = sets[sets_keys[i]]["settings"]["name"];
         a.setAttribute("data-value", sets[sets_keys[i]]["settings"]["subject"].trim());
-        subject_numbers[sets[sets_keys[i]]["settings"]["subject"].trim()] += 1
         if (sets[sets_keys[i]]["settings"]["subject"].trim()  == "Geography"){
             subject.innerHTML = '<ion-icon name="earth-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
         }else if (sets[sets_keys[i]]["settings"]["subject"].trim() == "Computer Science"){
@@ -365,16 +300,18 @@
             subject.innerHTML = '<ion-icon name="leaf-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
         }else if (sets[sets_keys[i]]["settings"]["subject"].trim()  == "History"){
             subject.innerHTML = '<ion-icon name="time-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
-        
         }else if (sets[sets_keys[i]]["settings"]["subject"].trim()  == "Sport"){
             subject.innerHTML = '<ion-icon name="football-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
-        
         }else if (sets[sets_keys[i]]["settings"]["subject"].trim()  == "English"){
             subject.innerHTML = '<ion-icon name="book-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
         }else if (sets[sets_keys[i]]["settings"]["subject"].trim()  == "Other"){
             subject.innerHTML = '<ion-icon name="albums-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
         }else if(sets[sets_keys[i]]["settings"]["subject"].trim()  == "Music"){
             subject.innerHTML = '<ion-icon name="musical-notes-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
+        }else if (sets[sets_keys[i]]["settings"]["subject"].trim()  == "Engineering"){
+            subject.innerHTML = '<ion-icon name="construct-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
+        }else if (sets[sets_keys[i]]["settings"]["subject"].trim()  == "Design"){
+            subject.innerHTML = '<ion-icon name="color-palette-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
         }
         else{
             subject.innerHTML = sets[sets_keys[i]]["settings"]["subject"];
@@ -429,15 +366,6 @@
         info.appendChild(subject)
         home.appendChild(a);
     }
-    var subject_numbers_keys = Object.keys(subject_numbers)
-    for (var i = 0; i < subject_numbers_keys.length-1;i++){
-        var element = document.getElementById(subject_numbers_keys[i])
-        if (subject_numbers[subject_numbers_keys[i]] == 1){
-            element.innerText = "1 Set"
-        }else{
-            element.innerText = `${subject_numbers[subject_numbers_keys[i]]} Sets`
-        }
-    }
     const dialog = document.getElementById('start_set');
     const closeButton = document.getElementById('close_mobile');
     var isDragging = false;
@@ -474,31 +402,32 @@
     }
     const open_filter = () => {
         var search_filter_container = document.getElementById("search_filter_container")
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                open_filter()
-                }
-        });
-        document.addEventListener('mousedown', function(event) {
-            if (search_filter_container && !search_filter_container.contains(event.target)) {
-                open_filter()
-            }
-        });
+        var open_filter = document.getElementById("open_filter")
         if (search_filter_container.style.display == "flex"){
             search_filter_container.style.display = "none"
             document.removeEventListener('keydown', function(event) {
                 if (event.key === 'Escape') {
-                    open_filter()
+                    search_filter_container.style.display = "none"
                 }
             });
             document.removeEventListener('mousedown', function(event) {
                 if (search_filter_container && !search_filter_container.contains(event.target)) {
-                    open_filter()
+                    search_filter_container.style.display = "none"
                 }
             });
         }else{
             search_filter_container.style.display = "flex"
         }
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                search_filter_container.style.display = "none"
+                }
+        });
+        document.addEventListener('mousedown', function(event) {
+            if (search_filter_container && !search_filter_container.contains(event.target)) {
+                search_filter_container.style.display = "none"
+            }
+        });
     }
 </script>
 {% endblock %}

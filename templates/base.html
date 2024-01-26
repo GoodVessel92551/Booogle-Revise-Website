@@ -280,11 +280,11 @@
             document.getElementById("notifications").appendChild(a);
         }
 
-        const new_notification = (title,body,icon,type) => {
+        const new_notification = (title,body,icon_name,type) => {
             var a = document.createElement("a");
             var title_element = document.createElement("strong")
             var icon = document.createElement("ion-icon")
-            icon.name = icon
+            icon.name = icon_name
             title_element.innerText = title
             a.id = `notification_${i}_notification`
             var p = document.createElement("p");
