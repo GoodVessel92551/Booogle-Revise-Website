@@ -1,5 +1,5 @@
 from flask import Flask, render_template,redirect,request,current_app,session
-from fun import mode_b_keys,ans_feeback,password_hash,get_folders,get_settings,get_streak,get_sets,hash_value,gen_user_token,add_streak,streak,login,check_image,gen_id,make_dict_group,user_data_group,username,recommend,rule_id,gen_code,leaderboard_dict,similarity,userinfo,make_dict,mod,play_dict,smart,last_7,week_add,stats_dict,update,make_dict_folder,subject,make_dict_rules
+from fun import answer_fix,mode_b_keys,ans_feeback,password_hash,get_folders,get_settings,get_streak,get_sets,hash_value,gen_user_token,add_streak,streak,login,check_image,gen_id,make_dict_group,user_data_group,username,recommend,rule_id,gen_code,leaderboard_dict,similarity,userinfo,make_dict,mod,play_dict,smart,last_7,week_add,stats_dict,update,make_dict_folder,subject,make_dict_rules
 from better_profanity import profanity
 import emoji
 import os,random,re
@@ -31,11 +31,6 @@ compress = Compress(app)
 def home():
     if login() == False:
         return render_template("login/login.html")
-    if session.get("notifications"):
-        notifications = session.get("notifications")
-        session.pop("notifications")
-    else:
-        notifications = []
     users_groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"]
     added_groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["added_groups"]
     print(added_groups)
@@ -45,12 +40,16 @@ def home():
         group_data = user_data_db.find_one({"username":owners_username,"type":"user_data"})["data"]["groups"][group]
         users_groups[group] = group_data
     streak()
-    if session.get("current_set_feedback"):
-        feedback = session.get("current_set_feedback")
-        session.pop("current_set_feedback")
+    if session.get("feedback"):
+        feedback = session.get("feedback")
+        session["notifications"] = [{"title":"Feedback","body":f"You Have {feedback} possible improvements to this set","type":"warning","icon":"alert-circle"}]
+        session.pop("feedback")
+    if session.get("notifications"):
+        notifications = session.get("notifications")
+        session.pop("notifications")
     else:
-        feedback = {}
-    return render_template("/home/home.html",set_feedback=feedback,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets(),is_new=new,notifications=notifications,folders=get_folders(),groups=users_groups)
+        notifications = []
+    return render_template("/home/home.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets(),is_new=new,notifications=notifications,folders=get_folders(),groups=users_groups)
 
 @app.route("/signup",methods=["POST","GET"])
 def signup():
@@ -498,7 +497,7 @@ def new():
                     "id":set_id
                 }
             }
-            session["current_set_feedback"] = {}
+            session["feedback"]  = 0
             user_data_db.update_one({"username":username(),"type":"user_data"},{"$set":{"data.sets."+set_id:new_set}})
             session["current_set"] = set_id
             return redirect("/new/question")
@@ -526,8 +525,12 @@ def new_question():
         image_url = request.form["image_url"]
         pattern = re.compile(r'\.(jpg|jpeg|png|gif|bmp|svg|tiff)$', re.IGNORECASE)
         type = smart(ans)
+        quest_mod = mod(quest)
+        quest_feedback = ans_feeback(quest)
         quest_num =str(len(get_sets()[session.get("current_set")]))
         new_quest = {"status":mod(quest),"question":quest,"answers":{"ans1":ans},"type":type,"answer_feedback":ans_feeback(ans)}
+        if quest_mod == "1" or quest_feedback == "Bad":
+            session["feedback"] += 1
         if bool(pattern.search(image_url)):
             image_data = check_image(image_url)
             if "rating_label" in image_data:
@@ -606,7 +609,7 @@ def edit(name):
                     query = {"username":username(),"type":"user_data"}
                     question = {}
                     quest_profanity = profanity.contains_profanity(quest)
-                    question = {"status":mod(quest),"question":quest,"answers":{"ans1":request.form[f"A{i}"]},"type":smart(request.form[f"A{i}"])}
+                    question = {"status":mod(quest),"question":quest,"answers":{"ans1":request.form[f"A{i}"]},"type":smart(request.form[f"A{i}"]),"answer_feedback":ans_feeback(request.form[f"A{i}"])}
                     image_url = request.form[f"img{i}"]
                     pattern = re.compile(r'\.(jpg|jpeg|png|gif|bmp|svg|tiff)$', re.IGNORECASE)
                     if bool(pattern.search(image_url)):
@@ -1611,5 +1614,12 @@ def api_smartstudy():
     data = request.get_json()
     print(data)
     return data
+
+@app.route("/api/ans_fix",methods=["POST","GET"])
+def api_ans_fix():
+    data = request.get_json()
+    fixed = {"ans":answer_fix(data["ans"])}
+
+    return fixed
 
 app.run(host='0.0.0.0', port=80,debug=True)

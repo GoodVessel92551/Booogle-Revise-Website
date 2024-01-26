@@ -113,8 +113,8 @@ Easter Island,Good
 large stone statues are found on Easter Island,Bad
 Photography,Good
 the art or practice of taking and processing photographs is photography,Bad
-Washington, D.C.,Good
-the capital city of the United States is Washington, D.C.,Bad
+Washington D.C.,Good
+the capital city of the United States is Washington D.C.,Bad
 Alexander the Great,Good
 a military commander who conquered much of the ancient world is Alexander the Great,Bad
 Photosynthesis,Good
@@ -249,8 +249,8 @@ Easter Island,Good
 large stone statues are found on Easter Island,Bad
 Photography,Good
 the art or practice of taking and processing photographs is photography,Bad
-Washington, D.C.,Good
-the capital city of the United States is Washington, D.C.,Bad
+Washington D.C.,Good
+the capital city of the United States is Washington D.C.,Bad
 Alexander the Great,Good
 a military commander who conquered much of the ancient world is Alexander the Great,Bad
 Photosynthesis,Good
@@ -342,7 +342,7 @@ the process by which cells break down glucose to produce energy is cellular resp
 Apollo 11,Good
 the first manned mission to land on the Moon is Apollo 11,Bad
 Galileo Galilei,Good
-an Italian astronomer, physicist, and engineer is Galileo Galilei,Bad
+an Italian astronomer physicist and engineer is Galileo Galilei,Bad
 Internet,Good
 a global network connecting computers is the Internet,Bad
 The Great Gatsby,Good
@@ -517,8 +517,8 @@ Easter Island,Good
 large stone statues are found on Easter Island,Bad
 Photography,Good
 the art or practice of taking and processing photographs is photography,Bad
-Washington, D.C.,Good
-the capital city of the United States is Washington, D.C.,Bad
+Washington D.C.,Good
+the capital city of the United States is Washington D.C.,Bad
 Alexander the Great,Good
 a military commander who conquered much of the ancient world is Alexander the Great,Bad
 Photosynthesis,Good
@@ -632,3 +632,277 @@ the famous equation by Einstein is E=mc^2,Bad
 Mona Lisa,Good
 a famous painting by Leonardo da Vinci is the Mona Lisa,Bad
 Pythagorean theorem,Good
+A heat treatment that increases the hardness and strength of a metal by changing the arrangement of atoms.,Good
+Hardening is a heat treatment that increases the hardness and strength of a metal by changing the arrangement of atoms.,Bad
+A type of electromagnetic radiation with wavelengths longer than visible light but shorter than microwaves.,Good
+Infrared radiation is a type of electromagnetic radiation with wavelengths longer than visible light but shorter than microwaves.,Bad
+A financial institution that provides banking services to individuals and businesses.,Good
+A bank is a financial institution that provides banking services to individuals and businesses.,Bad
+A device that converts electrical energy into mechanical energy.,Good
+An electric motor is a device that converts electrical energy into mechanical energy.,Bad
+The process of extracting useful information from data.,Good
+Data mining is the process of extracting useful information from data.,Bad
+A large celestial body that orbits a star and does not produce its own light.,Good
+A planet is a large celestial body that orbits a star and does not produce its own light.,Bad
+The study of the physical and chemical properties of matter and the changes it undergoes.,Good
+Chemistry is the study of the physical and chemical properties of matter and the changes it undergoes.,Bad
+A system of government where the people have the authority to make decisions through voting.,Good
+Democracy is a system of government where the people have the authority to make decisions through voting.,Bad
+The process of transferring data between two devices using electromagnetic waves.,Good
+Wireless communication is the process of transferring data between two devices using electromagnetic waves.,Bad
+A unit of measurement for electric current.,Good
+An ampere is a unit of measurement for electric current.,Bad
+A chemical compound composed of two hydrogen atoms and one oxygen atom.,Good
+Water is a chemical compound composed of two hydrogen atoms and one oxygen atom.,Bad
+A technique for encrypting data to ensure its security during transmission.,Good
+Encryption is a technique for encrypting data to ensure its security during transmission.,Bad
+A system of production where goods are made individually or in small batches.,Good
+Craft production is a system of production where goods are made individually or in small batches.,Bad
+A mathematical statement that expresses the equality of two expressions.,Good
+An equation is a mathematical statement that expresses the equality of two expressions.,Bad
+A device used to store electrical energy and release it when needed.,Good
+A battery is a device used to store electrical energy and release it when needed.,Bad
+A form of government where power is held by a single individual with absolute authority.,Good
+Autocracy is a form of government where power is held by a single individual with absolute authority.,Bad
+The branch of science that deals with the study of living organisms and their interactions with each other and the environment.,Good
+Ecology is the branch of science that deals with the study of living organisms and their interactions with each other and the environment.,Bad
+A system of government where power is divided between a central authority and individual states or provinces.,Good
+Federalism is a system of government where power is divided between a central authority and individual states or provinces.,Bad
+The process of converting a liquid into a gas by heating.,Good
+Evaporation is the process of converting a liquid into a gas by heating.,Bad
+A measure of the amount of matter in an object.,Good
+Mass is a measure of the amount of matter in an object.,Bad
+The study of the structure properties and behavior of matter.,Good
+Physics is the study of the structure properties and behavior of matter.,Bad
+A chemical element with atomic number 6 and symbol C.,Good
+Carbon is a chemical element with atomic number 6 and symbol C.,Bad
+A system of government where power is held by elected representatives of the people.,Good
+Republicanism is a system of government where power is held by elected representatives of the people.,Bad
+A substance that speeds up a chemical reaction without being consumed in the process.,Good
+A catalyst is a substance that speeds up a chemical reaction without being consumed in the process.,Bad
+The process of producing goods or services using machinery labor and resources.,Good
+Manufacturing is the process of producing goods or services using machinery labor and resources.,Bad
+The study of the Earth's physical features and the processes that shape them.,Good
+Geology is the study of the Earth's physical features and the processes that shape them.,Bad
+A substance that cannot be broken down into simpler substances by chemical means.,Good
+An element is a substance that cannot be broken down into simpler substances by chemical means.,Bad
+A measure of the force exerted on an object due to gravity.,Good
+Weight is a measure of the force exerted on an object due to gravity.,Bad
+A system of government where power is concentrated in the hands of a small group of people.,Good
+Oligarchy is a system of government where power is concentrated in the hands of a small group of people.,Bad
+The process of converting light energy into chemical energy in plants.,Good
+Photosynthesis is the process of converting light energy into chemical energy in plants.,Bad
+A material that allows electricity or heat to pass through it easily.,Good
+A conductor is a material that allows electricity or heat to pass through it easily.,Bad
+The study of the mind and behavior.,Good
+Psychology is the study of the mind and behavior.,Bad
+A naturally occurring solid formed from minerals or mineral-like substances.,Good
+A rock is a naturally occurring solid formed from minerals or mineral-like substances.,Bad
+The process of breaking down rocks into smaller pieces by physical or chemical means.,Good
+Weathering is the process of breaking down rocks into smaller pieces by physical or chemical means.,Bad
+A celestial body that orbits a planet and reflects sunlight.,Good
+A moon is a celestial body that orbits a planet and reflects sunlight.,Bad
+A measure of the average kinetic energy of the particles in a substance.,Good
+Temperature is a measure of the average kinetic energy of the particles in a substance.,Bad
+A type of energy that is associated with the motion of objects.,Good
+Kinetic energy is a type of energy that is associated with the motion of objects.,Bad
+A system of government where power is held by a hereditary ruler.,Good
+Monarchy is a system of government where power is held by a hereditary ruler.,Bad
+The process of combining two or more substances to form a new substance with different properties.,Good
+Chemical reaction is the process of combining two or more substances to form a new substance with different properties.,Bad
+A measure of the amount of space occupied by an object.,Good
+Volume is a measure of the amount of space occupied by an object.,Bad
+The process of converting a gas into a liquid by cooling.,Good
+Condensation is the process of converting a gas into a liquid by cooling.,Bad
+A measure of the average speed of particles in a substance.,Good
+Pressure is a measure of the average speed of particles in a substance.,Bad
+The process of converting a liquid into a solid by cooling.,Good
+Freezing is the process of converting a liquid into a solid by cooling.,Bad
+A compound formed by the chemical combination of two or more elements.,Good
+A molecule is a compound formed by the chemical combination of two or more elements.,Bad
+A force that acts between two objects due to their mass.,Good
+Gravity is a force that acts between two objects due to their mass.,Bad
+A device that measures electrical resistance.,Good
+An ohmmeter is a device that measures electrical resistance.,Bad
+The process of transmitting messages over long distances using electromagnetic signals.,Good
+Telecommunication is the process of transmitting messages over long distances using electromagnetic signals.,Bad
+A system of government where power is held by elected representatives.,Good
+Democracy is a system of government where power is held by elected representatives.,Bad
+The process of converting light energy into chemical energy in plants.,Good
+Photosynthesis is the process of converting light energy into chemical energy in plants.,Bad
+A device that converts alternating current into direct current.,Good
+A rectifier is a device that converts alternating current into direct current.,Bad
+The branch of science that deals with the structure and function of cells.,Good
+Cytology is the branch of science that deals with the structure and function of cells.,Bad
+A device that measures the intensity of light.,Good
+A photometer is a device that measures the intensity of light.,Bad
+The process of changing the position or orientation of an object.,Good
+Rotation is the process of changing the position or orientation of an object.,Bad
+A system of government where power is held by a single individual.,Good
+Autocracy is a system of government where power is held by a single individual.,Bad
+A system of government where power is divided between a central authority and regional governments.,Good
+Federalism is a system of government where power is divided between a central authority and regional governments.,Bad
+A substance that speeds up a chemical reaction without being consumed in the process.,Good
+A catalyst is a substance that speeds up a chemical reaction without being consumed in the process.,Bad
+A measure of the force exerted on an object due to gravity.,Good
+Weight is a measure of the force exerted on an object due to gravity.,Bad
+A substance that cannot be broken down into simpler substances by chemical means.,Good
+An element is a substance that cannot be broken down into simpler substances by chemical means.,Bad
+A measure of the amount of matter in an object.,Good
+Mass is a measure of the amount of matter in an object.,Bad
+The branch of science that deals with the study of living organisms and their interactions with each other and the environment.,Good
+Ecology is the branch of science that deals with the study of living organisms and their interactions with each other and the environment.,Bad
+A measure of the amount of space occupied by an object.,Good
+Volume is a measure of the amount of space occupied by an object.,Bad
+The process of combining two or more substances to form a new substance with different properties.,Good
+Chemical reaction is the process of combining two or more substances to form a new substance with different properties.,Bad
+A type of chemical bond formed by the sharing of electrons between atoms.,Good
+A covalent bond is a type of chemical bond formed by the sharing of electrons between atoms.,Bad
+A type of electromagnetic radiation with wavelengths shorter than visible light but longer than X-rays.,Good
+Ultraviolet radiation is a type of electromagnetic radiation with wavelengths shorter than visible light but longer than X-rays.,Bad
+The process of converting a gas into a liquid by cooling.,Good
+Condensation is the process of converting a gas into a liquid by cooling.,Bad
+A device used to measure atmospheric pressure.,Good
+A barometer is a device used to measure atmospheric pressure.,Bad
+A system of government where power is held by a hereditary ruler.,Good
+Monarchy is a system of government where power is held by a hereditary ruler.,Bad
+A type of rock formed from the solidification of magma or lava.,Good
+Igneous rock is a type of rock formed from the solidification of magma or lava.,Bad
+A system of government where power is held by a small group of people.,Good
+Oligarchy is a system of government where power is held by a small group of people.,Bad
+The process of converting a liquid into a gas by heating.,Good
+Evaporation is the process of converting a liquid into a gas by heating.,Bad
+A measure of the average kinetic energy of the particles in a substance.,Good
+Temperature is a measure of the average kinetic energy of the particles in a substance.,Bad
+A type of energy associated with the motion of particles.,Good
+Thermal energy is a type of energy associated with the motion of particles.,Bad
+The process of converting light energy into electrical energy.,Good
+Photovoltaic effect is the process of converting light energy into electrical energy.,Bad
+A type of cell that can produce electrical energy from chemical reactions.,Good
+A battery is a type of cell that can produce electrical energy from chemical reactions.,Bad
+A substance that cannot be decomposed into simpler substances by chemical means.,Good
+An element is a substance that cannot be decomposed into simpler substances by chemical means.,Bad
+The process of breaking down rocks into smaller pieces by physical or chemical means.,Good
+Weathering is the process of breaking down rocks into smaller pieces by physical or chemical means.,Bad
+The branch of science that deals with the study of matter and its motion through space and time.,Good
+Physics is the branch of science that deals with the study of matter and its motion through space and time.,Bad
+A chemical element with atomic number 79 and symbol Au.,Good
+Gold is a chemical element with atomic number 79 and symbol Au.,Bad
+A system of government where power is held by elected representatives of the people.,Good
+Republicanism is a system of government where power is held by elected representatives of the people.,Bad
+The process of converting a solid into a gas without passing through the liquid state.,Good
+Sublimation is the process of converting a solid into a gas without passing through the liquid state.,Bad
+A substance that releases hydrogen ions when dissolved in water.,Good
+An acid is a substance that releases hydrogen ions when dissolved in water.,Bad
+The process of converting a gas into a liquid by cooling.,Good
+Condensation is the process of converting a gas into a liquid by cooling.,Bad
+A measure of the force exerted on an object due to gravity.,Good
+Weight is a measure of the force exerted on an object due to gravity.,Bad
+A substance that cannot be broken down into simpler substances by chemical means.,Good
+An element is a substance that cannot be broken down into simpler substances by chemical means.,Bad
+A measure of the amount of matter in an object.,Good
+Mass is a measure of the amount of matter in an object.,Bad
+The branch of science that deals with the study of living organisms and their interactions with each other and the environment.,Good
+Ecology is the branch of science that deals with the study of living organisms and their interactions with each other and the environment.,Bad
+A measure of the amount of space occupied by an object.,Good
+Volume is a measure of the amount of space occupied by an object.,Bad
+The process of combining two or more substances to form a new substance with different properties.,Good
+Chemical reaction is the process of combining two or more substances to form a new substance with different properties.,Bad
+A type of chemical bond formed by the sharing of electrons between atoms.,Good
+A covalent bond is a type of chemical bond formed by the sharing of electrons between atoms.,Bad
+A type of electromagnetic radiation with wavelengths shorter than visible light but longer than X-rays.,Good
+Ultraviolet radiation is a type of electromagnetic radiation with wavelengths shorter than visible light but longer than X-rays.,Bad
+The process of converting a gas into a liquid by cooling.,Good
+Condensation is the process of converting a gas into a liquid by cooling.,Bad
+A device used to measure atmospheric pressure.,Good
+A barometer is a device used to measure atmospheric pressure.,Bad
+A system of government where power is held by a hereditary ruler.,Good
+Monarchy is a system of government where power is held by a hereditary ruler.,Bad
+A type of rock formed from the solidification of magma or lava.,Good
+Igneous rock is a type of rock formed from the solidification of magma or lava.,Bad
+A system of government where power is held by a small group of people.,Good
+Oligarchy is a system of government where power is held by a small group of people.,Bad
+The process of converting a liquid into a gas by heating.,Good
+Evaporation is the process of converting a liquid into a gas by heating.,Bad
+A measure of the average kinetic energy of the particles in a substance.,Good
+Temperature is a measure of the average kinetic energy of the particles in a substance.,Bad
+A type of energy associated with the motion of particles.,Good
+Thermal energy is a type of energy associated with the motion of particles.,Bad
+The process of converting light energy into electrical energy.,Good
+Photovoltaic effect is the process of converting light energy into electrical energy.,Bad
+A type of cell that can produce electrical energy from chemical reactions.,Good
+A battery is a type of cell that can produce electrical energy from chemical reactions.,Bad
+A substance that cannot be decomposed into simpler substances by chemical means.,Good
+An element is a substance that cannot be decomposed into simpler substances by chemical means.,Bad
+The process of breaking down rocks into smaller pieces by physical or chemical means.,Good
+Weathering is the process of breaking down rocks into smaller pieces by physical or chemical means.,Bad
+The branch of science that deals with the study of matter and its motion through space and time.,Good
+Physics is the branch of science that deals with the study of matter and its motion through space and time.,Bad
+A chemical element with atomic number 79 and symbol Au.,Good
+Gold is a chemical element with atomic number 79 and symbol Au.,Bad
+A system of government where power is held by elected representatives of the people.,Good
+Republicanism is a system of government where power is held by elected representatives of the people.,Bad
+The process of converting a solid into a gas without passing through the liquid state.,Good
+Sublimation is the process of converting a solid into a gas without passing through the liquid state.,Bad
+A substance that releases hydrogen ions when dissolved in water.,Good
+An acid is a substance that releases hydrogen ions when dissolved in water.,Bad
+The process of converting a gas into a liquid by cooling.,Good
+Condensation is the process of converting a gas into a liquid by cooling.,Bad
+A measure of the force exerted on an object due to gravity.,Good
+Weight is a measure of the force exerted on an object due to gravity.,Bad
+A substance that cannot be broken down into simpler substances by chemical means.,Good
+An element is a substance that cannot be broken down into simpler substances by chemical means.,Bad
+A measure of the amount of matter in an object.,Good
+Mass is a measure of the amount of matter in an object.,Bad
+The branch of science that deals with the study of living organisms and their interactions with each other and the environment.,Good
+Ecology is the branch of science that deals with the study of living organisms and their interactions with each other and the environment.,Bad
+A measure of the amount of space occupied by an object.,Good
+Volume is a measure of the amount of space occupied by an object.,Bad
+The process of combining two or more substances to form a new substance with different properties.,Good
+Chemical reaction is the process of combining two or more substances to form a new substance with different properties.,Bad
+A type of chemical bond formed by the sharing of electrons between atoms.,Good
+A covalent bond is a type of chemical bond formed by the sharing of electrons between atoms.,Bad
+A type of electromagnetic radiation with wavelengths shorter than visible light but longer than X-rays.,Good
+Ultraviolet radiation is a type of electromagnetic radiation with wavelengths shorter than visible light but longer than X-rays.,Bad
+The process of converting a gas into a liquid by cooling.,Good
+Condensation is the process of converting a gas into a liquid by cooling.,Bad
+A device used to measure atmospheric pressure.,Good
+A barometer is a device used to measure atmospheric pressure.,Bad
+A system of government where power is held by a hereditary ruler.,Good
+Monarchy is a system of government where power is held by a hereditary ruler.,Bad
+A type of rock formed from the solidification of magma or lava.,Good
+Igneous rock is a type of rock formed from the solidification of magma or lava.,Bad
+A system of government where power is held by a small group of people.,Good
+Oligarchy is a system of government where power is held by a small group of people.,Bad
+The process of converting a liquid into a gas by heating.,Good
+Evaporation is the process of converting a liquid into a gas by heating.,Bad
+A measure of the average kinetic energy of the particles in a substance.,Good
+Temperature is a measure of the average kinetic energy of the particles in a substance.,Bad
+A type of energy associated with the motion of particles.,Good
+Thermal energy is a type of energy associated with the motion of particles.,Bad
+The process of converting light energy into electrical energy.,Good
+Photovoltaic effect is the process of converting light energy into electrical energy.,Bad
+A type of cell that can produce electrical energy from chemical reactions.,Good
+A battery is a type of cell that can produce electrical energy from chemical reactions.,Bad
+A substance that cannot be decomposed into simpler substances by chemical means.,Good
+An element is a substance that cannot be decomposed into simpler substances by chemical means.,Bad
+The process of breaking down rocks into smaller pieces by physical or chemical means.,Good
+Weathering is the process of breaking down rocks into smaller pieces by physical or chemical means.,Bad
+The branch of science that deals with the study of matter and its motion through space and time.,Good
+Physics is the branch of science that deals with the study of matter and its motion through space and time.,Bad
+A chemical element with atomic number 79 and symbol Au.,Good
+Gold is a chemical element with atomic number 79 and symbol Au.,Bad
+A system of government where power is held by elected representatives of the people.,Good
+Republicanism is a system of government where power is held by elected representatives of the people.,Bad
+A heat treatment that results in metal that is tough with some ductility.,Good
+An IP address (Internet Protocol address) is used to uniquely identify a device on a network and enable communication between devices.,Bad
+TCP (Transmission Control Protocol) provides reliable connection-oriented communication with error-checking and acknowledgment while UDP (User Datagram Protocol) provides connectionless unreliable,Bad
+A subnet mask is used to divide an IP address into network and host portions. It helps determine which part of an IP address represents the network and which part represents the host facilitating rou,Bad
+DNS (Domain Name System) translates domain names (e.g. www.example.com) into IP addresses allowing users to access websites and other resources using human-readable names instead of numerical IP add,Bad
+NAT (Network Address Translation) is used to translate private IP addresses to public IP addresses and vice versa. It allows multiple devices within a private network to share a single public IP addre,Bad
+A firewall is a network security device or software that monitors and controls incoming and outgoing network traffic based on predetermined security rules. It acts as a barrier between a trusted inter,Bad
+DHCP (Dynamic Host Configuration Protocol) automatically assigns IP addresses to devices on a network simplifying network configuration.,Bad
+LAN (Local Area Network) connects devices within a limited area like a home or office while WAN (Wide Area Network) spans large geographical areas often connecting multiple LANs.,Bad
+A switch forwards data between devices within a LAN improving network efficiency by directing traffic only to the intended recipient.,Bad
+Newton's first law states that an object will remain at rest or in uniform motion in a straight line unless acted upon by an external force., Bad
+The law of conservation of energy states that energy cannot be created or destroyed only transformed from one form to another. In a closed system the total energy remains constant.,Bad

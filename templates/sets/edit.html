@@ -483,6 +483,23 @@ block title %}Edit{% endblock %} {% block main %}
   var keys = Object.keys(sets);
   var level = {{boosting|tojson}}[0];
   var save = false
+  const fix_ans = (ans) => {
+        data = {
+          "ans":ans
+        }
+        fetch("/api/ans_fix", {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          }})
+            .then(response => {
+              return response.json();
+            })
+            .then(data => {
+              console.log("Success:", data);
+            })
+        }
   var questions = document.getElementById("questions")
   if (level == "premium" || level == "pro" || level == "elite") {
       document.querySelectorAll(".premium").forEach((p) => {
@@ -613,21 +630,30 @@ block title %}Edit{% endblock %} {% block main %}
       questions.appendChild(div)
       div.appendChild(h2)
       div.appendChild(button)
-      if (sets[`Q${i}`]["status"] == "2") {
+      if (sets[`Q${i}`]["answer_feedback"]){
+        if (sets[`Q${i}`]["answer_feedback"] == "Bad") {
+          
+          var banner = document.createElement("span")
+          banner.classList.add("wanning_message", "error_message")
+          banner.innerHTML = '<ion-icon name="information-circle"></ion-icon>This answer might not be in the best format for question mode. <a>Learn More</a><button type="button" onclick="fix_ans(`'+sets['Q'+i][`answers`][`ans1`]+'`)">Fix</button>'
+          div.appendChild(banner)
+        }
+        else if (sets[`Q${i}`]["answer_feedback"] == "Good" && sets[`Q${i}`]["status"] == "2") {
           var banner = document.createElement("span")
           banner.classList.add("error_message", "good_message")
-          banner.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon>This Question Is Looking Good, Well Done!'
+          banner.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon>This question and answer are looking good, well done!'
           div.appendChild(banner)
+        }
       }
-      else if (sets[`Q${i}`]["status"] == "1") {
+      if (sets[`Q${i}`]["status"] == "1") {
           var banner = document.createElement("span")
           banner.classList.add("error_message")
-          banner.innerHTML = '<ion-icon name="warning-outline"></ion-icon>This Question May Contain Rude/Inappropriate Content.'
+          banner.innerHTML = '<ion-icon name="warning"></ion-icon>This Question May Contain Rude/Inappropriate Content.'
           div.appendChild(banner)
       }
       div.appendChild(input)
       div.appendChild(text)
       div.appendChild(img)
-  }
+    }
 </script>
 {% endblock %}

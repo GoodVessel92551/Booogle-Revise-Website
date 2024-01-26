@@ -15,6 +15,7 @@ from booogle_ai_tools.username_mod import username_mod
 import hashlib
 from flask import Flask, redirect, request,jsonify
 from flask.templating import render_template
+import spacy
 
 import stripe
 from stripe.error import StripeError
@@ -363,3 +364,14 @@ def payment_webhook():
         print('Unhandled event type {}'.format(event['type']))
     return True
 
+def answer_fix(ans):
+    nlp = spacy.load("en_core_web_sm")
+    def extract_key_concept(sentence):
+        doc = nlp(sentence)
+        key_concept = ""
+        for chunk in doc.noun_chunks:
+            key_concept = chunk.text
+            
+        return key_concept
+    entity = extract_key_concept(ans)
+    return entity
