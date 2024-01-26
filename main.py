@@ -239,25 +239,12 @@ def publish(name):
 def download(user_name,name):
     if login() == False:
         return render_template("login/login.html")
-    amount = 0
-    user_data = user_data_db.find_one({"username":user_name,"type":"user_data"})["data"]
+    user_data = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]
     user_sets = user_data["sets"]
     user_folders = user_data["folders"]
-    user_rules = user_data["rules"]
     set_id = gen_id()
     user_sets[set_id] = user_data_db.find_one({"username":user_name,"type":"user_data"})["data"]["sets"][name]
     user_sets[set_id]["settings"]["folder"] = False
-    for i in user_rules:
-        which_subject = user_rules[i]["subject"]
-        folder = user_rules[i]["folder"]
-        if folder not in db[username()]["folders"]:
-            del user_rules[i]
-            query = {"username":username(),"type":"user_data"}
-            update = {"$set":{"data.rules":user_rules}}
-            user_data_db.update_one(query, update)
-        if subject(name) == which_subject and db[username()]["sets"][set_id]["settings"]["folder"] == False:
-            user_folders[folder]["sets"].append(set_id)
-            user_sets[set_id]["settings"]["folder"] = True
     query = {"username":username(),"type":"user_data"}
     update = {"$set":{"data.folders":user_folders}}
     user_data_db.update_one(query, update)
