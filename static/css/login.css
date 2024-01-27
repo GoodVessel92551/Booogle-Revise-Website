@@ -1,6 +1,8 @@
 :root {
     --back: #1b1e1a;
-    --top_back: #2a2f2d;
+    --top_back: #20231F;
+    --top_back_border:1px solid #282C27;
+    --on_top_back:#37423e;
     --text: #f2f2f2;
     --text3: #B5B5B5;
     --main_button: #B6F2BC;
@@ -36,7 +38,7 @@
 }
 
 * {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 body,
@@ -70,18 +72,6 @@ html {
     color:var(--text)
 }
 
-.title{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50% ,-50%);
-    font-size: 40px;
-    color:var(--text);
-    font-weight:bold;
-    white-space:nowrap;
-    display:flex;
-    gap:10px;
-}
 
 .title > span{
     position:relative;
@@ -100,62 +90,6 @@ html {
 }
 
 
-
-.login{
-    position:absolute;
-    bottom:130px;
-    left:50%;
-    transform:translateX(-50%);
-    color:var(--text);
-    font-weight:bold;
-    background:none;
-    border:none;
-    padding-bottom:8px;
-    font-size:16px;
-    cursor:pointer;
-    transition:.4s;
-    text-decoration:none;
-}
-
-.login_button{
-    position:absolute;
-    bottom:70px;
-    left:50%;
-    transform:translateX(-50%);
-    color:var(--text);
-    background:none;
-    border:none;
-    padding-bottom:8px;
-    font-size:12px;
-    cursor:pointer;
-    transition:.4s;
-}
-
-.login_button > a{
-    color:var(--text4);
-}
-
-.login_button > a:hover{
-    text-decoration: none;
-}
-
-.login::before{
-    content:"";
-    width:100%;
-    height:8px;
-    background: #647d6d;
-    position:absolute;
-    bottom:4px;
-    left:0;
-    border-radius:4px;
-    z-index:-1;
-    transform:rotate(-2deg) translateY(4px);
-    transition:.4s background;
-}
-
-.login:hover::before{
-    background:#7da68c;
-}
 
 .down{
     position:absolute;
@@ -322,51 +256,9 @@ html {
     list-style-type: '-    ';
 }
 
-.sign_up_input{
-    width:300px;
-    height:32px;
-    border-radius:16px;
-    box-sizing:border-box;
-    border:1px solid var(--top_back);
-    background:none;
-    padding:10px 16px;
-    color:var(--text);
-    transition:.2s border;
-    display:block;
-    margin-bottom:8px;
-}
-
-.sign_up_input:focus{
-    border-color:var(--border_hover);
-    outline:none;
-}
-
-.sign_up_option_button{
-    padding:10px 16px;
-    background:var(--top_back);
-    color:var(--text);
-    border-radius:16px;
-    height:32px;
-    box-sizing:border-box;
-    border:none;
-    display:inline-flex;
-    justify-content:center;
-    align-items:center;
-    cursor:pointer;
-    transition:.2s background-color;
-    font-size:14px;
-}
-
-.sign_up_option_button:focus-visible{
-    outline:1px solid var(--border_hover);
-}
-
-.sign_up_option_button > input{
-    display:none;
-}
-
-.sign_up_option_button:has(input:checked){
-    background-color:var(--hover_top_green);
+.create_p{
+    font-size:14px !important;
+    max-width:500px;
 }
 
 .main_button {
@@ -614,4 +506,290 @@ html {
 
 .likes{
     color:#F2B6B6 !important;
+}
+
+.social_media{
+    bottom:32px;
+    right: 32px;
+    position: absolute;
+    display: flex;
+    gap:8px;
+    flex-direction: column;
+}
+
+.social_media > h3{
+    color:var(--text4);
+    font-size: 14px;
+    font-weight: 400;
+    margin:0px;
+}
+
+.social_media > div{
+    display: flex;
+    gap:16px;
+}
+
+.svg_path_github, .svg_path_x, .svg_path_discord,.svg_path_yt{
+    transition: .2s fill;
+    fill: var(--text4);
+}
+
+.social_media > div > a:hover .svg_path_github{
+    fill: #CACACA;
+}
+
+.social_media > div > a:hover .svg_path_x{
+    fill: #9AD6FF;
+}
+
+.social_media > div > a:hover .svg_path_discord{
+    fill: #9AAAFF;
+}
+
+.social_media > div > a:hover .svg_path_yt{
+    fill: #ff9a9a;
+}
+
+.title_group{
+    position: absolute;
+    top:calc(50% - 128px);
+    left: 64px;
+    max-width: 380px;
+}
+
+.title{
+    font-size: 40px;
+    color:var(--text);
+    font-weight:bold;
+    white-space:nowrap;
+    display:flex;
+    gap:10px;
+    margin-bottom: 16px;
+}
+
+.title_group > p{
+    color:var(--text4);
+
+}
+
+.buttons_group{
+    position: absolute;
+    bottom: 64px;
+    left:64px;
+}
+
+.login{
+    color:var(--text);
+    font-weight:bold;
+    background:none;
+    border:none;
+    padding-bottom:8px;
+    font-size:16px;
+    cursor:pointer;
+    transition:.4s;
+    text-decoration:none;
+    display: flex;
+    align-items: center;
+    gap:8px;
+    transition:.2s filter;
+}
+
+.login > ion-icon{
+    transition:.2s;
+}
+
+.login:hover{
+    filter: brightness(85%);
+}
+
+.login:hover > ion-icon{
+    transform: translateX(4px);
+}
+
+.login_button{
+    color:var(--text);
+    background:none;
+    border:none;
+    padding-bottom:8px;
+    font-size:12px;
+    cursor:pointer;
+    transition:.4s;
+}
+
+.login_button > a{
+    color:var(--text4);
+}
+
+.login_button > a:hover{
+    text-decoration: none;
+}
+
+.shapes{
+    position: absolute;
+    top:50%;
+    right:20%;
+    transform: translateY(-50%);
+    width:500px;
+}
+
+.shapes2{
+    position: absolute;
+    top:50%;
+    right:64px;
+    transform: translateY(-50%);
+    display:none;
+}
+
+
+@media (max-width:1100px) or (max-height:900px){
+    .shapes{
+        display:none;
+    }
+    .shapes2{
+        display:block;
+    }
+}
+
+@media (max-width:800px) or (max-height:620px){
+    .shapes2{
+        display:none;
+    }
+}
+
+
+.login_form{
+    width:100%;
+    margin-top:115px;
+    padding:64px;
+    box-sizing:border-box;
+    max-width:840px;
+    padding-top: 32px;
+    max-width:440px
+}
+
+.login_form h1{
+    color: var(--text);
+    font-family: "Open Sans";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.login_form h2{
+    color: var(--text);
+    font-size: 24px;
+}
+
+.login_form h3{
+    color: var(--text4);
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-top:32px;
+}
+
+.login_form p{
+    color: var(--text4);
+    font-family: "Open Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.sign_up_input{
+    width:100%;
+    height:40px;
+    border-radius:16px;
+    box-sizing:border-box;
+    background-color: #252724;
+    padding:10px 16px;
+    color:var(--text);
+    transition:.2s border;
+    display:block;
+    margin-bottom:8px;
+    border:none;
+}
+
+.sign_up_input:focus{
+    outline:1px solid var(--border_hover);
+}
+
+.role_container{
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    gap:8px;
+    align-items: stretch;
+}
+
+.sign_up_option_button{
+    padding:10px 16px;
+    background:#252724;
+    height:40px;
+    color:var(--text);
+    border-radius:16px;
+    box-sizing:border-box;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    transition:.2s filter;
+    font-size:14px;
+    width:98.5px;
+}
+
+.sign_up_option_button:focus-visible{
+    outline:1px solid var(--border_hover);
+}
+
+.sign_up_option_button > input{
+    display:none;
+}
+
+.sign_up_option_button:has(input:checked){
+    filter:brightness(120%)
+}
+
+.create_account_button{
+    width:100%;
+    height:40px;
+    border-radius:16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--main_button);
+    border:none;
+    margin-top:32px;
+    color: var(--back);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    cursor: pointer;
+    transition:.2s filter;
+}
+
+.create_account_button:hover{
+    filter:brightness(90%);
+}
+
+.switch_type{
+    color: #FFF !important;
+    font-size: 14px !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: normal !important;
+}
+
+.switch_type > a{
+    color: var(--text4);
+    text-decoration: underline;
+}
+
+.switch_type > a:hover{
+    text-decoration: none;
 }

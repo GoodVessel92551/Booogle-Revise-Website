@@ -148,42 +148,7 @@
             a.appendChild(user)
             home.appendChild(a)
             a.setAttribute('draggable', true);
-            a.style.cursor = 'move';
-
-            a.addEventListener('dragstart', (event) => {
-                event.dataTransfer.setData('text/plain', event.target.id);
-            });
-
-            a.addEventListener('dragend', (event) => {
-
-            });
         }
-
-        var current_set = ""
-        for (let j = 0; j < droppableContainers.length; j++) {
-            const droppableContainer = droppableContainers[j];
-            const droppableContainer_id = droppableContainer.id
-            droppableContainer.addEventListener('dragover', (event) => {
-                event.preventDefault();
-            });
-
-            droppableContainer.addEventListener('drop', (event) => {
-                event.preventDefault();
-                const draggedElementId = event.dataTransfer.getData('text/plain');
-                const draggedElement = document.getElementById(draggedElementId);
-                if (folder_keys.includes(droppableContainer.id)){
-                    draggedElement.remove()
-                    fetch(`/add/folder/${droppableContainer.id}/${draggedElement.id}`)
-                }else{
-                    if(current_set != draggedElement.id){
-                        console.log("Sending")
-                        current_set = draggedElement.id
-                        fetch(`/add/group/${droppableContainer.id}/${draggedElement.id}`)
-                    }
-                }
-            });
-        }
-    }
     const menu_open = () => {
         var menu_button = document.getElementById("home_menu_button")
         var menu = document.getElementById("home_menu")
@@ -196,6 +161,7 @@
         }
         
     }
+}
 </script>
     <div class="home_menu" id="home_menu">
         <a href="/new"><ion-icon name="add-outline"></ion-icon>New Set</a>

@@ -4265,3 +4265,70 @@ select:focus{
     margin:0px;
     font-size:14px;
 }
+
+.side-bar{
+    width:180px;
+    display: block;
+    height:calc(100% - 92px);
+    background-color: var(--top_back);
+    border:var(--top_back_border);
+    margin:76px 16px 16px 16px;
+    border-radius: var(--main_border_radius);
+    padding:16px;
+    box-sizing: border-box;
+}
+
+.side_title{
+    display: flex;
+    gap:8px;
+    color:var(--text);
+    align-items: center;
+    cursor: pointer;
+}
+
+.side_title > ion-icon{
+    transition: 667ms cubic-bezier(0.13, 1.29, 0.69, 1.26);
+}
+
+.side_title_selected > ion-icon{
+    transform: rotate(180deg);
+}
+
+.side_topics{
+    margin-top:16px;
+    width:calc(100% - 8px);
+    margin-left:8px;
+    border-left: var(--top_back_border);
+    padding-left:16px;
+    display: none;
+}
+
+.side_topics > span{
+    margin-top:8px;
+}
+
+.side_topics_selected{
+    display: block;
+}
+
+.side_subtopics{
+    margin-top:16px;
+    width:calc(100% - 40px);
+    margin-left:8px;
+    border-left: var(--top_back_border);
+    padding-left:16px;
+    display: none;
+    gap:8px;
+    flex-direction: column;
+    color:var(--text4);
+    font-size:12px;
+}
+
+.side_subtopics > span{
+    display: flex;
+    gap:8px
+}
+
+.side_subtopics_selected{
+    display: flex;
+}

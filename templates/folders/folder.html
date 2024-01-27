@@ -51,7 +51,7 @@
             </a>
         </div>
         <div class="start_buttons">
-            <a href="/delete" id="del_button" class="main_button del_button">
+            <a id="del_button" class="main_button del_button">
                 <span>Remove</span><ion-icon name="trash-outline"></ion-icon>
             </a>
             <a id="share" class="third_button main_button">
@@ -63,6 +63,15 @@
             <a href="/edit" id="edit_button" href="/edit" class="main_button">
                 <span>Edit</span><ion-icon name="pencil-outline"></ion-icon>
             </a>
+        </div>
+    </dialog>
+    <dialog id="delete_dialog" class="delete_dialog">
+        <h3>You Are About To Delete This Set</h3>
+        <p>This set will be permanently deleted and it can not be undone. Get more space by <a href="/upgrade">Upgrading</a></p>
+        <div>
+            <span id="delete_span_title" class="delete_span_title">Set Title: </span>
+            <button onclick="document.getElementById('delete_dialog').close()" class="delete_cancel">Cancel</button>
+            <button class="delete_button_dialog">Delete</button>
         </div>
     </dialog>
 </main>
@@ -105,7 +114,11 @@
         document.getElementById("flashcards").href = `/flashcards/${name}`
         document.getElementById("questions").href = `/questions/${name}`
         document.getElementById("fill").href = `/fill/${name}`
-        document.getElementById("del_button").href = `/remove/folder/{{title}}/${name}`
+        document.getElementById("del_button").addEventListener("click", () => {
+            fetch(`/remove/folder/{{title}}/${name}`)
+            document.getElementById("start_set").close()
+            document.getElementById(name).remove()
+        })
         document.getElementById("edit_button").href = `/edit/${name}`
         document.getElementById("upload").href = `/publish/${name}`
         var share = document.getElementById("share")

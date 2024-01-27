@@ -66,7 +66,7 @@
             </a>
         </div>
         <div class="start_buttons">
-            <a href="/delete" id="del_button" class="main_button del_button">
+            <a id="del_button" class="main_button del_button">
                 <span>Remove</span><ion-icon name="trash-outline"></ion-icon>
             </a>
             <a id="share" class="third_button main_button">
@@ -80,6 +80,15 @@
             </a>
         </div>
     </dialog>
+    <dialog id="delete_dialog" class="delete_dialog">
+        <h3>You Are About To Delete This Set</h3>
+        <p>This set will be permanently deleted and it can not be undone. Get more space by <a href="/upgrade">Upgrading</a></p>
+        <div>
+            <span id="delete_span_title" class="delete_span_title">Set Title: </span>
+            <button onclick="document.getElementById('delete_dialog').close()" class="delete_cancel">Cancel</button>
+            <button class="delete_button_dialog">Delete</button>
+        </div>
+    </dialog>
 </main>
 <nav class="bottom_nav">
     <a href="/new/group"><ion-icon name="people-outline"></ion-icon></a>
@@ -91,6 +100,17 @@
 <script>
     level = {{ boosting | tojson }}
     owner = {{ owner | tojson }}
+    const delete_set = (name,title) => {
+        document.getElementById("delete_dialog").showModal()
+        document.getElementById("delete_span_title").innerText = `Title: ${title}`
+        document.querySelector(".delete_button_dialog").addEventListener("click", () => {
+            fetch(`/remove/folder/${name}`)
+            document.getElementById("delete_dialog").close()
+            document.getElementById("start_set").close()
+            document.getElementById(name).remove()
+            new_notification("Success", "This set has been deleted","checkmark-circle","success")
+        })
+    }
     const copy = (text) => {
         navigator.clipboard.writeText(text)
         document.getElementById("share").innerHTML = "<ion-icon name='clipboard-outline'></ion-icon>Copyed!"
@@ -132,7 +152,9 @@
       document.getElementById("upload").style.display = "none";
       document.getElementById("share").document.getElementById("share")
     } else {
-      document.getElementById("del_button").href = `/remove/folder/{{title}}/${name}`
+        document.getElementById("del_button").addEventListener("click", () => {
+            delete_set(name,sets[name]["settings"]["name"])
+        })
       document.getElementById("edit_button").href = `/edit/${name}`
       document.getElementById("upload").href = `/publish/${name}`
       var share = document.getElementById("share")

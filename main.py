@@ -94,7 +94,6 @@ def signup():
                 error = "Password Too Long Or Too Short"
             else:
                 error = "Unknown Error"
-        how = request.form["how"]
         role = request.form["role"]
     else:
         error = False
@@ -1608,5 +1607,12 @@ def api_ans_fix():
     fixed = {"ans":answer_fix(data["ans"])}
 
     return fixed
+
+@app.route("/learn/<set>")
+def learn_set(set):
+    if login() == False:
+        return render_template("login/login.html")
+    notifications = {}
+    return render_template("learn/learn_set.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 app.run(host='0.0.0.0', port=80,debug=True)
