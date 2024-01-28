@@ -136,10 +136,13 @@ def username():
 def recommend(sets):
     subjects = Counter()
     recommended = []
+
     for i in sets:
         try:
             subjects[sets[i]["settings"]["subject"]] += 1
+            print("no error")
         except KeyError:
+            print("test")
             sets[i]["settings"]["subject"] = subject(i)
             subjects[sets[i]["settings"]["subject"]] += 1
     subjects = dict(sorted(subjects.items(), key=lambda x: x[1], reverse=True))

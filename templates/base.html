@@ -49,6 +49,7 @@
             --top_green_opactiy: #2a2f2dbb;
             --top_green_2: #262b27;
             --top_green_border: 1px solid #2e3532;
+            --hover_top_green_2:#2e3532;
             --on_top_green: #FFFFFFCC;
             --on_top_green_2: #FFFFFFCC;
             --main_button: #bfffc2;
@@ -91,7 +92,7 @@
             </svg>
         </a>
         <a class="nav_title" id="nav_title" href="/">{% block title %}{% endblock %}</a>
-        <a class="nav_streak">
+        <a class="nav_streak" href="/streak">
             <ion-icon id="nav_streak_fire"></ion-icon><span>{{streak|tojson}}</span>
         </a>
         <a class="boost" href="/upgrade" id="level_button"><span id="level">Upgrade</span>

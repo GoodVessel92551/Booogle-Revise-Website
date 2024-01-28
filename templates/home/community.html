@@ -100,12 +100,13 @@
         </div>
     </dialog>
 </main>
-    <nav class="bottom_nav">
-        <a href="/new/folder"><ion-icon name="folder-open-outline"></ion-icon></a>
-        <a href="/community"><ion-icon name="earth-outline"></ion-icon></a>
-        <a href="/play"><ion-icon name="play-outline"></ion-icon></a>
-        <a href="/new" class="add_button_nav"><ion-icon name="add-outline"></ion-icon></a>
-    </nav>
+<nav class="bottom_nav">
+    <a href="/"><ion-icon name="home-outline"></ion-icon></a>
+    <a href="/new"><ion-icon name="add-circle-outline"></ion-icon></a>
+    <a href="/community" class="bottom_nav_current"><ion-icon name="earth-outline"></ion-icon>Community</a>
+    <a href="/play"><ion-icon name="play-circle-outline"></ion-icon></a>
+    <a href="/new/folder"><ion-icon name="folder-open-outline"></ion-icon></a>
+</nav>
 <script>
     const copy = (text) => {
         navigator.clipboard.writeText(text)
@@ -137,7 +138,7 @@
         }
         document.getElementById("start_set").showModal();
         document.getElementById("set_image").src = `/static/set_icons/${sets[name]["settings"]["background"]}.webp`
-        document.getElementById("share").innerHTML = '<ion-icon name="share-social-outline"></ion-icon> Share'
+        document.getElementById("share").innerHTML = "<span>Share</span><ion-icon name='share-social-outline'></ion-icon>"
         var title = sets[name]["settings"]["name"];
         var user = sets[name]["settings"]["user"];
         document.getElementById("set_title").innerText = title;

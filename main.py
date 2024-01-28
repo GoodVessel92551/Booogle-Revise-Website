@@ -1439,12 +1439,12 @@ def focuse():
 def about():
     return render_template("login/about.html")
 
-@app.route("/streaks")
+@app.route("/streak")
 def streaks():
     if login() == False:
         return render_template("login/login.html")
     notifications = {}
-    return render_template("focus.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+    return render_template("/home/streak.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/updates")
 def updates():
@@ -1499,7 +1499,7 @@ def webhook():
 
 @app.route('/join/<plan>', methods=['POST'])
 def create_checkout_session(plan):
-    YOUR_DOMAIN = "https://dev.booogle.app/"
+    YOUR_DOMAIN = "https://beta.booogle.app/"
     if plan == "premium":
         price_id = "price_1OaKMPEg9DaDrNLaYFm4Uggt"
     elif plan == "pro":
@@ -1529,7 +1529,7 @@ def create_checkout_session(plan):
             },
         )
     except Exception as e:
-        return "Error"
+        return jsonify(error=str(e)), 403
     return redirect(checkout_session.url, code=303)
 
 @app.route("/classroom/<classroom>")

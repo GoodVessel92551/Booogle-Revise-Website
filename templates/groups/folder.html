@@ -69,7 +69,7 @@
             <a id="del_button" class="main_button del_button">
                 <span>Remove</span><ion-icon name="trash-outline"></ion-icon>
             </a>
-            <a id="share" class="third_button main_button">
+            <a id="share" class="main_button third_button">
                 <span>Share</span><ion-icon name="share-social-outline"></ion-icon>
             </a>
             <a href="/upload" id="upload" class="second_button main_button">
@@ -91,11 +91,11 @@
     </dialog>
 </main>
 <nav class="bottom_nav">
-    <a href="/new/group"><ion-icon name="people-outline"></ion-icon></a>
-    <a href="/new/folder"><ion-icon name="folder-open-outline"></ion-icon></a>
+    <a href="/" class="bottom_nav_current"><ion-icon name="home-outline"></ion-icon>Home</a>
+    <a href="/new"><ion-icon name="add-circle-outline"></ion-icon></a>
     <a href="/community"><ion-icon name="earth-outline"></ion-icon></a>
-    <a href="/play"><ion-icon name="play-outline"></ion-icon></a>
-    <a href="/new" class="add_button_nav"><ion-icon name="add-outline"></ion-icon></a>
+    <a href="/play"><ion-icon name="play-circle-outline"></ion-icon></a>
+    <a href="/new/folder"><ion-icon name="folder-open-outline"></ion-icon></a>
 </nav>
 <script>
     level = {{ boosting | tojson }}
@@ -132,7 +132,7 @@
     }
     mean = total_ans_len / sets_keys_local.length;
     if (mean <= 2 && sets_keys_local.length > 3) {
-      document.getElementById("share").innerHTML = "<ion-icon name='share-social-outline'></ion-icon>Share"
+      document.getElementById("share").innerHTML = "<span>Share</span><ion-icon name='share-social-outline'></ion-icon>"
       document.getElementById("quest_rec").style.display = "block"
       document.getElementById("flash_rec").style.display = "none"
     } else {

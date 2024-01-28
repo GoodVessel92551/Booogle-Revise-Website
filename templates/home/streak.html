@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block page_title %} Streak {% endblock %}
+{% block title %}Streak{% endblock %}
+{% block main %}
+<main class="main">
+    <div class="home_buttons">
+        <a id="freeze" class="main_button freeze_button">
+            <span>Freeze</span><ion-icon name="snow-outline"></ion-icon>
+        </a>
+        <a href="/" class="main_button">
+            <span>Home</span><ion-icon name="home-outline"></ion-icon>
+        </a>
+    </div>
+</main>
+<div class="streak_info">
+    <span id="flame_icon" class="streak_num">
+        <ion-icon id="flame_icon_icon" name="flame"></ion-icon>
+    </span>
+    <h2 id="streak_title">Revision Streak</h2>
+    <h3 id="streak_days">{{streak}} Days</h3>
+    <div class="streak_rewards">
+        <h4>Rewards</h4>
+        <p>Unlock rewards when you reach streak milestones.</p>
+        <div class="streak_rewards_container">
+            <a>
+                <span></span>
+                <div>
+                    <strong>Reward Title</strong>
+                    <p>Show your steak with this cover Image.</p>
+                </div>
+                <button class="streak_claim_button"><ion-icon name="gift-outline"></ion-icon>Claim</button>
+            </a>
+            <a></a>
+        </div>
+    </div>
+</div>
+<script>
+    var freeze = document.getElementById("freeze");
+    var streak_days = document.getElementById("streak_days");
+    var streak_title = document.getElementById("streak_title");
+    var flame_icon = document.getElementById("flame_icon");
+    var flame_icon_icon = document.getElementById("flame_icon_icon");
+    freeze.addEventListener("click",() => {
+        streak_title.classList.toggle("frozen");
+        flame_icon.classList.toggle("frozen");
+        streak_days.classList.toggle("frozen");
+        flame_icon_icon.name = "snow"
+    })
+</script>
+{% endblock %}

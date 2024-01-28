@@ -25,6 +25,13 @@
             </div>
         </form>
     </main>
+<nav class="bottom_nav">
+    <a href="/"><ion-icon name="home-outline"></ion-icon></a>
+    <a href="/new"><ion-icon name="add-circle-outline"></ion-icon></a>
+    <a href="/community"><ion-icon name="earth-outline"></ion-icon></a>
+    <a href="/play"><ion-icon name="play-circle-outline"></ion-icon></a>
+    <a href="/new/folder" class="bottom_nav_current"><ion-icon name="folder-open-outline"></ion-icon>New Folder</a>
+</nav>
 <script>
     var level = {{boosting|tojson}};
     if(level == "premium" || level == "pro" || level == "elite"){
