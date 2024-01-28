@@ -4544,3 +4544,67 @@ select:focus{
 .frozen{
     color:#B6E3F2 !important;
 }
+
+.learn_main{
+    width:calc(100% - 473px);
+    margin-top:76px;
+    padding: 16px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+}
+
+.learn_main h1{
+    color:var(--text);
+    font-size:24px;
+    margin:0px;
+}
+
+.learn_main h2{
+    color:var(--text4);
+    font-size:14px;
+    margin-top:8px;
+    font-weight: normal;
+}
+
+.learn_main hr{
+    border:var(--top_back_border);
+    width:100%;
+}
+
+body:has(.learn_main){
+    display: flex;
+}
+
+.learn_main > div{
+    display: flex;
+    gap:16px;
+    flex-direction: column;
+}
+
+@keyframes fade_in{
+    from{opacity:0;transform:translateY(50%) scale(0.9);}
+}
+
+part{
+    display: flex;
+    gap:16px;
+    margin-top:16px;
+    width:100%;
+    height:auto;
+    animation: fade_in ease-in both;
+    animation-timeline: view();
+    animation-range: entry 10% contain 0%;
+}
+
+part > img{
+    width:calc(40% - 8px);
+    border-radius: 16px;
+    object-fit: cover;
+}
+
+part > p{
+    color:var(--text);
+    margin:0px;
+    width:calc(60% - 8px);
+    line-height: 20px;
+}

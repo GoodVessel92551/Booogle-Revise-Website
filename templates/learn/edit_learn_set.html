@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block page_title %} Home {% endblock %}
+{% block title %}Home{% endblock %}
+{% block main %}
+<sidenav class="side-bar">
+    <div>
+    <span class="side_title" id="side_title"><ion-icon name="chevron-up-outline"></ion-icon><strong>Title</strong></span>
+    <div class="side_topics" id="side_topics">
+        <span class="side_title" id="topic_name" onclick="open_topic('topic_name')"><ion-icon name="chevron-up-outline"></ion-icon></ion-icon><strong>Topic</strong></span>
+        <div class="side_subtopics" id="topic_name_subtopics">
+            <span><ion-icon name="arrow-forward-outline"></ion-icon>Subtopic</span>
+            <span><ion-icon name="arrow-forward-outline"></ion-icon>Subtopic</span>
+        </div>
+        <span class="side_title" onclick="this.classList.toggle('side_title_selected')" id="side_title"><ion-icon name="chevron-up-outline"></ion-icon><strong>Topic</strong></span>
+        <span class="side_title" onclick="this.classList.toggle('side_title_selected')" id="side_title"><ion-icon name="chevron-up-outline"></ion-icon><strong>Topic</strong></span>
+    </div>
+    </div>
+</sidenav>
+<main class="main">
+</main>
+<script>
+    var side_title = document.getElementById("side_title")
+    var side_topics = document.getElementById("side_topics")
+    side_title.addEventListener("click",() => {
+        side_title.classList.toggle("side_title_selected")
+        side_topics.classList.toggle("side_topics_selected")
+    })
+    const open_topic = (topic_name) => {
+        var topic = document.getElementById(topic_name)
+        var topic_subtopics = document.getElementById(topic_name + "_subtopics")
+        topic.classList.toggle("side_title_selected")
+        topic_subtopics.classList.toggle("side_subtopics_selected")
+    }
+</script>
+{% endblock %}

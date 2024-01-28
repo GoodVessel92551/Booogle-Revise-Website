@@ -979,7 +979,7 @@ def play_start(code):
         global_data_db.update_one(query, update)
         return render_template("play/play_start.html",quests=len(set),users=play[code]["users"],code=code,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
     else:
-        return redirect(f"/play/{code}")
+        return redirect(f"/play/{int(code)}")
 
 @app.route("/play/started/<code>",methods=["POST","GET"])
 def play_started(code):
@@ -1614,5 +1614,12 @@ def learn_set(set):
         return render_template("login/login.html")
     notifications = {}
     return render_template("learn/learn_set.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+
+@app.route("/edit/learn/<set>")
+def edit_learn_set(set):
+    if login() == False:
+        return render_template("login/login.html")
+    notifications = {}
+    return render_template("learn/edit_learn_set.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 app.run(host='0.0.0.0', port=80,debug=True)
