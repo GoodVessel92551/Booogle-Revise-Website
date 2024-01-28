@@ -887,7 +887,7 @@ def play():
             session["notifications"] = [{"title":"Failed","body":f"{code} Is Not A valid Key, Please Try Again","type":"warning","icon":"alert-circle"}]
             return redirect("/play")
         else:
-            return redirect(f"/play/{code}")
+            return redirect(f"/play/{int(code)}")
     if session.get("notifications"):
         notifications = session.get("notifications")
         session.pop("notifications")
@@ -1487,7 +1487,6 @@ def webhook():
 
     except stripe.error.SignatureVerificationError as e:
         raise e
-
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
         print(session)
@@ -1529,7 +1528,7 @@ def create_checkout_session(plan):
             },
         )
     except Exception as e:
-        return jsonify(error=str(e)), 403
+        return "Error"
     return redirect(checkout_session.url, code=303)
 
 @app.route("/classroom/<classroom>")
@@ -1552,13 +1551,14 @@ def new_learn():
         title = request.form["title"]
         desc = request.form["desc"]
         subject = request.form["subject"]
-        background = request.form["background"]
+        background = request.form["cover"]
         title_mod = mod(title)
         desc_mod = mod(desc)
         if title_mod == 1 or desc_mod == 1:
             session["notifications"] = [{"title":"Failed","body":"Title Or Description Contain Possible Rude/Inappropriate Content","type":"warning","icon":"alert-circle"}]
-            return redirect("/new/learn")
-        pass
+            return redirect("/new/learn/")
+        else:
+            return redirect("/edit/learn/"+title)
     return render_template("learn/new_learn.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/learn")
@@ -1599,7 +1599,7 @@ def set_profile_image():
 def api_smartstudy():
     data = request.get_json()
     print(data)
-    return data
+    return "Success"
 
 @app.route("/api/ans_fix",methods=["POST","GET"])
 def api_ans_fix():
