@@ -1514,7 +1514,6 @@ def create_checkout_session(plan):
 
             line_items=[
                 {
-                    # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
                     'price': price_id,
                     'quantity': 1,
                 },
@@ -1622,4 +1621,4 @@ def edit_learn_set(set):
     notifications = {}
     return render_template("learn/edit_learn_set.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
-app.run(host='0.0.0.0', port=80,debug=True)
+app.run(host='0.0.0.0', port=8080,debug=True)

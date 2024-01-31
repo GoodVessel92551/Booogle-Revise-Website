@@ -4608,3 +4608,54 @@ part > p{
     width:calc(60% - 8px);
     line-height: 20px;
 }
+
+.upgrade_dialog{
+    width:345px;
+    background-color: var(--top_back);
+    border:var(--top_back_border);
+    border-radius: 16px;
+    padding:16px;
+
+
+}
+
+.upgrade_dialog > h3{
+    color: var(--text);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top:0px;
+}
+
+.upgrade_dialog > p{
+    color: var(--text4);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.upgrade_dialog:focus{
+    outline:none;
+}
+
+.upgrade_dialog > span{
+    width:calc(100% - 2px);
+    height:66px;
+    background-color: var(--top_green);
+    border:var(--top_green_border);
+    display: block;
+    border-radius: 16px;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.upgrade_dialog > span > strong{
+    color: var(--text);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin:0px;
+}

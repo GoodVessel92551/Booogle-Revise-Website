@@ -83,6 +83,20 @@
             <button class="delete_button_dialog">Delete</button>
         </div>
     </dialog>
+    <dialog id="upgrade_dialog" class="upgrade_dialog">
+        <h3>You are out of sets.</h3>
+        <p>You are unable to make more sets until you delete some or upgrade.</p>
+        <span>
+            <strong>+20 Sets</strong>
+            <div class="tags">
+            </div>
+        </span>
+        <div>
+            <span id="delete_span_title" class="delete_span_title">Set Title: </span>
+            <button onclick="document.getElementById('delete_dialog').close()" class="delete_cancel">Cancel</button>
+            <button class="delete_button_dialog">Delete</button>
+        </div>
+    </dialog>
 </main>
     <nav class="bottom_nav">
         <a href="/" class="bottom_nav_current"><ion-icon name="home-outline"></ion-icon>Home</a>
@@ -92,6 +106,8 @@
         <a href="/new/folder"><ion-icon name="folder-open-outline"></ion-icon></a>
     </nav>
 <script>
+    var upgrade_dialog = document.getElementById("upgrade_dialog")
+    upgrade_dialog.showModal()
     const delete_set = (name,title) => {
         document.getElementById("delete_dialog").showModal()
         document.getElementById("delete_span_title").innerText = `Title: ${title}`
