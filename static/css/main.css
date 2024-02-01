@@ -91,7 +91,7 @@
 }
 
 * {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     -webkit-tap-highlight-color: transparent;
     tap-highlight-color: transparent;
 }
@@ -520,7 +520,7 @@ html {
     color: var(--text);
     margin: 16px 16px 8px 16px;
     display: block;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .home_sets set p:not(.user_name, .amount_of_sets),.home_sets a p:not(.user_name, .amount_of_sets) {
@@ -664,7 +664,7 @@ html {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    font-weight:500;
+    font-weight:600;
     border:1px solid var(--main_button);
     gap:16px;
     flex-direction: row-reverse;

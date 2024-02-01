@@ -121,11 +121,11 @@
     var span = document.createElement("span")
     var no_sets = document.getElementById("no_sets")
     if (hour < 12) {
-        document.getElementById("welcome").innerText = `Good Morning `
+        document.getElementById("welcome").innerText = `Good morning `
     } else if (hour < 18) {
-        document.getElementById("welcome").innerText = `Good Afternoon `
+        document.getElementById("welcome").innerText = `Good afternoon `
     } else {
-        document.getElementById("welcome").innerText = `Good Evening `
+        document.getElementById("welcome").innerText = `Good evening `
     }
     document.getElementById("welcome").appendChild(span)
     var level = {{ boosting| tojson}};
@@ -358,6 +358,9 @@
         console.log(sets[sets_keys[i]]["settings"]["folder"])
         if (sets[sets_keys[i]]["settings"]["folder"]) {
             document.getElementById(a.id).style.display = "none"
+            strong.setAttribute("data-folder", "true");
+        }else{
+            strong.setAttribute("data-folder", "false");
         }
         a.setAttribute('draggable', true);
         a.style.cursor = 'move';
@@ -424,24 +427,27 @@
         var query = search_element.value
         var sets_list = document.querySelectorAll(".set_title");
         var folder_list = document.querySelectorAll(".folder_home");
+    
         for (var i = 0; i < sets_list.length; i++) {
             var set_id = sets_list[i].id
-            console.log(folder_list)
-            for (var j = 0; j < folder_list.length; j++) {
-                console.log(folder_list[j])
-                console.log(j)
+            var folder = sets_list[i].getAttribute("data-folder", "false");
+            if ((query == "" || query == null) && folder == "true") {
+                document.getElementById(set_id).style.display = "none";
+
+            }
+            else if (sets[set_id]["settings"]["name"].toLowerCase().includes(query.toLowerCase()) || sets[set_id]["settings"]["desc"].toLowerCase().includes(query.toLowerCase())) {
+                document.getElementById(set_id).style.display = "block";
+            } else  {
+                document.getElementById(set_id).style.display = "none";
+            }
+        }
+        for (var j = 0; j < folder_list.length; j++) {
                 if (query == "" || query == null) {
                     folder_list[j].style.display = "block";
                 } else {
                     folder_list[j].style.display = "none";
                 }
             }
-            if (!(sets[set_id]["settings"]["name"] + " " + sets[set_id]["settings"]["desc"]).toLowerCase().includes(search_element.value.toLowerCase()) && query == "") {
-                document.getElementById(set_id).style.display = "none";
-            } else {
-                document.getElementById(set_id).style.display = "block";
-            }
-        }
     }
 
 </script>
