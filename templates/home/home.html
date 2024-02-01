@@ -11,9 +11,6 @@
     <h1 id="welcome" class="welcome_text">Your Sets</h1>
     <input type="text" autocomplete="off" placeholder="Search" class="search" id="search">
     <div class="home_buttons">
-        <a href="/play" class="main_button third_button next">
-            <span>Play</span><ion-icon name="play-outline"></ion-icon>
-        </a>
         <a href="/community" class="main_button second_button">
             <span>Community</span><ion-icon name="earth-outline"></ion-icon>
         </a>
@@ -402,10 +399,8 @@
         var menu_button = document.getElementById("home_menu_button")
         var menu = document.getElementById("home_menu")
         if (menu.style.display == "flex") {
-            menu_button.classList.remove("home_menu_button_selected")
             menu.style.display = "none"
         } else {
-            menu_button.classList.add("home_menu_button_selected")
             menu.style.display = "flex"
         }
 
@@ -441,7 +436,7 @@
                     folder_list[j].style.display = "none";
                 }
             }
-            if (!(sets[set_id]["settings"]["name"] + " " + sets[set_id]["settings"]["desc"]).toLowerCase().includes(search_element.value.toLowerCase())) {
+            if (!(sets[set_id]["settings"]["name"] + " " + sets[set_id]["settings"]["desc"]).toLowerCase().includes(search_element.value.toLowerCase()) && query == "") {
                 document.getElementById(set_id).style.display = "none";
             } else {
                 document.getElementById(set_id).style.display = "block";
@@ -451,11 +446,13 @@
 
 </script>
 <div class="home_menu" id="home_menu">
+    <a href="/community"><ion-icon name="earth-outline"></ion-icon>Community</a>
+    <a href="/play"><ion-icon name="play-outline"></ion-icon>Play</a>
     <a href="/new"><ion-icon name="add-outline"></ion-icon>New Set</a>
     <a href="/new/folder"><ion-icon name="folder-open-outline"></ion-icon>New Folder</a>
     <a href="/new/group"><ion-icon name="people-outline"></ion-icon>New Group</a>
     <a href="/new/learn"><ion-icon name="book-outline"></ion-icon>New Learn Set</a>
     <a href="/automations"><ion-icon name="git-merge-outline"></ion-icon>Automation</a>
 </div>
-<button onclick="menu_open()" id="home_menu_button" class="home_add"><ion-icon name="add-outline"></ion-icon></button>
+<button onclick="menu_open()" id="home_menu_button" class="home_add"><ion-icon name="menu-outline"></ion-icon></button>
 {% endblock %}
