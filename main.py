@@ -1514,7 +1514,6 @@ def create_checkout_session(plan):
 
             line_items=[
                 {
-                    # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
                     'price': price_id,
                     'quantity': 1,
                 },
