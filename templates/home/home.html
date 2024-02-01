@@ -359,7 +359,7 @@
         a.appendChild(user)
         home.appendChild(a)
         console.log(sets[sets_keys[i]]["settings"]["folder"])
-        if(sets[sets_keys[i]]["settings"]["folder"]){
+        if (sets[sets_keys[i]]["settings"]["folder"]) {
             document.getElementById(a.id).style.display = "none"
         }
         a.setAttribute('draggable', true);
@@ -432,12 +432,12 @@
         for (var i = 0; i < sets_list.length; i++) {
             var set_id = sets_list[i].id
             console.log(folder_list)
-            for(var j = 0; j < folder_list.length; j++){
+            for (var j = 0; j < folder_list.length; j++) {
                 console.log(folder_list[j])
                 console.log(j)
-                if (query == "" || query == null){
+                if (query == "" || query == null) {
                     folder_list[j].style.display = "block";
-                }else{
+                } else {
                     folder_list[j].style.display = "none";
                 }
             }
