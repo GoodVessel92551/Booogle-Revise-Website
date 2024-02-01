@@ -1622,4 +1622,11 @@ def edit_learn_set(set):
     notifications = {}
     return render_template("learn/edit_learn_set.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
+@app.route("/custom_upgrade")
+def custom_upgrade():
+    if login() == False:
+        return render_template("login/login.html")
+    notifications = {}
+    return render_template("custom_upgrade.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+
 app.run(host='0.0.0.0', port=80,debug=True)

@@ -1142,7 +1142,7 @@ dialog::backdrop {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition: .5s aspect-ratio, .5s width, 0.3s border-color, 0.3s filter, 0.3s box-shadow, 1s transform;
+    transition: .5s aspect-ratio, .2s width, 0.2s border-color, 0.2s filter, 0.2s box-shadow, .5s transform;
     padding: 32px;
     box-sizing: border-box;
     position:relative;
@@ -2795,6 +2795,11 @@ input[type="number"]::-webkit-outer-spin-button {
 @media (max-width:400px){
     .home_buttons:not(.host_buttons){
         display:none;
+    }
+    .flashcard>h1{
+        font-size:20px;
+        white-space: normal;
+        overflow: visible;
     }
     .home_buttons{
         top:1px;

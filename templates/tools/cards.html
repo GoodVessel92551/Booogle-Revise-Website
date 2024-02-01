@@ -98,7 +98,7 @@ main %}
         if (!spin) {
             if (card.style.transform == 'rotateX(180deg)') {
                 card.style.transition = "0s";
-                
+                card.style.transform = 'rotateX(0deg)';
                 card_text.style.transform = "scale(1)"
                 card_text.style.display = "block";
                 title.style.display = "none"
@@ -110,8 +110,8 @@ main %}
                 ans_p.classList.remove("big_answer")
                 ans_p.style.left = ""
                 setTimeout(() => {
-                    card.style.transition = ".2s border-color,.2s filter,.2s box-shadow,1s transform"
-                }, 10)
+                    card.style.transition = ".2s border-color,.2s filter,.2s box-shadow,.5s transform"
+                }, 2)
             }
             if (current < 1) {
                 current = 1
@@ -169,10 +169,10 @@ main %}
                             ans_p.style.left = "25%"
                         }
                     }
-                }, 300)
+                }, 150)
                 setTimeout(() => {
                     spin = false;
-                }, 720)
+                }, 550)
             } else {
                 card.style.transform = 'rotateX(0deg)';
                 setTimeout(() => {
@@ -187,10 +187,10 @@ main %}
                     img.style.transform = "scale(1)"
                     ans_p.classList.remove("big_answer")
                     ans_p.style.left = ""
-                }, 300)
+                }, 150)
                 setTimeout(() => {
                     spin = false;
-                }, 720)
+                }, 550)
             }
         }
     })
