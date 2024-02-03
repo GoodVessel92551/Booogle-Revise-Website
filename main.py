@@ -1122,7 +1122,7 @@ def automations():
     
 @app.route("/test")
 def test():
-    return "/test"
+    return "test"
 
 
     
@@ -1627,5 +1627,6 @@ def custom_upgrade():
         return render_template("login/login.html")
     notifications = {}
     return render_template("custom_upgrade.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+
 
 app.run(host='0.0.0.0', port=80,debug=True)

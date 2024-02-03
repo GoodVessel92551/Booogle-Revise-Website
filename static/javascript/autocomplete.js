@@ -1,4 +1,5 @@
 var spelling_words = [];
+var possible_answer = "";
 fetch("/static/resources/text.txt")
   .then((response) => response.text())
   .then((data) => {
@@ -75,7 +76,8 @@ const spellCheck = (word) => {
 };
 
 const autocomplete = (sortedWords) => {
-  const complete = (input, current, next, button,spell) => {
+  const complete = (input, current, next, button,possible_answer) => {
+    console.log(possible_answer)
     var word_list = input.value.split(" ");
     var current_word = word_list[word_list.length - 1].toLowerCase();
     if (word_list.length > 1 && spell) {
@@ -122,6 +124,24 @@ const autocomplete = (sortedWords) => {
           }
         }
       }
+    }else if (possible_answer != ""){
+      input.placeholder = "";
+      next.innerText = possible_answer;
+      input.addEventListener("keydown", (e) => {
+        if (e.which === 9 && !done) {
+          e.preventDefault();
+          input.value += next.innerText;
+          done = true;
+          next.innerHTML = "";
+          button.style.display = "none";
+        }
+      });
+      button.addEventListener("click", (e) => {
+        input.focus();
+        input.value += next.innerText;
+        next.innerHTML = "";
+        button.style.display = "none";
+      });
     }
   };
   var input = document.getElementById("quest");
@@ -131,7 +151,26 @@ const autocomplete = (sortedWords) => {
   input.addEventListener("input", () => {
     var spell = input.value[input.value.length - 1] === " ";
     spell = false
-    complete(input, current, next, button,spell);
+    console.log(input.value)
+    if (input.value.includes("?")){
+      console.log("yes")
+      data = {
+        "question": input.value
+      }
+      fetch("/api/ai/answer",{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+      .then((response) => response.json())
+      .then ((data) => {
+        possible_answer = data["answer"];
+        console.log(data)
+      })
+    }
+    complete(input, current, next, button,spell,"");
   });
   input.addEventListener("blur", () => {
     next.innerHTML = "";
@@ -142,11 +181,16 @@ const autocomplete = (sortedWords) => {
   var ans_next = document.getElementById("ans_autocomplete_next");
   var ans_button = document.getElementById("ans_autocomplete_button");
   ans_input.addEventListener("input", () => {
-    complete(ans_input, ans_current, ans_next, ans_button);
+    complete(ans_input, ans_current, ans_next, ans_button,possible_answer);
   });
   ans_input.addEventListener("blur", () => {
     ans_next.innerHTML = "";
     ans_button.style.display = "none";
+    ans_input.placeholder = "Description";
+  });
+
+  ans_input.addEventListener("click", () => {
+    complete(ans_input, ans_current, ans_next, ans_button,possible_answer);
   });
 };
 
