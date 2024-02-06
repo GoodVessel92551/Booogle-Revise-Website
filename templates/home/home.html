@@ -9,7 +9,7 @@
 <main class="main">
 
     <h1 id="welcome" class="welcome_text">Your Sets</h1>
-    <input type="text" autocomplete="off" placeholder="Search" class="search" id="search">
+    <div class="search_bar"><ion-icon name="search-outline"></ion-icon><input type="text" autocomplete="off" placeholder="Search" class="search" id="search"></div>
     <div class="home_buttons">
         <a href="/community" class="main_button second_button">
             <span>Community</span><ion-icon name="earth-outline"></ion-icon>
@@ -449,7 +449,6 @@
                 }
             }
     }
-
 </script>
 <div class="home_menu" id="home_menu">
     <a href="/community"><ion-icon name="earth-outline"></ion-icon>Community</a>
@@ -458,7 +457,6 @@
     <a href="/new/folder"><ion-icon name="folder-open-outline"></ion-icon>New Folder</a>
     <a href="/new/group"><ion-icon name="people-outline"></ion-icon>New Group</a>
     <a href="/new/learn"><ion-icon name="book-outline"></ion-icon>New Learn Set</a>
-    <a href="/automations"><ion-icon name="git-merge-outline"></ion-icon>Automation</a>
 </div>
 <button onclick="menu_open()" id="home_menu_button" class="home_add"><ion-icon name="menu-outline"></ion-icon></button>
 {% endblock %}
