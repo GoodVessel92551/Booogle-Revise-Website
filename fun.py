@@ -31,8 +31,8 @@ db = client["Booogle_Revise"]
 global_data_db = db["Global_Data"]
 user_data_db = db["User_Data"]
 
-processor = TrOCRProcessor.from_pretrained('microsoft/trocr-large-stage1')
-model = VisionEncoderDecoderModel.from_pretrained('microsoft/trocr-large-stage1')
+processor = TrOCRProcessor.from_pretrained('microsoft/trocr-large-handwritten')
+model = VisionEncoderDecoderModel.from_pretrained('microsoft/trocr-large-handwritten')
 
 def photo_ai(image):
     image_url = image["imageData"]
