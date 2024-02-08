@@ -3,8 +3,13 @@
 {% block title %}Home{% endblock %}
 {% block main %}
 <a href="/new" id="no_sets" class="no_sets">
-    <span><ion-icon name="information-circle"></ion-icon><strong>No Sets</strong></span>
+    <span><ion-icon name="information-circle"></ion-icon><strong>No sets</strong></span>
     <p>You have no sets. To make one use the New button or Click Me!</p>
+</a>
+
+<a id="no_sets_search" style="display: none;" class="no_sets">
+    <span><ion-icon name="information-circle"></ion-icon><strong>No sets</strong></span>
+    <p>We are unable to find any sets with this name or description</p>
 </a>
 <main class="main">
 
@@ -424,10 +429,11 @@
         search();
     });
     const search = () => {
+        document.getElementById("no_sets_search").style.display = "none";
         var query = search_element.value
         var sets_list = document.querySelectorAll(".set_title");
         var folder_list = document.querySelectorAll(".folder_home");
-    
+        var search_num = 0
         for (var i = 0; i < sets_list.length; i++) {
             var set_id = sets_list[i].id
             var folder = sets_list[i].getAttribute("data-folder", "false");
@@ -437,6 +443,7 @@
             }
             else if (sets[set_id]["settings"]["name"].toLowerCase().includes(query.toLowerCase()) || sets[set_id]["settings"]["desc"].toLowerCase().includes(query.toLowerCase())) {
                 document.getElementById(set_id).style.display = "block";
+                search_num += 1
             } else  {
                 document.getElementById(set_id).style.display = "none";
             }
@@ -448,6 +455,9 @@
                     folder_list[j].style.display = "none";
                 }
             }
+        if(search_num == 0 && query != "" && query != null){
+            document.getElementById("no_sets_search").style.display = "block";
+        }
     }
 </script>
 <div class="home_menu" id="home_menu">

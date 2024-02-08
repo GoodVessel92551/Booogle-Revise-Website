@@ -3,19 +3,19 @@
 {% block title %}New{% endblock %}
 {% block main %}
     <main class="main">
-        <h1>Add a Question</h1>
+        <h1>Add a question</h1>
         <form id="gen_form" method="post" action="/new/question/generate">
             <span id="warn" style="display:none;" class="error_message"><ion-icon name="warning-outline"></ion-icon>Unable To Generate, Due To Question Possibly Containing Rude Text.</a></span>
             <span id="len_warn" style="display:none;" class="error_message warn_message"><ion-icon name="warning-outline"></ion-icon>Unable To Generate, Due To Question Not Containing The Required 3 Words.</a></span>
-            <input autofocus id="quest" autocomplete="off" placeholder="Question" value="{{quest}}" name="quest" required class="new_title text">
+            <input autofocus id="quest" autocomplete="off" placeholder="Word" value="{{quest}}" name="quest" required class="new_title text">
             <div style="margin-top:-52px;" class="autocomplete"><span class="autocomplete_current" id="quest_autocomplete_current"></span><span class="autocomplete_next" id="quest_autocomplete_next"></span><button class="autocomplete_button" id="quest_autocomplete_button" type="button">Tab</button><button id="voice_quest" class="mic" type="button" onclick="record('quest',this.id)"><ion-icon name="mic-outline"></ion-icon></button></div>
         </form>
             <form method="post">
-            <input id="quest2" hidden autocomplete="off" placeholder="Question" value="{{quest}}" name="quest" required class="new_title text">
+            <input id="quest2" hidden autocomplete="off" placeholder="Word" value="{{quest}}" name="quest" required class="new_title text">
             <button name="button" value="next" class="main_button next top_title_button" style="position:absolute;top:34.5px;right:0px;"><span>Next</span><ion-icon name="arrow-forward-outline"></ion-icon></button>
             <button name="button" value="finish" class="main_button second_button home_button top_title_button" style="position:absolute;top:34.5px;right:130.64px;"><span>Finish</span><ion-icon name="checkmark-done-outline"></ion-icon></button>
             <div id="answers">
-                <textarea maxlength="200" required name="ans1" id="ans1" placeholder="Answer" class="text new_answer">{{ans}}</textarea>
+                <textarea maxlength="200" required name="ans1" id="ans1" placeholder="Definition" class="text new_answer">{{ans}}</textarea>
                 <div style="height:300px;margin-top:-312px;padding-top:16px" class="autocomplete"><span class="autocomplete_current" id="ans_autocomplete_current"></span><span class="autocomplete_next" id="ans_autocomplete_next"></span><button class="autocomplete_button" id="ans_autocomplete_button" type="button">Tab</button><button id="voice_ans" style="top:-10px" class="mic" type="button" onclick="record('ans1',this.id)"><ion-icon name="mic-outline"></ion-icon></button></div>
             </div>
             <input class="new_title text" type="url" name="image_url" placeholder="Image URL (Shown In Flashcards)">

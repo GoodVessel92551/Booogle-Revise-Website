@@ -2,6 +2,10 @@
 {% block page_title %} Community {% endblock %}
 {% block title %}Community{% endblock %}
 {% block main %}
+<a id="no_sets_search" style="display: none;" class="no_sets">
+    <span><ion-icon name="information-circle"></ion-icon><strong>No sets</strong></span>
+    <p>We are unable to find any sets with this name or description</p>
+</a>
 <main class="main">
     <ul hidden class="share_links">
         {% for link in share_links %}
@@ -188,10 +192,12 @@
             }if(subject.value != "all"){
                 if (sets[i]["settings"]["subject"].trim() != subject.value){
                     document.getElementById(i).style.display = "none";
+                }else{
                 }
             }if (creator_element.value != ""){
                 if (!sets[i]["settings"]["user"].trim().toLowerCase().includes(creator_element.value.toLowerCase())){
                     document.getElementById(i).style.display = "none";
+                }else{
                 }
             }
         }

@@ -449,7 +449,8 @@ html {
 
 .main h1 {
     color: var(--text);
-    font-size: 40px;
+    font-size: 28px !important;
+    margin: 36px 0px !important;
 }
 
 .welcome_text{
@@ -793,6 +794,18 @@ html {
 .del_button:hover {
     background:var(--error_button) !important;
     color:var(--on_error_button) !important;
+}
+
+.ai_button{
+    background:linear-gradient(45deg, #B6E7F2, #B7B6F2,#F1B6F2);
+    background-clip: text;
+    border:none;
+    -webkit-text-fill-color: transparent;
+    border: 1px solid #B7B6F2;
+}
+
+.ai_button > ion-icon{
+    color:#B7B6F2;
 }
 
 .freeze_button{
@@ -2732,7 +2745,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 @media (max-width:400px){
-    .home_buttons:not(.host_buttons){
+    .home_buttons:not(.host_buttons, .no_hide){
         display:none;
     }
     .flashcard>h1{
@@ -4619,7 +4632,7 @@ part > p{
 .search_bar > ion-icon{
     position: absolute;
     top:50%;
-    left:8px;
+    left:16px;
     width:20px;
     transform: translateY(-50%);
     color: #a9a9a9;
@@ -4631,7 +4644,7 @@ part > p{
     box-sizing: border-box;
     border: none;
     background: none;
-    padding: 0px 16px 0px 32px;
+    padding: 0px 16px 0px 48px;
     border-radius: 32px;
     background: var(--top_back);
     color: var(--text);
@@ -4681,4 +4694,107 @@ part > p{
     .filter_search{
         display:none !important;
     }
+}
+
+.photo_mode_video{
+    height: 332px;
+    width: fit-content;
+    background:var(--top_back);
+    border-radius:var(--main_border_radius);
+    border: var(--top_back_border);
+    position: relative;
+}
+
+.photo_mode_video > button{
+    position: absolute;
+    bottom: -32px;
+    left:50%;
+    transform: translateX(-50%);
+    width: 64px;
+    height: 64px;
+    border-radius: 32px;
+    background:var(--top_back);
+    border: var(--top_back_border);
+    outline:8px solid var(--back);
+    cursor: pointer;
+}
+
+.photo_mode_video > button > ion-icon{
+    color:#B6E7F2;
+    font-size: 24px;
+    transition: .2s transform;
+}
+
+.photo_mode_video > button:hover > ion-icon{
+    transform: scale(0.8) rotate(5deg);
+}
+
+.photo_mode_video > button:active > ion-icon{
+    transform: scale(0.6) rotate(10deg);
+}
+
+.flashcards_containers{
+    width:332px;
+    height:332px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.flashcards_containers > span{
+    height:calc(50% - 8px);
+    background-color: var(--top_back);
+    border:var(--top_back_border);
+    border-radius: var(--main_border_radius);
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.flashcards_containers > span > h2{
+    color:var(--text);
+    font-size: 24px;
+    margin: 0px;
+}
+
+.flashcards_containers > span > p{
+    color:var(--text4);
+    font-size: 14px;
+    margin: 0px;
+}
+
+.photo_mode_containter{
+    width:100%;
+    display: flex;
+    gap:16px;
+    flex-wrap: wrap;
+}
+
+.flashcards_containers > span > button{
+    color:var(--text);
+    height:32px;
+    width:32px;
+    background:none;
+    cursor: pointer;
+    border:none;
+    position: absolute;
+    top:8px;
+    right: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flashcards_containers > span > button > ion-icon{
+    transition: .2s transform;
+}
+
+.flashcards_containers > span > button:hover ion-icon{
+    transform: rotate(20deg);
+}
+
+.flashcards_containers > span > button:active ion-icon{
+    transform: rotate(90deg);
 }

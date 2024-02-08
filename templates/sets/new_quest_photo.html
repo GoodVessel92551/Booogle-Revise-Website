@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block page_title %} Photo Mode {% endblock %}
+{% block title %}New{% endblock %}
+{% block main %}
+    <main class="main">
+        <h1>Photo Mode</h1>
+        <form method="post" action="/new/question">
+            <div class="home_buttons no_hide">
+                <button name="button" value="finish" class="main_button second_button home_button top_title_button"><span>Finish</span><ion-icon name="checkmark-done-outline"></ion-icon></button>
+                <button name="button" value="next_photo" class="main_button next top_title_button"><span>Next</span><ion-icon name="arrow-forward-outline"></ion-icon></button>
+            </div>
+            <input required hidden name="quest" id="word_input">
+            <textarea required hidden name="ans1" id="definition_input"></textarea>
+            <input hidden name="image_url" value="">
+        </form>
+        <p>Take photos of flashcards that you already have and then we will convert them into Booogle Flashcards. You are only able to use flashcards that have 1 line of text and the photo to have a clear white background.</p>
+        <h2 id="gen_text"></h2>
+        <div class="photo_mode_containter">
+            <div class="photo_mode_video">
+                <video class="photo_mode_video" id="video" width="640" height="480" autoplay></video>
+                <button id="captureButton" type="button"><ion-icon name="sparkles"></ion-icon></button>
+            </div>
+            <div class="flashcards_containers">
+                <span>
+                    <h2 id="gen_text_word">Word</h2>
+                    <button onclick="retake('word')"><ion-icon name="reload-outline"></ion-icon></button>
+                </span>
+                <span>
+                    <p id="gen_text_definition">Definition</p>
+                    <button onclick="retake('definition')"><ion-icon name="reload-outline"></ion-icon></button>
+                </span>
+            </div>
+        </div>
+        <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
+    </main>
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        var word_input = document.getElementById('word_input');
+        var definition_input = document.getElementById('definition_input');
+        const captureButton = document.getElementById('captureButton');
+        const gen_text_word = document.getElementById('gen_text_word');
+        const gen_text_definition = document.getElementById('gen_text_definition');
+        var type = "word"
+        navigator.mediaDevices.getUserMedia({
+            video: {
+                width: { ideal: 384 },
+                height: { ideal: 384 },
+                facingMode: 'environment'
+            }
+        })
+        .then(stream => {
+            video.srcObject = stream;
+        })
+        .catch(err => {
+            console.error('Error accessing the camera:', err);
+        });
+
+        // Function to capture a picture
+        captureButton.addEventListener('click', () => {
+        const context = canvas.getContext('2d');
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        
+        // Convert canvas content to base64 image
+        const imageData = canvas.toDataURL('image/png');
+        
+        // Do something with the image data, like sending it to a server or displaying it on the page
+        console.log('Captured image:', imageData);
+
+        var data = {
+            "imageData": imageData,
+            "type":type
+        } 
+        fetch('/api/photo', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({data})
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data["data"]);
+            if (type == "word"){
+                gen_text_word.innerHTML = data["data"];
+                word_input.value = data["data"];
+                type = "definition"
+            } else {
+                gen_text_definition.innerHTML = data["data"];
+                definition_input.innerHTML = data["data"];
+                type = "word"
+            }
+            type = "definition"
+        })
+    });
+    const retake = (button_type) => {
+        if (button_type == "word"){
+            type = "word"
+            captureButton.click();
+        } else {
+            type = "definition"
+            captureButton.click();
+        }
+    }
+    </script>
+{% endblock %}
