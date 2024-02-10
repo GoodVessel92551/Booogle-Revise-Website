@@ -14,13 +14,13 @@
 <main class="main">
 
     <h1 id="welcome" class="welcome_text">Your Sets</h1>
-    <div class="search_bar"><ion-icon name="search-outline"></ion-icon><input type="text" autocomplete="off" placeholder="Search" class="search" id="search"></div>
+    <div class="search_bar"><i class="ph ph-magnifying-glass"></i><input type="text" autocomplete="off" placeholder="Search" class="search" id="search"></div>
     <div class="home_buttons">
-        <a href="/community" class="main_button second_button">
-            <span>Community</span><ion-icon name="earth-outline"></ion-icon>
+        <a href="/community" id="community_button" class="main_button second_button">
+            <span>Community</span><i class="ph-bold ph-globe-hemisphere-west"></i>
         </a>
-        <a href="/new" class="main_button">
-            <span>New</span><ion-icon name="add-outline"></ion-icon>
+        <a href="/new" id="new_button" class="main_button">
+            <span>New</span><i class="ph-bold ph-plus"></i>
         </a>
     </div>
     <div class="home_sets" id="home_sets">
@@ -76,23 +76,23 @@
             </a>
         </div>
         <div class="start_buttons">
-            <a id="del_button" class="main_button del_button">
-                <span>Delete</span><ion-icon name="trash-outline"></ion-icon>
+            <a id="del_button" id="del_button" class="main_button del_button">
+                <span>Delete</span><i class="ph-bold ph-trash"></i>
             </a>
             <a id="share" class="main_button third_button">
-                <span>Share</span><ion-icon name="share-social-outline"></ion-icon>
+                <span>Share</span><i class="ph-bold ph-share-network"></i>
             </a>
-            <a href="/upload" id="upload" class="second_button main_button">
-                <span>Publish</span><ion-icon name="push-outline"></ion-icon>
+            <a href="/upload" id="upload_button" id="upload" class="second_button main_button">
+                <span>Publish</span><i class="ph-bold ph-upload-simple"></i>
             </a>
             <a href="/edit" id="edit_button" href="/edit" class="main_button">
-                <span>Edit</span><ion-icon name="pencil-outline"></ion-icon>
+                <span>Edit</span><i class="ph-bold ph-pencil-simple"></i>
             </a>
         </div>
     </dialog>
     <dialog id="delete_dialog" class="delete_dialog">
-        <h3>You Are About To Delete This Set</h3>
-        <p>This set will be permanently deleted and it can not be undone. Get more space by <a
+        <h3>Delete this set?</h3>
+        <p>This set will be permanently deleted and it can not be found again. Get more space by <a
                 href="/upgrade">Upgrading</a></p>
         <div>
             <span id="delete_span_title" class="delete_span_title">Set Title: </span>
@@ -136,7 +136,7 @@
     var level = {{ boosting| tojson}};
     const copy = (text) => {
         navigator.clipboard.writeText(text)
-        document.getElementById("share").innerHTML = "<span>Copyed!</span><ion-icon name='clipboard-outline'></ion-icon>"
+        document.getElementById("share").innerHTML = "<span>Coped!</span><i class='ph-bold ph-clipboard'></i>"
     }
     function show(name) {
         const dialog = document.getElementById('start_set');
@@ -179,7 +179,7 @@
             document.getElementById("quest_rec").style.display = "none"
         }
         document.getElementById("start_set").showModal()
-        document.getElementById("share").innerHTML = "<span>Share</span><ion-icon name='share-social-outline'></ion-icon>"
+        document.getElementById("share").innerHTML = "<span>Share</span><i class='ph-bold ph-share-network'></i>"
         document.getElementById("set_image").src = `/static/set_icons/${sets[name]["settings"]["background"]}.webp`
         document.getElementById("set_title").innerText = sets[name]["settings"]["name"]
         document.getElementById("set_desc").innerText = sets[name]["settings"]["desc"]
@@ -214,7 +214,7 @@
         a.classList.add("droppable", "folder_home")
         var img = document.createElement("img")
         var what_class = document.createElement("span")
-        what_class.innerHTML = '<ion-icon name="people-outline"></ion-icon> Group'
+        what_class.innerHTML = '<i class="ph ph-users-three"></i> Group'
         what_class.classList.add("subject")
         img.draggable = false
         a.draggable = false
@@ -257,7 +257,7 @@
         var p = document.createElement("p")
         var amount_of_sets = document.createElement("p")
         var what_class = document.createElement("span")
-        what_class.innerHTML = '<ion-icon name="folder-open-outline"></ion-icon> Folder'
+        what_class.innerHTML = '<i class="ph ph-folder-notch-open"></i> Folder'
         what_class.classList.add("subject")
         amount_of_sets.classList.add("amount_of_sets")
         a.href = `/folder/${folders[folder_keys[i]]["name"]}`
@@ -302,7 +302,7 @@
         a.draggable = true
         img.draggable = false
         var what_class = document.createElement("span")
-        what_class.innerHTML = '<ion-icon name="albums-outline"></ion-icon> Set'
+        what_class.innerHTML = '<i class="ph ph-cards"></i> Set'
         what_class.classList.add("subject")
         var strong = document.createElement("strong")
         var p = document.createElement("p")
@@ -459,14 +459,35 @@
             document.getElementById("no_sets_search").style.display = "block";
         }
     }
+    var community_button = document.getElementById("community_button")
+    var new_button = document.getElementById("new_button")
+    var edit_button = document.getElementById("edit_button")
+    var upload_button = document.getElementById("upload_button")
+    var share_button = document.getElementById("share")
+    var del_button = document.getElementById("del_button")
+    community_button.addEventListener("click", () => {
+        community_button.classList.add("button_spinner")
+    })
+    new_button.addEventListener("click", () => {
+        new_button.classList.add("button_spinner")
+    })
+    edit_button.addEventListener("click", () => {
+        edit_button.classList.add("button_spinner")
+    })
+    upload_button.addEventListener("click", () => {
+        upload_button.classList.add("button_spinner")
+    })
+    share_button.addEventListener("click", () => {
+        share_button.classList.add("button_spinner")
+    })
 </script>
 <div class="home_menu" id="home_menu">
-    <a href="/community"><ion-icon name="earth-outline"></ion-icon>Community</a>
-    <a href="/play"><ion-icon name="play-outline"></ion-icon>Play</a>
-    <a href="/new"><ion-icon name="add-outline"></ion-icon>New Set</a>
-    <a href="/new/folder"><ion-icon name="folder-open-outline"></ion-icon>New Folder</a>
-    <a href="/new/group"><ion-icon name="people-outline"></ion-icon>New Group</a>
-    <a href="/new/learn"><ion-icon name="book-outline"></ion-icon>New Learn Set</a>
+    <a href="/community"><i class="ph-bold ph-globe-hemisphere-west"></i>Community</a>
+    <a href="/play"><i class="ph-bold ph-play"></i>Play</a>
+    <a href="/new"><i class="ph-bold ph-plus"></i>New Set</a>
+    <a href="/new/folder"><i class="ph-bold ph-folder-notch-plus"></i>New Folder</a>
+    <a href="/new/group"><i class="ph-bold ph-users-three"></i>New Group</a>
+    <a href="/new/learn"><i class="ph-bold ph-book-open-text"></i>New Learn Set</a>
 </div>
 <button onclick="menu_open()" id="home_menu_button" class="home_add"><ion-icon name="menu-outline"></ion-icon></button>
 {% endblock %}

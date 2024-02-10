@@ -14,9 +14,9 @@
     </ul>
     <h1>Community</h1>
     <div class="filter_search" id="open_filter" onclick="open_filter()">
-        <ion-icon name="options-outline"></ion-icon>
+        <i class="ph ph-sliders-horizontal"></i>
     </div>
-    <div class="search_bar"><ion-icon name="search-outline"></ion-icon><input type="text" autocomplete="off" placeholder="Search" class="search" id="search"></div>
+    <div class="search_bar"><i class="ph ph-magnifying-glass"></i><input type="text" autocomplete="off" placeholder="Search" class="search" id="search"></div>
       <div class="search_subject" id="search_subject">View Subject Sets</div>
     <div id="search_filter_container" class="search_filter_container">
         <strong class="search_filters_title">Filters</strong>
@@ -45,13 +45,13 @@
     </div>
     
     <div class="home_buttons">
-        <a href="/" class="main_button">
+        <a href="/" id="home_button" class="main_button">
             <span>Home</span>
-            <ion-icon name="home-outline"></ion-icon>
+            <i class="ph-bold ph-house"></i>
         </a>
     </div>
     <div class="home_sets" id="home_sets">
-        <a onclick="document.getElementById('recommend_loading_spinner').style.display = 'flex'" style="display:none;" class="folder_home" draggable="false" href="/recommended" id="recommended_folder"><loading id="recommend_loading_spinner" class="loader"><spinner></spinner></loading><span class="subject"><ion-icon name="folder-open-outline"></ion-icon>Recommendations</span><img alt="Recommended" draggable="false" src="/static/folders/Recommend Folder.webp" id="recommended"><strong id="recommended">Recommended Sets</strong><p id="recommended">View Your Recommended Sets</p></a>
+        <a onclick="document.getElementById('recommend_loading_spinner').style.display = 'flex'" style="display:none;" class="folder_home" draggable="false" href="/recommended" id="recommended_folder"><loading id="recommend_loading_spinner" class="loader"><spinner></spinner></loading><span class="subject"><i class="ph ph-folder-notch"></i>Recommendations</span><img alt="Recommended" draggable="false" src="/static/folders/Recommend Folder.webp" id="recommended"><strong id="recommended">Recommended Sets</strong><p id="recommended">View Your Recommended Sets</p></a>
     </div>
     <dialog class="start_set" id="start_set">
         <div class="all_contain_start">
@@ -93,13 +93,13 @@
         </div>
         <div class="start_buttons">
             <a style="display:none;" href="/delete" id="del_button" class="main_button del_button">
-                <span>Delete</span><ion-icon name="trash-outline"></ion-icon>
+                <span>Delete</span><i class="ph-bold ph-trash"></i>
             </a>
             <a id="share" class="second_button main_button">
-                <span>Share</span><ion-icon name="share-social-outline"></ion-icon>
+                <span>Share</span><i class="ph-bold ph-share-network"></i>
             </a>
             <a href="/download" id="download_button" class="main_button">
-                <span>Download</span><ion-icon name="download-outline"></ion-icon>
+                <span>Download</span><i class="ph-bold ph-download-simple"></i>
             </a>
         </div>
     </dialog>
@@ -151,7 +151,7 @@
         document.getElementById("questions").href = `/questions/@${user}/${set_id}`;
         document.getElementById("fill").href = `/fill/@${user}/${set_id}`;
         if (level == "admin" || user == username) {
-            document.getElementById("del_button").style.display = "inline-block";
+            document.getElementById("del_button").style.display = "inline-flex";
         } else {
             document.getElementById("del_button").style.display = "none";
         }
@@ -294,31 +294,31 @@
         strong.innerText = sets[sets_keys[i]]["settings"]["name"];
         a.setAttribute("data-value", sets[sets_keys[i]]["settings"]["subject"].trim());
         if (sets[sets_keys[i]]["settings"]["subject"].trim()  == "Geography"){
-            subject.innerHTML = '<ion-icon name="earth-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
+            subject.innerHTML = '<i class="ph ph-globe-hemisphere-east"></i>'+sets[sets_keys[i]]["settings"]["subject"];
         }else if (sets[sets_keys[i]]["settings"]["subject"].trim() == "Computer Science"){
-            subject.innerHTML = '<ion-icon name="laptop-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
+            subject.innerHTML = '<i class="ph ph-laptop"></i>'+sets[sets_keys[i]]["settings"]["subject"];
         }else if(sets[sets_keys[i]]["settings"]["subject"].trim()  == "Maths"){
-            subject.innerHTML = '<ion-icon name="calculator-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
+            subject.innerHTML = '<i class="ph ph-math-operations"></i>'+sets[sets_keys[i]]["settings"]["subject"];
         }else if (sets[sets_keys[i]]["settings"]["subject"].trim()  == "Physics"){
-            subject.innerHTML = '<ion-icon name="rocket-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
+            subject.innerHTML = '<i class="ph ph-atom"></i>'+sets[sets_keys[i]]["settings"]["subject"];
         }else if(sets[sets_keys[i]]["settings"]["subject"].trim()  == "Chemistry"){
-            subject.innerHTML = '<ion-icon name="flask-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
+            subject.innerHTML = '<i class="ph ph-flask"></i>'+sets[sets_keys[i]]["settings"]["subject"];
         }else if(sets[sets_keys[i]]["settings"]["subject"].trim()  == "Biology"){
-            subject.innerHTML = '<ion-icon name="leaf-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
+            subject.innerHTML = '<i class="ph ph-leaf"></i>'+sets[sets_keys[i]]["settings"]["subject"];
         }else if (sets[sets_keys[i]]["settings"]["subject"].trim()  == "History"){
-            subject.innerHTML = '<ion-icon name="time-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
+            subject.innerHTML = '<i class="ph ph-clock-counter-clockwise"></i>'+sets[sets_keys[i]]["settings"]["subject"];
         }else if (sets[sets_keys[i]]["settings"]["subject"].trim()  == "Sport"){
-            subject.innerHTML = '<ion-icon name="football-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
+            subject.innerHTML = '<i class="ph ph-tennis-ball"></i>'+sets[sets_keys[i]]["settings"]["subject"];
         }else if (sets[sets_keys[i]]["settings"]["subject"].trim()  == "English"){
-            subject.innerHTML = '<ion-icon name="book-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
+            subject.innerHTML = '<i class="ph ph-books"></i>'+sets[sets_keys[i]]["settings"]["subject"];
         }else if (sets[sets_keys[i]]["settings"]["subject"].trim()  == "Other"){
-            subject.innerHTML = '<ion-icon name="albums-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
+            subject.innerHTML = '<i class="ph ph-cards"></i>'+sets[sets_keys[i]]["settings"]["subject"];
         }else if(sets[sets_keys[i]]["settings"]["subject"].trim()  == "Music"){
-            subject.innerHTML = '<ion-icon name="musical-notes-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
+            subject.innerHTML = '<i class="ph ph-guitar"></i>'+sets[sets_keys[i]]["settings"]["subject"];
         }else if (sets[sets_keys[i]]["settings"]["subject"].trim()  == "Engineering"){
-            subject.innerHTML = '<ion-icon name="construct-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
+            subject.innerHTML = '<i class="ph ph-wrench"></i>'+sets[sets_keys[i]]["settings"]["subject"];
         }else if (sets[sets_keys[i]]["settings"]["subject"].trim()  == "Design"){
-            subject.innerHTML = '<ion-icon name="color-palette-outline"></ion-icon>'+sets[sets_keys[i]]["settings"]["subject"];
+            subject.innerHTML = '<i class="ph ph-palette"></i>'+sets[sets_keys[i]]["settings"]["subject"];
         }
         else{
             subject.innerHTML = sets[sets_keys[i]]["settings"]["subject"];
@@ -436,5 +436,10 @@
             }
         });
     }
+
+    var home_button = document.getElementById("home_button");
+    home_button.addEventListener("click", () => {
+        home_button.classList.add("button_spinner")
+    })
 </script>
 {% endblock %}

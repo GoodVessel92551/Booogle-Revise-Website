@@ -42,7 +42,7 @@ def home():
     streak()
     if session.get("feedback"):
         feedback = session.get("feedback")
-        session["notifications"] = [{"title":"Feedback","body":f"You Have {feedback} possible improvements to this set","type":"warning","icon":"alert-circle"}]
+        session["notifications"] = [{"title":"Feedback","body":f"You Have {feedback} possible improvements to this set","type":"warning","icon":"ph-warning-circle"}]
         session.pop("feedback")
     if session.get("notifications"):
         notifications = session.get("notifications")
@@ -215,23 +215,23 @@ def publish(name):
         if username() in i:
             amount += 1
     if ((level == False) and (amount >= 2)) or ((level == "premium") and (amount >= 5)) or ((level == "pro") and (amount >= 10)) or ((level == "elite") and (amount >= 30)):
-        session["notifications"] = [{"title":"Failed","body":"You Have Reached The Max Amount Of Sets You Can Publish","type":"warning","icon":"alert-circle"}]
+        session["notifications"] = [{"title":"Failed","body":"You Have Reached The Max Amount Of Sets You Can Publish","type":"warning","icon":"ph-warning-circle"}]
         return redirect("/")
     set = get_sets()[name]
     for i in range(1,len(set)):
         quest = set[f"Q{i}"]["question"]
         if mod(quest) == "1" or profanity.contains_profanity(quest):
-            session["notifications"] = [{"title":"Failed","body":"You Can't Publish This Set, Due To It Contains Profanity Or Rude Text. (Question:"+str(i)+")","type":"wanning","icon":"alert-circle"}]
+            session["notifications"] = [{"title":"Failed","body":"You Can't Publish This Set, Due To It Contains Profanity Or Rude Text. (Question:"+str(i)+")","type":"wanning","icon":"ph-warning-circle"}]
             return redirect("/")
         for j in set[f"Q{i}"]["answers"]:
             ans = set[f"Q{i}"]["answers"][j]
             if mod(ans) == "1" or profanity.contains_profanity(ans):
-                session["notifications"] = [{"title":"Failed","body":"You Can't Publish This Set, Due To It Contains Profanity Or Rude Text. (Question:"+str(i)+")","type":"wanning","icon":"alert-circle"}]
+                session["notifications"] = [{"title":"Failed","body":"You Can't Publish This Set, Due To It Contains Profanity Or Rude Text. (Question:"+str(i)+")","type":"wanning","icon":"ph-warning-circle"}]
                 return redirect("/")
     query = {"name":"sets"}
     update = {"$push": {"data": [username(),name]}}
     global_data_db.update_one(query, update)
-    session["notifications"] = [{"title":"Success","body":f"You Have Published: {set['settings']['name']}","type":"success","icon":"checkmark-circle"}]
+    session["notifications"] = [{"title":"Success","body":f"You Have Published: {set['settings']['name']}","type":"success","icon":"ph-check-circle"}]
     return redirect("/community")
 
 @app.route("/download/@<user_name>/<name>")
@@ -265,9 +265,9 @@ def delete2(user_name,name):
         update = {"$set": {"data": sets}}
         global_data_db.update_one(query, update)
     else:
-        session["notifications"] = [{"title":"Failed","body":"You Can Not Delete This Set.","type":"warning","icon":"alert-circle"}]
+        session["notifications"] = [{"title":"Failed","body":"You Can Not Delete This Set.","type":"warning","icon":"ph-warning-circle"}]
         return redirect("/community")
-    session["notifications"] = [{"title":"Success","body":f"You Deleted This From The Community","type":"success","icon":"checkmark-circle"}]
+    session["notifications"] = [{"title":"Success","body":f"You Deleted This From The Community","type":"success","icon":"ph-check-circle"}]
     return redirect("/")
 
 @app.route("/flashcards/@<username>/<name>")
@@ -339,7 +339,7 @@ def new_folder():
         desc = request.form["desc"]
         cover = request.form["cover"]
         if title in list(user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["folders"]):
-            session["notifications"] = [{"title":"Failed","body":"You already have a folder with that name","type":"warning","icon":"alert-circle"}]
+            session["notifications"] = [{"title":"Failed","body":"You already have a folder with that name","type":"warning","icon":"ph-warning-circle"}]
             return redirect("/")
         else:
             new_folder = {
@@ -441,7 +441,7 @@ def new():
     level = userinfo(username())[0]
     len_sets = len(get_sets())
     if ((level == False) and (len_sets > 10)) or ((level == "premium") and (len_sets > 20)) or ((level == "pro") and (len_sets > 35)) or ((level == "elite") and (len_sets > 100)):
-        session["notifications"] = [{"title":"Failed","body":"You Have Reached The Max Amount Of Sets","type":"warning","icon":"alert-circle"}]
+        session["notifications"] = [{"title":"Failed","body":"You Have Reached The Max Amount Of Sets","type":"warning","icon":"ph-warning-circle"}]
         return redirect("/")
     if request.method == "POST":
         premium = ["pro","art","bike","elite","car","castle","code","hill","map","flask"]
@@ -464,7 +464,7 @@ def new():
             session["new_set"] = {"title":title,"desc":desc,"background":cover}
             return redirect("/new")
         if title in get_sets().keys():
-            session["notifications"] = [{"title":"Failed","body":"This Set With This Name Already Exists","type":"warning","icon":"alert-circle"}]
+            session["notifications"] = [{"title":"Failed","body":"This Set With This Name Already Exists","type":"warning","icon":"ph-warning-circle"}]
             return redirect("/")
         else:
             new_set = {
@@ -525,7 +525,7 @@ def new_question():
         user_data_db.update_one({"username":username(),"type":"user_data"},{"$set":{"data.sets."+session.get("current_set")+".Q"+quest_num:new_quest}})
         len_quests = len(get_sets()[session.get("current_set")])
         if ((level == False) and (len_quests >= 15)) or ((level == "premium") and (len_quests >= 20)) or ((level == "pro") and (len_quests >= 25)) or ((level == "elite") and (len_quests >= 50)):
-            session["notifications"] = [{"title":"Failed","body":"You Have Reached The Max Amount Of Questions","type":"warning","icon":"alert-circle"}]
+            session["notifications"] = [{"title":"Failed","body":"You Have Reached The Max Amount Of Questions","type":"warning","icon":"ph-warning-circle"}]
             return redirect("/")
         if request.form["button"] == "finish":
             session.pop("current_set")
@@ -568,7 +568,7 @@ def edit(name):
             session["new_set"] = {"title":title,"desc":desc,"background":cover}
             return redirect("/new")
         if title in get_sets().keys():
-            session["notifications"] = [{"title":"Failed","body":"This Set With This Name Already Exists","type":"warning","icon":"alert-circle"}]
+            session["notifications"] = [{"title":"Failed","body":"This Set With This Name Already Exists","type":"warning","icon":"ph-warning-circle"}]
             return redirect("/")
         else:
             if old_set["settings"]["user"] != username():
@@ -590,7 +590,7 @@ def edit(name):
             user_data_db.update_one({"username":username(),"type":"user_data"},{"$set":{"data.sets."+name:new_set}})
         for i in range(1,len(list(request.form)[3:])):
             if (i >= 15 and (level == False or level == "boost")) or (i >= 20 and level == "premium") or (i >= 25 and level == "pro") or (i >= 50 and level == "elite"):
-                session["notifications"] = [{"title":"Failed","body":"Your Have Reached The Max Amount Of Questions","type":"warning","icon":"alert-circle"}]
+                session["notifications"] = [{"title":"Failed","body":"Your Have Reached The Max Amount Of Questions","type":"warning","icon":"ph-warning-circle"}]
                 return redirect("/")
             else:
                 try:
@@ -613,7 +613,7 @@ def edit(name):
                         pass
                     else:
                         user_data_db.update_one(query, {"$set":{"data.sets."+name+".Q"+str(i):question}})
-        session["notifications"] = [{"title":"Success","body":f"You Have Edited: {title}","type":"success","icon":"checkmark-circle"}]
+        session["notifications"] = [{"title":"Success","body":f"You Have Edited: {title}","type":"success","icon":"ph-check-circle"}]
         return redirect("/")
     return render_template("sets/edit.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets()[name],notifications=notifications)
 
@@ -649,7 +649,7 @@ def question(name):
     notifications = []
     set = get_sets()[name]
     if len(set) < 4:
-        session["notifications"] = [{"title":"Failed","body":"You Need More Questions","type":"warning","icon":"alert-circle"}]
+        session["notifications"] = [{"title":"Failed","body":"You Need More Questions","type":"warning","icon":"ph-warning-circle"}]
         return redirect("/")
     if session.get("stats"):
         session.pop("stats")
@@ -769,7 +769,7 @@ def delete(name):
     query = {"username":username()}
     update = {"$unset":{"data.sets."+name:{}}}
     user_data_db.update_one(query,update)
-    session["notifications"] = {"title":"Success","body":f"You Have Deleted: {name}","type":"success","icon":"checkmark-circle"}
+    session["notifications"] = {"title":"Success","body":f"You Have Deleted: {name}","type":"success","icon":"ph-check-circle"}
     return redirect("/")
 
 
@@ -813,12 +813,12 @@ def fill(name):
 
 @app.errorhandler(500)
 def server_error(e):
-    session["notifications"] = [{"title":"Error 500","body":"There Was An Error Try Again Later","type":"error","icon":"close-circle"}]
+    session["notifications"] = [{"title":"Error 500","body":"There Was An Error Try Again Later","type":"error","icon":"ph-x-circle"}]
     return redirect("/")
 
 @app.errorhandler(404)
 def page_not_found(e):
-    session["notifications"] = [{"title":"Error 404","body":"We Were Unable To Find The Page That You Were Looking For","type":"error","icon":"close-circle"}]
+    session["notifications"] = [{"title":"Error 404","body":"We Were Unable To Find The Page That You Were Looking For","type":"error","icon":"ph-x-circle"}]
     return redirect("/")
 
 @app.route("/test/<set>",methods=["POST","GET"])
@@ -830,7 +830,7 @@ def test_mode(set):
     quest_set = {}
     level = userinfo(username())[0] 
     if level != "elite" and level != "admin":
-        session["notifications"] = [{"title":"Upgrade","body":"You Need To Upgrade To Access Test Mode","type":"warning","icon":"alert-circle"}]
+        session["notifications"] = [{"title":"Upgrade","body":"You Need To Upgrade To Access Test Mode","type":"warning","icon":"ph-warning-circle"}]
         return redirect("/")
     set_data = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["sets"][set]
     if request.method == "POST":
@@ -889,7 +889,7 @@ def play():
         code = request.form["code"]
         codes = global_data_db.find_one({"name":"play"})["data"]
         if code not in codes:
-            session["notifications"] = [{"title":"Failed","body":f"{code} Is Not A valid Key, Please Try Again","type":"warning","icon":"alert-circle"}]
+            session["notifications"] = [{"title":"Failed","body":f"{code} Is Not A valid Key, Please Try Again","type":"warning","icon":"ph-warning-circle"}]
             return redirect("/play")
         else:
             return redirect(f"/play/{int(code)}")
@@ -917,10 +917,10 @@ def play_code(code):
     players = len(play_info["users"])
     level = userinfo(username())[0]
     if (players >= 3 and level == False) or (players >= 5 and level == "premium") or (players >= 10 and level == "pro") or (players >= 44 and level == "elite"):
-        session["notifications"] = [{"title":"Failed","body":"There Are No Spaces Left For You","type":"warning","icon":"alert-circle"}]
+        session["notifications"] = [{"title":"Failed","body":"There Are No Spaces Left For You","type":"warning","icon":"ph-warning-circle"}]
         return redirect("/")
     if code not in list(codes):
-        session["notifications"] = [{"title":"Failed","body":f"{code} Is Not A valid Key, Please Try Again","type":"warning","icon":"alert-circle"}]
+        session["notifications"] = [{"title":"Failed","body":f"{code} Is Not A valid Key, Please Try Again","type":"warning","icon":"ph-warning-circle"}]
         return redirect("/play")
     play_info = {
         "score":{},
@@ -1022,7 +1022,7 @@ def play_started(code):
             session["next"] = "False"
     else:
         if len(set) < 4:
-            session["notifications"] = [{"title":"Failed","body":"You Need More Questions","type":"warning","icon":"alert-circle"}]
+            session["notifications"] = [{"title":"Failed","body":"You Need More Questions","type":"warning","icon":"ph-warning-circle"}]
             return redirect("/")
         if session.get("stats"):
             session.pop("stats")
@@ -1077,7 +1077,7 @@ def play_end(code):
     if username() == db["play"][code]["host"]:
         del db["play"][code]
     else:
-        session["notifications"] = [{"title":"Failed","body":"You Are Not The Host","type":"warning","icon":"alert-circle"}]
+        session["notifications"] = [{"title":"Failed","body":"You Are Not The Host","type":"warning","icon":"ph-warning-circle"}]
         return redirect("/")
     return redirect("/")
 
@@ -1113,7 +1113,7 @@ def automations():
             else:
                 for j in db[username()]["rules"]:
                     if subject in db[username()]["rules"][j]["subject"]:
-                        session["notifications"] = [{"title":"Failed","body":"You Already Have A Rule For This Subject","type":"warning","icon":"alert-circle"}]
+                        session["notifications"] = [{"title":"Failed","body":"You Already Have A Rule For This Subject","type":"warning","icon":"ph-warning-circle"}]
                         return redirect("/")
                 db[username()]["rules"][rule_id()] = {
                     "subject":subject,
@@ -1164,7 +1164,7 @@ def new_group():
     amount_groups = len(user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"])
     level = userinfo(username())[0]
     if (amount_groups >= 1 and level == "") or (amount_groups >= 2 and level == "premium") or (amount_groups >= 5 and level == "pro") or (amount_groups >= 20 and level == "elite"):
-        session["notifications"] = [{"title":"Failed","body":"You Have Reached The Max Amount Of Groups","type":"warning","icon":"alert-circle"}]
+        session["notifications"] = [{"title":"Failed","body":"You Have Reached The Max Amount Of Groups","type":"warning","icon":"ph-warning-circle"}]
         return redirect("/")
     if request.method == "POST":
         title = request.form["title"]
@@ -1212,9 +1212,9 @@ def group(group):
         users = global_data_db.find_one({"name":"usernames"})["data"]
         group_users = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"][group]["users"]
         if add_username not in users:
-            session["notifications"] = [{"title":"Failed","body":"User Does Not Exist","type":"warning","icon":"alert-circle"}]
+            session["notifications"] = [{"title":"Failed","body":"User Does Not Exist","type":"warning","icon":"ph-warning-circle"}]
         elif add_username in group_users:
-            session["notifications"] = [{"title":"Failed","body":"User Is Already In The Group","type":"warning","icon":"alert-circle"}]
+            session["notifications"] = [{"title":"Failed","body":"User Is Already In The Group","type":"warning","icon":"ph-warning-circle"}]
         else:
             query = {"username":add_username}
             update = {"$push":{"data.added_groups":[username(),group]}}
@@ -1222,7 +1222,7 @@ def group(group):
             query = {"username":username()}
             update = {"$push":{"data.groups."+group+".users":add_username}}
             user_data_db.update_one(query, update)
-            session["notifications"] = [{"title":"Success","body":"User Has Been Added To The Group","type":"success","icon":"checkmark-circle"}]
+            session["notifications"] = [{"title":"Success","body":"User Has Been Added To The Group","type":"success","icon":"ph-check-circle"}]
         return redirect("/group/"+group)
     else:
         sets = {}
@@ -1512,7 +1512,7 @@ def create_checkout_session(plan):
     elif plan == "elite":
         price_id = "price_1OaKNrEg9DaDrNLaGPsrMJ28"
     else:
-        session["notifications"] = [{"title":"Failed","body":"Invalid Plan","type":"warning","icon":"alert-circle"}]
+        session["notifications"] = [{"title":"Failed","body":"Invalid Plan","type":"warning","icon":"ph-warning-circle"}]
 
         return redirect("/")
     try:
@@ -1560,7 +1560,7 @@ def new_learn():
         title_mod = mod(title)
         desc_mod = mod(desc)
         if title_mod == 1 or desc_mod == 1:
-            session["notifications"] = [{"title":"Failed","body":"Title Or Description Contain Possible Rude/Inappropriate Content","type":"warning","icon":"alert-circle"}]
+            session["notifications"] = [{"title":"Failed","body":"Title Or Description Contain Possible Rude/Inappropriate Content","type":"warning","icon":"ph-warning-circle"}]
             return redirect("/new/learn/")
         else:
             return redirect("/edit/learn/"+title)

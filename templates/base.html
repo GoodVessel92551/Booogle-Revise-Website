@@ -93,10 +93,10 @@
         </a>
         <a class="nav_title" id="nav_title" href="/">{% block title %}{% endblock %}</a>
         <a class="nav_streak" href="/streak">
-            <ion-icon id="nav_streak_fire"></ion-icon><span>{{streak|tojson}}</span>
+            <i class="ph-fill ph-fire" id="nav_streak_fire"></i><span>{{streak|tojson}}</span>
         </a>
         <a class="boost" href="/upgrade" id="level_button"><span id="level">Upgrade</span>
-            <ion-icon id="level_icon"></ion-icon>
+            <i class="ph-bold ph-shield-check"></i>
         </a>
         <a class="nav_pro" href="/set_profile_image" rel="noopener"><img alt="profile_pic" id="nav_pro" src="{{boosting[1]}}" onerror="this.src='/static/images/Booogle Logo User.png'"/></a>
     </nav>
@@ -111,10 +111,10 @@
         const styleElement = document.getElementById('customStyles');
         var nav_streak_fire = document.getElementById("nav_streak_fire");
         if (streak > 0){
-            nav_streak_fire.name = "flame"
+            nav_streak_fire.classList.toggle = "ph-fill"
             nav_streak_fire.style.color = "#F2D6B6"
         }else{
-            nav_streak_fire.name = "flame-outline"
+            nav_streak_fire.classList.toggle = "ph-fill"
         }
         if(theme == "blue"){
             var newStyles = `
@@ -254,8 +254,8 @@
         for (var i = 0; i < notifications.length; i++) {
             var a = document.createElement("a");
             var title_element = document.createElement("strong")
-            var icon = document.createElement("ion-icon")
-            icon.name = notifications[i]["icon"]
+            var icon = document.createElement("i")
+            icon.classList.add(notifications[i]["icon"], "ph-fill")
             title_element.innerText = notifications[i]["title"]
             a.id = `notification_${i}_notification`
             var p = document.createElement("p");

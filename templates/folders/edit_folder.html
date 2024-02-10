@@ -5,7 +5,7 @@
     <main class="main">
         <h1>Edit Folder</h1>
         <form method="post">
-            <button class="main_button top_title_button" type="submit" style="position:absolute;top:34.5px;right:0px;"><span>Save</span><ion-icon name="save-outline"></ion-icon></button>
+            <button class="main_button top_title_button" type="submit" style="position:absolute;top:34.5px;right:0px;"><span>Save</span><i class="ph-bold ph-floppy-disk"></i></button>
             <input value="{{folder['name']}}" required oninvalid="this.setCustomValidity('Please enter only letters and numbers.')" oninput="this.setCustomValidity('')" pattern="^[A-Za-z0-9\s]+$" value="" id="quest"  maxlength="80" placeholder="Title" name="title" class="new_title text" autofocus>
             <div style="margin-top:-52px;" class="autocomplete"><span class="autocomplete_current" id="quest_autocomplete_current"></span><span class="autocomplete_next" id="quest_autocomplete_next"></span><button class="autocomplete_button" id="quest_autocomplete_button" type="button">Tab</button><button id="voice_title" class="mic" type="button" onclick="record('quest',this.id)"><ion-icon name="mic-outline"></ion-icon></button></div>
             <textarea required id="ans1" maxlength="150"  placeholder="Description" name="desc" class="new_desc text">{{folder["desc"]}}</textarea>

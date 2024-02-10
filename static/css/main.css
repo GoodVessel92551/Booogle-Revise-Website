@@ -215,8 +215,7 @@ html {
     color:var(--on_premium);
 }
 
-.boost ion-icon {
-    --ionicon-stroke-width: 45px;
+.boost i {
     position: relative;
     top: 7px;
     margin-right: 6px;
@@ -636,7 +635,7 @@ html {
     background-color: var(--hover_top_green-2);
 }
 
-.home_menu>a>ion-icon{
+.home_menu>a>i{
     margin-right: 8px;
     margin-left:-3px;
     background:var(--main_button);
@@ -794,6 +793,43 @@ html {
 .del_button:hover {
     background:var(--error_button) !important;
     color:var(--on_error_button) !important;
+}
+
+.button_spinner > i{
+    border-radius: 50%;
+    width:8px;
+    height:8px;
+    display:block;
+    border-radius:var(--main_border_radius);
+    border:2px solid transparent;
+    animation:spin 1s ease infinite;
+    height:14px;
+    width:14px;
+}
+
+.button_spinner > i:before{
+    content: "" !important;
+}
+
+.button_spinner:not(.del_button) > i{
+    border-bottom:2px solid var(--third_button);
+}
+
+.button_spinner:not(.del_button):hover > i{
+    border-bottom:2px solid var(--on_third_button);
+}
+
+.button_spinner:not(.third_button, .del_button) > i{
+    border-bottom:2px solid var(--second_button);
+}
+
+.button_spinner:not(.third_button, .del_button):hover > i{
+    border-bottom:2px solid var(--on_second_button);
+}
+
+.button_spinner:not(.second_button, .third_button, .del_button) > i{
+    color:var(--main_button) !important;
+    border-bottom:2px solid var(--on_main_button);
 }
 
 .ai_button{
@@ -1406,7 +1442,7 @@ dialog::backdrop {
     color: var(--text);
 }
 
-.up_items>span>ion-icon {
+.up_items>span>i {
     color: var(--text);
     margin-right: 8px;
     position: relative;
@@ -4629,7 +4665,7 @@ part > p{
     align-items: center;
 }
 
-.search_bar > ion-icon{
+.search_bar > i{
     position: absolute;
     top:50%;
     left:16px;
