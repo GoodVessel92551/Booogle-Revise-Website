@@ -1,5 +1,5 @@
 from flask import Flask, render_template,redirect,request,current_app,session
-from fun import photo_ai,answer_fix,mode_b_keys,ans_feeback,password_hash,get_folders,get_settings,get_streak,get_sets,hash_value,gen_user_token,add_streak,streak,login,check_image,gen_id,make_dict_group,user_data_group,username,recommend,rule_id,gen_code,leaderboard_dict,similarity,userinfo,make_dict,mod,play_dict,smart,last_7,week_add,stats_dict,update,make_dict_folder,subject,make_dict_rules
+from fun import answer_fix,mode_b_keys,ans_feeback,password_hash,get_folders,get_settings,get_streak,get_sets,hash_value,gen_user_token,add_streak,streak,login,check_image,gen_id,make_dict_group,user_data_group,username,recommend,rule_id,gen_code,leaderboard_dict,similarity,userinfo,make_dict,mod,play_dict,smart,last_7,week_add,stats_dict,update,make_dict_folder,subject,make_dict_rules
 from better_profanity import profanity
 import emoji
 import os,random,re
@@ -1636,17 +1636,5 @@ def custom_upgrade():
     return render_template("custom_upgrade.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 
-@app.route("/photo/new/question")
-def new_quest_photo():
-    if login() == False:
-        return render_template("login/login.html")
-    notifications = {}
-    return render_template("sets/new_quest_photo.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
-@app.route("/api/photo",methods=["POST"])
-def photo():
-    data = request.get_json()
-    send_data = {"data":photo_ai(data["data"]),"type":data["data"]["type"]}
-    return send_data
-
-app.run(host='0.0.0.0', port=80,debug=True)
+app.run(host='0.0.0.0', port=8080,debug=True)

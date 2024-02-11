@@ -96,7 +96,7 @@
             <i class="ph-fill ph-fire" id="nav_streak_fire"></i><span>{{streak|tojson}}</span>
         </a>
         <a class="boost" href="/upgrade" id="level_button"><span id="level">Upgrade</span>
-            <i class="ph-bold ph-shield-check"></i>
+            <i id="level_icon" class="ph-bold ph-arrow-circle-up"></i>
         </a>
         <a class="nav_pro" href="/set_profile_image" rel="noopener"><img alt="profile_pic" id="nav_pro" src="{{boosting[1]}}" onerror="this.src='/static/images/Booogle Logo User.png'"/></a>
     </nav>
@@ -313,21 +313,13 @@
         var level_icon = document.getElementById("level_icon")
         var level_text = document.getElementById("level")
         var level_button = document.getElementById("level_button")
-        if (level == "boost") {
-            level_button.classList.add("boost_boot")
-            level_text.innerText = "Boosting"
-            level_button.style.borderColor = "var(--boost1)";
-            level_button.style.color = "var(--boost1)";
-            level_icon.style.color = "var(--boost1)";
-            level_icon.name = "rocket-outline";
-        }
-        else if (level == "premium") {
+        if (level == "premium") {
             level_button.classList.add("boost_premium")
             level_text.innerText = "Premium"
             level_button.style.borderColor = "var(--premium1)";
             level_button.style.color = "var(--premium1)";
             level_icon.style.color = "var(--premium1)";
-            level_icon.name = "sparkles-outline";
+            level_icon.classList.replace("ph-arrow-circle-up","ph-sparkle");
         }
         else if (level == "pro") {
             level_button.classList.add("boost_pro")
@@ -335,16 +327,16 @@
             level_button.style.borderColor = "var(--pro1)";
             level_button.style.color = "var(--pro1)";
             level_icon.style.color = "var(--pro1)";
-            level_icon.name = "ribbon-outline";
+            level_icon.classList.replace("ph-arrow-circle-up","ph-medal");
         }
         else if (level == "elite") {
             level_button.classList.add("boost_elite")
             level_text.innerText = "Elite"
-            level_icon.name = "diamond-outline";
+            level_icon.classList.replace("ph-arrow-circle-up","ph-sketch-logo");
         }else if (level == "admin"){
             level_button.classList.add("boost_admin")
             level_text.innerText = "Admin"
-            level_icon.name = "shield-checkmark-outline";
+            level_icon.classList.replace("ph-arrow-circle-up","ph-shield-check");
 
         }
         else {

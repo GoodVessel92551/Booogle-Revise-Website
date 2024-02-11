@@ -16,11 +16,7 @@ import hashlib
 from flask import Flask, redirect, request,jsonify
 from flask.templating import render_template
 import spacy
-from transformers import TrOCRProcessor, VisionEncoderDecoderModel
-from PIL import Image
 import requests
-from io import BytesIO
-import base64
 import stripe
 from stripe.error import StripeError
 
@@ -30,26 +26,6 @@ client = MongoClient(os.getenv('mongo_url'))
 db = client["Booogle_Revise"]
 global_data_db = db["Global_Data"]
 user_data_db = db["User_Data"]
-
-processor = TrOCRProcessor.from_pretrained('microsoft/trocr-large-handwritten')
-model = VisionEncoderDecoderModel.from_pretrained('microsoft/trocr-large-handwritten')
-
-def photo_ai(image):
-    image_url = image["imageData"]
-    _, encoded_data = image_url.split(',', 1)
-    image_data = base64.b64decode(encoded_data)
-    
-    # Convert the decoded data into a PIL Image
-    image = Image.open(BytesIO(image_data)).convert("RGB")
-
-    # Process image
-    pixel_values = processor(images=image, return_tensors="pt").pixel_values
-
-    # Generate text
-    generated_ids = model.generate(pixel_values)
-    generated_text = processor.batch_decode(generated_ids, skip_special_tokens=True, max_new_tokens=20)[0]
-    print(generated_text)
-    return generated_text
 
 
 

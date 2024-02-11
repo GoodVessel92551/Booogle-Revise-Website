@@ -5,10 +5,10 @@ endblock %} {% block main %}
         <p style="margin-bottom: 64px;">Here you can change your profile image to something that represents you best.
         </p>
         <form  method="post">
-        <button onclick="save=false;document.getElementById('save_text').innerText = 'Saving...';" type="submit"
+        <button id="save_button" type="submit"
                 class="main_button top_title_button" style="position: absolute; top: 34.5px; right: 0px">
                 <span id="save_text">Save</span>
-                <ion-icon name="save-outline"></ion-icon>
+                <i class="ph-bold ph-floppy-disk"></i>
         </button>
         <h3 style="color:var(--text)">Default Images</h3>
         <div class="profile_images">
@@ -53,5 +53,9 @@ endblock %} {% block main %}
 <script>
         var current= {{current_color|tojson}};
         document.getElementById(current).checked = true;
+        var save_button = document.getElementById('save_button');
+        save_button.addEventListener("click", () => {
+                save_button.classList.add('button_spinner');
+        })
 </script>
 {% endblock %}
