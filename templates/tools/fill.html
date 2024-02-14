@@ -6,39 +6,34 @@ main %}
   <h1>Fill The Gaps</h1>
   <p class="fill" id="fill"></p>
   <div class="flash_buttons">
-    <button
-      type="button"
-      onclick="location.href='/'"
-      class="main_button second_button"
-      style="margin-right: 21px"
-    >
-      Exit<ion-icon name="exit-outline"></ion-icon>
+    <button type="button" onclick="location.href='/'" class="main_button second_button" style="margin-right: 21px">
+      Exit<i class="ph-bold ph-sign-out"></i>
     </button>
   </div>
 </main>
 <script>
-  var set = {{set|tojson}};
+  var set = {{ set| tojson}};
   var keys = Object.keys(set);
   var fill = document.getElementById("fill");
-  for (var i=1; i<keys.length; i++){
-      var quest = document.createElement("span");
-      var answer = document.createElement("input");
-      quest.innerText = set[`Q${i}`]["question"];
-      answer.id = `Q${i}`;
-      answer.classList.add("fill_ans");
-      answer.autocomplete = "off";
-      answer.addEventListener("keyup", (e) => {
-          var answers = Object.values(set[e.target.id]["answers"]);
-          var answers = answers.map(item => item.toLowerCase());
-          if (answers.includes(document.getElementById(e.target.id).value.toLowerCase())){
-              document.getElementById(e.target.id).style.background = "var(--main_button)";
-            document.getElementById(e.target.id).style.color = "var(--on_main_button)";
-              document.getElementById(e.target.id).disabled = true;
-              document.getElementById(e.target.id).style.fontWeight = "bold";
-          }
-      })
-      fill.appendChild(quest);
-      fill.appendChild(answer);
+  for (var i = 1; i < keys.length; i++) {
+    var quest = document.createElement("span");
+    var answer = document.createElement("input");
+    quest.innerText = set[`Q${i}`]["question"];
+    answer.id = `Q${i}`;
+    answer.classList.add("fill_ans");
+    answer.autocomplete = "off";
+    answer.addEventListener("keyup", (e) => {
+      var answers = Object.values(set[e.target.id]["answers"]);
+      var answers = answers.map(item => item.toLowerCase());
+      if (answers.includes(document.getElementById(e.target.id).value.toLowerCase())) {
+        document.getElementById(e.target.id).style.background = "var(--main_button)";
+        document.getElementById(e.target.id).style.color = "var(--on_main_button)";
+        document.getElementById(e.target.id).disabled = true;
+        document.getElementById(e.target.id).style.fontWeight = "bold";
+      }
+    })
+    fill.appendChild(quest);
+    fill.appendChild(answer);
   }
 </script>
 {% endblock %}

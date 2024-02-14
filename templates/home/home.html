@@ -82,7 +82,7 @@
             <a id="share" class="main_button third_button">
                 <span>Share</span><i class="ph-bold ph-share-network"></i>
             </a>
-            <a href="/upload" id="upload_button" id="upload" class="second_button main_button">
+            <a href="/upload" id="upload" class="second_button main_button">
                 <span>Publish</span><i class="ph-bold ph-upload-simple"></i>
             </a>
             <a href="/edit" id="edit_button" href="/edit" class="main_button">
@@ -406,9 +406,12 @@
     const menu_open = () => {
         var menu_button = document.getElementById("home_menu_button")
         var menu = document.getElementById("home_menu")
+        var menu_icon = document.getElementById("menu_icon")
         if (menu.style.display == "flex") {
+            menu_icon.classList.toggle("ph-x")
             menu.style.display = "none"
         } else {
+            menu_icon.classList.toggle("ph-x")
             menu.style.display = "flex"
         }
 
@@ -462,7 +465,7 @@
     var community_button = document.getElementById("community_button")
     var new_button = document.getElementById("new_button")
     var edit_button = document.getElementById("edit_button")
-    var upload_button = document.getElementById("upload_button")
+    var upload_button = document.getElementById("upload")
     var share_button = document.getElementById("share")
     var del_button = document.getElementById("del_button")
     community_button.addEventListener("click", () => {
@@ -489,5 +492,5 @@
     <a href="/new/group"><i class="ph-bold ph-users-three"></i>New Group</a>
     <a href="/new/learn"><i class="ph-bold ph-book-open-text"></i>New Learn Set</a>
 </div>
-<button onclick="menu_open()" id="home_menu_button" class="home_add"><ion-icon name="menu-outline"></ion-icon></button>
+<button onclick="menu_open()" id="home_menu_button" class="home_add"><i id="menu_icon" class="ph ph-list"></i></button>
 {% endblock %}

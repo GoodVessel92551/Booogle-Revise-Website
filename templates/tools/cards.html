@@ -8,23 +8,23 @@ main %}
     flex-wrap: wrap;
     width: calc(min(90%, 900px) + 2px);
   " class="main">
-    <button class="speaker" id="speaker">
-        <ion-icon name="volume-high-outline"></ion-icon>
+    <button class="speaker" id="speaker" type="button">
+        <i class="ph ph-speaker-simple-high"></i>
     </button>
     <div class="flashcard_container">
         <div id="card" class="flashcard">
             <h1 id="card_text" class="card_quest">Questions</h1>
             <h2 class="card_title" id="card_title">Answer</h2>
-            <img class="card_img" id="card_img">
+            <img class="card_img" id="card_img" alt="">
             <p class="card_ans" id="card_ans"></p>
         </div>
         <div class="flash_indicator">
             <span><span id="flash_indicator"></span></span>
         </div>
         <div class="flash_buttons">
-            <a class="main_button second_button" href="/" style="margin-right: 13px"><span>Exit</span><ion-icon name="exit-outline"></ion-icon></a>
+            <a class="main_button second_button" href="/" style="margin-right: 13px"><span>Exit</span><i class="ph-bold ph-sign-out"></i></a>
             <button onclick="next()" class="main_button next">
-                <span>Next</span><ion-icon name="arrow-forward-outline"></ion-icon>
+                <span>Next</span><i class="ph-bold ph-arrow-right"></i>
             </button>
         </div>
     </div>

@@ -78,17 +78,17 @@
         document.getElementById("len_warn").style.display = "block";
         document.getElementById(background).checked = true;
     }
-    if(level == "premium" || level == "pro" || level == "elite"){
+    if(level == "premium" || level == "pro" || level == "elite" || level == "admin"){
         document.querySelectorAll(".premium").forEach((p) => {
             p.style.display = "block";
         })
     }
-    if(level == "pro" || level == "elite"){
+    if(level == "pro" || level == "elite" || level == "admin"){
         document.querySelectorAll(".pro").forEach((p) => {
             p.style.display = "block";
         })
     }
-    if(level == "elite"){
+    if(level == "elite" || level == "admin"){
         document.querySelectorAll(".elite").forEach((p) => {
             p.style.display = "block";
         })

@@ -327,7 +327,7 @@ def questions(username,name):
             temp.remove(quest)
             ans.append(set[quest]["answers"][random.choice(list(set[quest]["answers"].keys()))])
         random.shuffle(ans)
-    return render_template("tools/question.html",streak=0,title=name,settings=settings,name="Guest",boosting=False,profile_pic="https://booogle-revise-2.goodvessel92551.repl.co/static/logo.png",sets=user_data_db.find_one({"username":username,"type":"user_data"})["data"]["sets"][name],ans=ans,question=question,notifications=notifications,owner=username,total_quests=len(current["order"]),set=name,quest_num = current["order"][current["current"]])
+    return render_template("tools/question.html",mode="community",streak=0,title=name,settings=settings,name="Guest",boosting=False,profile_pic="https://booogle-revise-2.goodvessel92551.repl.co/static/logo.png",sets=user_data_db.find_one({"username":username,"type":"user_data"})["data"]["sets"][name],ans=ans,question=question,notifications=notifications,owner=username,total_quests=len(current["order"]),set=name,quest_num = current["order"][current["current"]])
 
 @app.route("/new/folder",methods=["POST","GET"])
 def new_folder():
@@ -694,7 +694,7 @@ def question(name):
             temp.remove(quest)
             ans.append(set[quest]["answers"][random.choice(list(set[quest]["answers"].keys()))])
         random.shuffle(ans)
-    return render_template("tools/question.html",title=name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets()[name],ans=ans,question=question,notifications=notifications,quest_num = current["order"][current["current"]],set=name,total_quests=len(current["order"]),owner=username())
+    return render_template("tools/question.html",mode="question",title=name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets()[name],ans=ans,question=question,notifications=notifications,quest_num = current["order"][current["current"]],set=name,total_quests=len(current["order"]),owner=username())
 
 @app.route("/api/questions",methods=["POST","GET"])
 def api_quest_ans():
@@ -1067,8 +1067,79 @@ def play_started(code):
             temp.remove(quest)
             ans.append(set[quest]["answers"][random.choice(list(set[quest]["answers"].keys()))])
         random.shuffle(ans)
-        quest_num =len(set)
-    return render_template("tools/question.html",owner=host,total_quests=quest_num,quest_num=quest_num,title=name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),set=name,ans=ans,question=question,notifications=notifications)
+        quest_num = current["order"][session["current"]["current"]]
+        session["current_play_code"] = code
+    return render_template("tools/question.html",owner=host,total_quests=quest_num,quest_num=quest_num,title=name,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),set=name,ans=ans,question=question,notifications=notifications,mode="play")
+
+@app.route("/api/play/quest",methods=["POST","GET"])
+def api_quest_ans_play():
+    code = session.get("current_play_code")
+    correct = False
+    data = request.get_json()
+    owner = data["user"]
+    current = session.get("current")
+    set = user_data_db.find_one({"username":owner,"type":"user_data"})["data"]["sets"][data["set"]]
+    quest = set[current["order"][current["current"]]]["question"]
+    current_ans = set[data["question"]]["answers"]["ans1"]
+    current["current"] += 1
+    session["current"] = current
+    if data["answer"] == current_ans:
+        session["stats"][str(current["current"])] = {"quest":set[data["question"]]["question"],"correct":True}
+        correct = True
+        query = {"name":"play"}
+        update = {"$set":{"data."+code+".users."+username()+".score."+str(current["current"]+1):{"quest":quest,"correct":True}}}
+        global_data_db.update_one(query, update)
+    else:
+        session["stats"][str(current["current"])] = {"quest":set[data["question"]]["question"],"correct":False}
+        query = {"name":"play"}
+        update = {"$set":{"data."+code+".users."+username()+".score."+str(current["current"]+1):{"quest":quest,"correct":False}}}
+        global_data_db.update_one(query, update)
+    if session.get("current")["current"] == len(session.get("current")["order"]):
+        add_streak()
+        return {"done":True,"answer":current_ans,"correct":correct}
+    quest_num = current["order"][current["current"]]
+    next_quest = set[quest_num]
+
+    ans = []
+    temp = list(current["order"])
+    temp.remove(current["order"][current["current"]])
+    ans.append(set[current["order"][session["current"]["current"]]]["answers"]["ans1"])
+    try:
+        type = set[current["order"][current["current"]]]["type"]
+    except:
+        pass
+    else:
+        ans = []
+        for i in temp:
+            if set[i]["type"] == type:
+                temp.remove(i)
+                ans.append(set[i]["answers"]["ans1"])
+        if len(ans) >= 3:
+            random.shuffle(ans)
+            ans = ans[:2]
+            ans.append(set[current["order"][session["current"]["current"]]]["answers"]["ans1"])
+        else:
+            ans.append(set[current["order"][session["current"]["current"]]]["answers"]["ans1"])
+    while len(ans) < 3:
+        quest = random.choice(temp)
+        temp.remove(quest)
+        ans.append([set[quest]["answers"]["ans1"]])
+    random.shuffle(ans)
+
+    send_data = {
+        "done":False,
+        "correct":correct,
+        "answer":current_ans,
+        "question":next_quest["question"],
+        "answers":{
+            "ans1":ans[0],
+            "ans2":ans[1],
+            "ans3":ans[2]
+        },
+        "quest_num":quest_num
+    }
+    return send_data
+
 
 @app.route("/play/end/<code>")
 def play_end(code):
@@ -1431,7 +1502,7 @@ def settings():
     notifications = {}
     if request.method == "POST":
         theme = request.form["theme"]
-        db[username()]["settings"]["interface"]["theme"] = theme
+        user_data_db.update_one({"username":username(),"type":"user_data"},{"$set":{"data.settings.interface.theme":theme}})
     return render_template("settings/settings.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/focus")
@@ -1637,4 +1708,4 @@ def custom_upgrade():
 
 
 
-app.run(host='0.0.0.0', port=8080,debug=True)
+app.run(host='0.0.0.0', port=80,debug=True)

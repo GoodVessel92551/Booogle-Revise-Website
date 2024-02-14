@@ -3,7 +3,7 @@
 {% block title %}Questions{% endblock %}
 {% block main %}
     <form method="post" style="display:flex;justify-content: center;flex-wrap:wrap;width:calc(min(90%,900px) + 2px);" class="main">
-        <button type="button" class="speaker" id="speaker"><ion-icon name="volume-high-outline"></ion-icon></button>
+        <button type="button" class="speaker" id="speaker"><i class="ph ph-speaker-simple-high"></i></button>
         <div class="flashcard_container">
             <div class="flashcard_container_top">
             <div id="flashcard" class="flashcard quest_card">
@@ -23,7 +23,7 @@
         </div>
     </form>
     <div class="flash_buttons">
-        <a href="/" class="main_button second_button"><span>Exit</span><ion-icon name="exit-outline"></ion-icon></a>
+        <a href="/" class="main_button second_button"><span>Exit</span><i class="ph-bold ph-sign-out"></i></a>
     </div>
 </div>
 <script>
@@ -32,6 +32,7 @@
     var quest_num = {{quest_num|tojson}}
     var set = {{set|tojson}}
     var total_quests = {{total_quests|tojson}}
+    var mode = {{mode|tojson}}
     var correct = 0
     var wrong = 0
     var user = {{owner|tojson}}
@@ -59,7 +60,12 @@
         voice(text)
     })
     const answer = (ans) => {
-        var url = "/api/questions"
+        if (mode == "play"){
+            var url = "/api/play/quest"
+        }else{
+            var url = "/api/questions"
+        }
+        
         console.log(ans)
         var data = {
             "answer":ans,

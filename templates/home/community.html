@@ -277,8 +277,9 @@
         var user = document.createElement("a");
         var info = document.createElement("info");
         var subject = document.createElement("span")
-        var amount_of_questons = document.createElement("span")
+        var amount_of_questions = document.createElement("span")
         var hidden_share_link = document.createElement("a")
+        var download_num = document.createElement("span")
         a.setAttribute("data-subject", sets[sets_keys[i]]["settings"]["subject"].trim());
         a.setAttribute("data-user", sets[sets_keys[i]]["settings"]["user"]);
         img.draggable = false;
@@ -324,7 +325,8 @@
             subject.innerHTML = sets[sets_keys[i]]["settings"]["subject"];
         }
         info.classList.add("subject_info");
-        amount_of_questons.innerHTML = amount_questions+" Questions"
+        amount_of_questions.innerHTML = amount_questions+" Questions"
+        download_num.innerHTML = '<i class="ph ph-download-simple"></i> 0'
         p.innerText = sets[sets_keys[i]]["settings"]["desc"];
         a.id = sets_keys[i];
         strong.id = sets_keys[i];
@@ -369,7 +371,7 @@
         a.appendChild(user);
         a.appendChild(info);
         a.appendChild(hidden_share_link)
-        info.appendChild(amount_of_questons)
+        info.appendChild(amount_of_questions)
         info.appendChild(subject)
         home.appendChild(a);
     }

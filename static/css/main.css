@@ -593,10 +593,12 @@ html {
     background-color: var(--hover_top_green);
 }
 
-.home_add ion-icon {
+.home_add i {
     color: var(--on_top_green);
     font-size: 30px;
 }
+
+
 
 .home_menu {
     width: 200px;
@@ -998,6 +1000,12 @@ html {
     padding-top:16px;
 }
 
+
+@keyframes load_start {
+    from{transform: translateY(100px);opacity: 0;scale: 0.95;}
+    to{transform: translate(0px);opacity: 1;scale: 1;}
+}
+
 .start_set {
     width: 700px;
     height: 450px;
@@ -1007,6 +1015,7 @@ html {
     padding: 32px;
     border: none;
     border:var(--top_back_border);
+    animation: load_start .4s cubic-bezier(0.13, 0.98, 0.12, 0.96);
 }
 
 .share_set{
@@ -1394,7 +1403,7 @@ dialog::backdrop {
 }
 
 .up_container>.up_upgrade {
-    width: 320px;
+    width: 340px;
     background-color: var(--top_back);
     display: block;
     border-radius:var(--main_border_radius);
@@ -1616,12 +1625,16 @@ dialog::backdrop {
 
 .soon {
     color: var(--text);
-    background-color: var(--add_top);
+    background-color: var(--top_green);
+    border:var(--top_green_border);
     padding: 2px 10px;
-    font-size: 13px;
+    font-size: 12px;
     border-radius: 15px;
     margin-left: 6px;
     box-shadow: var(--shadow);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
 }
 
 .prompt_up {
@@ -2494,7 +2507,8 @@ dialog::backdrop {
 .user_leadrborad{
     display: flex;
     align-items: center;
-    background: var(--leaderboard);
+    background: var(--top_green);
+    border: var(--top_green_border);
     height:100%;
     width: 30%;
     padding:8px;
@@ -2505,7 +2519,8 @@ dialog::backdrop {
 .user_score{
     display: flex;
     align-items: center;
-    background: var(--leaderboard);
+    background: var(--top_green);
+    border: var(--top_green_border);
     height:100%;
     width: calc(70% - 8px);
     margin-left:8px;
@@ -2583,12 +2598,11 @@ input[type="number"]::-webkit-outer-spin-button {
     padding: 4px 8px;
     color: var(--on_top_green);
     border-radius:var(--main_border_radius);
-    font-size: 14px;
+    font-size: 12px;
     display:flex;
     align-items:center;
     gap:4px;
     white-space:nowrap;
-    font-size: 12px;
 }
 
 .subject {
@@ -3581,33 +3595,28 @@ input[type="number"]::-webkit-outer-spin-button {
     height:calc(100vh - 298px);
     display:flex;
     gap:32px;
-    align-items: flex-start;
+    
+    flex-direction: column;
 }
 
-.settings_menu{
-    background:var(--top_back);
-    width:220px;
-    padding:16px;
-    border-radius:var(--main_border_radius);
-}
 
 .settings_menu > strong{
     color:var(--text);
 }
 
 .settings_options{
-    width:100%;
-    margin-top:32px;
+    width:auto;
     display:flex;
     gap:8px;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .settings_options > a{
-    width:100%;
+    width:auto;
     height:32px;
-    border-radius:8px;
-    background:var(--on_top_back);
+    border-radius:var(--main_border_radius);
+    background:var(--top_back);
+    border: var(--top_back_border);
     display:block;
     flex-shrink: 0;
     padding:8px 16px;
@@ -3617,25 +3626,32 @@ input[type="number"]::-webkit-outer-spin-button {
     align-items: center;
     gap:8px;
     cursor:pointer;
-    transition:filter .3s;
+    transition:background-color .3s;
+}
+
+.settings_options > .current{
+    border-color:var(--main_button);
 }
 
 .settings_options > a:hover{
-    filter: brightness(110%);
+    background-color: var(--hover_top_green);
 }
 
 .change_settings{
-    width:calc(100% - 284px);
+    width:100%;
     background:var(--top_back);
     border-radius:var(--main_border_radius);
-    height:100%;
+    border:var(--top_back_border);
+    height:auto;
     padding:32px;
+    box-sizing: border-box;
 }
 
 .change_settings > h2{
     color:var(--text);
     font-size: 24px;
-    margin-bottom:4px
+    margin-bottom:4px;
+    margin-top:0px;
 }
 
 .change_settings > p{
@@ -3651,26 +3667,6 @@ input[type="number"]::-webkit-outer-spin-button {
     margin-top:32px;
 }
 
-.change_settings > select{
-    appearance: none;
-    background:var(--leaderboard);
-    border-radius:8px;
-    color:var(--text);
-    padding:6px 8px;
-    border:none;
-    background-image: url(/static/down.svg);
-    background-repeat: no-repeat;
-    background-position: 125px;
-    background-size: 16px 16px;
-    width:150px;
-    transition:.3s background-color;
-}
-
-.change_settings > select:focus{
-    background-color:var(--settings_back_focus);
-    background-image: url(/static/up.svg);
-    outline:none;
-}
 
 .settings_cards{
     width:100%;

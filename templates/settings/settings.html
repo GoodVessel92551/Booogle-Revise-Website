@@ -1,30 +1,25 @@
 {% extends "base.html" %}
+{% block page_title %} Settings {% endblock %}
 {% block title %}Settings{% endblock %}
 {% block main %}
 <main class="main">
     <h1>Settings</h1>
-    <div class="home_buttons">
-        <a href="/" class="main_button">
-            <span>Home</span><ion-icon name="home-outline"></ion-icon>
-        </a>
-    </div>
     <div class="settings_main">
         <div class="settings_menu">
-            <strong>Options</strong>
             <div class="settings_options">
-                <a><ion-icon name="tablet-landscape-outline"></ion-icon><span>Interface</span></a>
-                <a><ion-icon name="accessibility-outline"></ion-icon><span>Accessibility</span></a>
-                <a><ion-icon name="person-outline"></ion-icon><span>Account</span></a>
+                <a class="current"><i class="ph ph-gear"></i><span>General</span></a>
+                <a><i class="ph ph-person-arms-spread"></i><span>Accessibility</span></a>
+                <a><i class="ph ph-user-circle-gear"></i></ion-icon><span>Account</span></a>
             </div>
         </div>
         <form class="change_settings" method="post">
-            <button onclick="save=false;document.getElementById('save_text').innerText = 'Saving...';" type="submit"
-                class="main_button top_title_button" style="position: absolute; top: 34.5px; right: 0px">
-                <span id="save_text">Save</span>
-                <ion-icon name="save-outline"></ion-icon>
-            </button>
+            <div class="home_buttons">
+                <button id="save_button" class="main_button">
+                    <span>Save</span><i class="ph-bold ph-floppy-disk"></i>
+                </button>
+            </div>
             <h2>Interface</h2>
-            <p>Change The Appliance Of The UI</p>
+            <p>Change the style of the UI</p>
             <h3>Theme</h3>
             <p>Change The Color Theme From 4 Deferent Presets</p>
             <select name="theme">
@@ -33,13 +28,14 @@
                 <option value="yellow">Yellow</option>
                 <option value="red">Red</option>
             </select>
-            <h3>Cards</h3>
-            <p>Change The Appliance Of The Cards Used To Show Sets, Folders and Groups</p>
-            <div class="settings_cards">
-            <a onclick="document.getElementById('round').checked = true"><set><span></span></set><input type="radio" name="cards" value="round" id="round" checked></a>
-            <a onclick="document.getElementById('straight').checked = true"><set><span style="border-radius:16px 16px 0px 0px"></span></set><input type="radio" name="cards" value="straight" id="straight"></a>
             </form>
         </div>
     </div>
 </main>
+<script>
+    var save_button = document.getElementById('save_button');
+    save_button.addEventListener("click",() => {
+        save_button.classList.add('button_spinner');
+    })
+</script>
 {% endblock %}
