@@ -29,7 +29,7 @@
         <div class="all_contain_start">
             <img class="set_image" id="set_image">
             <div class="text_contain_start">
-                <h1 id="set_title" class="set_title_dialog">Set Name</h1>
+                <h1 id="set_title" class="set_title_dialog">Set Name</h1><span id="move_button" class="move_folder"><i class="ph ph-arrows-out-cardinal"></i>Move</span>
                 <p id="set_desc"></p>
             </div>
         </div>
@@ -100,6 +100,23 @@
             <button class="delete_button_dialog">Delete</button>
         </div>
     </dialog>
+    <dialog id="move_dialog" class="delete_dialog">
+        <h3>Move this set</h3>
+        <p>Move this set to a group of a folder.
+            <div class="move_set_option">
+                <button onclick="change_move('folder')"><i class="ph ph-folder-simple"></i>Folder</button>
+                <button onclick="change_move('group')"><i class="ph ph-users-three"></i>Group</button>
+                <span class="option_selected"></span>
+            </div>
+            <folders id="move_folders">
+
+            </folders>
+        <div>
+            <span id="delete_span_title" class="delete_span_title">Set Title: </span>
+            <button onclick="document.getElementById('move_dialog').close()" class="delete_cancel">Cancel</button>
+            <button class="move_button_dialog">Move</button>
+        </div>
+    </dialog>
 </main>
 <nav class="bottom_nav">
     <a href="/" class="bottom_nav_current"><ion-icon name="home-outline"></ion-icon>Home</a>
@@ -109,6 +126,7 @@
     <a href="/new/folder"><ion-icon name="folder-open-outline"></ion-icon></a>
 </nav>
 <script>
+
     const delete_set = (name, title) => {
         document.getElementById("delete_dialog").showModal()
         document.getElementById("delete_span_title").innerText = `Title: ${title}`
@@ -199,6 +217,9 @@
             document.getElementById("test").href = `/test/${name}`
             document.getElementById("test_lock").remove()
         }
+        document.getElementById("move_button").addEventListener("click", () => {
+            move_set(name)
+        })
     }
     var sets = {{ sets| tojson}};
     var sets_keys = Object.keys(sets)
@@ -483,6 +504,96 @@
     share_button.addEventListener("click", () => {
         share_button.classList.add("button_spinner")
     })
+    var move_location_type = "folder"
+    const change_move = (type) => {
+        var option_selected = document.querySelector(".option_selected")
+        if (type == "folder") {
+            move_location_type = "folder"
+            option_selected.style.left = "0"
+            var groups_elements = document.querySelectorAll(".group_move")
+            groups_elements.forEach(element => {
+                element.style.display = "none"
+            });
+            var folder_elements = document.querySelectorAll(".folder_move")
+            folder_elements.forEach(element => {
+                element.style.display = "flex"
+            });
+        } else {
+            move_location_type = "group"
+            var folder_elements = document.querySelectorAll(".folder_move")
+            folder_elements.forEach(element => {
+                element.style.display = "none"
+            });
+            var groups_elements = document.querySelectorAll(".group_move")
+            groups_elements.forEach(element => {
+                element.style.display = "flex"
+            });
+            option_selected.style.left = "50%"
+        }
+    }
+    var move_folders = document.getElementById("move_folders")
+    folder_keys.forEach(element => {
+        var span = document.createElement("span")
+        var info = document.createElement("info")
+        var title = document.createElement("strong")
+        var desc = document.createElement("p")
+        var img = document.createElement("img")
+        var input = document.createElement("input")
+        title.id = element
+        span.classList.add("folder_move")
+        input.type = "radio"
+        input.name = "pick_folder"
+        input.classList.add("radio_input")
+        title.innerText = folders[element]["name"]
+        desc.innerText = folders[element]["desc"]
+        img.src = `/static/folders/${folders[element]["background"]}.webp`
+        span.appendChild(img)
+        span.appendChild(info)
+        span.appendChild(input)
+        info.appendChild(title)
+        info.appendChild(desc)
+        move_folders.appendChild(span)
+    });
+    group_keys.forEach(element => {
+        var span = document.createElement("span")
+        var info = document.createElement("info")
+        var title = document.createElement("strong")
+        var desc = document.createElement("p")
+        var img = document.createElement("img")
+        var input = document.createElement("input")
+        title.id = element
+        span.classList.add("group_move")
+        input.type = "radio"
+        input.name = "pick_folder"
+        input.classList.add("radio_input")
+        title.innerText = groups[element]["settings"]["Title"]
+        desc.innerText = groups[element]["settings"]["Desc"]
+        img.src = `/static/groups/${groups[element]["settings"]["Cover"]}.webp`
+        span.appendChild(img)
+        span.appendChild(info)
+        span.appendChild(input)
+        info.appendChild(title)
+        info.appendChild(desc)
+        move_folders.appendChild(span)
+        span.style.display = "none"
+    });
+
+    const move_set = (set_name) => {
+        document.getElementById("move_dialog").showModal()
+        document.querySelector(".move_button_dialog").addEventListener("click", () => {
+            var selected = document.querySelector('input[name="pick_folder"]:checked').parentElement
+            if (move_location_type == "folder") {
+                fetch(`/add/folder/${selected.querySelector("strong").id}/${set_name}`)
+                document.getElementById(set_name).remove()
+            } else {
+                fetch(`/add/group/${selected.querySelector("strong").id}/${set_name}`)
+            }
+            document.getElementById("move_dialog").close()
+            document.getElementById("start_set").close()
+            new_notification("Success", "This set has been moved", "checkmark-circle", "success")
+        })
+    
+    }
 </script>
 <div class="home_menu" id="home_menu">
     <a href="/community"><i class="ph-bold ph-globe-hemisphere-west"></i>Community</a>

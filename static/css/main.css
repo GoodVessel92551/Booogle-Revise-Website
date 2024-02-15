@@ -4198,7 +4198,7 @@ select:focus{
 }
 
 .delete_dialog{
-    max-width:350px;
+    min-width:350px;
     background: var(--top_back);
     border: var(--top_back_border);
     color:var(--text);
@@ -4235,7 +4235,7 @@ select:focus{
     outline: none;
 }
 
-.delete_dialog > div{
+.delete_dialog > div:not(.move_set_option){
     display:flex;
     gap:16px;
     padding:0px 16px 16px 16px;
@@ -4254,6 +4254,18 @@ select:focus{
 .delete_button_dialog{
     background:var(--error_button);
     color:var(--on_error_button);
+    border:none;
+    font-size:13px;
+    border-radius:var(--main_border_radius);
+    padding:8px 16px;
+    cursor: pointer;
+    transition:.3s filter;
+    font-weight: 600;
+}
+
+.move_button_dialog{
+    background:var(--main_button);
+    color:var(--on_main_button);
     border:none;
     font-size:13px;
     border-radius:var(--main_border_radius);
@@ -4829,4 +4841,153 @@ part > p{
 
 .flashcards_containers > span > button:active ion-icon{
     transform: rotate(90deg);
+}
+
+.set_title_dialog{
+    display: inline;
+}
+
+.move_folder{
+    color:#D9B639;
+    background-color: #393724;
+    border-radius: var(--main_border_radius);
+    padding:4px 16px;
+    font-size:14px;
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    margin-left:16px;
+    cursor: pointer;
+    transition: filter .3s;
+}
+
+.move_folder:hover{
+    filter: brightness(110%);
+}
+
+.move_set_option{
+    height:32px;
+    width:calc(100% - 32px);
+    display: flex;
+    margin-left:16px;
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.move_set_option > button{
+    width:50%;
+    height:32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:8px;
+    border:none;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    background:none;
+    color:var(--text);
+    border-radius: 16px;
+}
+
+.move_set_option > button:focus{
+    outline:none;
+}
+
+.option_selected{
+    background:var(--top_green);
+    border: var(--top_green_border);
+    width:50%;
+    height:100%;
+    border-radius: var(--main_border_radius);
+    position: absolute;
+    z-index: -1;
+    box-sizing: border-box;
+    left:0px;
+    transition: 400ms cubic-bezier(0.25, 0.1, 0, 1.32) left;
+}
+
+.delete_dialog > folders{
+    width:calc(100% - 32px);
+    margin-left:16px;
+    display: flex;
+    gap:8px;
+    flex-direction: column;
+    margin-bottom: 16px;
+    max-height:200px;
+    overflow-y: scroll;
+}
+
+.delete_dialog > folders > span{
+    height:48px;
+    width:100%;
+    background-color: var(--top_green);
+    border:var(--top_green_border);
+    border-radius: var(--main_border_radius);
+    display: flex;
+    flex-direction: row;
+    padding:8px;
+    box-sizing: border-box;
+    gap:8px;
+    position: relative;
+}
+
+.delete_dialog > folders > span > img{
+    width:32px;
+    height:32px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.delete_dialog > folders > span > info{
+    display: flex;
+    flex-direction: column;
+    gap:4px;
+    justify-content: space-between;
+}
+
+.delete_dialog > folders > span > info > strong{
+    color:var(--text);
+    font-size:14px;
+    margin:0px;
+    line-height: 10px;
+
+}
+
+.delete_dialog > folders > span > info > p{
+    color:var(--text4);
+    font-size:12px;
+    margin:0px;
+    line-height: 14px;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.delete_dialog > folders > span > input{
+    position: absolute;
+    top:50%;
+    right:16px;
+    transform: translateY(-50%);
+}
+
+.radio_input{
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background-color:#2D312C;
+    border: 1px solid #3E433D;
+    border-radius:var(--main_border_radius);
+    cursor: pointer;
+    transition: .3s border-color, .3s background-image;
+    margin: 0px;
+    z-index:2;
+}
+
+.radio_input:checked {
+    background-color: var(--main_button);
+    background-image: url("/static/svgs/tick_choice_2.svg");
+    display: block;
+    border-color: #7DB47F;
 }
