@@ -1,0 +1,194 @@
+title,language
+Introduction to Python Basics,python
+Introduction to C++ Basics,cplusplus
+Introduction to C# Basics,csharp
+Basics of python,python
+Basics of C++,cplusplus
+Basics of C#,csharp
+Advanced Data Structures in Python,python
+Object-Oriented Programming in Python,python
+Python for Machine Learning,python
+C# Fundamentals: Getting Started,csharp
+Advanced C# Programming Techniques,csharp
+Building Desktop Applications with C#,csharp
+C++ Programming: From Basics to Advanced,cplusplus
+Data Structures and Algorithms in C++,cplusplus
+Object-Oriented Design with C++,cplusplus
+Python Web Development with Django,python
+Game Development with Unity and C#,csharp
+Graphics Programming in C++,cplusplus
+Machine Learning Algorithms in Python,python
+Database Management with SQL and C#,csharp
+Advanced Topics in C++,cplusplus
+Python Scripting for Automation,python
+Introduction to Unity Game Engine,csharp
+Network Programming in Python,python
+Software Engineering Principles with C#,csharp
+Parallel Programming in C++,cplusplus
+Python GUI Development with Tkinter,python
+Mobile App Development with Xamarin,csharp
+Advanced C# Web Applications,csharp
+Embedded Systems Programming in C++,cplusplus
+Data Analysis with Pandas in Python,python
+C# and .NET Core Development,csharp
+OpenGL Graphics Programming in C++,cplusplus
+Python for Web Scraping and Automation,python
+Introduction to ASP.NET Core MVC,csharp
+Advanced C++ Template Metaprogramming,cplusplus
+Cybersecurity with Python and C#,python
+Unity VR Development with C#,csharp
+Game Engine Architecture in C++,cplusplus
+Natural Language Processing with Python,python
+ASP.NET Core Web API Development,csharp
+Advanced C# Database Programming,csharp
+Robotics Programming with ROS and C++,cplusplus
+Python Data Visualization with Matplotlib,python
+Windows Forms Applications with C#,csharp
+Advanced Topics in C++ Multithreading,cplusplus
+Web Development with Flask and Python,python
+Cross-Platform Mobile Development with C#,csharp
+Embedded Linux Programming with C++,cplusplus
+Machine Learning Model Deployment with Python,python
+Advanced C# Design Patterns,csharp
+Graphics Rendering in C++ with OpenGL,cplusplus
+Python for Scientific Computing,python
+Azure Cloud Development with C#,csharp
+Game Physics Programming in C++,cplusplus
+Web Scraping and Data Mining with Python,python
+Distributed Systems with .NET Core and C#,csharp
+Real-time Systems Programming in C++,cplusplus
+Python for Artificial Intelligence,python
+Enterprise Application Development with C#,csharp
+Systems Programming in C++,cplusplus
+Web Development with Django and Python,python
+Cross-Platform Desktop App Development with C#,csharp
+Embedded Firmware Development with C++,cplusplus
+Quantitative Finance with Python,python
+Microservices Architecture with .NET Core and C#,csharp
+Advanced Algorithms in C++,cplusplus
+Python for Image Processing and Computer Vision,python
+Machine Learning Operations (MLOps) with C#,csharp
+High-Performance Computing with C++,cplusplus
+Web Scraping and Automation with Selenium in Python,python
+Cloud-Native Development with Kubernetes and C#,csharp
+Game AI Programming in C++,cplusplus
+Python Natural Language Toolkit (NLTK) Essentials,python
+Full Stack Web Development with ASP.NET Core and C#,csharp
+Embedded Systems Development with Arduino and C++,cplusplus
+Python for Data Science and Analytics,python
+Blockchain Development with C# and .NET, csharp
+Network Protocol Development in C++,cplusplus
+Python for Bioinformatics,python
+Desktop GUI Applications with WPF and C#,csharp
+Game Engine Optimization Techniques in C++,cplusplus
+Python for Data Analysis and Visualization,python
+Advanced Topics in C# Multithreading,csharp
+Network Security with C++ and Python,cplusplus
+Full Stack Web Development with Flask and Python,python
+Mobile Game Development with Unity and C#,csharp
+Real-time Graphics Programming in C++,cplusplus
+Python GUI Applications with PyQt,python
+Cross-Platform Mobile App Development with Xamarin and C#,csharp
+High-Performance Computing with CUDA and C++,cplusplus
+Data Mining and Machine Learning in Python,python
+Web Development with ASP.NET MVC and C#,csharp
+Embedded Robotics Programming with C++ and Python,cplusplus
+Python Automation for System Administrators,python
+Game Design Patterns in Unity with C#,csharp
+Graphics Programming with DirectX in C++,cplusplus
+Python for Finance and Algorithmic Trading,python
+ASP.NET Core Identity and Authentication with C#,csharp
+Computer Vision and Image Processing in C++ with OpenCV,cplusplus
+Python RESTful API Development with Flask,python
+Cross-Platform Desktop Applications with Electron and C#,csharp
+Parallel and Distributed Computing in C++ with MPI,cplusplus
+Python Scripting for DevOps Automation,python
+Unity Shader Programming with C#,csharp
+Game Engine Architecture and Design in C++,cplusplus
+Advanced Python Programming Techniques,python
+Web Development with Blazor and C#,.NET
+C++ Robotics and Control Systems Programming,cplusplus
+Data Science Projects with Python,python
+ASP.NET Core Razor Pages Development with C#,csharp
+Systems Programming in C++ on Linux,cplusplus
+Python for Cybersecurity and Ethical Hacking,python
+Augmented Reality App Development with Unity and C#,csharp
+Embedded Linux Development with Yocto and C++,cplusplus
+Python for Web Development and APIs,python
+C# Windows Services and Background Workers,csharp
+Advanced 3D Graphics Programming in C++,cplusplus
+Python Data Analysis and Visualization with Pandas and Matplotlib,python
+Cross-Platform Game Development with MonoGame and C#,csharp
+Real-Time Embedded Systems Programming with C++,cplusplus
+Python GUI Programming with Kivy,python
+ASP.NET Core Microservices Development with C#,csharp
+C++ Network Programming with Boost.Asio,cplusplus
+Python for Natural Language Understanding and Processing,python
+Mobile App Development with Flutter and Dart,csharp
+Graphics Programming with Vulkan in C++,cplusplus
+Python for Computational Biology and Bioinformatics,python
+Enterprise Web Applications with ASP.NET Core and C#,csharp
+Advanced C++ Memory Management and Optimization Techniques,cplusplus
+Python Web Scraping and Data Extraction,python
+Desktop Application Development with WinForms and C#,csharp
+Real-Time Rendering Techniques in C++ with DirectX,cplusplus
+Python for Internet of Things (IoT) Projects,python
+Cloud Development with Azure Functions and C#,csharp
+Game AI Programming with Behavior Trees in C++,cplusplus
+Python Testing and Test-Driven Development (TDD),python
+Cross-Platform Mobile Game Development with Godot and C#,csharp
+Systems Programming in C++ on Windows,cplusplus
+Python Deep Learning with TensorFlow and Keras,python
+ASP.NET Core WebHooks Development with C#,csharp
+C++ Game Engine Development with Unreal Engine,cplusplus
+Python for Quantum Computing,python
+Cloud-Native Microservices with .NET Core and C#,csharp
+Multimedia Applications Development in C++ with FFmpeg,cplusplus
+Python Web Development with FastAPI,python
+C# Windows Presentation Foundation (WPF) Development,csharp
+Advanced Game Physics Programming in C++,cplusplus
+Python for Robotics and Automation,python
+ASP.NET Core SignalR Development with C#,csharp
+C++ Compiler Design and Implementation,cplusplus
+Data Visualization and Dashboarding in Python with Plotly,python
+Cross-Platform Desktop App Development with Avalonia and C#,csharp
+Real-Time Audio Programming in C++ with OpenAL,cplusplus
+Python Data Analysis and Machine Learning with scikit-learn,python
+Web Development with NancyFX and C#,csharp
+Embedded Systems Programming with Arduino in C++,cplusplus
+Python for Geospatial Analysis and Mapping,python
+ASP.NET Core GraphQL Development with C#,csharp
+C++ Game Engine Architecture and Design Patterns,cplusplus
+Deep Reinforcement Learning with Python,python
+Desktop Application Development with UWP and C#,csharp
+Graphics Programming with OpenGL in C++ on MacOS,cplusplus
+Python for Computer Graphics and Animation,python
+Web Scraping and Automation with Scrapy in Python,python
+Serverless Computing with Azure Functions and C#,csharp
+Advanced C++ Graphics Rendering Techniques with DirectX,cplusplus
+Machine Learning Model Interpretability with Python,python
+C++ Robotics Simulation with Gazebo,cplusplus
+Python for Data Mining and Predictive Analysis,python
+ASP.NET Core Blazor Component Development with C#,csharp
+Network Protocol Development with Python and C++,cplusplus
+Cross-Platform Mobile App Development with React Native and C#,csharp
+Real-Time Physics Simulation in C++ with Bullet Physics,cplusplus
+Python for Game Development and Simulation,python
+ASP.NET Core Authentication and Authorization with C#,csharp
+C++ Game Engine Physics Integration with NVIDIA PhysX,cplusplus
+Data Engineering with Python and Apache Spark,python
+Web Development with OWIN and C#,csharp
+Embedded Systems Programming with Raspberry Pi in C++,cplusplus
+Python Natural Language Processing (NLP) with spaCy,python
+ASP.NET Core WebHooks Development with C# and Azure Functions,csharp
+C++ GUI Application Development with Qt,cplusplus
+Quantitative Trading Strategies with Python,python
+C++ Robotics Middleware with ROS,cplusplus
+Python for Social Network Analysis,python
+Web Scraping and Data Extraction with BeautifulSoup in Python,python
+Cloud Development with AWS Lambda and C#,csharp
+Game Engine Audio Programming in C++ with FMOD Studio,cplusplus
+Python for Computer Vision and Image Processing,python
+Microservices Development with Service Fabric and C#,csharp
+OpenGL Shading Language (GLSL) Programming in C++,cplusplus
+Python for Time Series Analysis and Forecasting,python

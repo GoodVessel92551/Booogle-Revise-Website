@@ -399,6 +399,79 @@
 
         });
     }
+    var code_sets = {{code_sets| tojson}};
+    var code_sets_keys = Object.keys(code_sets)
+    code_sets_keys.forEach((key) => {
+        console.log(code_sets_keys)
+        var level = code_sets[key]["level"];
+        var home = document.getElementById("home_sets");
+        var a = document.createElement("a");
+        a.classList.add("set_home")
+        var img = document.createElement("img");
+        var strong = document.createElement("strong");
+        var p = document.createElement("p");
+        var user = document.createElement("a");
+        var info = document.createElement("info");
+        var amount_of_questions = document.createElement("span")
+        a.href = "/code/" + code_sets[key]["id"];
+        a.setAttribute("data-subject", code_sets[key]["language"].trim());
+        a.setAttribute("data-user", code_sets[key]["user"]);
+        img.draggable = false;
+        img.alt = code_sets[key]["title"];
+        img.src = `/static/code_icons/${code_sets[key]["background"]}.webp`;
+        user.innerText = code_sets[key]["user"];
+        user.classList.add("user_name");
+        user.href = "/stats/@" + code_sets[key]["user"];
+        strong.innerText =code_sets[key]["title"];
+        a.setAttribute("data-value", code_sets[key]["language"].trim());
+        info.classList.add("subject_info");
+        amount_of_questions.innerHTML = "<i class='ph ph-file-code'></i>Code"
+        p.innerText = code_sets[key]["desc"];
+        a.id = key;
+        strong.id = key;
+        strong.classList.add("set_title");
+        img.id = key;
+        p.id = key;
+        if (level != false) {
+            var badge = document.createElement("ion-icon");
+            badge.classList.add("badge");
+                if (level == "boost") {
+                    badge.name = "rocket-outline";
+                    badge.style.background = "var(--boost1)";
+                    badge.style.color = "var(--on_boost)";
+                } else if (level == "premium") {
+                    badge.name = "sparkles-outline";
+                    badge.style.background = "var(--premium1)";
+                    badge.style.color = "var(--on_premium)";
+                } else if (level == "pro") {
+                    badge.name = "medal-outline";
+                    badge.style.background = "var(--pro1)";
+                    badge.style.color = "var(--on_pro)";
+                } else if (level == "elite") {
+                    badge.name = "diamond-outline";
+                    badge.style.background = "var(--elite1)";
+                    badge.style.color = "var(--on_elite)";
+                } else if (level == "admin") {
+                    badge.name = "shield-checkmark";
+                    badge.style.background = "#f2ecb6";
+                    badge.style.color = "#615210";
+                }
+            badge.id = code_sets[key]["title"];
+            user.appendChild(badge);
+            document.querySelector("svg").addEventListener("load", () => {
+                document.querySelectorAll(".badge").forEach((badge_item) => {
+                    badge_item.style.display = "inline-block";
+                });
+            });
+        }
+        a.appendChild(img);
+        a.appendChild(strong);
+        a.appendChild(p);
+        a.appendChild(user);
+        a.appendChild(info);
+        info.appendChild(amount_of_questions)
+        home.appendChild(a);
+    })
 
     var current_set = ""
     for (let j = 0; j < droppableContainers.length; j++) {
@@ -601,7 +674,7 @@
     <a href="/new"><i class="ph-bold ph-plus"></i>New Set</a>
     <a href="/new/folder"><i class="ph-bold ph-folder-notch-plus"></i>New Folder</a>
     <a href="/new/group"><i class="ph-bold ph-users-three"></i>New Group</a>
-    <a href="/new/learn"><i class="ph-bold ph-book-open-text"></i>New Learn Set</a>
+    <a href="/new/code"><i class="ph ph-file-code"></i>New Code Set</a>
 </div>
 <button onclick="menu_open()" id="home_menu_button" class="home_add"><i id="menu_icon" class="ph ph-list"></i></button>
 {% endblock %}

@@ -4991,3 +4991,125 @@ part > p{
     display: block;
     border-color: #7DB47F;
 }
+
+
+.code_editor_container{
+    width:calc(50% - 8px);
+    border-radius: var(--main_border_radius);
+    overflow: hidden;
+    color:var(--text);
+    border:var(--top_back_border);
+    background-color: var(--top_back);
+}
+
+.code_editor{
+    width: 100%;
+    box-sizing: border-box;
+    height:calc(100vh - 300px);
+}
+
+.top_banner_code{
+    width:100%;
+    background-color: var(--top_green);
+    border-bottom:var(--top_green_border);
+    padding:8px 16px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    box-sizing: border-box;
+    gap:8px;
+}
+
+.top_banner_code > strong{
+    font-weight: normal;
+}
+
+.button_options_code{
+    display: flex;
+    gap:8px;
+    align-items: center;
+    margin-left:auto;
+}
+
+.button_options_code > button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color:var(--text);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button_options_code > button:hover{
+    filter: brightness(90%);
+}
+
+.button_options_code > button:focus-visible{
+    color:var(--text2);
+    outline: none;
+}
+
+.code_editor{
+    display: flex;
+    flex-direction: row;
+    gap:16px;
+}
+
+.code_output{
+    width:100%;
+    height:calc(50% - 8px);
+    border-radius: var(--main_border_radius);
+    overflow: hidden;
+    color:var(--text);
+    border:var(--top_back_border);
+    background-color: var(--top_back);
+}
+
+.code_output > pre{
+    width:100%;
+    height:100%;
+    overflow-y: scroll;
+    padding:16px;
+    margin-top:0px;
+    box-sizing: border-box;
+}
+
+
+.code_output > pre > span > input{
+    background: none;
+    border:none;
+    color:var(--text);
+    font-size: 16px;
+    padding:0px;
+}
+
+.code_output > pre > span > input:focus{
+    outline:none;
+}
+
+.code_tools{
+    width:calc(50% - 8px);
+    display: flex;
+    gap:16px;
+    flex-direction: column;
+}
+
+
+.markdown{
+    width:100%;
+    height:calc(50% - 8px);
+    border-radius: var(--main_border_radius);
+    overflow: hidden;
+    color:var(--text);
+    border:var(--top_back_border);
+    background-color: var(--top_back);
+}
+
+.instructions_element{
+    padding:0px 16px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    height:calc(100% - 32px);
+}

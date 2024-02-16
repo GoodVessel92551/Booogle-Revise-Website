@@ -12,6 +12,7 @@ from booogle_ai_tools.smartmatch import smartmatch
 from booogle_ai_tools.smartsubject import smartsubject
 from booogle_ai_tools.smartfeedback import smartfeedback
 from booogle_ai_tools.username_mod import username_mod
+from booogle_ai_tools.smartcode import smartcode
 import hashlib
 from flask import Flask, redirect, request,jsonify
 from flask.templating import render_template
@@ -27,7 +28,9 @@ db = client["Booogle_Revise"]
 global_data_db = db["Global_Data"]
 user_data_db = db["User_Data"]
 
-
+def code_lang(title):
+    lang = smartcode.text(title)
+    return lang
 
 def ans_feeback(ans):
     return smartfeedback.text(ans)

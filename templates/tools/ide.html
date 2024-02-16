@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% block page_title %} {{title}} {% endblock %}
+{% block title %}{{title}}{% endblock %}
+{% block main %}
+<script type="text/javascript" src="https://unpkg.com/monaco-editor@latest/min/vs/loader.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/pyodide/v0.17.0/full/pyodide.js"></script>
+<main class="main ">
+    <h1>{{title}}</h1>
+    <div class="home_buttons no_hide">
+        <a class="main_button third_button" href="/publish/code/{{id}}" ><span>Publish</span><i class="ph ph-upload-simple"></i></a>
+        <button class="second_button main_button" onclick="save()"><span>Save</span><i class="ph-bold ph-floppy-disk"></i></button>
+        <button id="run_button" onclick="runPython()" class="main_button"><span>Run</span><i class="ph-bold ph-play"></i></button>
+    </div>
+    <editor class="code_editor">
+        <div class="code_editor_container">
+            <div class="top_banner_code">
+                <i class="ph ph-file-code"></i>
+                <strong>main.py</strong>
+                <div class="button_options_code">
+                    <button onclick="runPython()" type="button"><i class="ph ph-play"></i></button>
+                    <button type="button" onclick="save()"><i class="ph ph-floppy-disk"></i></button>
+                </div>
+            </div>
+            <div id="container" class="code_editor"></div>
+        </div>
+    </div>
+    <tools class="code_tools">
+        <div  class="code_output">
+            <div class="top_banner_code">
+                <i class="ph ph-terminal-window"></i>
+                <strong>Console</strong>
+                <div class="button_options_code">
+                    <button type="button" onclick="document.getElementById('output').innerHTML='<span>{{title}}><input id=console_input></span>';reset_input()"><i class="ph ph-broom"></i></button>
+                </div>
+            </div>
+            <pre id="output">
+<span>{{title}}><input id="console_input"></span>
+            </pre>
+        </div>
+        <div class="markdown">
+            <div class="top_banner_code">
+                <i class="ph ph-file-text"></i>
+                <strong>Instructions</strong>
+                <div class="button_options_code">
+                    <button><i class="ph ph-pencil-simple"></i></button>
+                </div>
+            </div>
+            <div id="instructions_element" class="instructions_element">
+
+            </div>
+        </div>
+    </tools>
+    </editor>
+</main>
+
+<script>
+    var title = {{title|tojson}};
+    var instructions = {{instructions|tojson}};
+    var id = {{id|tojson}};
+    const instructions_element = document.getElementById('instructions_element');
+    instructions_element.innerHTML = marked.parse(instructions)
+    const run_button = document.getElementById('run_button');
+    const output_element = document.getElementById('output');
+    let pyodideReady = false;
+
+    const save = () =>{
+        localStorage.setItem("code-"+id, window.editor.getValue())
+    }
+    const load = () =>{
+        return localStorage.getItem('code-'+id) || ""
+    }
+
+    const reset_input = () => {
+        var console_input = document.getElementById('console_input');
+        console.log(console_input)
+        console_input.addEventListener('keydown',(event) => {
+        if (event.key === 'Enter') {
+            text = console_input.value
+            if (text == "python main.py" || text == "python3 main.py") {
+                runPython()
+            }
+            else if (text.startsWith("pip install ")) {
+                installPackage(text.split(" ")[2])
+            }
+            else {
+                output_element.innerText = "Command not found"
+                document.getElementById('output').innerHTML +='\n<span>{{title}}><input id=console_input></span>'
+                reset_input()
+            }
+        }
+    });
+    }
+    reset_input()
+    document.addEventListener('keydown',(event) => {
+        if (event.ctrlKey && event.key === 'Enter') {
+            runPython()
+        }
+    });
+    async function loadPyodideIfNeeded() {
+        if (!pyodideReady) {
+            await loadPyodide({ indexURL: "https://cdn.jsdelivr.net/pyodide/v0.17.0/full/" });
+            pyodideReady = true;
+        }
+    }
+    async function installPackage(packageName) {
+            await loadPyodideIfNeeded();
+            await pyodide.loadPackage([packageName]);
+            output_element.innerText = `Successfully installed ${packageName}`;
+            document.getElementById('output').innerHTML +='\n<span>{{title}}><input id=console_input></span>'
+            reset_input()
+        }
+    async function runPython() {
+        save()
+        run_button.classList.toggle("button_spinner")
+
+        const code = window.editor.getValue();
+        await loadPyodideIfNeeded();
+
+        pyodide.runPython(`
+            import sys
+            from io import StringIO
+            sys.stdout = StringIO()
+        `);
+
+        pyodide.runPython(`
+                import js
+                class Input:
+                    def __init__(self):
+                        self.value = None
+
+                    def callback(self, value):
+                        self.value = value
+
+                    def __call__(self, prompt=''):
+                        input = Input()
+                        js.getInput(prompt, input.callback)
+                        while input.value is None:
+                            pass
+                        return input.value
+
+                input = Input()
+            `);
+        try {
+            // Run the user's Python code
+            pyodide.runPython(code);
+
+            // Get the output from Python stdout
+            const output = pyodide.runPython("sys.stdout.getvalue()");
+            output_element.innerText = output;
+            output_element.style.color = "var(--text)"
+        } catch (error) {
+            output_element.style.color = "var(--error_button)"
+            output_element.innerText = error;
+        }
+        run_button.classList.toggle("button_spinner")
+    }
+    window.getInput = function(prompt, callback) {
+        console.log(prompt)
+        var input = window.prompt(prompt);
+        callback(input);
+    }
+
+    require.config({
+        paths: { vs: "https://cdn.jsdelivr.net/npm/monaco-editor/min/vs" }
+    });
+
+    require(['vs/editor/editor.main'], function () {
+        monaco.editor.defineTheme('booogle-dark', {
+        base: 'vs-dark',
+        inherit: true,
+        rules: [
+        { token: 'comment', foreground: '7f7f7f' },
+            { token: 'keyword', foreground: '6dabdf' },
+            { token: 'number', foreground: 'b5cea8' },
+            { token: 'regexp', foreground: 'ce9178' },
+            { token: 'operator', foreground: 'd4d4d4' },
+            { token: 'string', foreground: 'e9a589' },
+            { token: 'delimiter', foreground: 'd4d4d4' },
+            { token: 'type.identifier', foreground: '569cd6' },
+            { token: 'variable.identifier', foreground: 'd4d4d4' },
+            { token: 'variable', foreground: '9cdcfe' },
+            { token: 'variable.predefined', foreground: '569cd6' },
+            { token: 'namespace', foreground: '569cd6' },
+            { token: 'annotation', foreground: '569cd6' },
+            { token: 'type', foreground: '4ec9b0' },
+            { token: 'type2', foreground: '4ec9b0' },
+            { token: 'type3', foreground: '4ec9b0' },
+            { token: 'property', foreground: '9cdcfe' },
+            { token: 'tag', foreground: '569cd6' },
+        ],
+        colors: {
+            'editor.background': '#20231F',
+            'editor.foreground': '#FFFFFF' ,
+            'editor.selectionBackground': '#496949',
+        }
+    });
+    monaco.editor.setTheme('booogle-dark');
+        window.editor = monaco.editor.create(document.getElementById('container'), {
+            value: [
+                load()
+            ].join('\n'),
+            language: 'python',
+            quickSuggestions: false, // Enable quick suggestions
+            quickSuggestionsDelay: 100
+        });
+    });
+    loadPyodideIfNeeded()
+</script>
+{% endblock %}

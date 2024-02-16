@@ -1,5 +1,5 @@
 from flask import Flask, render_template,redirect,request,current_app,session
-from fun import answer_fix,mode_b_keys,ans_feeback,password_hash,get_folders,get_settings,get_streak,get_sets,hash_value,gen_user_token,add_streak,streak,login,check_image,gen_id,make_dict_group,user_data_group,username,recommend,rule_id,gen_code,leaderboard_dict,similarity,userinfo,make_dict,mod,play_dict,smart,last_7,week_add,stats_dict,update,make_dict_folder,subject,make_dict_rules
+from fun import code_lang,answer_fix,mode_b_keys,ans_feeback,password_hash,get_folders,get_settings,get_streak,get_sets,hash_value,gen_user_token,add_streak,streak,login,check_image,gen_id,make_dict_group,user_data_group,username,recommend,rule_id,gen_code,leaderboard_dict,similarity,userinfo,make_dict,mod,play_dict,smart,last_7,week_add,stats_dict,update,make_dict_folder,subject,make_dict_rules
 from better_profanity import profanity
 import emoji
 import os,random,re
@@ -33,6 +33,7 @@ def home():
         return render_template("login/login.html")
     users_groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"]
     added_groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["added_groups"]
+    code_sets = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["code"]
     print(added_groups)
     for i in added_groups:
         owners_username = i[0]
@@ -49,7 +50,7 @@ def home():
         session.pop("notifications")
     else:
         notifications = []
-    return render_template("/home/home.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets(),is_new=new,notifications=notifications,folders=get_folders(),groups=users_groups)
+    return render_template("/home/home.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=get_sets(),is_new=new,notifications=notifications,folders=get_folders(),groups=users_groups,code_sets=code_sets)
 
 @app.route("/signup",methods=["POST","GET"])
 def signup():
@@ -65,6 +66,7 @@ def signup():
                 "level":"",
                 "groups":{},
                 "rules":{},
+                "code":{},
                 "added_groups":[],
                 "folders":{},
                 "settings":{"interface":{"theme":"green","cards":"straight"},"accessibility":{"fontSize":"normal","font":"roboto"}},
@@ -173,14 +175,21 @@ def community():
         boosting = userinfo(username())
         streak = get_streak()
     sets = global_data_db.find_one({"name":"sets"})["data"]
+    code_sets = global_data_db.find_one({"name":"code_sets"})["data"]
     view_sets = {}
+    code_sets_view = {}
     share_links = []
     for i, (name_key, set_name) in enumerate(sets):
         name = user_data_db.find_one({"username":name_key,"type":"user_data"})
         share_links.append("/share/@"+name_key+"/"+set_name)
         set_data = name["data"]["sets"][set_name]
         view_sets[i] = set_data
-    return render_template("home/community.html",streak=streak,share_links=share_links,name=users_name,settings=settings,boosting=boosting,sets=make_dict(view_sets),notifications=notifications)
+    
+    for i, (name_key, set_name) in enumerate(code_sets):
+        name = user_data_db.find_one({"username":name_key,"type":"user_data"})
+        set_data = name["data"]["code"][set_name]
+        code_sets_view[i] = set_data
+    return render_template("home/community.html",code_sets=code_sets_view,streak=streak,share_links=share_links,name=users_name,settings=settings,boosting=boosting,sets=make_dict(view_sets),notifications=notifications)
 
 @app.route("/recommended")
 def recommended():
@@ -1706,6 +1715,54 @@ def custom_upgrade():
     notifications = {}
     return render_template("custom_upgrade.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
+@app.route("/code/<set>")
+def code_ide(set):
+    if login() == False:
+        return render_template("login/login.html")
+    notifications = {}
+    set_data = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["code"][set]
+    title = set_data["title"]
+    instructions = set_data["instructions"]
+    return render_template("tools/ide.html",id=set,title=title,instructions=instructions,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
+
+@app.route("/new/code",methods=["POST","GET"])
+def new_code():
+    if login() == False:
+        return render_template("login/login.html")
+    notifications = {}
+    if request.method == "POST":
+        id = gen_id()
+        title = request.form["title"]
+        desc = request.form["desc"]
+        background = request.form["cover"]
+        title_mod = mod(title)
+        desc_mod = mod(desc)
+        lang = request.form["subject"]
+        instructions = request.form["instructions"]
+        query = {"username":username()}
+        update = {"$set":{"data.code."+id:{"id":id,"title":title,"desc":desc,"background":background,"language":lang,"user":username(),"instructions":instructions,"level":userinfo(username())[0]}}}
+        user_data_db.update_one(query, update)
+        if title_mod == 1 or desc_mod == 1:
+            session["notifications"] = [{"title":"Failed","body":"Title Or Description Contain Possible Rude/Inappropriate Content","type":"warning","icon":"ph-warning-circle"}]
+            return redirect("/new/code/")
+        else:
+            return redirect("/code/"+id)
+    return render_template("sets/new_code.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+
+
+@app.route("/api/smartcode",methods=["POST","GET"])
+def api_smnartcode():
+    data = request.get_json()
+    return {"subject":code_lang(data["text"])}
+
+@app.route("/publish/code/<set>")
+def publish_code(set):
+    if login() == False:
+        return render_template("login/login.html")
+    query = {"name":"code_sets"}
+    update = {"$push":{"data":[username(),set]}}
+    global_data_db.update_one(query, update)
+    return redirect("/")
 
 app.run(host='0.0.0.0', port=80,debug=True)
