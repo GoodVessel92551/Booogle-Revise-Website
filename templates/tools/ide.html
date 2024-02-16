@@ -2,14 +2,18 @@
 {% block page_title %} {{title}} {% endblock %}
 {% block title %}{{title}}{% endblock %}
 {% block main %}
+<link rel="stylesheet" href="/static/prismjs/prism.css" />
 <script type="text/javascript" src="https://unpkg.com/monaco-editor@latest/min/vs/loader.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/pyodide/v0.17.0/full/pyodide.js"></script>
 <main class="main ">
     <h1>{{title}}</h1>
     <div class="home_buttons no_hide">
-        <a class="main_button third_button" href="/publish/code/{{id}}" ><span>Publish</span><i class="ph ph-upload-simple"></i></a>
-        <button class="second_button main_button" onclick="save()"><span>Save</span><i class="ph-bold ph-floppy-disk"></i></button>
-        <button id="run_button" onclick="runPython()" class="main_button"><span>Run</span><i class="ph-bold ph-play"></i></button>
+        <button onclick="delete_code_set()" id="delete_button" class="main_button del_button"><span>Delete</span><i
+                class="ph-bold ph-trash"></i></button>
+        <a id="publish_button" class="main_button second_button" href="/publish/code/{{id}}"><span>Publish</span><i
+                class="ph ph-upload-simple"></i></a>
+        <button id="run_button" onclick="runPython()" class="main_button"><span>Run</span><i
+                class="ph-bold ph-play"></i></button>
     </div>
     <editor class="code_editor">
         <div class="code_editor_container">
@@ -18,80 +22,144 @@
                 <strong>main.py</strong>
                 <div class="button_options_code">
                     <button onclick="runPython()" type="button"><i class="ph ph-play"></i></button>
-                    <button type="button" onclick="save()"><i class="ph ph-floppy-disk"></i></button>
                 </div>
             </div>
             <div id="container" class="code_editor"></div>
         </div>
-    </div>
-    <tools class="code_tools">
-        <div  class="code_output">
-            <div class="top_banner_code">
-                <i class="ph ph-terminal-window"></i>
-                <strong>Console</strong>
-                <div class="button_options_code">
-                    <button type="button" onclick="document.getElementById('output').innerHTML='<span>{{title}}><input id=console_input></span>';reset_input()"><i class="ph ph-broom"></i></button>
+        </div>
+        <tools class="code_tools">
+            <div class="code_output" id="code_output">
+                <div class="top_banner_code">
+                    <i class="ph ph-terminal-window"></i>
+                    <strong>Console</strong>
+                    <div class="button_options_code">
+                        <button type="button"
+                            onclick="document.getElementById('output').innerHTML='<span>{{title}}><input id=console_input></span>';reset_input()"><i
+                                class="ph ph-broom"></i></button>
+                        <button onclick="hide_console()" id="hide_button_console"><i class="ph ph-caret-up"></i></button>
+                    </div>
                 </div>
-            </div>
-            <pre id="output">
+                <pre id="output">
 <span>{{title}}><input id="console_input"></span>
             </pre>
-        </div>
-        <div class="markdown">
-            <div class="top_banner_code">
-                <i class="ph ph-file-text"></i>
-                <strong>Instructions</strong>
-                <div class="button_options_code">
-                    <button><i class="ph ph-pencil-simple"></i></button>
+            </div>
+            <div id="markdown" class="markdown">
+                <div class="top_banner_code">
+                    <i class="ph ph-file-text"></i>
+                    <strong>Instructions</strong>
+                    <div class="button_options_code">
+                        <button id="open_edit_button" onclick="open_edit()"><i class="ph ph-pencil-simple"></i></button>
+                        <button onclick="hide_readme()" id="hide_button"><i class="ph ph-caret-down"></i></button>
+                    </div>
+                </div>
+                <div id="instructions_element" class="instructions_element">
+
                 </div>
             </div>
-            <div id="instructions_element" class="instructions_element">
-
-            </div>
-        </div>
-    </tools>
+        </tools>
     </editor>
+    <dialog id="delete_dialog" class="delete_dialog">
+        <h3>Delete this set?</h3>
+        <p>This set will be permanently deleted and it can not be found again. Get more space by <a
+                href="/upgrade">Upgrading</a></p>
+        <div>
+            <span id="delete_span_title" class="delete_span_title">Set Title: {{title}}</span>
+            <button onclick="document.getElementById('delete_dialog').close()" class="delete_cancel">Cancel</button>
+            <a id="delete_button_dialog" class="delete_button_dialog">Delete</a>
+        </div>
+    </dialog>
 </main>
 
 <script>
-    var title = {{title|tojson}};
-    var instructions = {{instructions|tojson}};
-    var id = {{id|tojson}};
+    var title = {{ title| tojson}};
+    var instructions = {{ instructions| tojson}};
+    var id = {{ id| tojson}};
+    var type = {{ type| tojson}};
+    var owner = {{ owner| tojson}};
+    var level = {{ boosting| tojson}}[0];
+    var code_container = document.getElementById('container');
+    var console_hidden = false;
+    code_container.addEventListener('input', () => {
+        save()
+        console.log("Saving")
+    })
+    const hide_console = () => {
+        if (console_hidden){
+            console_hidden = false
+        }else{
+            console_hidden = true
+        }
+        document.getElementById('code_output').classList.toggle('hide_console')
+        document.getElementById('markdown').classList.toggle('hide_console_readme')
+        document.getElementById("hide_button_console").classList.toggle('hide_console_button')
+    }
+    const hide_readme = () => {
+        document.getElementById('markdown').classList.toggle('hide_readme')
+        document.getElementById("code_output").classList.toggle('hide_readme_console')
+        document.getElementById("hide_button").classList.toggle('hide_readme_button')
+    }
+    const open_edit = () => {
+        window.location.href = "/edit/code/" + id
+    }
+    if (type == "user") {
+        document.getElementById('delete_button_dialog').href = "/delete/code/" + id
+        
+    }
+    else {
+        document.getElementById('delete_button_dialog').href = "/delete/@" + owner + "/" + id
+        if (owner != "{{current_user}}" && level != "admin") {
+            document.getElementById("delete_button").remove()
+        }else{
+            document.getElementById("delete_button").innerHTML = '<span>Remove</span><i class="ph-bold ph-file-minus"></i>'
+        }
+        document.getElementById("open_edit_button").remove()
+        document.getElementById("publish_button").remove()
+    }
+
+    const delete_code_set = () => {
+        document.getElementById('delete_dialog').showModal()
+    }
     const instructions_element = document.getElementById('instructions_element');
     instructions_element.innerHTML = marked.parse(instructions)
+    document.querySelectorAll('#instructions_element code').forEach(function (codeElement) {
+        codeElement.classList.add('language-python');
+    });
+    document.querySelectorAll('#instructions_element pre').forEach(function (codeElement) {
+        codeElement.classList.add('language-python');
+    });
     const run_button = document.getElementById('run_button');
     const output_element = document.getElementById('output');
     let pyodideReady = false;
 
-    const save = () =>{
-        localStorage.setItem("code-"+id, window.editor.getValue())
+    const save = () => {
+        localStorage.setItem("code-" + id, window.editor.getValue())
     }
-    const load = () =>{
-        return localStorage.getItem('code-'+id) || ""
+    const load = () => {
+        return localStorage.getItem('code-' + id) || ""
     }
 
     const reset_input = () => {
         var console_input = document.getElementById('console_input');
         console.log(console_input)
-        console_input.addEventListener('keydown',(event) => {
-        if (event.key === 'Enter') {
-            text = console_input.value
-            if (text == "python main.py" || text == "python3 main.py") {
-                runPython()
+        console_input.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                text = console_input.value
+                if (text == "python main.py" || text == "python3 main.py") {
+                    runPython()
+                }
+                else if (text.startsWith("pip install ")) {
+                    installPackage(text.split(" ")[2])
+                }
+                else {
+                    output_element.innerText = "Command not found"
+                    document.getElementById('output').innerHTML += '\n<span>{{title}}><input id=console_input></span>'
+                    reset_input()
+                }
             }
-            else if (text.startsWith("pip install ")) {
-                installPackage(text.split(" ")[2])
-            }
-            else {
-                output_element.innerText = "Command not found"
-                document.getElementById('output').innerHTML +='\n<span>{{title}}><input id=console_input></span>'
-                reset_input()
-            }
-        }
-    });
+        });
     }
     reset_input()
-    document.addEventListener('keydown',(event) => {
+    document.addEventListener('keydown', (event) => {
         if (event.ctrlKey && event.key === 'Enter') {
             runPython()
         }
@@ -103,14 +171,17 @@
         }
     }
     async function installPackage(packageName) {
-            await loadPyodideIfNeeded();
-            await pyodide.loadPackage([packageName]);
-            output_element.innerText = `Successfully installed ${packageName}`;
-            document.getElementById('output').innerHTML +='\n<span>{{title}}><input id=console_input></span>'
-            reset_input()
-        }
+        await loadPyodideIfNeeded();
+        await pyodide.loadPackage([packageName]);
+        output_element.innerText = `Successfully installed ${packageName}`;
+        document.getElementById('output').innerHTML += '\n<span>{{title}}><input id=console_input></span>'
+        reset_input()
+    }
     async function runPython() {
         save()
+        if (console_hidden == true) {
+            hide_console()
+        }
         run_button.classList.toggle("button_spinner")
 
         const code = window.editor.getValue();
@@ -154,7 +225,7 @@
         }
         run_button.classList.toggle("button_spinner")
     }
-    window.getInput = function(prompt, callback) {
+    window.getInput = function (prompt, callback) {
         console.log(prompt)
         var input = window.prompt(prompt);
         callback(input);
@@ -166,44 +237,180 @@
 
     require(['vs/editor/editor.main'], function () {
         monaco.editor.defineTheme('booogle-dark', {
-        base: 'vs-dark',
-        inherit: true,
-        rules: [
-        { token: 'comment', foreground: '7f7f7f' },
-            { token: 'keyword', foreground: '6dabdf' },
-            { token: 'number', foreground: 'b5cea8' },
-            { token: 'regexp', foreground: 'ce9178' },
-            { token: 'operator', foreground: 'd4d4d4' },
-            { token: 'string', foreground: 'e9a589' },
-            { token: 'delimiter', foreground: 'd4d4d4' },
-            { token: 'type.identifier', foreground: '569cd6' },
-            { token: 'variable.identifier', foreground: 'd4d4d4' },
-            { token: 'variable', foreground: '9cdcfe' },
-            { token: 'variable.predefined', foreground: '569cd6' },
-            { token: 'namespace', foreground: '569cd6' },
-            { token: 'annotation', foreground: '569cd6' },
-            { token: 'type', foreground: '4ec9b0' },
-            { token: 'type2', foreground: '4ec9b0' },
-            { token: 'type3', foreground: '4ec9b0' },
-            { token: 'property', foreground: '9cdcfe' },
-            { token: 'tag', foreground: '569cd6' },
-        ],
-        colors: {
-            'editor.background': '#20231F',
-            'editor.foreground': '#FFFFFF' ,
-            'editor.selectionBackground': '#496949',
-        }
-    });
-    monaco.editor.setTheme('booogle-dark');
+            base: 'vs-dark',
+            inherit: true,
+            rules: [
+                { token: 'comment', foreground: '7f7f7f' },
+                { token: 'keyword', foreground: '6dabdf' },
+                { token: 'number', foreground: 'b5cea8' },
+                { token: 'regexp', foreground: 'ce9178' },
+                { token: 'operator', foreground: 'd4d4d4' },
+                { token: 'string', foreground: 'e9a589' },
+                { token: 'delimiter', foreground: 'd4d4d4' },
+                { token: 'type.identifier', foreground: '569cd6' },
+                { token: 'variable.identifier', foreground: 'd4d4d4' },
+                { token: 'variable', foreground: '9cdcfe' },
+                { token: 'variable.predefined', foreground: '569cd6' },
+                { token: 'namespace', foreground: '569cd6' },
+                { token: 'annotation', foreground: '569cd6' },
+                { token: 'type', foreground: '4ec9b0' },
+                { token: 'type2', foreground: '4ec9b0' },
+                { token: 'type3', foreground: '4ec9b0' },
+                { token: 'property', foreground: '9cdcfe' },
+                { token: 'tag', foreground: '569cd6' },
+            ],
+            colors: {
+                'editor.background': '#20231F',
+                'editor.foreground': '#FFFFFF',
+                'editor.selectionBackground': '#496949',
+            }
+        });
+
+        monaco.editor.setTheme('booogle-dark');
+        
+        monaco.languages.registerCompletionItemProvider('python', {
+            provideCompletionItems: function (model, position) {
+                var suggestions = [
+                    {
+                        label: 'print',
+                        kind: monaco.languages.CompletionItemKind.Function,
+                        insertText: 'print',
+                        documentation: 'Prints the specified object(s) to the standard output'
+                    },
+                    {
+                        label: 'range',
+                        kind: monaco.languages.CompletionItemKind.Function,
+                        insertText: 'range',
+                        documentation: 'Returns a sequence of numbers, starting from 0 by default, and increments by 1 (by default), and stops before a specified number'
+                    },
+                    {
+                        label: 'input',
+                        kind: monaco.languages.CompletionItemKind.Function,
+                        insertText: 'input',
+                        documentation: 'Reads a line from input, converts it to a string (stripping a trailing newline), and returns that'
+                    },
+                    {
+                        label: 'len',
+                        kind: monaco.languages.CompletionItemKind.Function,
+                        insertText: 'len',
+                        documentation: 'Returns the number of items in a container'
+                    },
+                    {
+                        label: 'open',
+                        kind: monaco.languages.CompletionItemKind.Function,
+                        insertText: 'open',
+                        documentation: 'Opens a file and returns a corresponding file object'
+                    },
+                    {
+                        label: 'str',
+                        kind: monaco.languages.CompletionItemKind.Function,
+                        insertText: 'str',
+                        documentation: 'Returns a string object representing the value of a specified object'
+                    },
+                    {
+                        label: 'int',
+                        kind: monaco.languages.CompletionItemKind.Function,
+                        insertText: 'int',
+                        documentation: 'Returns an integer object constructed from a number or string x, or return 0 if no arguments are given'
+                    },
+                    {
+                        label: 'float',
+                        kind: monaco.languages.CompletionItemKind.Function,
+                        insertText: 'float',
+                        documentation: 'Returns a floating-point object constructed from a number or string x'
+                    },
+                    {
+                        label: 'list',
+                        kind: monaco.languages.CompletionItemKind.Function,
+                        insertText: 'list',
+                        documentation: 'Returns a list'
+                    },
+                    {
+                        label: 'dict',
+                        kind: monaco.languages.CompletionItemKind.Function,
+                        insertText: 'dict',
+                        documentation: 'Returns a dictionary'
+                    },
+                    {
+                        label: 'tuple',
+                        kind: monaco.languages.CompletionItemKind.Function,
+                        insertText: 'tuple',
+                        documentation: 'Returns a tuple'
+                    },
+                    {
+                        label: 'import',
+                        kind: monaco.languages.CompletionItemKind.Keyword,
+                        insertText: 'import',
+                        documentation: 'Imports a module'
+                    },
+                    {
+                        label: 'from',
+                        kind: monaco.languages.CompletionItemKind.Keyword,
+                        insertText: 'from',
+                        documentation: 'Imports a module'
+                    },
+                    {
+                        label: 'as',
+                        kind: monaco.languages.CompletionItemKind.Keyword,
+                        insertText: 'as',
+                        documentation: 'Imports a module'
+                    },
+                    {
+                        label: 'def',
+                        kind: monaco.languages.CompletionItemKind.Keyword,
+                        insertText: 'def',
+                        documentation: 'Defines a function'
+                    },
+                    {
+                        label: 'return',
+                        kind: monaco.languages.CompletionItemKind.Keyword,
+                        insertText: 'return',
+                        documentation: 'Exits a function and returns a value'
+                    },
+                    {
+                        label: 'if',
+                        kind: monaco.languages.CompletionItemKind.Keyword,
+                        insertText: 'if',
+                        documentation: 'Defines a block of code to be executed, if a specified condition is true'
+                    },
+                    {
+                        label: 'else',
+                        kind: monaco.languages.CompletionItemKind.Keyword,
+                        insertText: 'else',
+                        documentation: 'Defines a block of code to be executed, if the same condition is false'
+                    },
+                    {
+                        label: 'elif',
+                        kind: monaco.languages.CompletionItemKind.Keyword,
+                        insertText: 'elif',
+                        documentation: 'Defines a block of code to be executed, if the same condition is false'
+                    }
+                ];
+
+                return {
+                    suggestions: suggestions
+                };
+            }
+        });
+
         window.editor = monaco.editor.create(document.getElementById('container'), {
             value: [
                 load()
             ].join('\n'),
             language: 'python',
-            quickSuggestions: false, // Enable quick suggestions
-            quickSuggestionsDelay: 100
+            quickSuggestions: true, // Enable quick suggestions
+            quickSuggestionsDelay: 100,
+            automaticLayout: true,
+            tabSize:8,
+            detectIndentation:true,
+            insertSpaces:false
         });
     });
+
+
+    // Example: Add an error decoration for line 2
+
     loadPyodideIfNeeded()
 </script>
+<script src="/static/prismjs/prism.js"></script>
 {% endblock %}

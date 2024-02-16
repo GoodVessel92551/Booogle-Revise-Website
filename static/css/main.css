@@ -438,11 +438,11 @@ html {
     }
 }
 
-.main {
+body > .main {
     width: 90%;
     position: absolute;
     left: 50%;
-    top: 100px;
+    top:100px;
     transform: translateX(-50%);
 }
 
@@ -5005,7 +5005,8 @@ part > p{
 .code_editor{
     width: 100%;
     box-sizing: border-box;
-    height:calc(100vh - 300px);
+    height:calc(100vh - 250px);
+    padding-top: 8px;
 }
 
 .top_banner_code{
@@ -5040,6 +5041,7 @@ part > p{
     color:var(--text);
     font-size: 16px;
     cursor: pointer;
+    transition: .3s transform ease;
 }
 
 .button_options_code > button:hover{
@@ -5047,7 +5049,7 @@ part > p{
 }
 
 .button_options_code > button:focus-visible{
-    color:var(--text2);
+    color:var(--main_button);
     outline: none;
 }
 
@@ -5065,6 +5067,7 @@ part > p{
     color:var(--text);
     border:var(--top_back_border);
     background-color: var(--top_back);
+    transition: .3s height ease;
 }
 
 .code_output > pre{
@@ -5105,11 +5108,81 @@ part > p{
     color:var(--text);
     border:var(--top_back_border);
     background-color: var(--top_back);
+    transition: .3s height ease;
 }
 
 .instructions_element{
-    padding:0px 16px;
+    padding:0px 16px 16px 16px;
     box-sizing: border-box;
     overflow-y: scroll;
     height:calc(100% - 32px);
+}
+
+.instructions_element h1{
+    color:var(--text) !important;
+    font-size:24px !important;
+    margin:16px 0px 32px 0px !important;
+}
+
+.instructions_element h2{
+    color:var(--text);
+    font-size:20px;
+}
+
+.instructions_element h3{
+    color:var(--text);
+    font-size:18px;
+}
+
+.instructions_element h4{
+    color:var(--text4);
+    font-size:16px;
+}
+
+.instructions_element p{
+    color:var(--text4);
+    font-size:14px;
+}
+
+.instructions_element pre{
+    border-radius: 16px;
+}
+
+.instructions_element code{
+    border-radius: 16px;
+}
+
+
+.copy-to-clipboard-button{
+    background-color: var(--top_green) !important;
+    border: var(--top_green_border) !important;
+    padding:4px 8px !important;
+    border-radius: var(--main_border_radius) !important;
+    box-shadow: none !important;
+    margin:4px;
+}
+
+
+.hide_readme{
+    height:39px;
+}
+
+.hide_readme_console{
+    height:calc(100% - 47px)
+}
+
+.hide_readme_button{
+    transform: rotate(180deg);
+}
+
+.hide_console{
+    height:39px;
+}
+
+.hide_console_readme{
+    height:calc(100% - 47px)
+}
+
+.hide_console_button{
+    transform: rotate(180deg);
 }

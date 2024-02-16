@@ -779,6 +779,12 @@ def delete(name):
     update = {"$unset":{"data.sets."+name:{}}}
     user_data_db.update_one(query,update)
     session["notifications"] = {"title":"Success","body":f"You Have Deleted: {name}","type":"success","icon":"ph-check-circle"}
+    if name in list(global_data_db.find_one({"name":"sets"})["data"]):
+        sets = global_data_db.find_one({"name":"sets"})["data"]
+        sets.remove(name)
+        query = {"name":"sets"}
+        update = {"$set":{"data":sets}}
+        global_data_db.update_one(query, update)
     return redirect("/")
 
 
@@ -1723,8 +1729,26 @@ def code_ide(set):
     set_data = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["code"][set]
     title = set_data["title"]
     instructions = set_data["instructions"]
-    return render_template("tools/ide.html",id=set,title=title,instructions=instructions,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+    return render_template("tools/ide.html",owner=username(),type="user",id=set,title=title,instructions=instructions,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
+@app.route("/code/@<user>/<set>")
+def code_ide_user(user,set):
+    if login() == False:
+        notifications = []
+        users_name = "Guest"
+        settings = {"interface":{"theme":"green","cards":"straight"},"accessibility":{"fontSize":"normal","font":"roboto"}}
+        boosting = [False,"/static/logo.png"]
+        streak = 0
+    else:
+        notifications = []
+        users_name = username()
+        settings = get_settings()
+        boosting = userinfo(username())
+        streak = get_streak()
+    set_data = user_data_db.find_one({"username":user,"type":"user_data"})["data"]["code"][set]
+    title = set_data["title"]
+    instructions = set_data["instructions"]
+    return render_template("tools/ide.html",owner=user,type="community",id=set,title=title,instructions=instructions,name=users_name,streak=streak,settings=settings,boosting=boosting,notifications=notifications)
 
 @app.route("/new/code",methods=["POST","GET"])
 def new_code():
@@ -1750,7 +1774,7 @@ def new_code():
             return redirect("/code/"+id)
     return render_template("sets/new_code.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
-
+ 
 @app.route("/api/smartcode",methods=["POST","GET"])
 def api_smnartcode():
     data = request.get_json()
@@ -1760,9 +1784,48 @@ def api_smnartcode():
 def publish_code(set):
     if login() == False:
         return render_template("login/login.html")
+    published_sets = global_data_db.find_one({"name":"code_sets"})["data"]
+    for i in published_sets:
+        if set in i:
+            session["notifications"] = [{"title":"Failed","body":"Set Already Exists On Community","type":"warning","icon":"ph-warning-circle"}]
+            return redirect("/")
     query = {"name":"code_sets"}
     update = {"$push":{"data":[username(),set]}}
     global_data_db.update_one(query, update)
+    return redirect("/")
+
+@app.route("/edit/code/<set>",methods=["POST","GET"])
+def edit_code(set):
+    if login() == False:
+        return render_template("login/login.html")
+    notifications = {}
+    if request.method == "POST":
+        title = request.form["title"]
+        desc = request.form["desc"]
+        background = request.form["cover"]
+        lang = request.form["subject"]
+        instructions = request.form["instructions"]
+        query = {"username":username()}
+        update = {"$set":{"data.code."+set:{"id":set,"title":title,"desc":desc,"background":background,"language":lang,"user":username(),"instructions":instructions,"level":userinfo(username())[0]}}}
+        user_data_db.update_one(query, update)
+        return redirect("/code/"+set)
+    else:
+        set_data = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["code"][set]
+        return render_template("sets/edit_code.html",set_data=set_data,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+
+@app.route("/delete/code/<set>",methods=["POST","GET"])
+def delete_code(set):
+    if login() == False:
+        return render_template("login/login.html")
+    query = {"username":username()}
+    update = {"$unset":{"data.code."+set:""}}
+    user_data_db.update_one(query, update)
+    session["notifications"] = [{"title":"Success","body":"Set Deleted","type":"success","icon":"ph-check-circle"}]
+    for i in global_data_db.find_one({"name":"code_sets"})["data"]:
+        if set in i:
+            query = {"name":"code_sets"}
+            update = {"$pull":{"data":[username(),set]}}
+            global_data_db.update_one(query, update)
     return redirect("/")
 
 app.run(host='0.0.0.0', port=80,debug=True)
