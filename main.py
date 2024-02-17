@@ -1928,6 +1928,8 @@ def group_task(group,task):
                 this_group = user_data_db.find_one({"username":i[0],"type":"user_data"})["data"]["groups"][group]
     task_info = this_group["assignments"][task]
     set = task_info["set"]
+    if owner == username():
+        return redirect("/class/admin/"+group+"/"+task)
     if task_info["type"] == "code":
         return redirect("/task/code/"+owner+"/"+set+"/"+task+"/"+group)
     elif task_info["type"] == "flashcards":
@@ -1968,6 +1970,8 @@ def class_admin(group,task):
     if login() == False:
         return render_template("login/login.html")
     notifications = {}
-    return render_template("groups/classes/admin.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+    group_info = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"][group]
+    task_info = group_info["assignments"][task]
+    return render_template("groups/classes/admin.html",group_info=group_info,task=task_info,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 app.run(host='0.0.0.0', port=80,debug=True)

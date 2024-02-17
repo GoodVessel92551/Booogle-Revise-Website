@@ -1,0 +1,31 @@
+{% extends "base.html" %}{% block page_title %} {{task["title"]}} {% endblock %} {% block
+    title %}{{task["title"]}}{% endblock %} {% block main %}
+    <main class="main">
+        <h1>{{task["title"]}}</h1>
+        <div class="home_buttons no_hide">
+            <button class="main_button del_button"><span>Delete</span><i class="ph-bold ph-trash"></i></button>
+            <button class="main_button second_button"><span>Class Stats</span><i class="ph-bold ph-projector-screen-chart"></i></button>
+            <button class="main_button"><span>Edit</span><i class="ph-bold ph-pencil-simple"></i></button>
+        </div>
+        <div class="class_admin_container">
+            <span>
+                <name>
+                    <strong>GoodVessel92551</strong>
+                    <a><i class="ph ph-note"></i>View Work</a>
+                </name>
+                <score>
+                    <p>20/10</p>
+                </score>
+            </span>
+            <span>
+                <name>
+                    <strong>GoodVessel92551</strong>
+                    <a><i class="ph ph-note"></i>View Work</a>
+                </name>
+                <score>
+                    <p>20/10</p>
+                </score>
+            </span>
+        </div>
+    </main>
+    {% endblock %}

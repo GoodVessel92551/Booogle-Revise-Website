@@ -5295,3 +5295,60 @@ part > p{
     right: 16px;
     transform: translateY(-50%);
 }
+
+.class_admin_container{
+    width:100%;
+    display: flex;
+    gap:16px;
+    flex-direction: column;
+}
+
+.class_admin_container > span{
+    width:100%;
+    height:40px;
+    display: flex;
+    gap:8px;
+}
+
+.class_admin_container > span > name{
+    width:100%;
+    background-color: var(--top_back);
+    border:var(--top_back_border);
+    border-radius: var(--main_border_radius);
+    display: flex;
+    color:var(--text);
+    padding:8px 16px;
+    box-sizing: border-box;
+}
+
+.class_admin_container > span > name > a{
+    margin-left:auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: var(--text4);
+    transition: .3s color;
+}
+
+.class_admin_container > span > name > a:hover{
+    color: var(--text);
+}
+
+
+.class_admin_container > span > score{
+    background-color: var(--top_back);
+    border:var(--top_back_border);
+    border-radius: var(--main_border_radius);
+    display: flex;
+    color:var(--text);
+    padding:8px 16px;
+    box-sizing: border-box;
+}
+
+.class_admin_container > span > score > p{
+    margin:0px;
+    font-size:14px;
+    line-height: 20px;
+}
