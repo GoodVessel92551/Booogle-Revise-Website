@@ -1,5 +1,5 @@
 from flask import Flask, render_template,redirect,request,current_app,session
-from fun import code_lang,answer_fix,mode_b_keys,ans_feeback,password_hash,get_folders,get_settings,get_streak,get_sets,hash_value,gen_user_token,add_streak,streak,login,check_image,gen_id,make_dict_group,user_data_group,username,recommend,rule_id,gen_code,leaderboard_dict,similarity,userinfo,make_dict,mod,play_dict,smart,last_7,week_add,stats_dict,update,make_dict_folder,subject,make_dict_rules
+from fun import get_code_sets,code_lang,answer_fix,mode_b_keys,ans_feeback,password_hash,get_folders,get_settings,get_streak,get_sets,hash_value,gen_user_token,add_streak,streak,login,check_image,gen_id,make_dict_group,user_data_group,username,recommend,rule_id,gen_code,leaderboard_dict,similarity,userinfo,make_dict,mod,play_dict,smart,last_7,week_add,stats_dict,update,make_dict_folder,subject,make_dict_rules
 from better_profanity import profanity
 import emoji
 import os,random,re
@@ -1234,11 +1234,7 @@ def automations():
         return redirect("/")
     notifications = []
     return render_template("rules.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,folders=make_dict_folder(db[username()]["folders"]),rules=make_dict_rules(db[username()]["rules"]))
-    
-@app.route("/test")
-def test():
-    text = photo_ai("image")
-    return text
+
 
 
     
@@ -1280,6 +1276,7 @@ def new_group():
         title = request.form["title"]
         desc = request.form["desc"]
         cover = request.form["cover"]
+        type = request.form["type"]
         group_id = gen_id()
         group = {
             "sets":[],
@@ -1290,9 +1287,12 @@ def new_group():
                 "Desc":desc,
                 "Cover":cover,
                 "Owner":username(),
-                "upload_own":False
+                "upload_own":False,
+                "type":type
             }
         }
+        if type == "class":
+            group["assignments"] = {}
         query = {"username":username()}
         update = {"$set":{"data.groups."+group_id:group}}
         user_data_db.update_one(query, update)
@@ -1347,6 +1347,11 @@ def group(group):
                 sets[i] = user_sets[groups[group]["sets"][i]]
             user_data = user_data_group(groups[group]["users"])
             folders = groups[group]["folders"]
+            type = groups[group]["settings"]["type"]
+            if type == "class":
+                assignments = groups[group]["assignments"]
+                title = groups[group]["settings"]["Title"]
+                tasks = groups[group]["assignments"]
         else:
             added_groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["added_groups"]
             for i in added_groups:
@@ -1361,7 +1366,15 @@ def group(group):
                         sets[i] = owner_sets[this_group["sets"][i]]
                     user_data = user_data_group(this_group["users"])
                     folders = this_group["folders"]
-        return render_template("groups/group.html",group_name=group_name,folders=folders,user_data=user_data,sets=sets,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,title=group,owner=owner)
+                    type = this_group["settings"]["type"]
+                    if type == "class":
+                        assignments = this_group["assignments"]
+                        title = this_group["settings"]["Title"]
+                        tasks = this_group["assignments"]
+        if type == "class":
+            return render_template("groups/classes/classroom.html",tasks=tasks,assignments=assignments,group_name=group_name,folders=folders,user_data=user_data,sets=sets,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,title=title,owner=owner,id=group)
+        else:
+            return render_template("groups/group.html",group_name=group_name,folders=folders,user_data=user_data,sets=sets,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,title=group,owner=owner)
     
 @app.route("/add/group/<group>/<name>")
 def add_group_set(group,name):
@@ -1851,5 +1864,75 @@ def delete_code(set):
             update = {"$pull":{"data":[username(),set]}}
             global_data_db.update_one(query, update)
     return redirect("/")
+
+@app.route("/new/assignment/<group>",methods=["POST","GET"])
+def new_assignment(group):
+    if login() == False:
+        return render_template("login/login.html")
+    if request.method == "POST":
+        title = request.form["title"]
+        date = request.form["date"]
+        type = request.form["type"]
+        set = request.form["set"]
+        id = gen_id()
+        if type == "code":
+            set_name = get_code_sets()[set]["title"]
+        else:
+            set_name = get_sets()[set]["settings"]["name"]
+        task = {
+            "title":title,
+            "date":date,
+            "type":type,
+            "set":set,
+            "set_name":set_name
+        }
+        query = {"username":username()}
+        update = {"$set":{"data.groups."+group+".assignments."+id:task}}
+        user_data_db.update_one(query, update)
+        return redirect("/group/"+group)
+    notifications = {}
+    sets = get_sets()
+    code_sets = get_code_sets()
+    return render_template("groups/classes/new_assignment.html",sets=sets,code_sets=code_sets,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+
+@app.route("/group/<group>/task/<task>")
+def group_task(group,task):
+    if login() == False:
+        return render_template("login/login.html")
+    added_groups = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["added_groups"]
+    groups = list(user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"].keys())
+    if group in groups:
+        owner = username()
+        this_group = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"][group]
+    else:
+        for i in added_groups:
+            print(i)
+            if i[1] == group:
+                owner = i[0]
+                this_group = user_data_db.find_one({"username":i[0],"type":"user_data"})["data"]["groups"][group]
+    task_info = this_group["assignments"][task]
+    set = task_info["set"]
+    if task_info["type"] == "code":
+        return redirect("/task/code/"+owner+"/"+set)
+    elif task_info["type"] == "flashcards":
+        return redirect("/task/flashcards/"+owner+"/"+set)
+    else:
+        return redirect("/task/question/"+owner+"/"+set)
+
+@app.route("/task/code/<owner>/<set>")
+def task_code(owner,set):
+    if login() == False:
+        return render_template("login/login.html")
+    notifications = {}
+    set_data = user_data_db.find_one({"username":owner,"type":"user_data"})["data"]["code"][set]
+    title = set_data["title"]
+    instructions = set_data["instructions"]
+    return render_template("tools/ide.html",owner=owner,type="task",id=set,title=title,instructions=instructions,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+
+@app.route("/submit/code",methods=["POST","GET"])
+def submit_code():
+    data = request.get_json()
+    print(data)
+    return {"success":True}
 
 app.run(host='0.0.0.0', port=80,debug=True)

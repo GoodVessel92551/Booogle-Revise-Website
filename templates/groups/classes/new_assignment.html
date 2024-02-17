@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block page_title %} New Assignment {% endblock %}
+{% block title %}New Task{% endblock %}
+{% block main %}
+    <main class="main">
+        <h1 id="title">New Task</h1>
+        <p id="desc" class="new_set_desc">Create a task to help your student learn/revise the subject that you are teaching with the ability to set flashcards, questions and code challenges</p>
+        <form method="post">
+            <div class="home_buttons no_hide">
+                <button name="button" value="normal" class="main_button next top_title_button" type="submit"><span>Create</span><i class="ph-bold ph-file-plus"></i></button>
+            </div>
+            <input required oninvalid="this.setCustomValidity('Please enter only letters and numbers.')" oninput="this.setCustomValidity('')" pattern="^[A-Za-z0-9\s]+$" value="{{title}}" id="quest"  maxlength="80" placeholder="Title" name="title" class="new_title text" autofocus>
+            <h3>Due Date</h3>
+            <p>Choose the data that the task it due</p>
+            <input type="date" name="date" required>
+            <h3>Task Type</h3>
+            <p>Choose the type of task that this some sets might not be able in all of the task types</p>
+            <select name="type" id="task_type" required>
+                <option value="flashcards">Flashcards</option>
+                <option value="questions">Multiple Choice</option>
+                <option value="code">Code</option>
+            </select>
+            <h3>Set</h3>
+            <p>Choose a set that the task should be about</p>
+            <div id="choose_sets" class="new_assignment">
+
+            </div>
+        </form>
+    </main>
+    <nav class="bottom_nav">
+        <a href="/"><ion-icon name="home-outline"></ion-icon></a>
+        <a href="/new" class="bottom_nav_current"><ion-icon name="add-circle-outline"></ion-icon>New</a>
+        <a href="/community"><ion-icon name="earth-outline"></ion-icon></a>
+        <a href="/play"><ion-icon name="play-circle-outline"></ion-icon></a>
+        <a href="/new/folder"><ion-icon name="folder-open-outline"></ion-icon></a>
+    </nav>
+<script>
+    var sets = {{sets|tojson}};
+    var set_keys = Object.keys(sets);
+    var code_sets = {{code_sets|tojson}};
+    var code_set_keys = Object.keys(code_sets);
+    var choose_sets = document.getElementById('choose_sets');
+    var task_type = document.getElementById('task_type');
+    task_type.addEventListener('change', (e) => {
+        var type = e.target.value;
+        if (type == 'flashcards') {
+            show_sets('set');
+            hide_sets('code');
+        } else if (type == 'questions') {
+            show_sets('set');
+            hide_sets('code');
+        } else if (type == 'code') {
+            show_sets('code');
+            hide_sets('set');
+        }
+    });
+    const hide_sets = (type) => {
+        console.log("Hiding sets")
+        var sets = document.querySelectorAll('[data-type="' + type + '"]');
+        sets.forEach(set => {
+            set.style.display = 'none';
+        });
+    }
+    const show_sets = (type) => {
+        console.log("Showing sets")
+        var sets = document.querySelectorAll('[data-type="' + type + '"]');
+        sets.forEach(set => {
+            set.style.display = 'flex';
+        });
+    }
+
+    set_keys.forEach(key => {
+        set = sets[key];
+        var a = document.createElement('a');
+        var img = document.createElement('img');
+        var strong = document.createElement('strong');
+        var p = document.createElement('p');
+        var input = document.createElement('input');
+        var span = document.createElement('span');
+        input.type = 'radio';
+        input.name = 'set';
+        input.value = key;
+        input.classList.add('radio_input');
+        img.src = '/static/set_icons/' + set.settings.background + '.webp';
+        img.draggable = false;
+        strong.innerHTML = set.settings.name;
+        p.innerHTML = set.settings.desc;
+        a.setAttribute("data-type", "set");
+        a.appendChild(img);
+        span.appendChild(strong);
+        span.appendChild(p);
+        a.appendChild(span);
+        a.appendChild(input);
+        choose_sets.appendChild(a);
+    });
+    code_set_keys.forEach(key => {
+        set = code_sets[key];
+        var a = document.createElement('a');
+        var img = document.createElement('img');
+        var strong = document.createElement('strong');
+        var p = document.createElement('p');
+        var input = document.createElement('input');
+        var span = document.createElement('span');
+        input.type = 'radio';
+        input.name = 'set';
+        input.value = key;
+        input.classList.add('radio_input');
+        img.src = '/static/code_icons/' + set.background + '.webp';
+        img.draggable = false;
+        strong.innerHTML = set.title;
+        p.innerHTML = set.desc;
+        a.style.display = 'none';
+        a.setAttribute("data-type", "code");
+        a.appendChild(img);
+        span.appendChild(strong);
+        span.appendChild(p);
+        a.appendChild(span);
+        a.appendChild(input);
+        choose_sets.appendChild(a);
+    });
+</script>
+{% endblock %}

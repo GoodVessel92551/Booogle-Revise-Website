@@ -235,7 +235,11 @@
         a.classList.add("droppable", "folder_home")
         var img = document.createElement("img")
         var what_class = document.createElement("span")
-        what_class.innerHTML = '<i class="ph ph-users-three"></i> Group'
+        if (groups[group_keys[i]]["settings"]["type"] == "class") {
+            what_class.innerHTML = '<i class="ph ph-chalkboard-simple"></i> Class'
+        } else {
+            what_class.innerHTML = '<i class="ph ph-users-three"></i> Group'
+        }
         what_class.classList.add("subject")
         img.draggable = false
         a.draggable = false
@@ -287,7 +291,7 @@
         strong.innerText = folders[folder_keys[i]]["name"]
         p.innerText = folders[folder_keys[i]]["desc"]
         a.id = folder_keys[i]
-        var amount_sets = Object.keys(folders[folder_keys[i]]["sets"]).length
+        var amount_sets = Object.keys(folders[folder_keys[i]]["sets"]).length + Object.keys(folders[folder_keys[i]]["code"]).length
         if (amount_sets <= 1) {
             amount_of_sets.innerText = `Contains ${amount_sets} Set`
         } else {
@@ -682,6 +686,7 @@
         })
     
     }
+
 </script>
 <div class="home_menu" id="home_menu">
     <a href="/community"><i class="ph-bold ph-globe-hemisphere-west"></i>Community</a>

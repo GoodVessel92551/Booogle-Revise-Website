@@ -8,6 +8,7 @@
 <main class="main ">
     <h1>{{title}}</h1>
     <div class="home_buttons no_hide">
+        <button class="main_button second_button" onclick="submit()" id="submit_button"><span>Submit</span><i class="ph ph-checks"></i></button>
         <button onclick="delete_code_set()" id="delete_button" class="main_button del_button"><span>Delete</span><i
                 class="ph-bold ph-trash"></i></button>
         <a id="publish_button" class="main_button second_button" href="/publish/code/{{id}}"><span>Publish</span><i
@@ -83,6 +84,23 @@
         save()
         console.log("Saving")
     })
+    const submit = () => {
+        var data = {
+            "code": window.editor.getValue(),
+            "id": id,
+            "owner": owner
+        }
+        url = "/submit/code"
+        fetch(url,{
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+    }
     const hide_console = () => {
         if (console_hidden){
             console_hidden = false
@@ -103,7 +121,11 @@
     }
     if (type == "user") {
         document.getElementById('delete_button_dialog').href = "/delete/code/" + id
-        
+        document.getElementById("submit_button").remove()
+    }else if (type == "task"){
+        document.getElementById("delete_button").remove()
+        document.getElementById("open_edit_button").remove()
+        document.getElementById("publish_button").remove()
     }
     else {
         document.getElementById('delete_button_dialog').href = "/delete/@" + owner + "/" + id
@@ -114,6 +136,7 @@
         }
         document.getElementById("open_edit_button").remove()
         document.getElementById("publish_button").remove()
+        document.getElementById("submit_button").remove()
     }
 
     const delete_code_set = () => {

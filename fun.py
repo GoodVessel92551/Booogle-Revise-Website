@@ -39,6 +39,10 @@ def get_sets():
     sets = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["sets"]
     return sets
 
+def get_code_sets():
+    sets = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["code"]
+    return sets
+
 def get_streak():
     streak = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["streak"]["streak"]
     return streak

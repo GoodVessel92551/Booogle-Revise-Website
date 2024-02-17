@@ -471,11 +471,15 @@ body > .main {
     
 }
 
-.main>p {
+.main p {
     color: var(--text4);
 }
 
 .main h2 {
+    color: var(--text);
+}
+
+.main h3 {
     color: var(--text);
 }
 
@@ -4074,6 +4078,8 @@ input[type="number"]::-webkit-outer-spin-button {
     transition: .2s background;
     display:flex;
     position: relative;
+    width:250px;
+    text-decoration: none;
 }
 
 .class_tasks > a:hover{
@@ -4089,15 +4095,22 @@ input[type="number"]::-webkit-outer-spin-button {
 .class_tasks > a > span{
     display:flex;
     flex-direction:column;
-    justify-content:center;
+    justify-content:space-between;
+    height:32px;
+    margin-top:8px;
     gap:4px;
     margin-right:16px;
 }
 
 .class_tasks > a > span > strong{
     color:var(--text);
-    font-size:16px;
+    font-size:14px;
     margin:0px;
+    line-height: 10px;
+    max-width: 120px;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .class_tasks > a > span > p{
@@ -4105,6 +4118,7 @@ input[type="number"]::-webkit-outer-spin-button {
     font-size:12px;
     color:var(--text4);
     margin:0px;
+    line-height: 10px;
 }
 
 .class_tasks_time{
@@ -4132,10 +4146,10 @@ select{
     border-radius: 16px;
     height:32px;
     font-size:14px;
-    background-image: url(/static/svgs/down.svg);
+    background-image: url(/static/svgs/down_new.svg);
     background-repeat: no-repeat;
     background-position: 170px;
-    background-size: 20px 20px;
+    background-size: 16px 16px;
     display: flex;
     align-items: center;
 }
@@ -4144,6 +4158,32 @@ select:focus{
     outline:none;
     border-color:var(--border_hover);
 }
+
+input[type="date"]{
+    appearance: none;
+    width: 200px;
+    height: 32px;
+    background: var(--top_back);
+    border:var(--top_back_border);
+    color:var(--text);
+    padding-left:16px;
+    border-radius: 16px;
+    box-sizing: border-box;
+}
+
+input[type="date"]:focus{
+    outline:none;
+    border-color:var(--border_hover);
+}
+
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background-image: url(/static/svgs/calendar.svg);
+    background-size: 16px 16px;
+    position: relative;
+    right:10px;
+}
+
 
 
 .profile_images{
@@ -5185,4 +5225,73 @@ part > p{
 
 .hide_console_button{
     transform: rotate(180deg);
+}
+
+.new_assignment{
+    width:100%;
+    display: flex;
+    gap:16px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-bottom: 8px;
+}
+
+.new_assignment > a{
+    min-width:250px;
+    height:48px;
+    background-color: var(--top_back);
+    border:var(--top_back_border);
+    border-radius: var(--main_border_radius);
+    display: block;
+    padding:8px;
+    box-sizing: border-box;
+    display: flex;
+    gap:8px;
+    position: relative;
+}
+
+.new_assignment > a > img{
+    height:32px;
+    width:32px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.new_assignment > a > span{
+    display: flex;
+    flex-direction: column;
+    gap:4px;
+    height: 32px;
+    justify-content: space-between;
+}
+
+.new_assignment > a > span > strong{
+    color: var(--text);
+    font-size: 14px;
+    margin: 0px;
+    line-height: 10px;
+    max-width: 150px;
+    overflow: hidden;
+    height: 50%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.new_assignment > a > span > p{
+    color: var(--text4);
+    font-size: 12px;
+    margin: 0px;
+    line-height: 14px;
+    max-width: 150px;
+    height: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.new_assignment > a > input{
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
 }

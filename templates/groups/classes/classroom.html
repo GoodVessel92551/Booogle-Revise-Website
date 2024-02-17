@@ -1,8 +1,8 @@
-{% extends "base.html" %}{% block page_title %} Group {% endblock %} {% block
+{% extends "base.html" %}{% block page_title %} {{title}} {% endblock %} {% block
 title %}{{title}}{% endblock %} {% block main %}
 <main class="main">
   <div class="your_sets_button">
-    <a class="droppable your_sets_button_hover" href="/">Your Groups</a>
+    <a class="droppable your_sets_button_hover" href="/">Your Classes</a>
     <folder>{{title}}</folder>
   </div>
   <div class="home_buttons host_buttons">
@@ -21,21 +21,26 @@ title %}{{title}}{% endblock %} {% block main %}
     </a>
   </div>
   <h2 class="class_tasks_title">Class Tasks</h2>
-  <div class="class_tasks">
+  <div id="class_tasks" class="class_tasks">
     <a>
       <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M428 224H288C275.27 224 263.061 218.943 254.059 209.941C245.057 200.939 240 188.73 240 176V36C240 34.9391 239.579 33.9217 238.828 33.1716C238.078 32.4214 237.061 32 236 32H144C127.026 32 110.747 38.7428 98.7452 50.7452C86.7428 62.7475 80 79.0261 80 96V416C80 432.974 86.7428 449.252 98.7452 461.255C110.747 473.257 127.026 480 144 480H368C384.974 480 401.252 473.257 413.255 461.255C425.257 449.252 432 432.974 432 416V228C432 226.939 431.579 225.922 430.828 225.172C430.078 224.421 429.061 224 428 224Z" fill="#D9D9D9"/>
-        <path d="M419.22 188.59L275.41 44.78C275.13 44.502 274.775 44.3128 274.388 44.2363C274.001 44.1599 273.6 44.1995 273.236 44.3501C272.871 44.5008 272.56 44.7559 272.34 45.0832C272.12 45.4106 272.002 45.7956 272 46.19V176C272 180.243 273.686 184.313 276.686 187.314C279.687 190.314 283.757 192 288 192H417.81C418.204 191.998 418.589 191.88 418.917 191.66C419.244 191.44 419.499 191.129 419.65 190.764C419.801 190.4 419.84 189.999 419.764 189.612C419.687 189.225 419.498 188.87 419.22 188.59Z" fill="#8CB18F"/>
-        <path opacity="0.1" d="M160 294H352.5M160 374H263" stroke="black" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span>
-          <strong>Task</strong>
-          <p>Revise | Set Name</p>    
-        </span>
-        <p class="class_tasks_time">2 Days</p>
+        <path
+          d="M428 224H288C275.27 224 263.061 218.943 254.059 209.941C245.057 200.939 240 188.73 240 176V36C240 34.9391 239.579 33.9217 238.828 33.1716C238.078 32.4214 237.061 32 236 32H144C127.026 32 110.747 38.7428 98.7452 50.7452C86.7428 62.7475 80 79.0261 80 96V416C80 432.974 86.7428 449.252 98.7452 461.255C110.747 473.257 127.026 480 144 480H368C384.974 480 401.252 473.257 413.255 461.255C425.257 449.252 432 432.974 432 416V228C432 226.939 431.579 225.922 430.828 225.172C430.078 224.421 429.061 224 428 224Z"
+          fill="#D9D9D9" />
+        <path
+          d="M419.22 188.59L275.41 44.78C275.13 44.502 274.775 44.3128 274.388 44.2363C274.001 44.1599 273.6 44.1995 273.236 44.3501C272.871 44.5008 272.56 44.7559 272.34 45.0832C272.12 45.4106 272.002 45.7956 272 46.19V176C272 180.243 273.686 184.313 276.686 187.314C279.687 190.314 283.757 192 288 192H417.81C418.204 191.998 418.589 191.88 418.917 191.66C419.244 191.44 419.499 191.129 419.65 190.764C419.801 190.4 419.84 189.999 419.764 189.612C419.687 189.225 419.498 188.87 419.22 188.59Z"
+          fill="#8CB18F" />
+        <path opacity="0.1" d="M160 294H352.5M160 374H263" stroke="black" stroke-width="32" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+      <span>
+        <strong>Task</strong>
+        <p>Revise | Set Name</p>
+      </span>
+      <p class="class_tasks_time">2 Days</p>
     </a>
   </div>
-
+  <h2>Class Sets</h2>
   <div class="home_sets" id="home_sets"></div>
 
 
@@ -138,8 +143,46 @@ title %}{{title}}{% endblock %} {% block main %}
 </nav>
 <script>
   var folders = {{ folders| tojson}};
+  var tasks = {{ tasks| tojson}};
+  var class_tasks = document.getElementById("class_tasks")
+  tasks_keys = Object.keys(tasks)
+  tasks_keys.forEach(key => {
+    var task = tasks[key]
+    var a = document.createElement("a")
+    var svg ='<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M428 224H288C275.27 224 263.061 218.943 254.059 209.941C245.057 200.939 240 188.73 240 176V36C240 34.9391 239.579 33.9217 238.828 33.1716C238.078 32.4214 237.061 32 236 32H144C127.026 32 110.747 38.7428 98.7452 50.7452C86.7428 62.7475 80 79.0261 80 96V416C80 432.974 86.7428 449.252 98.7452 461.255C110.747 473.257 127.026 480 144 480H368C384.974 480 401.252 473.257 413.255 461.255C425.257 449.252 432 432.974 432 416V228C432 226.939 431.579 225.922 430.828 225.172C430.078 224.421 429.061 224 428 224Z"fill="#D9D9D9" /> <path d="M419.22 188.59L275.41 44.78C275.13 44.502 274.775 44.3128 274.388 44.2363C274.001 44.1599 273.6 44.1995 273.236 44.3501C272.871 44.5008 272.56 44.7559 272.34 45.0832C272.12 45.4106 272.002 45.7956 272 46.19V176C272 180.243 273.686 184.313 276.686 187.314C279.687 190.314 283.757 192 288 192H417.81C418.204 191.998 418.589 191.88 418.917 191.66C419.244 191.44 419.499 191.129 419.65 190.764C419.801 190.4 419.84 189.999 419.764 189.612C419.687 189.225 419.498 188.87 419.22 188.59Z" fill="#8CB18F" /><path opacity="0.1" d="M160 294H352.5M160 374H263" stroke="black" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" /></svg>'
+    var span = document.createElement("span")
+    var strong = document.createElement("strong")
+    var p = document.createElement("p")
+    var date = document.createElement("p")
+    strong.innerText = task["title"]
+    var type = task["type"]
+    var set = task["set_name"]
+    if (type == "flashcards") {
+      p.innerText = "Flashcards | "+set
+    } else if (type == "questions") {
+      p.innerText = "Questions | "+set
+    } else if (type == "code") {
+      p.innerText = "Code | "+set
+    }
+    a.href = `/group/{{id}}/task/${key}`
+    var targetDate = new Date(task["date"]);
+    var today = new Date();
+    var differenceInMs = targetDate.getTime() - today.getTime();
+    var differenceInDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
+    date.innerText = differenceInDays + " Days"
+    if (differenceInDays < 0){
+      date.innerText = "Overdue"
+      date.style.color = "var(--on_error)"
+    }
+    date.classList.add("class_tasks_time")
+    a.innerHTML = svg
+    a.appendChild(span)
+    span.appendChild(strong)
+    span.appendChild(p)
+    a.appendChild(date)
+    class_tasks.appendChild(a)
+  })
   var folder_keys = Object.keys(folders)
-  console.log(folders)
   level = {{ boosting | tojson }}
   owner = {{ owner | tojson }}
   username = {{ name | tojson }}
@@ -446,14 +489,10 @@ title %}{{title}}{% endblock %} {% block main %}
   }
 </script>
 <div class="home_menu" id="home_menu">
-  <a href="/group/folder/new/{{title}}"><ion-icon name="folder-open-outline"></ion-icon>New Folder</a>
-  <a href="javascript:document.getElementById('add_user_group').showModal()"><ion-icon
-      name="person-add-outline"></ion-icon>Add Person</a>
-  <a href="javascript:document.getElementById('view_user_group').showModal()"><ion-icon
-      name="people-outline"></ion-icon>View People</a>
-  <a href="/group/Assignment/new/{{title}}"><ion-icon name="document-text-outline"></ion-icon>Assignment</a>
+  <a onclick="document.getElementById('add_user_group').showModal()"><i class="ph-bold ph-user-plus"></i>Add User</a>
+  <a onclick="document.getElementById('view_user_group').showModal()"><i class="ph-bold ph-users-three"></i>View Users</a>
+  <a href="/new/folder"><i class="ph-bold ph-folder-notch-plus"></i>New Folder</a>
+  <a href="/new/assignment/{{id}}"><i class="ph-bold ph-notebook"></i>New Assignment</a>
 </div>
-<button onclick="menu_open()" id="home_menu_button" class="home_add">
-  <ion-icon name="add-outline"></ion-icon>
-</button>
+<button onclick="menu_open()" id="home_menu_button" class="home_add"><i id="menu_icon" class="ph ph-list"></i></button>
 {% endblock %}

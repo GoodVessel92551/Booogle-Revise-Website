@@ -5,7 +5,10 @@
     <main class="main">
         <h1>New Group</h1>
         <form method="post">
-            <button class="main_button top_title_button" type="submit" style="position:absolute;top:34.5px;right:0px;"><span>Done</span><ion-icon name="checkmark-done-outline"></ion-icon></button>
+            <div class="home_buttons no_hide">
+                <button class="main_button second_button" type="submit" name="type" value="class"><span>Create as class</span><i class="ph ph-chalkboard-simple"></i></button>
+                <button class="main_button top_title_button" type="submit" name="type" value="group"><span>Done</span><ion-icon name="checkmark-done-outline"></ion-icon></button>
+            </div>
             <input required oninvalid="this.setCustomValidity('Please enter only letters and numbers.')" oninput="this.setCustomValidity('')" pattern="^[A-Za-z0-9\s]+$" value="" id="quest"  maxlength="80" placeholder="Title" name="title" class="new_title text" autofocus>
             <div style="margin-top:-52px;" class="autocomplete"><span class="autocomplete_current" id="quest_autocomplete_current"></span><span class="autocomplete_next" id="quest_autocomplete_next"></span><button class="autocomplete_button" id="quest_autocomplete_button" type="button">Tab</button><button id="voice_title" class="mic" type="button" onclick="record('quest',this.id)"><ion-icon name="mic-outline"></ion-icon></button></div>
             <textarea required id="ans1" maxlength="150"  placeholder="Description" name="desc" class="new_desc text"></textarea>
