@@ -464,6 +464,21 @@
                 });
             });
         }
+        if (code_sets[key]["folder"] == true){
+            a.style.display = "none"
+            strong.setAttribute("data-folder", "true");
+        }else{
+            a.setAttribute('draggable', true);
+            a.style.cursor = 'move';
+
+            a.addEventListener('dragstart', (event) => {
+                event.dataTransfer.setData('text/plain', event.target.id);
+            });
+
+            a.addEventListener('dragend', (event) => {
+
+        });
+        }
         a.appendChild(img);
         a.appendChild(strong);
         a.appendChild(p);

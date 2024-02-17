@@ -355,7 +355,8 @@ def new_folder():
                 "name":title,
                 "desc":desc,
                 "background":cover,
-                "sets":[]
+                "sets":[],
+                "code":[]
             }
             query = {"username":username(),"type":"user_data"}
             update = {"$set":{"data.folders."+title:new_folder}}
@@ -369,11 +370,16 @@ def folder(folder):
         return render_template("login/login.html")
     notifications = []
     sets = {}
+    code_sets_folder = {}
     user_sets = get_sets()
+    code_sets = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["code"]
     names = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["folders"][folder]["sets"]
+    code_names = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["folders"][folder]["code"]
     for i in names:
         sets[i] = user_sets[i]
-    return render_template("folders/folder.html",sets=sets,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,title=user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["folders"][folder]["name"])
+    for i in code_names:
+        code_sets_folder[i] = code_sets[i]
+    return render_template("folders/folder.html",code=code_sets_folder,sets=sets,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications,title=user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["folders"][folder]["name"])
 
 @app.route("/edit/folder/<folder>",methods=["POST","GET"])
 def edit_folder(folder):
@@ -418,13 +424,24 @@ def remove_folder(folder):
 def remove_folder_sey(folder,name):
     if login() == False:
         return render_template("login/login.html")
-    query = {"username":username(),"type":"user_data"}
-    sets = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["folders"][folder]["sets"]
-    sets.remove(name)
-    update = {"$set":{"data.folders."+folder+".sets":sets}}
-    user_data_db.update_one(query, update)
-    update = {"$set":{"data.sets."+name+".settings.folder":False}}
-    user_data_db.update_one(query, update)
+    if name in list(user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["folders"][folder]["code"]):
+        query = {"username":username(),"type":"user_data"}
+        sets = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["folders"][folder]["code"]
+        print(sets)
+        sets.remove(name)
+        update = {"$set":{"data.folders."+folder+".code":sets}}
+        user_data_db.update_one(query, update)
+        update = {"$set":{"data.code."+name+".folder":False}}
+        user_data_db.update_one(query, update)
+        return redirect("/folder/"+folder)
+    else:
+        query = {"username":username(),"type":"user_data"}
+        sets = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["folders"][folder]["sets"]
+        sets.remove(name)
+        update = {"$set":{"data.folders."+folder+".sets":sets}}
+        user_data_db.update_one(query, update)
+        update = {"$set":{"data.sets."+name+".settings.folder":False}}
+        user_data_db.update_one(query, update)
     return redirect("/folder/"+folder)
     
 @app.route("/add/folder/<folder>/<name>")
@@ -432,8 +449,15 @@ def add_folder_set(folder,name):
     if login() == False:
         return render_template("login/login.html")
     folders = get_folders()
-    if name in list(folders[folder]["sets"]):
+    if name in list(folders[folder]["sets"]) and name in list(folders[folder]["code"]):
         return "Error"
+    elif name in list(user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["code"].keys()):
+        query = {"username":username(),"type":"user_data"}
+        update = {"$push":{"data.folders."+folder+".code":name}}
+        user_data_db.update_one(query, update)
+        update = {"$set":{"data.code."+name+".folder":True}}
+        user_data_db.update_one(query, update)
+        return redirect("/folder/"+folder)
     else:
         query = {"username":username(),"type":"user_data"}
         update = {"$push":{"data.folders."+folder+".sets":name}}

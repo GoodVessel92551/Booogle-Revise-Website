@@ -2,7 +2,9 @@
 {% block page_title %} {{title}} {% endblock %}
 {% block title %}{{title}}{% endblock %} {% block main %}
 <main class="main">
-  <div class="your_sets_button"><a class="droppable your_sets_button_hover" href="/">Your Sets</a><folder>{{title}}</folder></div>
+    <div class="your_sets_button"><a class="droppable your_sets_button_hover" href="/">Your Sets</a>
+        <folder>{{title}}</folder>
+    </div>
     <div class="home_buttons host_buttons">
         <a href="/remove/folder/{{title}}" class="del_button main_button">
             <span>Delete</span><i class="ph-bold ph-trash"></i>
@@ -11,7 +13,7 @@
             <span>Edit</span><i class="ph-bold ph-pencil-simple"></i>
         </a>
     </div>
-  <div class="home_sets" id="home_sets"></div>
+    <div class="home_sets" id="home_sets"></div>
     <dialog class="start_set" id="start_set">
         <div class="all_contain_start">
             <img class="set_image" id="set_image">
@@ -20,31 +22,43 @@
                 <p id="set_desc"></p>
             </div>
         </div>
-        <button id="close_mobile" class="close_moblie no_pull"><div></div></button>
+        <button id="close_mobile" class="close_moblie no_pull">
+            <div></div>
+        </button>
         <button class="close_start_set">
             <ion-icon onclick="document.getElementById('start_set').close()" class="close_start"
                 name="close-outline"></ion-icon>
         </button>
         <div class="start_options">
-            <a onclick="document.getElementById('cards_loading').style.display = 'flex'" href="/flashcards" id="flashcards">
-                <loading id="cards_loading" class="loader"><spinner></spinner></loading>
+            <a onclick="document.getElementById('cards_loading').style.display = 'flex'" href="/flashcards"
+                id="flashcards">
+                <loading id="cards_loading" class="loader">
+                    <spinner></spinner>
+                </loading>
                 <span id="flash_rec" class="subject"><ion-icon name="sparkles"></ion-icon>Recommend</span>
                 <ion-icon src="/static/revise_icons/Fashcards.svg"></ion-icon>
                 <strong>Flashcards</strong>
             </a>
-            <a onclick="document.getElementById('quest_loading').style.display = 'flex'" href="/questions" id="questions">
-                <loading id="quest_loading" class="loader"><spinner></spinner></loading>
+            <a onclick="document.getElementById('quest_loading').style.display = 'flex'" href="/questions"
+                id="questions">
+                <loading id="quest_loading" class="loader">
+                    <spinner></spinner>
+                </loading>
                 <span id="quest_rec" class="subject"><ion-icon name="sparkles"></ion-icon>Recommend</span>
                 <ion-icon src="/static/revise_icons/Questions.svg"></ion-icon>
                 <strong>Questions</strong>
             </a>
             <a onclick="document.getElementById('fill_loading').style.display = 'flex'" href="/fill" id="fill">
-                <loading id="fill_loading" class="loader"><spinner></spinner></loading>
+                <loading id="fill_loading" class="loader">
+                    <spinner></spinner>
+                </loading>
                 <ion-icon src="/static/revise_icons/Fill The Gaps.svg"></ion-icon>
                 <strong>Fill The Gaps</strong>
             </a>
             <a onclick="document.getElementById('test_loading').style.display = 'flex'" href="/upgrade" id="test">
-                <loading id="test_loading" class="loader"><spinner></spinner></loading>
+                <loading id="test_loading" class="loader">
+                    <spinner></spinner>
+                </loading>
                 <ion-icon id="test_lock" class="start_lock" name="arrow-up-circle-outline"></ion-icon>
                 <ion-icon src="/static/revise_icons/Test.svg"></ion-icon>
                 <strong>Test</strong>
@@ -67,7 +81,8 @@
     </dialog>
     <dialog id="delete_dialog" class="delete_dialog">
         <h3>You Are About To Delete This Set</h3>
-        <p>This set will be permanently deleted and it can not be undone. Get more space by <a href="/upgrade">Upgrading</a></p>
+        <p>This set will be permanently deleted and it can not be undone. Get more space by <a
+                href="/upgrade">Upgrading</a></p>
         <div>
             <span id="delete_span_title" class="delete_span_title">Set Title: </span>
             <button onclick="document.getElementById('delete_dialog').close()" class="delete_cancel">Cancel</button>
@@ -83,31 +98,31 @@
     <a href="/new/folder"><ion-icon name="folder-open-outline"></ion-icon></a>
 </nav>
 <script>
-    level = {{boosting|tojson}}
+    level = {{ boosting | tojson }}
     const copy = (text) => {
         navigator.clipboard.writeText(text)
         document.getElementById("share").innerHTML = "<ion-icon name='clipboard-outline'></ion-icon>Copyed!"
     }
-  function show(name) {
-      var set = sets[name]
-      var sets_keys = Object.keys(set)
-      sets_keys.pop()
-      var mean = 0
-      var total_ans_len = 0
-      for (var i = 0;i < sets_keys.length;i++){
-          var ans = set[sets_keys[i]]["answers"]["ans1"]
-          total_ans_len += ans.split(" ").length
-      }
-      mean = total_ans_len / sets_keys.length;
-      if(mean <= 2 && sets_keys.length > 3){
-          document.getElementById("share").innerHTML = "<span>Share</span><ion-icon name='share-social-outline'></ion-icon>"
-          document.getElementById("quest_rec").style.display = "flex"
-          document.getElementById("flash_rec").style.display = "none"
-      }else{
-          document.getElementById("flash_rec").style.display = "flex"
-          document.getElementById("quest_rec").style.display = "none"
-      }
-      document.getElementById("start_set").showModal()
+    function show(name) {
+        var set = sets[name]
+        var sets_keys = Object.keys(set)
+        sets_keys.pop()
+        var mean = 0
+        var total_ans_len = 0
+        for (var i = 0; i < sets_keys.length; i++) {
+            var ans = set[sets_keys[i]]["answers"]["ans1"]
+            total_ans_len += ans.split(" ").length
+        }
+        mean = total_ans_len / sets_keys.length;
+        if (mean <= 2 && sets_keys.length > 3) {
+            document.getElementById("share").innerHTML = "<span>Share</span><ion-icon name='share-social-outline'></ion-icon>"
+            document.getElementById("quest_rec").style.display = "flex"
+            document.getElementById("flash_rec").style.display = "none"
+        } else {
+            document.getElementById("flash_rec").style.display = "flex"
+            document.getElementById("quest_rec").style.display = "none"
+        }
+        document.getElementById("start_set").showModal()
         document.getElementById("set_image").src = `/static/set_icons/${sets[name]["settings"]["background"]}.webp`
         document.getElementById("set_title").innerText = sets[name]["settings"]["name"]
         document.getElementById("set_desc").innerText = sets[name]["settings"]["desc"]
@@ -125,42 +140,42 @@
         share.addEventListener("click", () => {
             copy(`revise.booogle.app/share/@${sets[name]["settings"]["user"]}/${name}`)
         })
-      if (level == "elite" || level == "admin"){
-          document.getElementById("test").href = `/test/${name}`
-          document.getElementById("test_lock").remove()
-      }
-  }
-  var sets = {{sets|tojson}};
-  var sets_keys = Object.keys(sets)
+        if (level == "elite" || level == "admin") {
+            document.getElementById("test").href = `/test/${name}`
+            document.getElementById("test_lock").remove()
+        }
+    }
+    var sets = {{ sets| tojson}};
+    var sets_keys = Object.keys(sets)
     const droppableElement = document.querySelector('.droppable');
-  for(var i=0;i<sets_keys.length;i++){
-      var level = sets[sets_keys[i]]["settings"]["level"]
-      var home = document.getElementById("home_sets")
-      var a = document.createElement("set")
-      a.classList.add("set_home")
-      var img = document.createElement("img")
-      img.draggable = false
-      var strong = document.createElement("strong")
-      var p = document.createElement("p")
-      var user = document.createElement("p")
-      a.addEventListener("click",(e) => {
-          show(e.target.id)
-      })
-      img.alt = sets[sets_keys[i]]["settings"]["name"]
-      img.src = `/static/set_icons/${sets[sets_keys[i]]["settings"]["background"]}.webp`
-      user.innerText = sets[sets_keys[i]]["settings"]["user"]
-      user.classList.add("user_name")
-      strong.innerText = sets[sets_keys[i]]["settings"]["name"]
-      p.innerText = sets[sets_keys[i]]["settings"]["desc"]
-      a.id = sets_keys[i]
-      strong.id = sets_keys[i]
-      img.id = sets_keys[i]
-      p.id = sets_keys[i]
-      user.id = sets_keys[i]
-      if(level != false){
-          var badge = document.createElement("ion-icon")
-          badge.classList.add("badge")
-          if (level == "boost") {
+    for (var i = 0; i < sets_keys.length; i++) {
+        var level = sets[sets_keys[i]]["settings"]["level"]
+        var home = document.getElementById("home_sets")
+        var a = document.createElement("set")
+        a.classList.add("set_home")
+        var img = document.createElement("img")
+        img.draggable = false
+        var strong = document.createElement("strong")
+        var p = document.createElement("p")
+        var user = document.createElement("p")
+        a.addEventListener("click", (e) => {
+            show(e.target.id)
+        })
+        img.alt = sets[sets_keys[i]]["settings"]["name"]
+        img.src = `/static/set_icons/${sets[sets_keys[i]]["settings"]["background"]}.webp`
+        user.innerText = sets[sets_keys[i]]["settings"]["user"]
+        user.classList.add("user_name")
+        strong.innerText = sets[sets_keys[i]]["settings"]["name"]
+        p.innerText = sets[sets_keys[i]]["settings"]["desc"]
+        a.id = sets_keys[i]
+        strong.id = sets_keys[i]
+        img.id = sets_keys[i]
+        p.id = sets_keys[i]
+        user.id = sets_keys[i]
+        if (level != false) {
+            var badge = document.createElement("ion-icon")
+            badge.classList.add("badge")
+            if (level == "boost") {
                 badge.name = "rocket-outline";
                 badge.style.background = "var(--boost1)";
                 badge.style.color = "var(--on_boost)";
@@ -181,61 +196,145 @@
                 badge.style.background = "#f2ecb6";
                 badge.style.color = "#615210";
             }
-          badge.id = sets[sets_keys[i]]["settings"]["name"]
-          user.appendChild(badge)
-          document.querySelector('svg').addEventListener('load', () => {
-              document.querySelectorAll(".badge").forEach((badge_item) => {
-                  badge_item.style.display = "inline-block"
-              })
-          })
-      }
-      a.appendChild(img)
-      a.appendChild(strong)
-      a.appendChild(p)
-      a.appendChild(user)
-      home.appendChild(a)
-    a.classList.add('draggable');
+            badge.id = sets[sets_keys[i]]["settings"]["name"]
+            user.appendChild(badge)
+            document.querySelector('svg').addEventListener('load', () => {
+                document.querySelectorAll(".badge").forEach((badge_item) => {
+                    badge_item.style.display = "inline-block"
+                })
+            })
+        }
+        a.appendChild(img)
+        a.appendChild(strong)
+        a.appendChild(p)
+        a.appendChild(user)
+        home.appendChild(a)
+        a.classList.add('draggable');
 
-    a.setAttribute('draggable', true);
-    a.style.cursor = 'move';
+        a.setAttribute('draggable', true);
+        a.style.cursor = 'move';
 
-    a.addEventListener('dragstart', (event) => {
-      event.dataTransfer.setData('text/plain', event.target.id);
+        a.addEventListener('dragstart', (event) => {
+            event.dataTransfer.setData('text/plain', event.target.id);
+        });
+
+        a.addEventListener('dragend', (event) => {
+
+        });
+    }
+    var code_sets = {{ code| tojson}};
+    var code_sets_keys = Object.keys(code_sets)
+    code_sets_keys.forEach((key) => {
+        console.log(key)
+        var level = code_sets[key]["level"];
+        var home = document.getElementById("home_sets");
+        var a = document.createElement("a");
+        a.classList.add("set_home")
+        var img = document.createElement("img");
+        var strong = document.createElement("strong");
+        var p = document.createElement("p");
+        var user = document.createElement("a");
+        var info = document.createElement("info");
+        var amount_of_questions = document.createElement("span")
+        a.href = "/code/" + code_sets[key]["id"];
+        a.setAttribute("data-subject", code_sets[key]["language"].trim());
+        a.setAttribute("data-user", code_sets[key]["user"]);
+        img.draggable = false;
+        img.alt = code_sets[key]["title"];
+        img.src = `/static/code_icons/${code_sets[key]["background"]}.webp`;
+        user.innerText = code_sets[key]["user"];
+        user.classList.add("user_name");
+        user.href = "/stats/@" + code_sets[key]["user"];
+        strong.innerText = code_sets[key]["title"];
+        a.setAttribute("data-value", code_sets[key]["language"].trim());
+        info.classList.add("subject_info");
+        amount_of_questions.innerHTML = "<i class='ph ph-file-code'></i>Code"
+        p.innerText = code_sets[key]["desc"];
+        a.id = key;
+        strong.id = key;
+        strong.classList.add("set_title");
+        img.id = key;
+        p.id = key;
+        if (level != false) {
+            var badge = document.createElement("ion-icon");
+            badge.classList.add("badge");
+            if (level == "boost") {
+                badge.name = "rocket-outline";
+                badge.style.background = "var(--boost1)";
+                badge.style.color = "var(--on_boost)";
+            } else if (level == "premium") {
+                badge.name = "sparkles-outline";
+                badge.style.background = "var(--premium1)";
+                badge.style.color = "var(--on_premium)";
+            } else if (level == "pro") {
+                badge.name = "medal-outline";
+                badge.style.background = "var(--pro1)";
+                badge.style.color = "var(--on_pro)";
+            } else if (level == "elite") {
+                badge.name = "diamond-outline";
+                badge.style.background = "var(--elite1)";
+                badge.style.color = "var(--on_elite)";
+            } else if (level == "admin") {
+                badge.name = "shield-checkmark";
+                badge.style.background = "#f2ecb6";
+                badge.style.color = "#615210";
+            }
+            badge.id = code_sets[key]["title"];
+            user.appendChild(badge);
+            document.querySelector("svg").addEventListener("load", () => {
+                document.querySelectorAll(".badge").forEach((badge_item) => {
+                    badge_item.style.display = "inline-block";
+                });
+            });
+        }
+        a.setAttribute('draggable', true);
+        a.style.cursor = 'move';
+
+        a.addEventListener('dragstart', (event) => {
+            event.dataTransfer.setData('text/plain', event.target.id);
+        });
+
+        a.addEventListener('dragend', (event) => {
+
+        });
+
+        a.appendChild(img);
+        a.appendChild(strong);
+        a.appendChild(p);
+        a.appendChild(user);
+        a.appendChild(info);
+        info.appendChild(amount_of_questions)
+        home.appendChild(a);
+    })
+    droppableElement.addEventListener('dragenter', (event) => {
+        droppableElement.style.outline = '1px solid var(--border_hover)';
     });
 
-    a.addEventListener('dragend', (event) => {
-
+    droppableElement.addEventListener('dragleave', (event) => {
+        droppableElement.style.outline = 'none';
     });
-  }
-  droppableElement.addEventListener('dragenter', (event) => {
-    droppableElement.style.outline = '1px solid var(--border_hover)';
-  });
+    droppableElement.addEventListener('dragover', (event) => {
+        event.preventDefault();
+    });
 
-  droppableElement.addEventListener('dragleave', (event) => {
-    droppableElement.style.outline = 'none';
-  });
-  droppableElement.addEventListener('dragover', (event) => {
-    event.preventDefault();
-  });
-
-  droppableElement.addEventListener('drop', (event) => {
-    event.preventDefault();
-    droppableElement.style.outline = 'none';
-    const draggedElementId = event.dataTransfer.getData('text/plain');
-    const draggedElement = document.getElementById(draggedElementId);
-    draggedElement.remove()
-    fetch(`/remove/folder/{{title}}/${draggedElement.id}`)
-  });
+    droppableElement.addEventListener('drop', (event) => {
+        event.preventDefault();
+        droppableElement.style.outline = 'none';
+        const draggedElementId = event.dataTransfer.getData('text/plain');
+        const draggedElement = document.getElementById(draggedElementId);
+        draggedElement.remove()
+        fetch(`/remove/folder/{{title}}/${draggedElement.id}`)
+    });
     const dialog = document.getElementById('start_set');
     const closeButton = document.getElementById('close_mobile');
     var isDragging = false;
-    
+
     closeButton.addEventListener('touchstart', (e) => {
         isDragging = true;
     });
-    
+
     closeButton.addEventListener('touchmove', (e) => {
-      if (isDragging) {
+        if (isDragging) {
             dialog.classList.add("slide_out_animation");
             setTimeout(() => {
                 dialog.classList.remove("slide_out_animation");
@@ -243,7 +342,7 @@
             }, 500);
         }
     });
-    document.addEventListener('touchstart', function(e) {
+    document.addEventListener('touchstart', function (e) {
         if (e.target.classList.contains('no_pull')) {
             e.preventDefault();
         }
