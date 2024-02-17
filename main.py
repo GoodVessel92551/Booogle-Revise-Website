@@ -336,6 +336,9 @@ def questions(username,name):
             temp.remove(quest)
             ans.append(set[quest]["answers"][random.choice(list(set[quest]["answers"].keys()))])
         random.shuffle(ans)
+    if session.get("stats"):
+        session.pop("stats")
+    session["stats"] = {}
     return render_template("tools/question.html",mode="community",streak=0,title=name,settings=settings,name="Guest",boosting=False,profile_pic="https://booogle-revise-2.goodvessel92551.repl.co/static/logo.png",sets=user_data_db.find_one({"username":username,"type":"user_data"})["data"]["sets"][name],ans=ans,question=question,notifications=notifications,owner=username,total_quests=len(current["order"]),set=name,quest_num = current["order"][current["current"]])
 
 @app.route("/new/folder",methods=["POST","GET"])
@@ -792,6 +795,12 @@ def api_quest_ans():
 
 @app.route("/finish/questions")
 def finish_questions():
+    if session.get("task"):
+        data = session.get("task")
+        query = {"username":data["owner"]}
+        update = {"$set":{"data.groups."+data["group"]+".assignments."+data["task"]+".data."+username():session["stats"]}}
+        user_data_db.update_one(query, update)
+        session.pop("task")
     return render_template("tools/finish.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=[],stats=session["stats"])
 
 @app.route("/delete/<name>")
@@ -840,6 +849,12 @@ def finish():
     if login() == False:
         return render_template("login/login.html")
     notifications = []
+    if session.get("task"):
+        data = session.get("task")
+        query = {"username":data["owner"]}
+        update = {"$set":{"data.groups."+data["group"]+".assignments."+data["task"]+".data."+username():True}}
+        user_data_db.update_one(query, update)
+        session.pop("task")
     return render_template("tools/finish_flash.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/fill/<name>")
@@ -1884,7 +1899,8 @@ def new_assignment(group):
             "date":date,
             "type":type,
             "set":set,
-            "set_name":set_name
+            "set_name":set_name,
+            "data":{}
         }
         query = {"username":username()}
         update = {"$set":{"data.groups."+group+".assignments."+id:task}}
@@ -1913,26 +1929,45 @@ def group_task(group,task):
     task_info = this_group["assignments"][task]
     set = task_info["set"]
     if task_info["type"] == "code":
-        return redirect("/task/code/"+owner+"/"+set)
+        return redirect("/task/code/"+owner+"/"+set+"/"+task+"/"+group)
     elif task_info["type"] == "flashcards":
-        return redirect("/task/flashcards/"+owner+"/"+set)
+        return redirect("/task/flashcards/"+owner+"/"+set+"/"+task+"/"+group)
     else:
-        return redirect("/task/question/"+owner+"/"+set)
+        session["task"] = {"owner":owner,"set_id":set,"task":task,"group":group}
+        return redirect("/questions/@"+owner+"/"+set)
 
-@app.route("/task/code/<owner>/<set>")
-def task_code(owner,set):
+@app.route("/task/code/<owner>/<set>/<task>/<group>")
+def task_code(owner,set,task,group):
     if login() == False:
         return render_template("login/login.html")
     notifications = {}
     set_data = user_data_db.find_one({"username":owner,"type":"user_data"})["data"]["code"][set]
     title = set_data["title"]
     instructions = set_data["instructions"]
-    return render_template("tools/ide.html",owner=owner,type="task",id=set,title=title,instructions=instructions,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+    return render_template("tools/ide.html",group_id=group,task_id=task,owner=owner,type="task",id=set,title=title,instructions=instructions,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/submit/code",methods=["POST","GET"])
 def submit_code():
     data = request.get_json()
-    print(data)
+    query = {"username":data["owner"]}
+    update = {"$set":{"data.groups."+data["group_id"]+".assignments."+data["task_id"]+".data."+username():data["code"]}}
+    user_data_db.update_one(query, update)
     return {"success":True}
+
+@app.route("/task/flashcards/<owner>/<set_id>/<task>/<group>")
+def task_flashcards(owner,set_id,task,group):
+    if login() == False:
+        return render_template("login/login.html")
+    notifications = {}
+    session["task"] = {"owner":owner,"set_id":set_id,"task":task,"group":group}
+    set = user_data_db.find_one({"username":owner,"type":"user_data"})["data"]["sets"][set_id]
+    return render_template("tools/cards.html",title=set_id,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),sets=set,notifications=notifications)
+
+@app.route("/class/admin/<group>/<task>")
+def class_admin(group,task):
+    if login() == False:
+        return render_template("login/login.html")
+    notifications = {}
+    return render_template("groups/classes/admin.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 app.run(host='0.0.0.0', port=80,debug=True)

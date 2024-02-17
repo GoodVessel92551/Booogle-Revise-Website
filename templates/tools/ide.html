@@ -88,7 +88,9 @@
         var data = {
             "code": window.editor.getValue(),
             "id": id,
-            "owner": owner
+            "owner": owner,
+            "task_id": "{{task_id}}",
+            "group_id": "{{group_id}}"
         }
         url = "/submit/code"
         fetch(url,{
