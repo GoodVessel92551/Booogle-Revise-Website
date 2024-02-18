@@ -1,0 +1,54 @@
+{% extends "base.html" %}{% block page_title %} {{user}} {% endblock %} {% block
+    title %}{{user}}{% endblock %} {% block main %}
+    <main class="main">
+        <div class="home_buttons no_hide">
+            <button class="main_button"><span>Class</span><i class="ph-bold ph-chalkboard-simple"></i></button>
+        </div>
+        <h1>{{user}}</h1>
+        <h2>Quick view</h2>
+        <div class="admin_quick_view">
+            <span>
+                <h3>{{score}}/{{total}}</h3>
+                <p>Score</p>
+            </span>
+            <span>
+                <h3>{{percentage}}%</h3>
+                <p>Percentage</p>
+            </span>
+            <span>
+                <h3>{{time}}</h3>
+                <p>Time</p>
+            </span>
+        </div>
+        <h2>Question View</h2>
+        <div id="question_container" class="admin_quest_view">
+        </div>
+    </main>
+    <script>
+        var user_info = {{ user_info| tojson}};
+        var user_keys = Object.keys(user_info);
+        var question_container = document.getElementById("question_container");
+        user_keys.forEach(key => {
+            var span = document.createElement("span");
+            var p = document.createElement("p");
+            var h3 = document.createElement("h3");
+            var i = document.createElement("i");
+            var icon_container = document.createElement("span");
+            p.innerText = "Question "+key;
+            h3.innerText = user_info[key]["quest"];
+            if (user_info[key]["correct"]){
+                i.classList.add("ph", "ph-check");
+                i.style.color = "var(--main_button)";
+            }else{
+                i.classList.add("ph", "ph-x");
+                i.style.color = "var(--on_error)";
+            }
+            i.classList.add("ph", "ph-check");
+            icon_container.appendChild(i);
+            span.appendChild(p);
+            span.appendChild(h3);
+            span.appendChild(icon_container);
+            question_container.appendChild(span);
+        });
+    </script>
+    {% endblock %}

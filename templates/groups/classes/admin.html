@@ -1,31 +1,87 @@
 {% extends "base.html" %}{% block page_title %} {{task["title"]}} {% endblock %} {% block
-    title %}{{task["title"]}}{% endblock %} {% block main %}
-    <main class="main">
-        <h1>{{task["title"]}}</h1>
-        <div class="home_buttons no_hide">
-            <button class="main_button del_button"><span>Delete</span><i class="ph-bold ph-trash"></i></button>
-            <button class="main_button second_button"><span>Class Stats</span><i class="ph-bold ph-projector-screen-chart"></i></button>
-            <button class="main_button"><span>Edit</span><i class="ph-bold ph-pencil-simple"></i></button>
-        </div>
-        <div class="class_admin_container">
-            <span>
-                <name>
-                    <strong>GoodVessel92551</strong>
-                    <a><i class="ph ph-note"></i>View Work</a>
-                </name>
-                <score>
-                    <p>20/10</p>
-                </score>
-            </span>
-            <span>
-                <name>
-                    <strong>GoodVessel92551</strong>
-                    <a><i class="ph ph-note"></i>View Work</a>
-                </name>
-                <score>
-                    <p>20/10</p>
-                </score>
-            </span>
-        </div>
-    </main>
-    {% endblock %}
+title %}{{task["title"]}}{% endblock %} {% block main %}
+<main class="main">
+    <h1>{{task["title"]}}</h1>
+    <div class="home_buttons no_hide">
+        <button class="main_button del_button"><span>Delete</span><i class="ph-bold ph-trash"></i></button>
+        <button class="main_button second_button"><span>Class Stats</span><i
+                class="ph-bold ph-projector-screen-chart"></i></button>
+        <button class="main_button"><span>Edit</span><i class="ph-bold ph-pencil-simple"></i></button>
+    </div>
+    <div class="class_admin_container" id="class_container">
+    </div>
+</main>
+<script>
+    var task_info = {{ task| tojson}};
+    var users = Object.keys(task_info["data"])
+    var home_container = document.getElementById("class_container");
+    var task_type = task_info["type"]
+    var all_users = {{ users| tojson}};
+    all_users.forEach(user => {
+        console.log(user);
+        var container = document.createElement("span");
+        var name = document.createElement("name");
+        var strong = document.createElement("strong");
+        var a = document.createElement("a");
+        var i = document.createElement("i");
+        var score = document.createElement("score");
+        var p = document.createElement("p");
+        strong.innerText = user;
+        if (users.includes(user)) {
+            if (task_type == "questions") {
+                i.classList.add("ph", "ph-note");
+                a.href = `/questions/class/admin/{{group_id}}/{{task_id}}/@${user}`
+                a.appendChild(i);
+                a.appendChild(document.createTextNode("View Work"));
+                score_num = 0
+                Object.keys(task_info["data"][user]).forEach(answer => {
+                    if (task_info["data"][user][answer]["correct"]) {
+                        score_num++
+                    }
+                });
+                p.innerText = score_num + "/" + Object.keys(task_info["data"][user]).length;
+            } else if (task_type == "code") {
+                i.classList.add("ph", "ph-file-code");
+                a.href = `/code/class/admin/{{group_id}}/{{task_id}}/@${user}`
+                a.appendChild(i);
+                a.appendChild(document.createTextNode("View Code"));
+                var code = task_info["data"][user];
+                var lines = code.split(/\r\n|\r|\n/);
+                if (lines.length == 1) {
+                    p.innerText = lines.length + " line";
+                } else {
+                    p.innerText = lines.length + " lines";
+                }
+            }else{
+                i.classList.add("ph", "ph-check");
+                i.style.color = "var(--main_button)"
+                a.appendChild(i);
+                a.appendChild(document.createTextNode("Complete"));
+                p.innerText = "Time"
+            }
+        } else {
+            if (task_type == "flashcards"){
+                i.classList.add("ph", "ph-x");
+                i.style.color = "var(--on_error)"
+                a.appendChild(i);
+                a.appendChild(document.createTextNode("Not Complete"));
+                p.innerText = "No Time";
+            }else{
+                i.classList.add("ph", "ph-file-x");
+                i.style.color = "var(--on_error)"
+                a.appendChild(i);
+                a.appendChild(document.createTextNode("No Work"));
+                p.innerText = "0";
+            }
+
+        }
+        name.appendChild(strong);
+        name.appendChild(a);
+        score.appendChild(p);
+        container.appendChild(name);
+        container.appendChild(score);
+        home_container.appendChild(container);
+    })
+
+</script>
+{% endblock %}

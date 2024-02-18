@@ -78,6 +78,7 @@
     var type = {{ type| tojson}};
     var owner = {{ owner| tojson}};
     var level = {{ boosting| tojson}}[0];
+    var code = {{ code| tojson}};
     var code_container = document.getElementById('container');
     var console_hidden = false;
     code_container.addEventListener('input', () => {
@@ -140,6 +141,9 @@
         document.getElementById("publish_button").remove()
         document.getElementById("submit_button").remove()
     }
+    if (type == "class"){
+        document.getElementById("delete_button").remove()
+    }
 
     const delete_code_set = () => {
         document.getElementById('delete_dialog').showModal()
@@ -160,7 +164,12 @@
         localStorage.setItem("code-" + id, window.editor.getValue())
     }
     const load = () => {
-        return localStorage.getItem('code-' + id) || ""
+        if (code != ""){
+            return code
+        }else{
+            return localStorage.getItem('code-' + id) || ""
+        }
+        
     }
 
     const reset_input = () => {

@@ -1781,7 +1781,7 @@ def code_ide(set):
     set_data = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["code"][set]
     title = set_data["title"]
     instructions = set_data["instructions"]
-    return render_template("tools/ide.html",owner=username(),type="user",id=set,title=title,instructions=instructions,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+    return render_template("tools/ide.html",code="",owner=username(),type="user",id=set,title=title,instructions=instructions,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/code/@<user>/<set>")
 def code_ide_user(user,set):
@@ -1800,7 +1800,7 @@ def code_ide_user(user,set):
     set_data = user_data_db.find_one({"username":user,"type":"user_data"})["data"]["code"][set]
     title = set_data["title"]
     instructions = set_data["instructions"]
-    return render_template("tools/ide.html",owner=user,type="community",id=set,title=title,instructions=instructions,name=users_name,streak=streak,settings=settings,boosting=boosting,notifications=notifications)
+    return render_template("tools/ide.html",code="",owner=user,type="community",id=set,title=title,instructions=instructions,name=users_name,streak=streak,settings=settings,boosting=boosting,notifications=notifications)
 
 @app.route("/new/code",methods=["POST","GET"])
 def new_code():
@@ -1946,7 +1946,7 @@ def task_code(owner,set,task,group):
     set_data = user_data_db.find_one({"username":owner,"type":"user_data"})["data"]["code"][set]
     title = set_data["title"]
     instructions = set_data["instructions"]
-    return render_template("tools/ide.html",group_id=group,task_id=task,owner=owner,type="task",id=set,title=title,instructions=instructions,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+    return render_template("tools/ide.html",code="",group_id=group,task_id=task,owner=owner,type="task",id=set,title=title,instructions=instructions,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 @app.route("/submit/code",methods=["POST","GET"])
 def submit_code():
@@ -1972,6 +1972,39 @@ def class_admin(group,task):
     notifications = {}
     group_info = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"][group]
     task_info = group_info["assignments"][task]
-    return render_template("groups/classes/admin.html",group_info=group_info,task=task_info,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+    users = group_info["users"]
+    return render_template("groups/classes/admin.html",users=users,group_id=group,task_id=task,group_info=group_info,task=task_info,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+
+@app.route("/code/class/admin/<group>/<task>/@<user>")
+def code_ide_class(group,task,user):
+    if login() == False:
+        return render_template("login/login.html")
+    notifications = {}
+    set_name = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"][group]["assignments"][task]["set"]
+    set_data = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["code"][set_name]
+    title = set_data["title"]
+    instructions = set_data["instructions"]
+    code = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"][group]["assignments"][task]["data"][user]
+    return render_template("tools/ide.html",code=code,owner=username(),type="class",id=set_name,title=title,instructions=instructions,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+
+@app.route("/questions/class/admin/<group>/<task>/@<user>")
+def class_admin_questions(group,task,user):
+    if login() == False:
+        return render_template("login/login.html")
+    notifications = {}
+    task = user_data_db.find_one({"username":username(),"type":"user_data"})["data"]["groups"][group]["assignments"][task]
+    user_info = task["data"][user]
+    score = 0
+    total = 0
+    print(user_info)
+    for i in user_info:
+        print(i)
+        total += 1
+        if user_info[i]["correct"] == True:
+            score += 1
+    percentage = round((score/total)*100)
+    time = "WIP"
+    return render_template("groups/classes/questions_view.html",time=time,total=total,percentage=percentage,score=score,user=user,group=group,task=task,user_info=user_info,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+
 
 app.run(host='0.0.0.0', port=80,debug=True)

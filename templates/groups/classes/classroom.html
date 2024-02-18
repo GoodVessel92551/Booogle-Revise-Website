@@ -7,17 +7,17 @@ title %}{{title}}{% endblock %} {% block main %}
   </div>
   <div class="home_buttons host_buttons">
     <a id="leave_button" href="/remove/group/{{title}}" class="del_button main_button">
-      <span>Delete</span><ion-icon name="trash-outline"></ion-icon>
+      <span>Delete</span><i class="ph-bold ph-trash"></i>
     </a>
     <a class="main_button third_button" onclick="document.getElementById('view_user_group').showModal()">
-      <span>View Users</span><ion-icon name="people-outline"></ion-icon>
+      <span>View Users</span><i class="ph-bold ph-users-three"></i>
     </a>
     <a id="add_button" class="main_button second_button"
       onclick="document.getElementById('add_user_group').showModal()">
-      <span>Add User</span><ion-icon name="person-add-outline"></ion-icon>
+      <span>Add User</span><i class="ph-bold ph-user-plus"></i>
     </a>
     <a id="edit_button" href="/edit/group/{{title}}" class="main_button">
-      <span>Edit</span><ion-icon name="pencil-outline"></ion-icon>
+      <span>Edit</span><i class="ph-bold ph-pencil-simple"></i>
     </a>
   </div>
   <h2 class="class_tasks_title">Class Tasks</h2>
@@ -483,6 +483,7 @@ title %}{{title}}{% endblock %} {% block main %}
   }
 </script>
 <div class="home_menu" id="home_menu">
+  <a><i class="ph-bold ph-key"></i>Join Key</a>
   <a onclick="document.getElementById('add_user_group').showModal()"><i class="ph-bold ph-user-plus"></i>Add User</a>
   <a onclick="document.getElementById('view_user_group').showModal()"><i class="ph-bold ph-users-three"></i>View Users</a>
   <a href="/new/folder"><i class="ph-bold ph-folder-notch-plus"></i>New Folder</a>
