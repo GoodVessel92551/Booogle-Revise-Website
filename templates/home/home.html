@@ -3,12 +3,12 @@
 {% block title %}Home{% endblock %}
 {% block main %}
 <a href="/new" id="no_sets" class="no_sets">
-    <span><ion-icon name="information-circle"></ion-icon><strong>No sets</strong></span>
+    <span><<i class="ph-fill ph-info"></i><strong>No sets</strong></span>
     <p>You have no sets. To make one use the New button or Click Me!</p>
 </a>
 
 <a id="no_sets_search" style="display: none;" class="no_sets">
-    <span><ion-icon name="information-circle"></ion-icon><strong>No sets</strong></span>
+    <span><i class="ph-fill ph-info"></i><strong>No sets</strong></span>
     <p>We are unable to find any sets with this name or description</p>
 </a>
 <main class="main">
@@ -557,10 +557,21 @@
                 document.getElementById(set_id).style.display = "none";
 
             }
-            else if (sets[set_id]["settings"]["name"].toLowerCase().includes(query.toLowerCase()) || sets[set_id]["settings"]["desc"].toLowerCase().includes(query.toLowerCase())) {
-                document.getElementById(set_id).style.display = "block";
-                search_num += 1
-            } else  {
+            else if (sets_keys.includes(set_id)){
+                if (sets[set_id]["settings"]["name"].toLowerCase().includes(query.toLowerCase()) || sets[set_id]["settings"]["desc"].toLowerCase().includes(query.toLowerCase())) {
+                    document.getElementById(set_id).style.display = "block";
+                    search_num += 1
+                }else{
+                    document.getElementById(set_id).style.display = "none";
+                }
+            }else if (code_sets_keys.includes(set_id)){
+                if (code_sets[set_id]["title"].toLowerCase().includes(query.toLowerCase()) || code_sets[set_id]["desc"].toLowerCase().includes(query.toLowerCase())) {
+                    document.getElementById(set_id).style.display = "block";
+                    search_num += 1
+                }else{
+                    document.getElementById(set_id).style.display = "none";
+                }
+            }else  {
                 document.getElementById(set_id).style.display = "none";
             }
         }

@@ -5,7 +5,6 @@
     <main class="main">
         <h1 id="title">New Code Set</h1>
         <p id="desc" class="new_set_desc">Create a code set this allows people to revise and learn programming all with in Booogle Revise!</p>
-        <span id="len_warn" style="display:none;" class="error_message"><ion-icon name="warning-outline"></ion-icon>Unable To Create Set, Due To The Set Title/Description Being To Long/Short.</a></span>
         <form method="post">
             <button class="main_button next top_title_button" type="submit" style="position:absolute;top:34.5px;right:0px;"><span>Create</span><i class="ph-bold ph-file-plus"></i></button>
             <input required oninvalid="this.setCustomValidity('Please enter only letters and numbers.')" oninput="this.setCustomValidity('')" pattern="^[A-Za-z0-9\s]+$" value="{{title}}" id="quest"  maxlength="80" placeholder="Title" name="title" class="new_title text" autofocus>
@@ -14,7 +13,7 @@
             <div style="height:200px;margin-top:-212px;padding-top: 16px;" class="autocomplete"><span class="autocomplete_current" id="ans_autocomplete_current"></span><span class="autocomplete_next" id="ans_autocomplete_next"></span><button class="autocomplete_button" id="ans_autocomplete_button" type="button">Tab</button><button style="top:-10px" id="voice_desc" class="mic" type="button" onclick="record('ans1',this.id)"><ion-icon name="mic-outline"></ion-icon></button></div>
             <textarea required id="ins" maxlength="1500"  placeholder="Instructions (Use Markdown)" name="instructions" class="new_desc text">{{desc}}</textarea>
             <div style="height:200px;margin-top:-212px;padding-top: 16px;" class="autocomplete"><span class="autocomplete_current" id="ins_autocomplete_current"></span><span class="autocomplete_next" id="ins_autocomplete_next"></span><button class="autocomplete_button" id="ins_autocomplete_button" type="button">Tab</button><button style="top:-10px" id="voice_desc" class="mic" type="button" onclick="record('ins',this.id)"><ion-icon name="mic-outline"></ion-icon></button></div>
-            <h3  style="color:var(--text)">Subject</h3>
+            <h3  style="color:var(--text)">Language</h3>
             <select name="subject" id="subject">
                 <option id="python" value="Python">Python</option>
                 <option id="cplusplus" value="C++">C++</option>
