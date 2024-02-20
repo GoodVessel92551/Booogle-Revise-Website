@@ -181,6 +181,10 @@ title %}{{title}}{% endblock %} {% block main %}
   owner = {{ owner | tojson }}
   username = {{ name | tojson }}
   user_data = {{ user_data | tojson }}
+  if (username != owner) {
+    var leave_button = document.getElementById("leave_button")
+    leave_button.innerHTML = '<span>Leave</span><i class="ph-bold ph-sign-out"></i>'
+  }
   user_data_keys = Object.keys(user_data)
   var folder_sets = []
   for (var i = 0; i < folder_keys.length; i++) {

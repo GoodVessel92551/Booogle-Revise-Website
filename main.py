@@ -2007,4 +2007,11 @@ def class_admin_questions(group,task,user):
     return render_template("groups/classes/questions_view.html",time=time,total=total,percentage=percentage,score=score,user=user,group=group,task=task,user_info=user_info,name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
 
 
+@app.route("/whiteboard")
+def whiteboard():
+    if login() == False:
+        return render_template("login/login.html")
+    notifications = {}
+    return render_template("tools/whiteboard.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),notifications=notifications)
+
 app.run(host='0.0.0.0', port=80,debug=True)

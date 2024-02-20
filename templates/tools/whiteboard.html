@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block page_title %} Whiteboard {% endblock %}
+{% block title %}Whiteboard{% endblock %}
+{% block main %}
+<main class="main">
+<board class="whiteboard_container">
+    <div class="tools_left">
+        <button><i class="ph ph-cursor"></i></button>
+        <button><i class="ph ph-pencil-simple"></i></button>
+        <button><i class="ph ph-text-t"></i></button>
+        <button onclick="create_note()"><i class="ph ph-note-blank"></i></button>
+        <div>
+            <button><i class="ph ph-arrow-u-down-left"></i></button>
+            <button><i class="ph ph-arrow-u-down-right"></i></button>
+            <button class="whiteboard_new"><i class="ph ph-plus"></i></button>
+        </div>
+    </div>
+    <div id="whiteboard" class="whiteboard">
+
+    </div>
+    <div class="tools_left">
+        <button><i class="ph ph-pencil-simple-line"></i></button>
+        <button><i class="ph ph-paint-brush"></i></button>
+        <div>
+            <button><i class="ph ph-arrow-u-down-left"></i></button>
+            <button><i class="ph ph-arrow-u-down-right"></i></button>
+            <button class="whiteboard_new"><i class="ph ph-plus"></i></button>
+        </div>
+    </div>
+</board>
+</main>
+<script>
+    const whiteboard = document.getElementById("whiteboard");
+const create_note = () => {
+    var note = document.createElement("div");
+    note.classList.add("note");
+    note.innerHTML = ""
+    var close = document.createElement("button");
+    close.innerHTML = "<i class='ph ph-x'></i>";
+    close.onclick = () => {
+        note.remove();
+    }
+    whiteboard.appendChild(note);
+    note.appendChild(close);
+    note.classList.add("draggableElement");
+    updateDraggableElements()
+}
+
+    // Function to start dragging
+    function startDragging(e) {
+    this.isDragging = true;
+    this.offsetX = e.clientX - this.offsetLeft;
+    this.offsetY = e.clientY - this.offsetTop;
+    this.prevX = e.clientX;
+    this.prevY = e.clientY;
+}
+
+    // Function to drag the element
+    function dragElement(e) {
+        if (this.isDragging) {
+            var whiteboard_width = whiteboard.offsetWidth;
+            var whiteboard_height = whiteboard.offsetHeight;
+            const currentX = e.clientX - this.offsetX;
+            const currentY = e.clientY - this.offsetY;
+            const speedX = currentX - this.prevX;
+            const speedY = currentY - this.prevY;
+            console.log(speedX)
+            var oldx = this.style.left;
+            var oldy = this.style.top;
+            this.prevX = currentX;
+            this.prevY = currentY;
+            if (currentX < 66){
+                this.style.left = oldx + "px";
+            }else if (currentX > whiteboard_width - 126){
+                this.style.left = oldx + "px";
+            }else{
+                this.style.left = currentX + 'px';
+            }
+            if (currentY < 16){
+                this.style.top = oldy + "px";
+            }else if (currentY > whiteboard_height - 176){
+                this.style.top = oldy + "px";
+            }else{
+                this.style.top = currentY + 'px';
+            }
+            
+            if (speedX > 6){
+                this.style.transform = `rotate(6deg)`
+                if (speedX > 15){
+                    this.style.transform = `rotate(12deg)`
+                }
+            }else if (speedX < -6){
+                this.style.transform = `rotate(-6deg)`
+                if (speedX > -15){
+                    this.style.transform = `rotate(-12deg)`
+                }
+            }else{
+                this.style.transform = "rotate(0deg)"
+            }
+        }
+    }
+
+    // Function to stop dragging
+    function stopDragging() {
+        this.isDragging = false;
+        this.style.transform = "rotate(0deg)"
+    }
+
+    const updateDraggableElements = () => {
+    var draggableElements = document.querySelectorAll('.draggableElement');
+
+    // Add event listeners for mouse events to each draggable element
+    draggableElements.forEach(element => {
+        element.isDragging = false;
+        element.addEventListener('mousedown', startDragging);
+        document.addEventListener('mousemove', dragElement.bind(element));
+        document.addEventListener('mouseup', stopDragging.bind(element));
+    });
+    };
+</script>
+{% endblock %}
