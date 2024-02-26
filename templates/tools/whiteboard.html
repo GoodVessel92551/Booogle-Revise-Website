@@ -2,11 +2,17 @@
 {% block page_title %} Whiteboard {% endblock %}
 {% block title %}Whiteboard{% endblock %}
 {% block main %}
+<link href="https://fonts.googleapis.com/css2?family=Handlee&family=Manrope:wght@200;400;500;600;700&display=swap"
+    rel="stylesheet">
+<div id="cursor">
+
+</div>
 <main class="main">
     <board class="whiteboard_container">
         <div class="tools_left">
-            <button><i class="ph ph-cursor"></i></button>
-            <button><i class="ph ph-pencil-simple"></i></button>
+            <button id="mouse_button" style="color:var(--main_button);"><i class="ph ph-cursor"></i></button>
+            <button id="pen_button"><i class="ph ph-pencil-simple"></i></button>
+            <button id="eraser-button"><i class="ph ph-eraser"></i></button>
             <button><i class="ph ph-text-t"></i></button>
             <button onclick="create_note()"><i class="ph ph-note-blank"></i></button>
             <div>
@@ -17,6 +23,9 @@
         </div>
         <div id="whiteboard" class="whiteboard">
 
+            <canvas id="whiteboard_canvas">
+
+            </canvas>
         </div>
         <div class="tools_left">
             <button><i class="ph ph-pencil-simple-line"></i></button>
@@ -31,37 +40,56 @@
 </main>
 <script>
     const whiteboard = document.getElementById("whiteboard");
+    const cursor = document.getElementById("cursor");
+    whiteboard.addEventListener('mousemove', (e) => {
+        var mouseX = e.pageX;
+        var mouseY = e.pageY
+        console.log('Mouse position: ' + e.clientX + ', ' + e.clientY)
+        cursor.style.left = mouseX + 'px';
+        cursor.style.top = mouseY + 'px';
+    });
     const random_number = (min, max) => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     const create_note = () => {
+        mouse_mode()
         var note = document.createElement("div");
         note.classList.add("note");
         note.innerHTML = ""
         var close = document.createElement("button");
+        note.name = "note";
         close.innerHTML = "<i class='ph ph-x'></i>";
         close.onclick = () => {
             note.remove();
         }
+        var text_area = document.createElement("textarea");
+        text_area.addEventListener('input', () => {
+            this.style.height = 'auto'; // Reset height to auto to properly calculate scroll height
+            this.style.height = this.scrollHeight + 'px'; // Set height to scroll height
+        });
+        note.addEventListener("click", () => {
+            text_area.focus();
+        })
         whiteboard.appendChild(note);
         note.appendChild(close);
+        note.appendChild(text_area);
         note.classList.add("draggableElement");
         updateDraggableElements()
         var note_top = random_number(16, whiteboard.offsetHeight - 176);
         var note_left = random_number(66, whiteboard.offsetWidth - 126);
         note.style.top = note_top + "px";
         note.style.left = note_left + "px";
-        var color = random_number(1,5)
-        if (color == 1){
-            note.style.backgroundColor = "#FFFFFF";
-        } else if (color == 2){
+        var color = random_number(0, 6)
+        if (color == 1) {
+            note.style.backgroundColor = "#DEE084";
+        } else if (color == 2) {
             note.style.backgroundColor = "#E08484";
-        } else if (color == 3){
-            note.style.backgroundColor = "#E08484";
-        } else if (color == 4){
+        } else if (color == 3) {
+            note.style.backgroundColor = "#E0B084";
+        } else if (color == 4) {
             note.style.backgroundColor = "#A3E084";
-        } else if (color == 5){
+        } else if (color == 5) {
             note.style.backgroundColor = "#84CAE0";
         }
     }
@@ -78,6 +106,7 @@
     // Function to drag the element
     function dragElement(e) {
         if (this.isDragging) {
+
             var whiteboard_width = whiteboard.offsetWidth;
             var whiteboard_height = whiteboard.offsetHeight;
             const currentX = e.clientX - this.offsetX;
@@ -102,17 +131,18 @@
             } else {
                 this.style.top = currentY + 'px';
             }
-            if (speedX > 6) {
-                console.log("speed")
-                this.style.transform = `rotate(6deg)`
-                if (speedX > 15) {
+            if (speedX > 0) {
+                if (speedX > 12) {
                     this.style.transform = `rotate(12deg)`
+                } else if (speedX > 4) {
+                    this.style.transform = `rotate(6deg)`
                 }
-            } else if (speedX < -6) {
-                console.log("speed")
-                this.style.transform = `rotate(-6deg)`
-                if (speedX > -15) {
+
+            } else if (speedX < 1) {
+                if (speedX < -12) {
                     this.style.transform = `rotate(-12deg)`
+                } else if (speedX < -4) {
+                    this.style.transform = `rotate(-6deg)`
                 }
             }
         }
@@ -135,5 +165,142 @@
             document.addEventListener('mouseup', stopDragging.bind(element));
         });
     };
+    document.addEventListener("DOMContentLoaded", () => {
+        const canvas = document.getElementById("whiteboard_canvas");
+        const context = canvas.getContext("2d");
+        let painting = false;
+        let erasing = false;
+        let lastX, lastY; // Variables to track last position for smoother erasing
+
+        // Set canvas width and height
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+
+        // Disable anti-aliasing for sharper lines
+        context.imageSmoothingEnabled = false;
+        context.imageSmoothingQuality = 'high';
+
+        function startPosition(e) {
+            if (erasing) {
+                painting = true;
+                erase(e); // Start erasing
+            } else {
+                painting = true;
+                draw(e);
+            }
+        }
+
+        function endPosition() {
+            painting = false;
+            context.beginPath();
+        }
+
+        function draw(e) {
+            if (!painting || mouse) return;
+            if (erasing) erase(e);
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            context.lineWidth = 5;
+            context.lineCap = "round";
+            context.strokeStyle = "#fff";
+            context.lineTo(x, y);
+            context.stroke();
+            context.beginPath();
+            context.moveTo(x, y);
+
+            lastX = x;
+            lastY = y;
+        }
+
+        function erase(e) {
+            if (!painting || mouse) {
+                lastX = x;
+                lastY = y;
+                lastX = null;
+                lastY = null;
+                return
+            }
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            context.lineWidth = 32; // Adjust the width for the eraser
+            context.lineCap = "round";
+            context.globalCompositeOperation = 'destination-out'; // Set composite operation to erase
+            context.lineTo(x, y);
+            context.stroke();
+            context.beginPath();
+            context.moveTo(x, y);
+
+            lastX = x;
+            lastY = y;
+        }
+
+        canvas.addEventListener("mousedown", startPosition);
+        canvas.addEventListener("mouseup", endPosition);
+        canvas.addEventListener("mousemove", draw);
+
+        // Toggle eraser mode when 'E' key is pressed
+        const eraserButton = document.getElementById("eraser-button");
+        eraserButton.addEventListener("click", (e) => {
+            pen = false;
+            mouse = false;
+            erasing = !erasing; // Toggle eraser mode
+            mouse_button.style.color = mouse ? "var(--main_button)" : "var(--text)";
+            pen_button.style.color = pen ? "var(--main_button)" : "var(--text)";
+            eraserButton.style.color = erasing ? "var(--main_button)" : "var(--text)"; // Change color of the button to indicate eraser mode
+            cursor.classList.toggle("erasercursor");
+            cursor.classList.toggle("cursor");
+            if (erasing) {
+                console.log("Eraser mode enabled");
+            } else {
+                console.log("Eraser mode disabled");
+            }
+        });
+    });
+    const mouse_button = document.getElementById("mouse_button");
+    mouse_button.addEventListener("click", () => {
+        mouse_mode();
+    });
+
+    var mouse = true;
+    var pen = false;
+    const mouse_mode = () => {
+        pen = false
+        erasing = false;
+        mouse = !mouse;
+        if (mouse) {
+            cursor.classList.remove("cursor");
+            cursor.classList.remove("erasercursor");
+        }else{
+            cursor.classList.add("cursor");
+        }
+        mouse_button.style.color = mouse ? "var(--main_button)" : "var(--text)"; 
+        pen_button.style.color = pen ? "var(--main_button)" : "var(--text)";
+        eraserButton.style.color = erasing ? "var(--main_button)" : "var(--text)";
+    }
+    const pen_button = document.getElementById("pen_button")
+    pen_button.addEventListener("click", () => {
+        pen_mode();
+    });
+
+
+    const pen_mode = () => {
+        pen = !pen;
+        mouse = false;
+        erasing = false;
+        cursor.classList.toggle("cursor");
+        mouse_button.style.color = mouse ? "var(--main_button)" : "var(--text)";
+        pen_button.style.color = pen ? "var(--main_button)" : "var(--text)";
+        eraserButton.style.color = erasing ? "var(--main_button)" : "var(--text)";
+    }
+
+
+    whiteboard_canvas.width = whiteboard.offsetWidth;
+    whiteboard_canvas.height = whiteboard.offsetHeight;
+
+
 </script>
 {% endblock %}
