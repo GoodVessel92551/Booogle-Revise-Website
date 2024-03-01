@@ -15,10 +15,10 @@
             <button id="eraser-button"><i class="ph ph-eraser"></i></button>
             <button><i class="ph ph-text-t"></i></button>
             <button onclick="create_note()"><i class="ph ph-note-blank"></i></button>
-            <div>
+            <div class="lower_buttons_board">
                 <button><i class="ph ph-arrow-u-down-left"></i></button>
                 <button><i class="ph ph-arrow-u-down-right"></i></button>
-                <button class="whiteboard_new"><i class="ph ph-plus"></i></button>
+                <button onclick="clear_board()" class="whiteboard_new"><i class="ph ph-broom"></i></button>
             </div>
         </div>
         <div id="whiteboard" class="whiteboard">
@@ -28,24 +28,88 @@
             </canvas>
         </div>
         <div class="tools_left">
-            <button><i class="ph ph-pencil-simple-line"></i></button>
-            <button><i class="ph ph-paint-brush"></i></button>
-            <div>
+            <div class="color_picker">
+                <button id="line_thickness_button"><i class="ph ph-sliders-horizontal"></i></button>
+                <div id="line_thickness" class="board_options_container">
+                    <button onclick="change_thickness('1')" class="board_options"><span style="height:1px;"></span></button>
+                    <button onclick="change_thickness('2')" class="board_options"><span style="height:2px;"></span></button>
+                    <button onclick="change_thickness('4')" class="board_options"><span style="height:4px;"></span></button>
+                    <button onclick="change_thickness('6')" class="board_options"><span style="height:6px;"></span></button>
+                    <button onclick="change_thickness('8')" class="board_options"><span style="height:8px;"></span></button>
+                </div>
+            </div>
+            
+            <div class="color_picker">
+                <button id="color_picker_button"><i class="ph ph-palette"></i></button>
+                <div id="color_picker" class="board_options_container">
+                    <button onclick="change_color(this.style.background)" class="board_options" style="background:#E7E7E7;"></button>
+                    <button onclick="change_color(this.style.background)" class="board_options" style="background:#E08484;"></button>
+                    <button onclick="change_color(this.style.background)" class="board_options" style="background:#E0B084;"></button>
+                    <button onclick="change_color(this.style.background)" class="board_options" style="background:#A3E084;"></button>
+                    <button onclick="change_color(this.style.background)" class="board_options" style="background:#84CAE0;"></button>
+                </div>
+            </div>
+            <div class="lower_buttons_board">
                 <button><i class="ph ph-arrow-u-down-left"></i></button>
                 <button><i class="ph ph-arrow-u-down-right"></i></button>
-                <button class="whiteboard_new"><i class="ph ph-plus"></i></button>
+                <button onclick="clear_board()" class="whiteboard_new"><i class="ph ph-broom"></i></button>
             </div>
         </div>
     </board>
 </main>
 <script>
+    const color_picker = document.getElementById("color_picker");
+    const line_thickness = document.getElementById("line_thickness");
+    const color_picker_button = document.getElementById("color_picker_button");
+    const line_thickness_button = document.getElementById("line_thickness_button");
+    var current_tool = "cursor";
     const eraserButton = document.getElementById("eraser-button");
     const whiteboard = document.getElementById("whiteboard");
     const cursor = document.getElementById("cursor");
+    var pen = false;
+    var erasing = false;
+    var mouse = true;
+    var pen_color = "rgb(231, 231, 231)"
+    var thickness = "4"
+
+    const change_thickness = (new_thickness) => {
+        thickness = new_thickness
+        console.log(erasing)
+        if (erasing){
+            cursor.style.width = parseInt(thickness)*10 + "px";
+            cursor.style.height = parseInt(thickness)*10 + "px";
+        }else{
+            cursor.style.width = parseInt(thickness) + "px";
+            cursor.style.height = parseInt(thickness) + "px";
+        }
+    }
+    const change_color = (new_color) => {
+        pen_color = new_color
+        cursor.style.backgroundColor = new_color;
+    }
+    color_picker_button.addEventListener("click", () => {
+        if (color_picker.style.display == "flex") {
+            color_picker.style.display = "none";
+        } else {
+            if (line_thickness.style.display == "flex") {
+                line_thickness.style.display = "none";
+            }
+            color_picker.style.display = "flex";
+        }
+    });
+    line_thickness_button.addEventListener("click", () => {
+        if (line_thickness.style.display == "flex") {
+            line_thickness.style.display = "none";
+        } else {
+            if (color_picker.style.display == "flex") {
+                color_picker.style.display = "none";
+            }
+            line_thickness.style.display = "flex";
+        }
+    });
     whiteboard.addEventListener('mousemove', (e) => {
         var mouseX = e.pageX;
         var mouseY = e.pageY
-        console.log('Mouse position: ' + e.clientX + ', ' + e.clientY)
         cursor.style.left = mouseX + 'px';
         cursor.style.top = mouseY + 'px';
     });
@@ -53,8 +117,14 @@
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    const clear_board = () =>{
+        var canvas = document.getElementById("whiteboard_canvas");
+        var context = canvas.getContext("2d");
+        context.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
     const create_note = () => {
-        mouse_mode()
+        change_tool("cursor");
         var note = document.createElement("div");
         note.classList.add("note");
         note.innerHTML = ""
@@ -81,16 +151,16 @@
         var note_left = random_number(66, whiteboard.offsetWidth - 126);
         note.style.top = note_top + "px";
         note.style.left = note_left + "px";
-        var color = random_number(0, 6)
-        if (color == 1) {
+        var note_color = random_number(0, 6)
+        if (note_color == 1) {
             note.style.backgroundColor = "#DEE084";
-        } else if (color == 2) {
+        } else if (note_color == 2) {
             note.style.backgroundColor = "#E08484";
-        } else if (color == 3) {
+        } else if (note_color == 3) {
             note.style.backgroundColor = "#E0B084";
-        } else if (color == 4) {
+        } else if (note_color == 4) {
             note.style.backgroundColor = "#A3E084";
-        } else if (color == 5) {
+        } else if (note_color == 5) {
             note.style.backgroundColor = "#84CAE0";
         }
     }
@@ -170,7 +240,6 @@
         const canvas = document.getElementById("whiteboard_canvas");
         const context = canvas.getContext("2d");
         let painting = false;
-        let erasing = false;
         let lastX, lastY; // Variables to track last position for smoother erasing
 
         // Set canvas width and height
@@ -182,6 +251,7 @@
         context.imageSmoothingQuality = 'high';
 
         function startPosition(e) {
+            console.log(erasing)
             if (erasing) {
                 painting = true;
                 erase(e); // Start erasing
@@ -199,21 +269,26 @@
         function draw(e) {
             if (!painting || mouse) return;
             if (erasing) erase(e);
-            const rect = canvas.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+            else{
+                console.log("drawing")
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                context.globalCompositeOperation = 'source-over';
+                context.lineJoin = "round";
+                context.lineCap = "round";
+                context.lineWidth = parseInt(thickness);
+                context.strokeStyle = pen_color;
+                context.lineTo(x, y);
+                context.stroke();
+                context.beginPath();
+                context.moveTo(x, y);
 
-            context.lineWidth = 5;
-            context.lineCap = "round";
-            context.strokeStyle = "#fff";
-            context.lineTo(x, y);
-            context.stroke();
-            context.beginPath();
-            context.moveTo(x, y);
-
-            lastX = x;
-            lastY = y;
+                lastX = x;
+                lastY = y;
+            }
         }
+
 
         function erase(e) {
             if (!painting || mouse) {
@@ -223,11 +298,14 @@
                 lastY = null;
                 return
             }
+            console.log("erasing")
             const rect = canvas.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
 
-            context.lineWidth = 32; // Adjust the width for the eraser
+            context.lineWidth = parseInt(thickness)*10; // Adjust the width for the eraser
+            cursor.style.width = parseInt(thickness)*10 + "px";
+            cursor.style.height = parseInt(thickness)*10 + "px";
             context.lineCap = "round";
             context.globalCompositeOperation = 'destination-out'; // Set composite operation to erase
             context.lineTo(x, y);
@@ -244,57 +322,60 @@
         canvas.addEventListener("mousemove", draw);
 
         // Toggle eraser mode when 'E' key is pressed
-        eraserButton.addEventListener("click", (e) => {
-            pen = false;
-            mouse = false;
-            erasing = !erasing; // Toggle eraser mode
-            mouse_button.style.color = mouse ? "var(--main_button)" : "var(--text)";
-            pen_button.style.color = pen ? "var(--main_button)" : "var(--text)";
-            eraserButton.style.color = erasing ? "var(--main_button)" : "var(--text)"; // Change color of the button to indicate eraser mode
-            cursor.classList.toggle("erasercursor");
-            cursor.classList.toggle("cursor");
-            if (erasing) {
-                console.log("Eraser mode enabled");
-            } else {
-                console.log("Eraser mode disabled");
-            }
-        });
     });
+
+
     const mouse_button = document.getElementById("mouse_button");
     mouse_button.addEventListener("click", () => {
-        mouse_mode();
+        change_tool("cursor");
     });
 
-    var mouse = true;
-    var pen = false;
-    const mouse_mode = () => {
-        pen = false
-        erasing = false;
-        mouse = !mouse;
-        if (mouse) {
-            cursor.classList.remove("cursor");
-            cursor.classList.remove("erasercursor");
-        }else{
-            cursor.classList.add("cursor");
-        }
-        mouse_button.style.color = mouse ? "var(--main_button)" : "var(--text)"; 
-        pen_button.style.color = pen ? "var(--main_button)" : "var(--text)";
-        eraserButton.style.color = erasing ? "var(--main_button)" : "var(--text)";
-    }
+
     const pen_button = document.getElementById("pen_button")
     pen_button.addEventListener("click", () => {
-        pen_mode();
+        cursor.style.width = parseInt(thickness) + "px";
+            cursor.style.height = parseInt(thickness) + "px";
+        change_tool("pen");
     });
 
+    eraserButton.addEventListener("click", (e) => {
+        cursor.style.width = parseInt(thickness)*10 + "px";
+        cursor.style.height = parseInt(thickness)*10 + "px";
+        change_tool("eraser");
+    });
 
-    const pen_mode = () => {
-        pen = !pen;
-        mouse = false;
-        erasing = false;
-        cursor.classList.toggle("cursor");
-        mouse_button.style.color = mouse ? "var(--main_button)" : "var(--text)";
-        pen_button.style.color = pen ? "var(--main_button)" : "var(--text)";
-        eraserButton.style.color = erasing ? "var(--main_button)" : "var(--text)";
+    const change_tool = (tool) => {
+        if (tool == "cursor") {
+            pen = false;
+            erasing = false;
+            mouse = true;
+            mouse_button.style.color = "var(--main_button)";
+            pen_button.style.color = "var(--text)";
+            eraserButton.style.color = "var(--text)";
+            cursor.classList.remove("eraser_cursor");
+            cursor.classList.remove("pen_cursor");
+            cursor.classList.remove("cursor");
+        } else if (tool == "pen") {
+            pen = true;
+            erasing = false;
+            mouse = false;
+            mouse_button.style.color = "var(--text)";
+            pen_button.style.color = "var(--main_button)";
+            eraserButton.style.color = "var(--text)";
+            cursor.classList.remove("eraser_cursor");
+            cursor.classList.add("pen_cursor");
+            cursor.classList.add("cursor");
+        } else if (tool == "eraser") {
+            pen = false;
+            erasing = true;
+            mouse = false;
+            mouse_button.style.color = "var(--text)";
+            pen_button.style.color = "var(--text)";
+            eraserButton.style.color = "var(--main_button)";
+            cursor.classList.remove("pen_cursor");
+            cursor.classList.add("eraser_cursor");
+            cursor.classList.add("cursor");
+        }
     }
 
 

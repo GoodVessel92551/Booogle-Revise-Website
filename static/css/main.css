@@ -5469,7 +5469,7 @@ part > p{
 
 }
 
-.tools_left > div{
+.lower_buttons_board{
     margin-top: auto;
     display: flex;
     flex-direction: column;
@@ -5477,7 +5477,7 @@ part > p{
     align-items: center;
 }
 
-.tools_left button{
+.tools_left button:not(.board_options){
     background:none;
     border:none;
     color:var(--text);
@@ -5487,6 +5487,48 @@ part > p{
     align-items: center;
     cursor: pointer;
     transition: .3s color;
+}
+
+.board_options_container{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    position: absolute;
+    right: calc(50% + 40px);
+    top: 50%;
+    transform: translateY(-50%);
+    height: 32px;
+    gap:8px;
+    background:var(--top_green);
+    border:var(--top_green_border);
+    border-radius: var(--main_border_radius);
+    padding:0px 4px;
+}
+
+.board_options_container > button{
+    width:24px;
+    height:24px;
+    background:#454743;
+    border:none;
+    border-radius: var(--main_border_radius);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board_options_container > button > span{
+    display: block;
+    width:90%;
+    height:5px;
+    background-color:var(--text);
+    border-radius: 20px;
+    transform: rotate(-45deg);
+}
+
+.color_picker{
+    position: relative;
 }
 
 .tools_left button:hover{
@@ -5562,7 +5604,7 @@ part > p{
     width:5px;
     background-color: #fff;
     border:none;
-    border-radius: 16px;
+    border-radius: 100px;
     position: absolute;
     pointer-events: none;
     z-index: 2;
@@ -5570,14 +5612,12 @@ part > p{
 }
 
 
-.erasercursor{
-    height:32px !important;
-    width:32px !important;
+.eraser_cursor{
     background-color: transparent !important;
-    border:1px solid #ccc;
+    border:1px solid #ccc !important;
 }
 
-.pencursor{
+.pen_cursor{
     height:5px;
     width:5px;
     background-color: #fff;
