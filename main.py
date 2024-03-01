@@ -535,6 +535,13 @@ def new():
             background = "animals"
         return render_template("sets/new.html",name=username(),streak=get_streak(),settings=get_settings(),boosting=userinfo(username()),title=title,desc=desc,background=background,notifications=notifications)
 
+@app.route("/new/<title>/<desc>")
+def new_title(title,desc):
+    if login() == False:
+        return render_template("login/login.html")
+    session["new_set"] = {"title":title,"desc":desc,"background":""}
+    return redirect("/new")
+
 @app.route("/new/question",methods=["POST","GET"])
 def new_question():
     if login() == False:

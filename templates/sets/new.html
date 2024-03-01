@@ -8,7 +8,6 @@
         <span id="len_warn" style="display:none;" class="error_message"><ion-icon name="warning-outline"></ion-icon>Unable To Create Set, Due To The Set Title/Description Being To Long/Short.</a></span>
         <form method="post">
             <div class="home_buttons no_hide">
-                <button class="main_button ai_button" value="photo" name="button" type="submit" ><span>Photo Mode</span><ion-icon name="camera-outline"></ion-icon></button>
                 <button name="button" value="normal" class="main_button next top_title_button" type="submit"><span>Next</span><ion-icon name="arrow-forward-outline"></ion-icon></button>
             </div>
             <input required oninvalid="this.setCustomValidity('Please enter only letters and numbers.')" oninput="this.setCustomValidity('')" pattern="^[A-Za-z0-9\s]+$" value="{{title}}" id="quest"  maxlength="80" placeholder="Title" name="title" class="new_title text" autofocus>
@@ -75,8 +74,8 @@
     var level = {{boosting|tojson}}[0];
 
     if(title != "" || desc != ""){
-        document.getElementById("len_warn").style.display = "block";
-        document.getElementById(background).checked = true;
+    }else{
+        document.getElementById("quest").value = title;
     }
     if(level == "premium" || level == "pro" || level == "elite" || level == "admin"){
         document.querySelectorAll(".premium").forEach((p) => {

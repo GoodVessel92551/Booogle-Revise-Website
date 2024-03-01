@@ -3,7 +3,9 @@
 {% block title %}Home{% endblock %}
 {% block main %}
 <a href="/new" id="no_sets" class="no_sets">
-    <span><<i class="ph-fill ph-info"></i><strong>No sets</strong></span>
+    <span>
+        <<i class="ph-fill ph-info"></i><strong>No sets</strong>
+    </span>
     <p>You have no sets. To make one use the New button or Click Me!</p>
 </a>
 
@@ -12,9 +14,11 @@
     <p>We are unable to find any sets with this name or description</p>
 </a>
 <main class="main">
-
+    <div class="search_bar new_set_title_bar" id="create_set"><i class="ph ph-pen"></i><input type="text" autocomplete="off"
+        placeholder="Title" class="search""></div>
     <h1 id="welcome" class="welcome_text">Your Sets</h1>
-    <div class="search_bar"><i class="ph ph-magnifying-glass"></i><input type="text" autocomplete="off" placeholder="Search" class="search" id="search"></div>
+    <div class="search_bar"><i class="ph ph-magnifying-glass"></i><input type="text" autocomplete="off"
+            placeholder="Search" class="search" id="search"></div>
     <div class="home_buttons">
         <a href="/community" id="community_button" class="main_button second_button">
             <span>Community</span><i class="ph-bold ph-globe-hemisphere-west"></i>
@@ -29,7 +33,8 @@
         <div class="all_contain_start">
             <img class="set_image" id="set_image">
             <div class="text_contain_start">
-                <h1 id="set_title" class="set_title_dialog">Set Name</h1><span id="move_button" class="move_folder"><i class="ph ph-arrows-out-cardinal"></i>Move</span>
+                <h1 id="set_title" class="set_title_dialog">Set Name</h1><span id="move_button" class="move_folder"><i
+                        class="ph ph-arrows-out-cardinal"></i>Move</span>
                 <p id="set_desc"></p>
             </div>
         </div>
@@ -103,14 +108,14 @@
     <dialog id="move_dialog" class="delete_dialog">
         <h3>Move this set</h3>
         <p>Move this set to a group of a folder.
-            <div class="move_set_option">
-                <button onclick="change_move('folder')"><i class="ph ph-folder-simple"></i>Folder</button>
-                <button onclick="change_move('group')"><i class="ph ph-users-three"></i>Group</button>
-                <span class="option_selected"></span>
-            </div>
-            <folders id="move_folders">
+        <div class="move_set_option">
+            <button onclick="change_move('folder')"><i class="ph ph-folder-simple"></i>Folder</button>
+            <button onclick="change_move('group')"><i class="ph ph-users-three"></i>Group</button>
+            <span class="option_selected"></span>
+        </div>
+        <folders id="move_folders">
 
-            </folders>
+        </folders>
         <div>
             <span id="delete_span_title" class="delete_span_title">Set Title: </span>
             <button onclick="document.getElementById('move_dialog').close()" class="delete_cancel">Cancel</button>
@@ -389,7 +394,7 @@
         if (sets[sets_keys[i]]["settings"]["folder"]) {
             document.getElementById(a.id).style.display = "none"
             strong.setAttribute("data-folder", "true");
-        }else{
+        } else {
             strong.setAttribute("data-folder", "false");
         }
         a.setAttribute('draggable', true);
@@ -403,7 +408,7 @@
 
         });
     }
-    var code_sets = {{code_sets| tojson}};
+    var code_sets = {{ code_sets| tojson}};
     var code_sets_keys = Object.keys(code_sets)
     code_sets_keys.forEach((key) => {
         console.log(code_sets_keys)
@@ -426,7 +431,7 @@
         user.innerText = code_sets[key]["user"];
         user.classList.add("user_name");
         user.href = "/stats/@" + code_sets[key]["user"];
-        strong.innerText =code_sets[key]["title"];
+        strong.innerText = code_sets[key]["title"];
         a.setAttribute("data-value", code_sets[key]["language"].trim());
         info.classList.add("subject_info");
         amount_of_questions.innerHTML = "<i class='ph ph-file-code'></i>Code"
@@ -439,27 +444,27 @@
         if (level != false) {
             var badge = document.createElement("ion-icon");
             badge.classList.add("badge");
-                if (level == "boost") {
-                    badge.name = "rocket-outline";
-                    badge.style.background = "var(--boost1)";
-                    badge.style.color = "var(--on_boost)";
-                } else if (level == "premium") {
-                    badge.name = "sparkles-outline";
-                    badge.style.background = "var(--premium1)";
-                    badge.style.color = "var(--on_premium)";
-                } else if (level == "pro") {
-                    badge.name = "medal-outline";
-                    badge.style.background = "var(--pro1)";
-                    badge.style.color = "var(--on_pro)";
-                } else if (level == "elite") {
-                    badge.name = "diamond-outline";
-                    badge.style.background = "var(--elite1)";
-                    badge.style.color = "var(--on_elite)";
-                } else if (level == "admin") {
-                    badge.name = "shield-checkmark";
-                    badge.style.background = "#f2ecb6";
-                    badge.style.color = "#615210";
-                }
+            if (level == "boost") {
+                badge.name = "rocket-outline";
+                badge.style.background = "var(--boost1)";
+                badge.style.color = "var(--on_boost)";
+            } else if (level == "premium") {
+                badge.name = "sparkles-outline";
+                badge.style.background = "var(--premium1)";
+                badge.style.color = "var(--on_premium)";
+            } else if (level == "pro") {
+                badge.name = "medal-outline";
+                badge.style.background = "var(--pro1)";
+                badge.style.color = "var(--on_pro)";
+            } else if (level == "elite") {
+                badge.name = "diamond-outline";
+                badge.style.background = "var(--elite1)";
+                badge.style.color = "var(--on_elite)";
+            } else if (level == "admin") {
+                badge.name = "shield-checkmark";
+                badge.style.background = "#f2ecb6";
+                badge.style.color = "#615210";
+            }
             badge.id = code_sets[key]["title"];
             user.appendChild(badge);
             document.querySelector("svg").addEventListener("load", () => {
@@ -468,10 +473,10 @@
                 });
             });
         }
-        if (code_sets[key]["folder"] == true){
+        if (code_sets[key]["folder"] == true) {
             a.style.display = "none"
             strong.setAttribute("data-folder", "true");
-        }else{
+        } else {
             a.setAttribute('draggable', true);
             a.style.cursor = 'move';
 
@@ -481,7 +486,7 @@
 
             a.addEventListener('dragend', (event) => {
 
-        });
+            });
         }
         a.appendChild(img);
         a.appendChild(strong);
@@ -557,32 +562,32 @@
                 document.getElementById(set_id).style.display = "none";
 
             }
-            else if (sets_keys.includes(set_id)){
+            else if (sets_keys.includes(set_id)) {
                 if (sets[set_id]["settings"]["name"].toLowerCase().includes(query.toLowerCase()) || sets[set_id]["settings"]["desc"].toLowerCase().includes(query.toLowerCase())) {
                     document.getElementById(set_id).style.display = "block";
                     search_num += 1
-                }else{
+                } else {
                     document.getElementById(set_id).style.display = "none";
                 }
-            }else if (code_sets_keys.includes(set_id)){
+            } else if (code_sets_keys.includes(set_id)) {
                 if (code_sets[set_id]["title"].toLowerCase().includes(query.toLowerCase()) || code_sets[set_id]["desc"].toLowerCase().includes(query.toLowerCase())) {
                     document.getElementById(set_id).style.display = "block";
                     search_num += 1
-                }else{
+                } else {
                     document.getElementById(set_id).style.display = "none";
                 }
-            }else  {
+            } else {
                 document.getElementById(set_id).style.display = "none";
             }
         }
         for (var j = 0; j < folder_list.length; j++) {
-                if (query == "" || query == null) {
-                    folder_list[j].style.display = "block";
-                } else {
-                    folder_list[j].style.display = "none";
-                }
+            if (query == "" || query == null) {
+                folder_list[j].style.display = "block";
+            } else {
+                folder_list[j].style.display = "none";
             }
-        if(search_num == 0 && query != "" && query != null){
+        }
+        if (search_num == 0 && query != "" && query != null) {
             document.getElementById("no_sets_search").style.display = "block";
         }
     }
@@ -695,8 +700,48 @@
             document.getElementById("start_set").close()
             new_notification("Success", "This set has been moved", "checkmark-circle", "success")
         })
-    
+
     }
+    const create_set = document.getElementById("create_set")
+    var set_title
+    var set_desc
+    var current = "title"
+    document.addEventListener("keyup", function (event) {
+        console.log(create_set.style.display)
+        if (event.key === "n" && (create_set.style.display == "" || create_set.style.display == "none")) {
+            current = "title"
+            create_set.querySelector("input").value = ""
+            create_set.style.display = "flex"
+            create_set.querySelector("input").focus()
+            create_set.querySelector("input").placeholder = "Title"
+            create_set.querySelector("input").value = ""
+        }
+    });
+    create_set.addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+            if (current == "title"){
+                current = "desc"
+                set_title = create_set.querySelector("input").value
+                create_set.querySelector("input").placeholder = "Description"
+                create_set.querySelector("input").value = ""
+            } else {
+                current = "title"
+                create_set.style.display = "none"
+                set_desc = create_set.querySelector("input").value
+                window.location.href = `/new/${set_title}/${set_desc}`
+            }
+        }
+    });
+    create_set.addEventListener("focusout", function (event) {
+        create_set.style.display = "none"
+    });
+
+    document.addEventListener("keyup", function (event) {
+        if (event.key === "Escape") {
+            create_set.style.display = "none"
+        }
+    });
+
 
 </script>
 <div class="home_menu" id="home_menu">

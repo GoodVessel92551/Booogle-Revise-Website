@@ -4719,7 +4719,7 @@ part > p{
     left:16px;
     width:20px;
     transform: translateY(-50%);
-    color: #a9a9a9;
+    color: #c5c5c5;
 }
 
 .search {
@@ -5628,4 +5628,42 @@ part > p{
     font-family: "Handlee", cursive;
     font-size:18px;
     color:var(--text);
+    padding: 16px;
+    background-color: #31352f;
+    display: inline-block;
+    border-radius: var(--main_border_radius);
+    cursor: move;
+    box-sizing: border-box;
+}
+
+.text_board > input{
+    text-align: center;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    resize:none;
+    background: none;
+    border:none;
+    font-family: "Handlee", cursive;
+    font-size:18px;
+    color:var(--text);
+    width: auto;
+    max-width: 100vw;
+    min-width: 50px;
+}
+
+.new_set_title_bar{
+    position: absolute;
+    top:20vh;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    width:40%;
+    display: none;
+}
+
+.new_set_title_bar .search{
+    box-shadow: 5px 5px 20px #000000a9;
+    border-radius: 8px;
+    height: 48px;
 }
