@@ -5623,3 +5623,9 @@ part > p{
     background-color: #fff;
     border:none;
 }
+
+.text_board{
+    font-family: "Handlee", cursive;
+    font-size:18px;
+    color:var(--text);
+}

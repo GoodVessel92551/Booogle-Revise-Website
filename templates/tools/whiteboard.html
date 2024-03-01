@@ -22,7 +22,7 @@
             </div>
         </div>
         <div id="whiteboard" class="whiteboard">
-
+            <div class="next_board">This is some text</div>
             <canvas id="whiteboard_canvas">
 
             </canvas>
@@ -122,6 +122,8 @@
         var context = canvas.getContext("2d");
         context.clearRect(0, 0, canvas.width, canvas.height);
     }
+
+
 
     const create_note = () => {
         change_tool("cursor");
