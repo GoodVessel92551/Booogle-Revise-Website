@@ -39,6 +39,7 @@
     </board>
 </main>
 <script>
+    const eraserButton = document.getElementById("eraser-button");
     const whiteboard = document.getElementById("whiteboard");
     const cursor = document.getElementById("cursor");
     whiteboard.addEventListener('mousemove', (e) => {
@@ -243,7 +244,6 @@
         canvas.addEventListener("mousemove", draw);
 
         // Toggle eraser mode when 'E' key is pressed
-        const eraserButton = document.getElementById("eraser-button");
         eraserButton.addEventListener("click", (e) => {
             pen = false;
             mouse = false;
